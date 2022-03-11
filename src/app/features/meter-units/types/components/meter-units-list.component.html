@@ -43,9 +43,10 @@
                            *ngIf="appliedFiltersFromUser"
                            [hideCloseButton]="true"
                            [primaryButtonText]="'BUTTON.CLOSE'"
+                           [showHeaderBorder]="false"
                            [title]="'FILTER.TITLE'"
                            [visible]="filtersOpened">
-    <div class="tw-px-8 tw-pt-6">
+    <div>
       <app-meter-unit-filter (filterChange)="applyFilters()"></app-meter-unit-filter>
     </div>
 
@@ -65,6 +66,7 @@
         <!-- reference component -->
         <!-- example of table grid with Pagination and fetch API calls for retrieving data -->
         <app-data-table
+          (clearFilerTextClickEvent)="clearFilters($event)"
           (columnVisibilityChangedEvent)="columnVisibilityChanged($event)"
           (deSelectAllClickEvent)="deSelectAll($event)"
           (filterIconClickEvent)="filterIconClicked($event)"
@@ -79,11 +81,12 @@
           (wildCardsEnabledEvent)="toggleWildcards($event)"
           *ngIf="gridData && appliedFiltersFromUser"
           [clientSideSearchAndFilters]="false"
+          [disableSearch]="meterIdsFilterApplied"
           [excelExport]="true"
           [excelFileName]="'meters_overview'"
           [excludedIdsFromSelection]="requestModel.excludeIds"
           [fetchData]="true"
-          [filtersCount]="getFilterInfo().count ? getFilterInfo().count : 0"
+          [filtersCount]="getFilterCount() ? getFilterCount() : 0"
           [gridColumns]="metersColumns"
           [gridData]="gridData.data"
           [kendoGridSelectByColumn]="'deviceId'"
@@ -104,9 +107,9 @@
           [sortable]="true"
           [tableHeight]="calculateHeight()"
           [totalCount]="totalCount"
-          [totalCount]="gridData.totalCount"
           [wildCardsEnabled]="wildCardsSearch"
           [wildCardsSearch]="true"
+          [withClearFilerText]="true"
           [withFiltersIcon]="true"
           [withRefreshButton]="true"
           [withRowSelection]="true"

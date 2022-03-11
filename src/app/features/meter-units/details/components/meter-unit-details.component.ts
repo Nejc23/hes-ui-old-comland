@@ -76,6 +76,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
       this.getMetadata();
     });
+
+    this.eventsService.getCustom('SavedDataEvent').subscribe(() => {
+      this.getData();
+    });
   }
 
   // form - rights
@@ -499,17 +503,10 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   update() {
-    this.saveData = true;
+    this.eventsService.emitCustom('SaveDataEvent', true);
   }
 
   isEditVisible() {
     return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
-  }
-
-  saveDataEvent(event: boolean) {
-    this.saveData = false;
-    if (event) {
-      this.getData();
-    }
   }
 }

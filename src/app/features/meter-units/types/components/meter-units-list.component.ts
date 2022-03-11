@@ -63,11 +63,12 @@ export class MeterUnitsListComponent implements OnInit {
   appliedFilters;
   metersColumns: Array<GridColumn> = [];
   metersRowActionConfiguration: Array<GridRowAction> = [];
+  meterIdsFilterApplied = false;
   //
-
   wildCardsSearch = false;
   refreshInterval = gridRefreshInterval;
   requestModel: GridRequestParams = {
+    deviceIds: [],
     excludeIds: [],
     requestId: null,
     startRow: 0,
@@ -133,6 +134,7 @@ export class MeterUnitsListComponent implements OnInit {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
         this.searchFromQueryParams = params['search'];
+        this.clearLocalStorage();
       }
     });
     this.breadcrumbService.setPageName('');
@@ -143,6 +145,29 @@ export class MeterUnitsListComponent implements OnInit {
           this.selectedRowsIds = [];
         }
       }
+    });
+
+    this.eventManager.getCustom('ApplyMeterIdsFilter').subscribe((event) => {
+      const ids = event.ids;
+      // convert ids from excel array<number>
+      if (!ids.some(isNaN)) {
+        ids.toString();
+      }
+      this.requestModel.searchModel = [
+        {
+          colId: event.field,
+          type: enumSearchFilterOperators.like,
+          value: ids.join().toString().replace(/,/gi, '&'),
+          useWildcards: true
+        }
+      ];
+      this.meterIdsFilterApplied = true;
+      this.getMetersListData(true);
+    });
+
+    this.eventManager.getCustom('ClearMeterIdsFilter').subscribe(() => {
+      this.clearMeterIdsFilter();
+      this.getMetersListData(true);
     });
   }
 
@@ -156,13 +181,15 @@ export class MeterUnitsListComponent implements OnInit {
     this.meterUnitsTypeGridLayoutStore.visibleColumns = this.metersColumns.map((column) => column.field);
     // all visible by default
     this.selectedRowsIds = JSON.parse(localStorage.getItem('selectedRowsIds')) ?? [];
+    if (this.selectedRowsIds.length > 0) {
+      this.requestModel.deviceIds = this.selectedRowsIds;
+    }
     this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
-
     this.metersColumns.map((columns) => (columns.hidden = false));
-    // currently we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
+    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(this.selectAllEnabled);
+    // currently, we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
     // get layout and load data
     this.getMeterUnitsLayoutGridLayoutStore();
-    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
 
     this.codelistService.meterUnitStatusCodelist(this.id).subscribe((res) => {
       this.metersFiltersConfiguration.push({
@@ -189,12 +216,7 @@ export class MeterUnitsListComponent implements OnInit {
       this.pageNumber++;
     }
     this.meterUnitsTypeService
-      .getGridMeterUnitsForm(
-        this.requestModel,
-        this.pageNumber,
-        this.pageSize,
-        this.metersColumns.map((column) => column.field)
-      )
+      .getGridMeterUnitsForm(this.requestModel, this.pageNumber, this.pageSize, this.getAllDisplayedColumnsNames())
       .subscribe((data) => {
         this.loading = false;
         this.gridData = data;
@@ -281,6 +303,8 @@ export class MeterUnitsListComponent implements OnInit {
     this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
     this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
     this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+    this.clearLocalStorage();
+
     this.selectedRowsIds = [];
     this.requestModel.excludeIds = [];
     this.requestModel.searchModel = [
@@ -339,7 +363,7 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   getAllDisplayedColumnsNames(): string[] {
-    return this.metersColumns.map((c) => c.field);
+    return this.meterIdsFilterApplied ? [this.requestModel.searchModel[0].colId] : this.metersColumns.map((column) => column.field);
   }
 
   toggleWildcards(event: boolean) {
@@ -418,8 +442,6 @@ export class MeterUnitsListComponent implements OnInit {
     // this.meterUnitsLayout
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, this.meterUnitsTypeGridLayoutStore.meterUnitsLayout);
 
-    this.applyFilters(false);
-
     // set visible columns icons and rowActions are always visible
     if (this.meterUnitsTypeGridLayoutStore.visibleColumns.length > 0) {
       this.metersColumns
@@ -434,6 +456,7 @@ export class MeterUnitsListComponent implements OnInit {
         }
       });
     }
+    this.applyFilters(false);
   }
 
   closeSlideOut() {
@@ -441,6 +464,7 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   applyFilters(saveUserSettings = true) {
+    this.clearLocalStorage();
     this.pageNumber = 1;
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     console.log(filter);
@@ -460,7 +484,7 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.vendors = filter.vendorsFilter ?? [];
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
-    this.getFilterInfo();
+    this.getFilterCount();
     this.appliedFiltersFromUser = true;
     // save filters to user settings
     if (saveUserSettings) {
@@ -475,9 +499,10 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   // fill text in header - about selected filters copied from existing ag-grid
-  getFilterInfo() {
+  getFilterCount() {
+    let count: number;
     const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    return this.staticTextService.getFiltersInfo(
+    count = this.staticTextService.getFiltersInfo(
       filterInfo.name,
       filterInfo.statesFilter && filterInfo.statesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0,
@@ -489,7 +514,11 @@ export class MeterUnitsListComponent implements OnInit {
       filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0,
       filterInfo.protocolFilter && filterInfo.protocolFilter.length > 0,
       filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0
-    );
+    ).count;
+    if (this.meterIdsFilterApplied) {
+      count++;
+    }
+    return count;
   }
 
   filterIconClicked(event: boolean) {
@@ -535,5 +564,38 @@ export class MeterUnitsListComponent implements OnInit {
       localStorage.setItem('excludedIds', JSON.stringify(this.requestModel?.excludeIds));
     }
     console.log(this.requestModel.excludeIds);
+  }
+
+  clearMeterIdsFilter() {
+    this.meterIdsFilterApplied = false;
+    this.requestModel.searchModel = [
+      {
+        colId: 'all',
+        type: enumSearchFilterOperators.like,
+        value: this.searchText,
+        useWildcards: this.wildCardsSearch
+      }
+    ];
+  }
+
+  clearFilters(event: boolean) {
+    // clear search
+    if (this.meterIdsFilterApplied) {
+      this.clearMeterIdsFilter();
+    }
+    // clear and apply filters
+    this.gridFilterSessionStoreService.clearGridLayout();
+    this.applyFilters();
+    this.eventManager.emitCustom('ClearFilter', true);
+  }
+
+  clearLocalStorage() {
+    this.requestModel.deviceIds = [];
+    this.requestModel.excludeIds = [];
+    this.selectAllEnabled = false;
+    localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+    localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
+    localStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
+    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
   }
 }

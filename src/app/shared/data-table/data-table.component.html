@@ -55,12 +55,13 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </button>
       </div>
 
-      <div *ngIf="withSearch">
+      <div *ngIf="withSearch" [ngClass]="disableSearch ? 'disabled-search' : '' ">
         <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{'COMMON.SEARCH' | translate }}:</div>
 
         <div [formGroup]="searchForm" class="tw-inline-flex gray-border tw-w-56 search-input">
 
           <div (click)="searchIconClicked()"
+               [ngClass]="disableSearch ? 'disabled-search' : '' "
                [title]="getWildCardToolTipText()"
                class="tw-flex tw-justify-center tw-cursor-pointer" data-placement="top"
                data-toggle="tooltip">
@@ -68,7 +69,10 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           </div>
           <!-- Client side search on all columns only works on strings and date time -->
           <input #searchInput
+                 [disabled]="disableSearch"
                  [formControlName]="'search'"
+                 [ngClass]="disableSearch ? 'disabled-search' : '' "
+                 [readonly]="disableSearch"
                  kendoTextBox
                  placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
           />
@@ -85,6 +89,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <span [ngClass]="filtersCount > 0 ? 'tw-visible' : 'tw-invisible'"
                 class="badge badge-primary corner-badge">{{filtersCount}}</span>
         </button>
+
+        <div (click)="onClearFilterClick()"
+             *ngIf="withClearFilerText"
+             class="tw-text-darkGray tw-text-sm tw-ml-8 tw-flex tw-items-center tw-cursor-pointer tw-w-20">
+          {{ 'FILTER.CLEAR-FILTERS' | translate }}
+        </div>
       </div>
 
       <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex">

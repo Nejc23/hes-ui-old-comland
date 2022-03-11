@@ -33,7 +33,7 @@ import { IActionRequestParams } from '../../../../../core/repository/interfaces/
 export class ActionButtonsComponent {
   @Input() requestModel: GridRequestParams;
   @Input() selectedCount: number;
-  @Input() searchColumnNames: string[];
+  @Input() searchColumnNames: string[] = [];
 
   constructor(
     public fb: FormBuilder,

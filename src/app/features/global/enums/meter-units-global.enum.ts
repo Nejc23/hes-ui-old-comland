@@ -38,5 +38,6 @@ export const gridSysNameColumnsEnum = {
   currentL2: 'currentL2',
   currentL3: 'currentL3',
   hasActiveJobs: 'hasActiveJobs',
-  templateId: 'templateId'
+  templateId: 'templateId',
+  externalId: 'externalId'
 };

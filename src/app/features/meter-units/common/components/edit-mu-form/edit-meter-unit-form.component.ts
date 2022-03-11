@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
@@ -25,6 +25,7 @@ import { MeterUnitsService } from '../../../../../core/repository/services/meter
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
 import { MuForm } from '../../../types/interfaces/mu-form.interface';
+import { EventManagerService } from '../../../../../core/services/event-manager.service';
 
 @Component({
   selector: 'app-edit-meter-unit-form',
@@ -36,8 +37,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   @Input() data: MeterUnitDetails;
   @Input() plcDevice = false;
-  @Output() savedDataEvent = new EventEmitter<boolean>();
-  @Input() saveData = false;
   @Input() basicDetails = false;
   @ViewChild('hostnameField') public hostnameComponent: InputTextComponent;
 
@@ -81,7 +80,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     private jobsSelectGridService: JobsSelectGridService,
     private toast: ToastNotificationService,
     private codelistServiceMu: CodelistMeterUnitsRepositoryService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventsService: EventManagerService
   ) {}
 
   get nameProperty() {
@@ -206,6 +206,9 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.form = this.setFormEdit();
+    this.eventsService.getCustom('SaveDataEvent').subscribe((res) => {
+      this.update();
+    });
     this.codelistServiceMu.meterUnitVendorCodelist(null).subscribe((manufacturers) => {
       this.manufacturers = this.isDlms ? manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : manufacturers;
       const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
@@ -216,9 +219,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.saveData) {
-      this.update();
-    }
     if (this.data && this.form) {
       // update template name
       this.form.get(this.templateStringProperty).setValue(this.data.templateName);
@@ -447,7 +447,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   }
 
   update() {
-    this.saveData = false;
     this.setFormControls();
     if (!this.isDlms) {
       this.disableAdvancedControls();
@@ -474,7 +473,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.toast.successToast(successMessage);
-          this.savedDataEvent.emit(true);
+          this.eventsService.emitCustom('SavedDataEvent', true);
         },
         (errResult) => {
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
@@ -509,7 +508,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     } else {
       this.tabstrip.selectTab(1); // Communication (jobs tab is not visible)
     }
-    this.savedDataEvent.emit(false);
   }
 
   fillData(): MuForm {

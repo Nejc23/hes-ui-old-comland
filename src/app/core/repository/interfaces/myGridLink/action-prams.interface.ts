@@ -1,6 +1,7 @@
 export interface IActionRequestParams {
   pageSize: number;
   pageNumber: number;
+  includedIds?: string[];
   sort: IActionSortParams[];
   textSearch: IActionSearchParam;
   filter?: IActionFilterParams[];

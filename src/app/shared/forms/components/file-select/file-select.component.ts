@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { FileRestrictions, UploadProgressEvent } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
@@ -8,7 +8,7 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
   selector: 'app-file-select',
   templateUrl: './file-select.component.html'
 })
-export class FileSelectComponent implements OnInit {
+export class FileSelectComponent implements OnInit, OnChanges {
   // Required
   @Input() form: FormGroup;
   @Input() property: string;
@@ -17,13 +17,14 @@ export class FileSelectComponent implements OnInit {
   @Input() multiple = true;
   @Input() allowedExtensions: string[] = [];
   @Input() acceptExtensions: string[] = [];
-
+  @Input() isRequired = true;
   @Input() isDropZoneCustom = true;
   @Input() dropFileSelectSubtitle = '';
 
   @Output() selectEvent = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
   @Output() fileValid = new EventEmitter<boolean>();
+  @Input() clearData = false;
 
   @ViewChild('uploadSample') upload: any;
 
@@ -50,6 +51,16 @@ export class FileSelectComponent implements OnInit {
     return this.formUtils.hasFormControlRequiredField(this.formControl);
   }
 
+  get accept(): string {
+    return this.acceptExtensions.join(', ');
+  }
+
+  ngOnChanges() {
+    if (this.clearData) {
+      this.resetFileSelectFlags();
+    }
+  }
+
   ngOnInit() {
     this.restrictions = {
       allowedExtensions: this.allowedExtensions
@@ -63,10 +74,6 @@ export class FileSelectComponent implements OnInit {
     }
 
     this.controlId = _.uniqueId('fileSelect');
-  }
-
-  get accept(): string {
-    return this.acceptExtensions.join(', ');
   }
 
   showErrors(): boolean {
