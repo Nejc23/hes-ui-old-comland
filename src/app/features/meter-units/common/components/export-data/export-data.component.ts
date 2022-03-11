@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { environment } from 'src/environments/environment';
 
 export interface ExportDataPayload extends IActionRequestParams {
   startDate: string;
@@ -30,6 +31,7 @@ export class ExportDataComponent implements OnInit {
     { id: 'Events', value: 'All events for a given period', apiId: 'EVENTS' }
   ];
   invalidRange = false;
+  maxDateRange = environment.exportDataMaxRange;
 
   constructor(private formBuilder: FormBuilder, private translate: TranslateService, private modal: NgbActiveModal) {
     this.form = this.createForm();
@@ -78,7 +80,7 @@ export class ExportDataComponent implements OnInit {
   }
 
   checkIfDatesValid(startDate: Date, endDate: Date) {
-    this.invalidRange = moment(endDate).diff(moment(startDate), 'months', true) > 3;
+    this.invalidRange = moment(endDate).diff(moment(startDate), 'months', true) > this.maxDateRange;
     return this.invalidRange;
   }
 }

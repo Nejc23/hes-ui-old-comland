@@ -34,5 +34,6 @@ export const environment = {
   // clientScope: 'openid profile roles offline_access company',
   // clientAutoSilentRenew: true
 
-  importIdsMaxLength: 800
+  importIdsMaxLength: 800,
+  exportDataMaxRange: 3
 };
