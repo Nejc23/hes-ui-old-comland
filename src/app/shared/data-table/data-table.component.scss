@@ -452,3 +452,7 @@
     cursor: text !important; // until we add back link
   }
 }
+
+.disabled-search {
+  cursor: not-allowed !important;
+}

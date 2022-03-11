@@ -182,6 +182,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() showColumnChooser = false;
   @Input() wildCardsSearch = false;
   @Input() withFiltersIcon = false;
+  @Input() withClearFilerText = false;
   @Input() filtersCount = 0;
   @Input() searchText = '';
   @Input() wildCardsEnabled = false;
@@ -189,6 +190,8 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() withAddButton = false;
   @Input() editFieldById = ''; // id needs to be defined for inline edit
   @Input() noDataTextAlignLeft = false;
+  @Input() disableSearch = false;
+
   searchForm: FormGroup;
   wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
   // search
@@ -241,6 +244,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() searchIconClickEvent = new EventEmitter<boolean>();
   @Output() wildCardsEnabledEvent = new EventEmitter<boolean>();
   @Output() filterIconClickEvent = new EventEmitter<boolean>();
+  @Output() clearFilerTextClickEvent = new EventEmitter<boolean>();
   @Output() inlineSaveButtonClickEvent = new EventEmitter<any>();
 
   @Output() selectAllClickEvent = new EventEmitter<boolean>();
@@ -661,7 +665,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   searchIconClicked() {
-    if (this.wildCardsSearch) {
+    if (this.wildCardsSearch && !this.disableSearch) {
       this.wildCardsEnabled = !this.wildCardsEnabled;
       if (this.wildCardsEnabled) {
         this.wildCardsEnabledEvent.emit(true);
@@ -692,6 +696,10 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   onFilterIconClick() {
     this.filterIconClickEvent.emit(true);
+  }
+
+  onClearFilterClick() {
+    this.clearFilerTextClickEvent.emit(true);
   }
 
   // meter units grid specific columns from old grid

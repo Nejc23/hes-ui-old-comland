@@ -303,11 +303,9 @@
                            [title]="basicDetails ? 'COMMON.BASIC-DETAILS' : 'COMMON.COMMUNICATION-DETAILS'"
                            [visible]="openEdit">
 
-    <app-edit-meter-unit-form (savedDataEvent)="saveDataEvent($event)"
-                              [basicDetails]="basicDetails"
+    <app-edit-meter-unit-form [basicDetails]="basicDetails"
                               [data]="data"
-                              [plcDevice]="isPlcDevice"
-                              [saveData]="saveData">
+                              [plcDevice]="isPlcDevice">
     </app-edit-meter-unit-form>
   </app-slide-out-component>
 

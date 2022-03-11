@@ -31,7 +31,7 @@ import { GridRequestParams } from '../../../../../core/repository/interfaces/hel
 export class ActionButtonsComponent {
   @Input() requestModel: GridRequestParams;
   @Input() selectedCount: number;
-  @Input() searchColumnNames: string[];
+  @Input() searchColumnNames: string[] = [];
 
   constructor(
     public fb: FormBuilder,

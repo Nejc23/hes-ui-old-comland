@@ -80,6 +80,11 @@ export class MeterUnitsTypeGridService {
       width: 200
     },
     {
+      field: gridSysNameColumnsEnum.externalId,
+      translationKey: 'GRID.EXTERNAL-ID',
+      width: 120
+    },
+    {
       field: gridSysNameColumnsEnum.logicalDeviceName,
       translationKey: 'GRID.LOGICAL-DEVICE-NAME',
       width: 200

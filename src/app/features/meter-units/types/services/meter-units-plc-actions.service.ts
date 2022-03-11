@@ -7,11 +7,7 @@ import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import {
-  IActionRequestDeleteDevice,
-  IActionRequestParams,
-  IRegisterTypesEnum
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -345,15 +341,9 @@ export class MeterUnitsPlcActionsService {
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = this.translate.instant('COMMON.CONFIRM');
     let response: Observable<any> = new Observable();
+    params.includedIds = params.deviceIds;
 
-    const paramsDeleteDevice = params as IActionRequestDeleteDevice;
-    paramsDeleteDevice.includedIds = params.deviceIds;
-    paramsDeleteDevice.deviceIds = null;
-
-    paramsDeleteDevice.excludedIds = params.excludeIds;
-    paramsDeleteDevice.excludeIds = null;
-
-    response = this.service.deleteDevice(paramsDeleteDevice);
+    response = this.service.deleteDevice(params);
     const operationName = this.translate.instant('COMMON.DELETE-DEVICES');
 
     // todo REFACTOR {{ VALUE }}
@@ -695,6 +685,7 @@ export class MeterUnitsPlcActionsService {
     return requestParam;
   }
 
+  // working version with search and filters
   getOperationRequestParam(
     guid: string,
     requestModel: GridRequestParams,
@@ -720,8 +711,8 @@ export class MeterUnitsPlcActionsService {
       // select from grid
       requestParam.deviceIds = requestModel.deviceIds;
     }
-
     // select all enabled on grid, dont send ids
+    debugger;
     if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
       requestParam.excludeIds = requestModel.excludeIds;
       requestParam.deviceIds = [];
@@ -748,6 +739,17 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
+
+        if (requestModel.filterModel.protocol && requestModel.filterModel.protocol.length > 0) {
+          requestModel.filterModel.protocol.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.protocolType),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+
         if (requestModel.filterModel.vendors && requestModel.filterModel.vendors?.length > 0) {
           requestModel.filterModel.vendors.map((row) =>
             requestParam.filter.push({
@@ -818,6 +820,20 @@ export class MeterUnitsPlcActionsService {
                 filterOperation: filterOperationEnum.equal
               });
             }
+            if (row.id === 4) {
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.isHls),
+                propValue: 'true',
+                filterOperation: filterOperationEnum.equal
+              });
+            }
+            if (row.id === 5) {
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.isHls),
+                propValue: 'false',
+                filterOperation: filterOperationEnum.equal
+              });
+            }
           });
         }
 
@@ -832,6 +848,14 @@ export class MeterUnitsPlcActionsService {
         }
       }
     }
+    console.log('deviceIds:');
+    console.log(requestParam.deviceIds);
+    console.log('Select all enabled:');
+    console.log(this.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+    console.log('Filter:');
+    console.log(requestParam.filter);
+    console.log('Search:');
+    console.log(requestParam.textSearch);
     return requestParam;
   }
 

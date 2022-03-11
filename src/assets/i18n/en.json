@@ -101,6 +101,7 @@
         "HOURLY": "Hourly",
         "IMAGE-READY-FOR-ACTIVATION": "Image ready for activation",
         "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
+        "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
         "IMPORT-SUCCESSFUL": "Import successful",
         "IN-RANGE": "In Range",
         "INACTIVE": "Inactive",
@@ -469,7 +470,8 @@
         "VALUE": "Value",
         "DEVICEID": "Guid",
         "SYNC-WINDOW-MIN": "Lower limit (ms)",
-        "SYNC-WINDOW-MAX": "Upper limit (ms)"
+        "SYNC-WINDOW-MAX": "Upper limit (ms)",
+        "IMPORT-DEVICES-FILER-LABEL": "Compare meter id with (works with filter from file only)"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -576,7 +578,8 @@
         "ACTION-RUNJOB": "Run job",
         "ACTION-SAVE": "Save",
         "ACTION-CANCEL": "Cancel",
-        "ACTION-EXECUTE": "Execute job"
+        "ACTION-EXECUTE": "Execute job",
+        "EXTERNAL-ID": "External Id"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -873,7 +876,9 @@
         "NORMALIZED-DATA": "Normalized data",
         "RAW-DATA": "Raw data",
         "CREATE-NEW-READING": "Create new reading",
-        "CREATE-NEW-TIME-SYNC": "Create new time sync"
+        "CREATE-NEW-TIME-SYNC": "Create new time sync",
+        "MAXIMUM-IMPORT-MESSAGE": "Maximum number of identifiers exceeded!",
+        "MAXIMUM-IMPORT-ERROR": "{{ value1 }} identifier detected,  {{ value2 }} allowed."
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
