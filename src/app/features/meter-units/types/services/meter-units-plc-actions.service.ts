@@ -712,7 +712,6 @@ export class MeterUnitsPlcActionsService {
       requestParam.deviceIds = requestModel.deviceIds;
     }
     // select all enabled on grid, dont send ids
-    debugger;
     if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
       requestParam.excludeIds = requestModel.excludeIds;
       requestParam.deviceIds = [];
