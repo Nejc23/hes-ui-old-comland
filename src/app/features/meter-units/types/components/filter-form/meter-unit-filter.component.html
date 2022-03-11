@@ -1,64 +1,113 @@
 <div class="pt-1 h-100">
   <form [formGroup]="form">
-    <fieldset>
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="meterUnitStatuses$ | async"
-                     [form]="form"
-                     [property]="statesProperty"
-                     label="State">
-      </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="protocolTypes"
-                     [form]="form"
-                     [property]="protocolProperty"
-                     label="Protocol">
-      </app-input-tag>
+    <kendo-tabstrip [keepTabContent]="true">
+      <kendo-tabstrip-tab [selected]="true" [title]="'COMMON.BASIC' | translate">
 
-      <div *ngIf="!form.valid" class="form-row text-danger">
-        <div class="col-6"></div>
-        <div class="col-6"><i class="far fa-info-circle"></i><span
-          class="small">{{errorValidatorReadStatusComponents()}}</span></div>
-      </div>
-      <app-input-tag (valueChanged)="applyFilter()"
-                     [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
-                     [form]="form"
-                     [property]="vendorsProperty"
-                     label="Vendor">
-      </app-input-tag>
+        <ng-template kendoTabContent>
+          <fieldset class="tw-px-8 tw-mt-7">
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="meterUnitStatuses$ | async"
+                           [form]="form"
+                           [property]="statesProperty"
+                           label="State">
+            </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="deviceMediums$ | async"
-                     [form]="form"
-                     [property]="mediumProperty"
-                     label="Medium">
-      </app-input-tag>
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="protocolTypes"
+                           [form]="form"
+                           [property]="protocolProperty"
+                           label="Protocol">
+            </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [allowCustomValues]="true"
-                     [autocompleteItemsAsObjects]="firmware$ | async"
-                     [form]="form"
-                     [property]="firmwareProperty"
-                     label="Firmware">
-      </app-input-tag>
+            <div *ngIf="!form.valid" class="form-row text-danger">
+              <div class="col-6"></div>
+              <div class="col-6"><i class="far fa-info-circle"></i><span
+                class="small">{{errorValidatorReadStatusComponents()}}</span></div>
+            </div>
+            <app-input-tag (valueChanged)="applyFilter()"
+                           [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
+                           [form]="form"
+                           [property]="vendorsProperty"
+                           label="Vendor">
+            </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="disconnectorState$ | async"
-                     [form]="form"
-                     [property]="breakerStateProperty"
-                     label="Disconnector state">
-      </app-input-tag>
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="deviceMediums$ | async"
+                           [form]="form"
+                           [property]="mediumProperty"
+                           label="Medium">
+            </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="ciiState$ | async"
-                     [form]="form"
-                     [property]="ciiStateProperty"
-                     label="CII state">
-      </app-input-tag>
+            <app-input-tag (valueChanged)="applyFilter()" [allowCustomValues]="true"
+                           [autocompleteItemsAsObjects]="firmware$ | async"
+                           [form]="form"
+                           [property]="firmwareProperty"
+                           label="Firmware">
+            </app-input-tag>
 
-      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="showOptionFilter$"
-                     [form]="form"
-                     [property]="showOptionFilterProperty"
-                     label="Show">
-      </app-input-tag>
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="disconnectorState$ | async"
+                           [form]="form"
+                           [property]="breakerStateProperty"
+                           label="Disconnector state">
+            </app-input-tag>
 
-    </fieldset>
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="ciiState$ | async"
+                           [form]="form"
+                           [property]="ciiStateProperty"
+                           label="CII state">
+            </app-input-tag>
 
-    <div class="mb-3 link mt-2">
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="showOptionFilter$"
+                           [form]="form"
+                           [property]="showOptionFilterProperty"
+                           label="Show">
+            </app-input-tag>
+          </fieldset>
+        </ng-template>
+      </kendo-tabstrip-tab>
+
+      <kendo-tabstrip-tab [title]="'COMMON.ADVANCED' | translate">
+        <ng-template kendoTabContent>
+          <fieldset class="tw-px-8 tw-mt-7">
+
+            <app-select-input (selectedValueChanged)="fieldChanged($event)"
+                              [disabled]="false"
+                              [form]="form"
+                              [label]="'IMPORT-DEVICES-FILER-LABEL' | translate"
+                              [property]="importDevicesField"
+                              [selectOptions]="filterFromFiles">
+            </app-select-input>
+
+            <div *ngIf="showImportError" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+              <div class="tw-flex tw-items-center">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="tw-pl-3">
+                  <span class="tw-text-black">{{'PLC-METER.MAXIMUM-IMPORT-MESSAGE' | translate }}</span>
+                  <div
+                    class="text-danger"> {{ this.maximumImportErrorText }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="expand-dropzone">
+              <app-file-select (removeEvent)="removed($event)"
+                               (selectEvent)="selected($event)"
+                               [acceptExtensions]="acceptExtensions"
+                               [allowedExtensions]="allowedExt"
+                               [clearData]="clearFile"
+                               [dropFileSelectSubtitle]="uploadDropSubtitle"
+                               [form]="form"
+                               [isRequired]="false"
+                               [multiple]="false"
+                               [property]="fileProperty">
+              </app-file-select>
+            </div>
+          </fieldset>
+
+        </ng-template>
+      </kendo-tabstrip-tab>
+    </kendo-tabstrip>
+
+    <div class="mb-3 tw-px-8 link mt-2">
       <strong><a (click)="clearButtonClicked()" class="text-primary" href="javascript:void(0);">
         <span>{{ 'FILTER.CLEAR-FILTERS' | translate }}</span></a>
       </strong>

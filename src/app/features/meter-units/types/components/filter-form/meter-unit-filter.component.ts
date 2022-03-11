@@ -12,6 +12,16 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { TranslateService } from '@ngx-translate/core';
+import { FileInfo } from '@progress/kendo-angular-upload';
+import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
+import { EventManagerService } from '../../../../../core/services/event-manager.service';
+import readXlsxFile from 'read-excel-file';
+import { environment } from '../../../../../../environments/environment';
+
+interface MetersIdsFilterData {
+  ids: number[];
+  field: string;
+}
 
 @Component({
   selector: 'app-meter-unit-filter',
@@ -50,6 +60,29 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   @Output() toggleFilter = new EventEmitter();
 
+  // hardcoded dropdown for import file field
+  filterFromFiles: Codelist<string>[] = [
+    { id: 'serialNumber', value: this.translate.instant('FORM.SERIAL-NUMBER') },
+    { id: 'logicalDeviceName', value: this.translate.instant('GRID.LOGICAL-DEVICE-NAME') },
+    { id: 'externalId', value: this.translate.instant('FORM.EXTERNAL-ID') }
+  ];
+
+  // todo
+  allowedExt = ['csv', 'xlsx'];
+  acceptExtensions = ['.csv', '.xlsx'];
+  uploadedData = '';
+  meterIds: Array<number> = [];
+  fileValid = false;
+  showImportError = false;
+  clearFile = false;
+
+  meterIdsFilterEvent: MetersIdsFilterData;
+  maxImportNumber = environment.importIdsMaxLength;
+  uploadDropSubtitle = this.translate.instant('COMMON.IMPORT-SUBTITLE-CSV-XLSX');
+  maximumImportErrorText = '';
+
+  public files: Array<any> = [];
+
   private eventSettingsStoreLoadedSubscription: Subscription;
 
   constructor(
@@ -61,7 +94,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private codelistHelperService: CodelistHelperService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private ngxCsvParser: NgxCsvParser,
+    private eventsService: EventManagerService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
@@ -76,6 +111,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     });
 
     // this.applyFilter = _.debounce(this.applyFilter, 1000);
+    this.eventsService.getCustom('ClearFilter').subscribe((res) => {
+      this.clearButtonClicked();
+    });
   }
 
   get statesProperty() {
@@ -130,6 +168,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'medium';
   }
 
+  get importDevicesField() {
+    return 'importDevicesField';
+  }
+
+  get fileProperty() {
+    return 'fileSelect';
+  }
+
   // called on init
   ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
@@ -155,16 +201,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.paramsSub) {
-      this.paramsSub.unsubscribe();
-    }
-
-    if (this.eventSettingsStoreLoadedSubscription) {
-      this.eventSettingsStoreLoadedSubscription.unsubscribe();
-    }
-  }
-
   /*
   get showMeterUnitsWithoutTemplateProperty() {
     return 'showMeterUnitsWithoutTemplate';
@@ -177,6 +213,16 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   get showOnlyImageReadyForActivationProperty() {
     return 'showOnlyImageReadyForActivation';
   }*/
+
+  ngOnDestroy() {
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
+
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
+  }
 
   doFillData() {
     // change filter outside of grid ???
@@ -238,7 +284,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
         ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []],
         [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
-        [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []]
+        [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []],
+        [this.importDevicesField]: [this.filterFromFiles[0]],
+        [this.fileProperty]: null
       },
       { validators: [rangeFilterValidator] }
     );
@@ -249,9 +297,15 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   clearButtonClicked() {
     this.gridFilterSessionStoreService.clearGridLayout();
 
+    this.form.get(this.importDevicesField).setValue(this.filterFromFiles[0]);
+    this.form.get(this.fileProperty).setValue(null);
+    this.eventsService.emitCustom('ClearMeterIdsFilter', this.meterIdsFilterEvent);
+
+    this.clearFile = true;
+    this.meterIds = [];
+    this.fileValid = false;
     // refresh form
     this.doFillData();
-
     // close tool-panel
     this.filterChange.emit();
   }
@@ -321,5 +375,86 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   getFilterTitle(): string {
     return this.translate.instant('FILTER.FILTERS');
+  }
+
+  selected(event: any) {
+    event.files.forEach((file: FileInfo) => {
+      if (file.rawFile) {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          this.uploadedData = reader.result as string;
+
+          if (file.extension === '.csv') {
+            this.ngxCsvParser
+              .parse(file.rawFile, { header: false, delimiter: ',' })
+              .pipe()
+              .subscribe(
+                (result: Array<any>) => {
+                  this.parseFile(result);
+                },
+                (error: NgxCSVParserError) => {
+                  console.log('csv error:');
+                  console.log(error);
+                  this.fileValid = false;
+                }
+              );
+            // xlsx
+          } else {
+            readXlsxFile(file.rawFile).then(
+              (rows) => {
+                this.parseFile(rows);
+              },
+              () => {
+                console.log('xlsx error');
+                this.fileValid = false;
+              }
+            );
+          }
+        };
+        reader.readAsDataURL(file.rawFile);
+      }
+    });
+  }
+
+  removed(event: any) {
+    this.uploadedData = '';
+    this.fileValid = false;
+  }
+
+  applyMeterIdsToGrid() {
+    if (this.fileValid) {
+      this.eventsService.emitCustom('ApplyMeterIdsFilter', this.meterIdsFilterEvent);
+    }
+  }
+
+  parseFile(ids) {
+    this.showImportError = false;
+    this.fileValid = false;
+    this.meterIds = ids;
+    if (this.meterIds.length > environment.importIdsMaxLength) {
+      this.maximumImportErrorText = this.translate.instant('PLC-METER.MAXIMUM-IMPORT-ERROR', {
+        value1: this.meterIds.length,
+        value2: this.maxImportNumber
+      });
+      this.showImportError = true;
+    } else {
+      this.fileValid = true;
+      this.meterIdsFilterEvent = {
+        ids: this.meterIds,
+        field: this.form.get(this.importDevicesField).value.id
+      };
+    }
+    if (this.form.get(this.importDevicesField).value.id) {
+      this.eventsService.emitCustom('ApplyMeterIdsFilter', this.meterIdsFilterEvent);
+    }
+  }
+
+  fieldChanged(event: any) {
+    this.meterIdsFilterEvent = {
+      ids: this.meterIds,
+      field: this.form.get(this.importDevicesField).value.id
+    };
+    this.applyMeterIdsToGrid();
   }
 }

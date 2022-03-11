@@ -1,19 +1,19 @@
-<div class="mb-3" [formGroup]="form">
-  <label [attr.for]="property" *ngIf="label">
+<div [formGroup]="form" class="mb-3">
+  <label *ngIf="label" [attr.for]="property">
     {{ 'FORM.' + label.toUpperCase() | translate }}
     <sup *ngIf="required"> *</sup>
   </label>
 
   <div
-    *ngIf="isDropZoneCustom"
-    class="dropzone-custom"
     #customDropzone
-    [kendoUploadDropZone]="'customZone'"
-    [ngClass]="{ 'hover-mouse-down': isDropZoneHover }"
+    (dragend)="onDropZoneEnd($event)"
     (dragenter)="onDropZoneEnter($event)"
     (dragleave)="onDropZoneLeave($event)"
-    (dragend)="onDropZoneEnd($event)"
     (drop)="onDropZoneEnd($event)"
+    *ngIf="isDropZoneCustom"
+    [kendoUploadDropZone]="'customZone'"
+    [ngClass]="{ 'hover-mouse-down': isDropZoneHover }"
+    class="dropzone-custom"
   >
     <div class="text-center" style="width: 100%">
       <div *ngIf="!isFileSelectOk && !isFileSelectFailed">
@@ -44,7 +44,7 @@
         </div>
         <div class="subtitle pt-2">
           <span>{{ 'FORM.DRAG-UPLOAD' | translate }} </span
-          ><a href="javascript:void(0)" (click)="onFileSelectClick()">{{ 'FORM.CHOOSE-NEW-FILE' | translate }}</a>
+          ><a (click)="onFileSelectClick()" href="javascript:void(0)">{{ 'FORM.CHOOSE-NEW-FILE' | translate }}</a>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           <span>{{ 'FORM.FILE-NOT-SUPPORTED' | translate }}:</span><span> {{ fileName }}</span>
         </div>
         <div class="subtitle pt-2">
-          <a href="javascript:void(0)" (click)="onFileSelectClick()">{{ 'FORM.SELECT-HERE' | translate }}</a
+          <a (click)="onFileSelectClick()" href="javascript:void(0)">{{ 'FORM.SELECT-HERE' | translate }}</a
           ><span> {{ 'FORM.DRAG-ANOTHER' | translate }}</span>
         </div>
       </div>
@@ -67,24 +67,24 @@
   </div>
 
   <kendo-fileselect
-    required
     #uploadSample
-    zoneId="customZone"
-    [formControlName]="property"
-    [restrictions]="restrictions"
-    [multiple]="multiple"
-    [accept]="accept"
-    (select)="fileSelected($event)"
     (remove)="onRemove($event)"
+    (select)="fileSelected($event)"
+    [accept]="accept"
+    [formControlName]="property"
     [id]="controlId"
+    [multiple]="multiple"
     [name]="controlId"
+    [required]="isRequired"
+    [restrictions]="restrictions"
+    zoneId="customZone"
   >
   </kendo-fileselect>
   <small class="form-text text-muted"
-    ><span>{{ textExplanation | translate }}</span>
+  ><span>{{ textExplanation | translate }}</span>
   </small>
   <!--Loop through errors-->
-  <div class="help-block" *ngIf="showErrors()">
+  <div *ngIf="showErrors()" class="help-block">
     <app-form-error [error]="formControl!.errors"></app-form-error>
   </div>
 </div>
