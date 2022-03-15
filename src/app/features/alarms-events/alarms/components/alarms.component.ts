@@ -1,17 +1,18 @@
-import { GridUtils } from '../../../global/grid.utils';
 import { AlarmingService } from '../../../../core/repository/services/alarming/alarming.service';
-import { IActionRequestParamsAlarms, IActionSortParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
+import { IActionRequestParamsAlarms } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAlarmsList } from 'src/app/core/repository/interfaces/alarming/alarms-list.interface';
-import { AlarmsListGridService } from '../services/alarms-list-grid.service';
-import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { AlarmsStaticTextService } from '../services/alarms-static-text.service';
-import { capitalize } from 'lodash';
 import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { EventData } from 'src/app/api/alarms-events/event-data-dto';
+import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
+import { EventDataRequestDto } from 'src/app/api/alarms-events/event-data-request-dto';
+import { Observable } from 'rxjs';
+import { GridColumn, GridColumnType, PageChangedEvent } from 'src/app/shared/data-table/data-table.component';
+import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -19,244 +20,282 @@ import * as moment from 'moment';
   styles: []
 })
 export class AlarmsComponent implements OnInit {
-  rowData: IAlarmsList[];
-  columnDefs = [];
+  // Alarms
+  alarmsDataList$: Observable<GridResponse<IAlarmsList>>;
+  alarmsDataList: GridResponse<IAlarmsList>;
+  alarmsForm: FormGroup;
+  alarmsPageNumber = 1;
+  alarmsPageSize = 20;
+  alarmsDataListCount = 0;
+  alarmsLoading = false;
 
-  totalCount = 0;
-
-  // N/A
-  notAvailableText = this.staticTextService.notAvailableTekst;
-  overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
-  overlayLoadingTemplate = this.staticTextService.loadingData;
-  noData = false;
-
-  // ag-grid
-  public modules: Module[] = AllModules;
-  public frameworkComponents;
-  public gridOptions: Partial<GridOptions>;
-  public gridApi;
-  public gridColumnApi;
-
-  public localeText;
-
-  requestModel: IActionRequestParamsAlarms = {
-    pageSize: 0,
-    startTime: null,
-    endTime: null,
-    filter: null,
-    pageNumber: 0,
-    sort: null,
-    textSearch: null
-  };
-
-  isGridLoaded = false;
-
-  pageSizes: Codelist<number>[] = [
-    { id: 20, value: '20' },
-    { id: 50, value: '50' },
-    { id: 100, value: '100' }
+  public alarmsSort: SortDescriptor[] = [
+    {
+      field: 'alarmTimestamp',
+      dir: 'desc'
+    }
   ];
 
-  selectedPageSize: Codelist<number> = this.pageSizes[0];
+  alarmsDataColumnsConfiguration: Array<GridColumn> = [
+    {
+      field: 'alarmTimestamp',
+      translationKey: 'GRID.TIMESTAMP',
+      type: GridColumnType.DATE_TIME,
+      width: 100
+    },
+    {
+      field: 'eventId',
+      translationKey: 'GRID.ID',
+      width: 50
+    },
+    {
+      field: 'severity',
+      translationKey: 'GRID.SEVERITY',
+      type: GridColumnType.COLORED_ENUM,
+      coloredValues: [
+        {
+          enumValue: 'LOW',
+          color: 'blue'
+        },
+        {
+          enumValue: 'MEDIUM',
+          color: 'orange'
+        },
+        {
+          enumValue: 'HIGH',
+          color: 'red'
+        }
+      ],
+      width: 100
+    },
+    {
+      field: 'description',
+      translationKey: 'GRID.DESCRIPTION',
+      width: 200
+    },
+    {
+      field: 'manufacturer',
+      translationKey: 'GRID.VENDOR',
+      width: 100,
+      class: 'text-uppercase'
+    },
+    {
+      field: 'sourceType',
+      translationKey: 'GRID.SOURCE-TYPE',
+      width: 100
+    },
+    {
+      field: 'protocol',
+      translationKey: 'GRID.PROTOCOL',
+      width: 100
+    }
+  ];
 
-  form: FormGroup;
-  datasource: any;
+  // Events
+  eventsDataList$: Observable<EventData>;
+  eventsDataList: EventData;
+  eventsForm: FormGroup;
+  eventsPageNumber = 1;
+  eventsPageSize = 20;
+  eventsDataListCount = 0;
+  eventsLoading = false;
+
+  eventsDataColumnsConfiguration: Array<GridColumn> = [
+    {
+      field: 'timeStamp',
+      translationKey: 'GRID.TIMESTAMP',
+      type: GridColumnType.DATE_TIME,
+      width: 100
+    },
+    {
+      field: 'eventIdRaw',
+      translationKey: 'GRID.EVENT-ID-RAW',
+      width: 50
+    },
+    {
+      field: 'eventId',
+      translationKey: 'GRID.EVENT-ID',
+      width: 50
+    },
+    {
+      field: 'description',
+      translationKey: 'GRID.DESCRIPTION',
+      width: 200
+    },
+    {
+      field: 'serialNumber',
+      translationKey: 'GRID.METER-ID',
+      width: 150
+    },
+    {
+      field: 'manufacturer',
+      translationKey: 'GRID.VENDOR',
+      width: 100,
+      class: 'text-uppercase'
+    },
+    {
+      field: 'protocol',
+      translationKey: 'GRID.PROTOCOL',
+      width: 100,
+      class: 'text-uppercase'
+    }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
-    private alarmsListGridService: AlarmsListGridService,
     private alarmingService: AlarmingService,
-    private translate: TranslateService,
-    private staticTextService: AlarmsStaticTextService
+    private breadcrumbService: BreadcrumbService,
+    private dataProcessingService: DataProcessingService,
+    private elRef: ElementRef
   ) {
-    this.form = this.createForm();
+    this.alarmsForm = this.createAlarmsForm();
+    this.eventsForm = this.createEventsForm();
 
-    this.frameworkComponents = alarmsListGridService.setFrameworkComponents();
-    this.gridOptions = this.alarmsListGridService.setGridOptions();
+    this.getEventsDataList();
   }
 
-  get startTimeProperty(): string {
+  get startTimeAlarmsProperty(): string {
     return 'startDate';
   }
 
-  get endTimeProperty(): string {
+  get endTimeAlarmsProperty(): string {
     return 'endDate';
   }
 
-  get searchProperty(): string {
-    return 'search';
+  get startTimeEventsProperty(): string {
+    return 'startDate';
   }
 
-  get pageSizeProperty() {
-    return 'pageSize';
+  get endTimeEventsProperty(): string {
+    return 'endDate';
   }
 
   ngOnInit() {
-    this.columnDefs = this.alarmsListGridService.setGridDefaultColumns();
-
-    this.localeText = {
-      // for side panel
-      columns: this.translate.instant('GRID.COLUMNS'),
-      filters: this.translate.instant('GRID.FILTERS'),
-
-      // for filter panel
-      page: this.translate.instant('GRID.PAGE'),
-      more: this.translate.instant('GRID.MORE'),
-      to: this.translate.instant('GRID.TO'),
-      of: this.translate.instant('GRID.OF'),
-      next: this.translate.instant('GRID.NEXT'),
-      last: this.translate.instant('GRID.LAST'),
-      first: this.translate.instant('GRID.FIRST'),
-      previous: this.translate.instant('GRID.PREVIOUS'),
-      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
-    };
+    this.breadcrumbService.setPageName('');
   }
 
-  createForm(): FormGroup {
+  createAlarmsForm(): FormGroup {
     return this.formBuilder.group({
-      [this.startTimeProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endTimeProperty]: [moment(), Validators.required],
-      [this.pageSizeProperty]: this.pageSizes[0],
+      [this.startTimeAlarmsProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endTimeAlarmsProperty]: [moment(), Validators.required],
       startTime: ['00:00'],
       endTime: ['00:00']
     });
   }
 
-  onPaginationChange(params) {
-    const currentApiPage = params.api.paginationGetCurrentPage();
-    const currentSessionPage = this.alarmsListGridService.getSessionSettingsPageIndex();
-
-    if (currentApiPage !== currentSessionPage) {
-      if (this.isGridLoaded) {
-        if (params.newPage) {
-          this.alarmsListGridService.setSessionSettingsPageIndex(currentApiPage);
-        }
-      } else {
-        // params.api.paginationGoToPage(currentSessionPage);
-      }
-    }
-  }
-
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-
-    if (this.gridColumnApi) {
-      this.gridColumnApi.applyColumnState({ state: [{ colId: 'alarmTimestamp', sort: 'desc' }] });
-    }
-
-    this.setGridDataSource();
-  }
-
-  setGridDataSource() {
-    const that = this;
-    that.datasource = {
-      getRows(paramsRow) {
-        const startRow = that.alarmsListGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
-        const endRow = that.alarmsListGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
-
-        const startDate = new Date(that.form.get(that.startTimeProperty).value);
-        startDate.setMinutes(0, 0, 0);
-        const endDate = new Date(that.form.get(that.endTimeProperty).value);
-        endDate.setMinutes(0, 0, 0);
-
-        that.requestModel.pageSize = endRow - startRow;
-        that.requestModel.pageNumber = that.alarmsListGridService.getSessionSettingsPageIndex() + 1;
-        that.requestModel.startTime = startDate;
-        that.requestModel.endTime = endDate;
-
-        that.requestModel.sort = that.getSort(paramsRow.request.sortModel);
-
-        if (!that.requestModel.startTime || !that.requestModel.endTime) {
-          that.gridApi.hideOverlay();
-          that.rowData = null;
-          that.totalCount = 0;
-          that.noData = true;
-          that.gridApi.showNoRowsOverlay();
-          paramsRow.successCallback([], 0);
-          return;
-        }
-
-        that.loadData(that, paramsRow);
-      }
-    };
-    this.gridApi.setServerSideDatasource(that.datasource);
-  }
-
-  getSort(sortModel: any[]): IActionSortParams[] {
-    if (!sortModel || sortModel.length === 0) {
-      return null;
-    }
-
-    const sortResult: IActionSortParams[] = [];
-    sortModel.map((row) =>
-      sortResult.push({
-        propName: capitalize(row.colId),
-        index: 0,
-        sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
-      })
-    );
-    return sortResult;
-  }
-
-  loadData(instance: AlarmsComponent, paramsRow: any) {
-    instance.alarmingService.getGridAlarms(instance.requestModel).subscribe((data) => {
-      instance.gridApi.hideOverlay();
-
-      if (data === undefined || data == null || data.totalCount === 0) {
-        instance.totalCount = 0;
-        instance.noData = true;
-        instance.gridApi.showNoRowsOverlay();
-      } else {
-        instance.totalCount = data.totalCount;
-        instance.noData = false;
-      }
-
-      paramsRow.successCallback(data ? data.data : [], instance.totalCount);
-
-      instance.gridApi.paginationGoToPage(instance.alarmsListGridService.getSessionSettingsPageIndex());
-      this.isGridLoaded = true;
-
-      this.resizeColumns();
+  createEventsForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.startTimeEventsProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endTimeEventsProperty]: [moment(), Validators.required],
+      startTime: ['00:00'],
+      endTime: ['00:00']
     });
   }
 
-  getAllDisplayedColumnsNames(): string[] {
-    if (this.gridColumnApi) {
-      const columns = this.gridColumnApi.getAllDisplayedColumns();
-      return columns.map((c) => c.colId);
+  getAlarmsDataList() {
+    if (this.alarmsPageNumber === 0) {
+      this.alarmsPageNumber++;
     }
-    return;
+
+    const startDate = new Date(this.alarmsForm.get(this.startTimeAlarmsProperty).value);
+    startDate.setSeconds(0, 0);
+    const endDate = new Date(this.alarmsForm.get(this.endTimeAlarmsProperty).value);
+    endDate.setSeconds(0, 0);
+
+    const request: IActionRequestParamsAlarms = {
+      startTime: startDate,
+      endTime: endDate,
+      pageNumber: this.alarmsPageNumber,
+      pageSize: this.alarmsPageSize,
+      sort: [
+        {
+          index: 0,
+          propName: this.alarmsSort[0].field,
+          sortOrder: this.alarmsSort[0].dir === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+        }
+      ],
+      textSearch: null
+    };
+
+    this.eventsLoading = true;
+
+    this.alarmsDataList$ = this.alarmingService.getGridAlarms(request);
+    this.alarmsDataList$.subscribe((data) => {
+      this.alarmsDataList = data;
+      this.eventsLoading = false;
+      if (data) {
+        this.alarmsDataListCount = data.totalCount;
+        if (this.alarmsDataListCount === 0) {
+          this.alarmsPageNumber = 0;
+        }
+      } else {
+        this.alarmsDataListCount = 0;
+      }
+    });
   }
 
-  pageSizeChanged(selectedValue: any) {
-    if (this.isGridLoaded) {
-      this.alarmsListGridService.setSessionSettingsPageIndex(0);
-      this.selectedPageSize = selectedValue;
-      this.setGridPageSize();
+  public alarmsSortChange(sort: SortDescriptor[]): void {
+    this.alarmsSort = sort;
+    this.getAlarmsDataList();
+  }
+
+  getEventsDataList() {
+    if (this.eventsPageNumber === 0) {
+      this.eventsPageNumber++;
     }
+
+    const startDate = new Date(this.eventsForm.get(this.startTimeEventsProperty).value);
+    startDate.setSeconds(0, 0);
+    const endDate = new Date(this.eventsForm.get(this.endTimeEventsProperty).value);
+    endDate.setSeconds(0, 0);
+
+    const request: EventDataRequestDto = {
+      startTime: startDate,
+      endTime: endDate,
+      pageNumber: this.eventsPageNumber,
+      pageSize: this.eventsPageSize
+    };
+
+    this.eventsLoading = true;
+
+    this.eventsDataList$ = this.dataProcessingService.getEventsData(request);
+    this.eventsDataList$.subscribe((data) => {
+      this.eventsDataList = data;
+      this.eventsLoading = false;
+      if (data) {
+        this.eventsDataListCount = data.totalRowCount;
+        if (this.eventsDataListCount === 0) {
+          this.eventsPageNumber = 0;
+        }
+      } else {
+        this.eventsDataListCount = 0;
+      }
+    });
   }
 
-  setGridPageSize() {
-    const api: any = this.gridApi;
-    api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
-    this.gridApi.setServerSideDatasource(this.datasource);
+  loadMoreAlarmsData(event: PageChangedEvent) {
+    this.alarmsPageNumber = event.pageNumber;
+    if (event.rowsPerPage && event.rowsPerPage !== this.alarmsPageSize) {
+      this.alarmsPageNumber = 1;
+      this.alarmsPageSize = event.rowsPerPage;
+    }
+    this.getAlarmsDataList();
   }
 
-  gridSizeChanged() {
-    this.resizeColumns();
+  loadMoreEventsData(event: PageChangedEvent) {
+    this.eventsPageNumber = event.pageNumber;
+    if (event.rowsPerPage && event.rowsPerPage !== this.eventsPageSize) {
+      this.eventsPageNumber = 1;
+      this.eventsPageSize = event.rowsPerPage;
+    }
+    this.getEventsDataList();
   }
 
-  resizeColumns() {
-    GridUtils.resizeColumns(this.gridColumnApi, this.gridOptions);
+  addWidth() {
+    return this.elRef.nativeElement.parentElement.offsetWidth;
   }
 
-  onFirstDataRendered(params) {
-    // params.api.sizeColumnsToFit();
-    // params.api.showLoadingOverlay();
-  }
-
-  dateRangeChanged() {
-    this.gridApi?.purgeServerSideCache([]);
+  calculateHeight() {
+    return window.innerHeight - 370;
   }
 }

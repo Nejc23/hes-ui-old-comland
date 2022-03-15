@@ -250,6 +250,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() selectAllClickEvent = new EventEmitter<boolean>();
   @Output() deSelectAllClickEvent = new EventEmitter<boolean>();
   @Output() selectionChangedEvent = new EventEmitter<SelectionEvent>();
+  @Output() sortChangeEvent = new EventEmitter<SortDescriptor[]>();
 
   checkboxColumn: CheckboxColumn = {
     columnMenu: false,
@@ -601,6 +602,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     }
     this.sort = sort;
     this.loadItems(data, this.totalCount ? this.totalCount : data.length, this.sort);
+    this.sortChangeEvent.emit(sort);
   }
 
   // clear all filters Text
