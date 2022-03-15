@@ -1,11 +1,15 @@
 {
     "ALARM": {
+        "ALARMS": "Alarms",
+        "ALARMS-OVERVIEW": "Alarms & Events overview",
+        "EVENTS": "Events",
         "NO-ALARMS": "No Alarms have been added yet"
     },
     "BREADCRUMB": {
         "CONCENTRATOR": "Concentrator",
         "JOBS": "Jobs",
-        "OVERVIEW": "Overview - Meters"
+        "OVERVIEW": "Overview - Meters",
+        "DCU": "Concentrators"
     },
     "BUTTON": {
         "ACTIVATE": "Activate",
@@ -100,6 +104,7 @@
         "HOURLY": "Hourly",
         "IMAGE-READY-FOR-ACTIVATION": "Image ready for activation",
         "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
+        "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
         "IMPORT-SUCCESSFUL": "Import successful",
         "IN-RANGE": "In Range",
         "INACTIVE": "Inactive",
@@ -269,7 +274,7 @@
         "READ-STATUS": "read status{{additionalString}}",
         "STATUS": "status{{additionalString}}",
         "TYPE": "type{{additionalString}}",
-        "VENDOR": "vendor{{additionalString}}",
+        "VENDOR": "manufacturer{{additionalString}}",
         "LAST-NOTIFICATIONS": "Last notifications",
         "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
         "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
@@ -286,7 +291,8 @@
         "DOWNLOAD-CLIENT-CERT": "Download client certificate",
         "PROTECT-YOUR-CERT": "Protect your certificate",
         "ENTER-CLIENT-PASSWORD": "Enter the password for certificate",
-        "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again."
+        "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again.",
+        "CONCENTRATORS-OVERVIEW": "Data Concentrators overview"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - page not exists"
@@ -412,6 +418,8 @@
         "THRESHOLD": "Threshold",
         "THRESHOLD-EMERGENCY": "Threshold emergency",
         "THRESHOLD-NORMAL": "Threshold normal",
+        "TIMERANGE": "Time range",
+        "TIMESTAMP": "Timestamp",
         "TYPE": "Type",
         "UPLOAD": "Upload",
         "UPLOAD-FILED": "Upload failed",
@@ -419,7 +427,7 @@
         "UPLOADING-FILE": "Uploading file",
         "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
         "USERNAME": "Username",
-        "VENDOR": "Vendor",
+        "VENDOR": "Manufacturer",
         "WEEK-DAYS": "Week-days",
         "WRAPPER": "Wrapper",
         "TIME": "Time",
@@ -465,7 +473,10 @@
         "FIRSTINSTALLEDDATE": "Installed",
         "PROPERTY": "Property",
         "VALUE": "Value",
-        "DEVICEID": "Guid"
+        "DEVICEID": "Guid",
+        "SYNC-WINDOW-MIN": "Lower limit (ms)",
+        "SYNC-WINDOW-MAX": "Upper limit (ms)",
+        "IMPORT-DEVICES-FILER-LABEL": "Compare meter id with (works with filter from file only)"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -549,7 +560,7 @@
         "TYPE": "Type",
         "UNIT": "Unit",
         "VALUE": "Value",
-        "VENDOR": "Vendor",
+        "VENDOR": "Manufacturer",
         "REGISTER": "Register",
         "HOSTNAME": "Hostname",
         "STATE": "State",
@@ -560,7 +571,23 @@
         "EVERY-YEAR": "Every year",
         "DAY-EXTERNALID": "Day ID",
         "ROWS-PER-PAGE": "Rows per page",
-        "ACTIVE-JOBS": "Active jobs"
+        "ACTIVE-JOBS": "Active jobs",
+        "ACTION-DETAILS": "Open details",
+        "ACTION-REGISTERS": "Show registers",
+        "ACTION-DUPLICATE": "Duplicate",
+        "ACTION-EDIT": "Edit",
+        "ACTION-DELETE": "Delete",
+        "ACTION-REJECT": "Reject",
+        "ACTION-GRANT": "Grant",
+        "ACTION-SETTINGS": "Settings",
+        "ACTION-RUNJOB": "Run job",
+        "ACTION-SAVE": "Save",
+        "ACTION-CANCEL": "Cancel",
+    	"ACTION-EXECUTE": "Execute job",
+    	"EXTERNAL-ID": "External Id",
+    	"EVENT-ID": "Event ID",
+    	"EVENT-ID-RAW": "Event ID (raw)",
+    	"METER-ID": "Meter ID"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -632,7 +659,15 @@
         "TIME-SYNCHRONIZATION": "Time synchronization",
         "TOPOLOGY": "Topology",
         "TOPOLOGY-JOB": "Topology job",
-        "ACTIVE-JOBS": "Active jobs"
+        "ACTIVE-JOBS": "Active jobs",
+        "METER-TIME-SYNC-JOB": "Time synchronization (P2P)",
+        "METER-TIME-SYNCHRONIZATION": "Time synchronization (P2P)",
+        "METER-TIME-SYNC": {
+            "CONDITIONAL-SYNC": "Conditional synchronization",
+            "CONDITIONAL-SYNC-INFO": "Time will be synchronized if the clock on the meter is outside of upper and lower borders",
+            "CONDITIONAL-SYNC-ALERT": "Clock will be synchronized unconditionally every time job will be executed!"
+        },
+        "JOBS-OVERVIEW": "Jobs overview"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -663,7 +698,7 @@
         "ALL-RIGHTS RESERVED": "© 2020. All rights reserved",
         "AUTO-TEMPLATES": "Auto templates",
         "DATA-VIEW": "Data view",
-        "DCU": "Data Concentrator",
+        "DCU": "Concentrators",
         "IMPORT-DEVICE-KEYS": "Import device keys",
         "IMPORT-TEMPLATES": "Import configurations",
         "JOBS": "Jobs",
@@ -731,7 +766,6 @@
         "CHECK-DEVICE-TEMPLATE": "Please, check your device configuration.",
         "CLEAR-ALARMS": "Clear Alarms",
         "CLEAR-FF": "Clear FF",
-        "CREATE-NEW": "Create new",
         "DROP-AVAILABLE-REGISTERS": "Drop available registers here.",
         "DROP-SUBTITLE": "Selected file must be in .xml file format.",
         "EDIT-METER": "Edit {{ protocol }} meter",
@@ -844,7 +878,15 @@
         },
         "TRANSFORMER-RATIO": "Transformer ratio",
         "CURRENT-RATIO": "Current ratio",
-        "VOLTAGE-RATIO": "Voltage ratio"
+        "VOLTAGE-RATIO": "Voltage ratio",
+        "METERS-OVERVIEW": "Meters overview",
+        "SHOW-RAW": "Show raw data",
+        "NORMALIZED-DATA": "Normalized data",
+        "RAW-DATA": "Raw data",
+        "CREATE-NEW-READING": "Create new reading",
+        "CREATE-NEW-TIME-SYNC": "Create new time sync",
+        "MAXIMUM-IMPORT-MESSAGE": "Maximum number of identifiers exceeded!",
+        "MAXIMUM-IMPORT-ERROR": "{{ value1 }} identifier detected,  {{ value2 }} allowed."
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {

@@ -164,7 +164,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() pageable = false;
   @Input() stickyHeader = false;
   @Input() tableHeight = 450;
-  @Input() total;
+  @Input() totalCount; // total items count (totalCount from backend)
   @Input() rowHeight: 44; // required for virtual scroll
   @Input() fetchData = false; // fetch data from API on next page
   @Input() excelFileName = '';
@@ -182,14 +182,16 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() showColumnChooser = false;
   @Input() wildCardsSearch = false;
   @Input() withFiltersIcon = false;
+  @Input() withClearFilerText = false;
   @Input() filtersCount = 0;
   @Input() searchText = '';
   @Input() wildCardsEnabled = false;
   @Input() inlineEdit = false;
   @Input() withAddButton = false;
-  @Input() totalCount;
   @Input() editFieldById = ''; // id needs to be defined for inline edit
   @Input() noDataTextAlignLeft = false;
+  @Input() disableSearch = false;
+
   searchForm: FormGroup;
   wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
   // search
@@ -242,11 +244,13 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() searchIconClickEvent = new EventEmitter<boolean>();
   @Output() wildCardsEnabledEvent = new EventEmitter<boolean>();
   @Output() filterIconClickEvent = new EventEmitter<boolean>();
+  @Output() clearFilerTextClickEvent = new EventEmitter<boolean>();
   @Output() inlineSaveButtonClickEvent = new EventEmitter<any>();
 
   @Output() selectAllClickEvent = new EventEmitter<boolean>();
   @Output() deSelectAllClickEvent = new EventEmitter<boolean>();
   @Output() selectionChangedEvent = new EventEmitter<SelectionEvent>();
+  @Output() sortChangeEvent = new EventEmitter<SortDescriptor[]>();
 
   checkboxColumn: CheckboxColumn = {
     columnMenu: false,
@@ -324,7 +328,6 @@ export class DataTableComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     // data changed
     this.initGrid();
-
     if (this.selectAllEnabled) {
       // select ALL on next page
       // exclude ids
@@ -332,6 +335,9 @@ export class DataTableComponent implements OnInit, OnChanges {
       console.log(this.selectedKeys);
       if (this.excludedIdsFromSelection) {
         this.selectedKeys = this.selectedKeys.filter((id) => !this.excludedIdsFromSelection.includes(id)); //
+      }
+      if (this.totalCount === 0) {
+        this.pageNumber = 0;
       }
       console.log(this.selectedKeys);
     }
@@ -343,7 +349,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     }
   }
 
-  switchValueChanged(id: string, event: Event) {
+  switchValueChanged(id: string, event: boolean) {
     this.switchClickedEvent.emit({ id: id, value: event });
   }
 
@@ -369,7 +375,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     if (this.fetchData) {
       this.skip = event.skip;
       // load next page
-      if (this.pageNumber * this.pageSize < this.total) {
+      if (this.pageNumber * this.pageSize < this.totalCount) {
         if (this.scrollable === 'virtual') {
           this.pageNumber++;
         } else {
@@ -387,7 +393,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     } else {
       // client side data
       this.skip = event.skip;
-      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
+      this.loadItems(this.gridData, this.totalCount ? this.totalCount : this.gridData.length);
     }
   }
 
@@ -545,7 +551,7 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   initGrid() {
     if (this.gridData) {
-      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
+      this.loadItems(this.gridData, this.totalCount ? this.totalCount : this.gridData.length);
     } else {
       // no data
       this.gridView = {
@@ -595,7 +601,8 @@ export class DataTableComponent implements OnInit, OnChanges {
       data = this.filteredData;
     }
     this.sort = sort;
-    this.loadItems(data, this.total ? this.total : data.length, this.sort);
+    this.loadItems(data, this.totalCount ? this.totalCount : data.length, this.sort);
+    this.sortChangeEvent.emit(sort);
   }
 
   // clear all filters Text
@@ -625,12 +632,12 @@ export class DataTableComponent implements OnInit, OnChanges {
   // grid navigation for pagination with API calls
 
   navigateToLastPage() {
-    this.pageNumber = Math.ceil(this.total / this.pageSize);
+    this.pageNumber = Math.ceil(this.totalCount / this.pageSize);
     this.pageChangedEvent.emit({ pageNumber: this.pageNumber });
   }
 
   navigateToNextPage() {
-    if (this.pageNumber < this.total / this.pageSize) {
+    if (this.pageNumber < this.totalCount / this.pageSize) {
       this.pageNumber++;
       this.pageChangedEvent.emit({ pageNumber: this.pageNumber });
     }
@@ -660,7 +667,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   searchIconClicked() {
-    if (this.wildCardsSearch) {
+    if (this.wildCardsSearch && !this.disableSearch) {
       this.wildCardsEnabled = !this.wildCardsEnabled;
       if (this.wildCardsEnabled) {
         this.wildCardsEnabledEvent.emit(true);
@@ -691,6 +698,10 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   onFilterIconClick() {
     this.filterIconClickEvent.emit(true);
+  }
+
+  onClearFilterClick() {
+    this.clearFilerTextClickEvent.emit(true);
   }
 
   // meter units grid specific columns from old grid
@@ -804,6 +815,10 @@ export class DataTableComponent implements OnInit, OnChanges {
       }
     });
     return error;
+  }
+
+  switchClicked(rowData: any, value: boolean) {
+    this.switchValueChanged(rowData[this.kendoGridSelectByColumn], value);
   }
 
   private closeEditor(rowIndex = this.editedRowIndex) {

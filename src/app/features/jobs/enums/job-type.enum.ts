@@ -4,5 +4,6 @@ export enum JobTypeEnumeration {
   timeSync = 3,
   readEvents = 4,
   topology = 5,
-  alarmNotification = 6
+  alarmNotification = 6,
+  meterTimeSync = 7
 }

@@ -4,7 +4,6 @@ import { GridCellManufacturerComponent } from './../alarms/components/grid/grid-
 import { SharedModule } from './../../../shared/shared.module';
 import { AlarmsEventsRoutingModule } from './../common/modules/alarms-events-routing.module';
 import { NgModule } from '@angular/core';
-import { AlarmsEventsListComponent } from '../components/alarms-events-list.component';
 import { AlarmsComponent } from '../alarms/components/alarms.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GridCellTimestampComponent } from '../alarms/components/grid/grid-cell-timestamp.component';
@@ -14,7 +13,6 @@ import { GridCellAlarmProtocolComponent } from '../alarms/components/grid/grid-c
 @NgModule({
   entryComponents: [],
   declarations: [
-    AlarmsEventsListComponent,
     AlarmsComponent,
     GridCellTimestampComponent,
     GridCellManufacturerComponent,

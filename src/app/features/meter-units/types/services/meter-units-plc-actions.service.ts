@@ -7,11 +7,7 @@ import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import {
-  IActionRequestDeleteDevice,
-  IActionRequestParams,
-  IRegisterTypesEnum
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -59,7 +55,7 @@ export class MeterUnitsPlcActionsService {
     private translate: TranslateService
   ) {}
 
-  onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
+  onScheduleReadJobs(params: IActionRequestParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
       size: 'xl'
     };
@@ -69,17 +65,27 @@ export class MeterUnitsPlcActionsService {
       const component: SchedulerJobComponent = modalRef.componentInstance;
       modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
       component.setFormAddNew(JobTypeEnumeration.reading, units);
-      component.deviceFiltersAndSearch = {
-        id: params.deviceIds,
-        search: params.search,
-        filter: params.filter,
-        excludeIds: params.excludeIds
-      };
+      component.prepareNewJobForDevicesRequest(params);
       modalRef.result.then().catch(() => {});
     });
   }
 
-  onJobsAssignExisting(params: RequestFilterParams, selectedRowsCount: number) {
+  onScheduleMeterTimeSyncJobs(params: IActionRequestParams, selectedRowsCount: number) {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    this.codelistService.timeUnitCodeslist().subscribe((units) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+      component.setFormAddNew(JobTypeEnumeration.meterTimeSync, units);
+      component.prepareNewJobForDevicesRequest(params);
+      modalRef.result.then().catch(() => {});
+    });
+  }
+
+  onJobsAssignExisting(params: IActionRequestParams, selectedRowsCount: number) {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
 
     const modalRef = this.modalService.open(PlcMeterJobsAssignExistingComponent);
@@ -335,15 +341,9 @@ export class MeterUnitsPlcActionsService {
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = this.translate.instant('COMMON.CONFIRM');
     let response: Observable<any> = new Observable();
+    params.includedIds = params.deviceIds;
 
-    const paramsDeleteDevice = params as IActionRequestDeleteDevice;
-    paramsDeleteDevice.includedIds = params.deviceIds;
-    paramsDeleteDevice.deviceIds = null;
-
-    paramsDeleteDevice.excludedIds = params.excludeIds;
-    paramsDeleteDevice.excludeIds = null;
-
-    response = this.service.deleteDevice(paramsDeleteDevice);
+    response = this.service.deleteDevice(params);
     const operationName = this.translate.instant('COMMON.DELETE-DEVICES');
 
     // todo REFACTOR {{ VALUE }}
@@ -668,16 +668,24 @@ export class MeterUnitsPlcActionsService {
       search: null,
       excludeIds: null
     };
-
     // select from row
     if (guid && guid.length > 0) {
       requestParam.deviceIds.push(guid);
     } else {
       requestParam.deviceIds = requestModel.deviceIds;
     }
+    // select all button from grid
+    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
+      // excluded ids, filter, search and empty deviceIds are sent
+      requestParam.filter = requestModel.filterModel;
+      requestParam.search = requestModel.searchModel;
+      requestParam.excludeIds = requestModel.excludeIds;
+      requestParam.deviceIds = [];
+    }
     return requestParam;
   }
 
+  // working version with search and filters
   getOperationRequestParam(
     guid: string,
     requestModel: GridRequestParams,
@@ -703,7 +711,6 @@ export class MeterUnitsPlcActionsService {
       // select from grid
       requestParam.deviceIds = requestModel.deviceIds;
     }
-
     // select all enabled on grid, dont send ids
     if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
       requestParam.excludeIds = requestModel.excludeIds;
@@ -713,7 +720,7 @@ export class MeterUnitsPlcActionsService {
 
       requestParam.textSearch.value = '';
 
-      if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
+      if (requestModel.searchModel?.length > 0 && requestModel.searchModel[0].value?.length > 0) {
         requestParam.textSearch.value = requestModel.searchModel[0].value;
         requestParam.textSearch.propNames = visibleColumnsNames;
         requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
@@ -731,7 +738,18 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
-        if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
+
+        if (requestModel.filterModel.protocol && requestModel.filterModel.protocol.length > 0) {
+          requestModel.filterModel.protocol.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.protocolType),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+
+        if (requestModel.filterModel.vendors && requestModel.filterModel.vendors?.length > 0) {
           requestModel.filterModel.vendors.map((row) =>
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.vendor),
@@ -740,7 +758,7 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
-        if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
+        if (requestModel.filterModel.firmware && requestModel.filterModel.firmware?.length > 0) {
           requestModel.filterModel.firmware.map((row) =>
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.firmware),
@@ -749,7 +767,7 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
-        if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState.length > 0) {
+        if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState?.length > 0) {
           requestModel.filterModel.disconnectorState.map((row) =>
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
@@ -758,7 +776,7 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
-        if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState.length > 0) {
+        if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState?.length > 0) {
           requestModel.filterModel.ciiState.map((row) =>
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.ciiState),
@@ -767,7 +785,7 @@ export class MeterUnitsPlcActionsService {
             })
           );
         }
-        if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
+        if (requestModel.filterModel.tags && requestModel.filterModel.tags?.length > 0) {
           requestModel.filterModel.tags.map((row) =>
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.tags),
@@ -778,7 +796,7 @@ export class MeterUnitsPlcActionsService {
         }
 
         // show operations filter
-        if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
+        if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter?.length > 0) {
           requestModel.filterModel.showOptionFilter.map((row) => {
             if (row.id === 1) {
               requestParam.filter.push({
@@ -801,6 +819,20 @@ export class MeterUnitsPlcActionsService {
                 filterOperation: filterOperationEnum.equal
               });
             }
+            if (row.id === 4) {
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.isHls),
+                propValue: 'true',
+                filterOperation: filterOperationEnum.equal
+              });
+            }
+            if (row.id === 5) {
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.isHls),
+                propValue: 'false',
+                filterOperation: filterOperationEnum.equal
+              });
+            }
           });
         }
 
@@ -815,6 +847,14 @@ export class MeterUnitsPlcActionsService {
         }
       }
     }
+    console.log('deviceIds:');
+    console.log(requestParam.deviceIds);
+    console.log('Select all enabled:');
+    console.log(this.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+    console.log('Filter:');
+    console.log(requestParam.filter);
+    console.log('Search:');
+    console.log(requestParam.textSearch);
     return requestParam;
   }
 

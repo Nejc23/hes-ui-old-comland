@@ -1,0 +1,20 @@
+<app-label-with-switch [form]="form" [property]="'conditionalSync'" message='JOB.METER-TIME-SYNC.CONDITIONAL-SYNC' secondaryMessage='JOB.METER-TIME-SYNC.CONDITIONAL-SYNC-INFO'>
+</app-label-with-switch>
+
+
+<div class="tw-flex tw-row tw-pt-4" *ngIf="form.get('conditionalSync').value">
+  <div class="tw-flex-none tw-w-25 tw-pr-5">
+    <app-input-numeric [form]="form" [property]="'syncWindowMinInMs'" label="SYNC-WINDOW-MIN" [max]="10000">
+    </app-input-numeric>
+  </div>
+  <div class="tw-flex-initial tw-w-25">
+    <app-input-numeric [form]="form" [property]="'syncWindowMaxInMs'" label="SYNC-WINDOW-MAX" [max]="10000">
+    </app-input-numeric>
+  </div>
+</div>
+
+<div *ngIf="!form.get('conditionalSync').value">
+  <div class="alert alert-danger" role="alert">
+    <span>{{ 'JOB.METER-TIME-SYNC.CONDITIONAL-SYNC-ALERT' | translate }}</span>
+  </div>
+</div>

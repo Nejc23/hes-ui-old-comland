@@ -155,10 +155,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
       const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
+      return selectedRows && selectedRows.length > 0;
     }
     return false;
   }

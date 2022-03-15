@@ -18,4 +18,5 @@ export interface MeterUnitsLayout {
   gridLayout: string;
   mediumFilter?: Codelist<number>[];
   protocolFilter?: Codelist<number>[];
+  importDevicesField?: Codelist<number>[];
 }

@@ -221,7 +221,7 @@ export class VaultAccessComponent implements OnInit {
       modalRef.result.then(
         () => {
           // on close (CONFIRM)
-          this.cryptoService.rejectClientCertificate({ id: event.requestId }).subscribe(
+          this.cryptoService.rejectClientCertificate({ id: event.rowData.requestId }).subscribe(
             (res) => {
               this.toast.successToast(this.translate.instant('VAULT-ACCESS.REJECT-ITEM-SUCCESS'));
               this.getClientCertificatesPendingData();
@@ -245,7 +245,7 @@ export class VaultAccessComponent implements OnInit {
       modalRef.result.then(
         () => {
           // on close (CONFIRM)
-          this.cryptoService.grantClientCertificate({ id: event.requestId }).subscribe(
+          this.cryptoService.grantClientCertificate({ id: event.rowData.requestId }).subscribe(
             (res) => {
               this.toast.successToast(this.translate.instant('VAULT-ACCESS.GRANT-ITEM-SUCCESS'));
               this.getClientCertificatesPendingData();
@@ -272,7 +272,7 @@ export class VaultAccessComponent implements OnInit {
       component.modalTitle = this.translate.instant('VAULT-ACCESS.REJECT-ITEMS');
       component.btnConfirmText = this.translate.instant('VAULT-ACCESS.REJECT-BUTTON');
       component.hideCloseButton = true;
-      if (event.selectedKeys.length === 1) {
+      if (this.selectedKeys.length === 1) {
         component.modalBody = this.translate.instant('VAULT-ACCESS.REJECT-ITEM-CONFIRMATION');
       } else {
         component.modalBody = this.translate.instant('VAULT-ACCESS.REJECT-ITEMS-CONFIRMATION');
@@ -280,14 +280,14 @@ export class VaultAccessComponent implements OnInit {
 
       modalRef.result.then(() => {
         const batch: Observable<any>[] = [];
-        for (const key of event.selectedKeys) {
+        for (const key of this.selectedKeys) {
           batch.push(this.cryptoService.rejectClientCertificate({ id: key }));
         }
         const joinedObservables = forkJoin(batch);
         joinedObservables
           .subscribe(
             () => {
-              if (event.selectedKeys.length === 1) {
+              if (this.selectedKeys.length === 1) {
                 this.toast.successToast(this.translate.instant('VAULT-ACCESS.REJECT-ITEM-SUCCESS'));
               } else {
                 this.toast.successToast(this.translate.instant('VAULT-ACCESS.REJECT-ITEMS-SUCCESS'));
@@ -346,6 +346,7 @@ export class VaultAccessComponent implements OnInit {
   }
 
   selectionChanged(selectedRows: string[]) {
+    this.selectedKeys = selectedRows;
     this.showGridBulkActions = selectedRows.length > 0;
   }
 

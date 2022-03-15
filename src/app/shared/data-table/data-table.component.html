@@ -21,7 +21,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   [ngClass]="tableClass ? tableClass : ''"
   [pageSize]="pageSize"
   [pageable]="pageable"
-  [reorderable]="false"
+  [resizable]="true"
   [rowClass]="rowClass"
   [rowHeight]="rowHeight"
   [scrollable]="scrollable"
@@ -55,20 +55,24 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </button>
       </div>
 
-      <div *ngIf="withSearch">
+      <div *ngIf="withSearch" [ngClass]="disableSearch ? 'disabled-search' : '' ">
         <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{'COMMON.SEARCH' | translate }}:</div>
 
         <div [formGroup]="searchForm" class="tw-inline-flex gray-border tw-w-56 search-input">
 
           <div (click)="searchIconClicked()"
+               [ngClass]="disableSearch ? 'disabled-search' : '' "
                [title]="getWildCardToolTipText()"
-               class="tw-flex tw-justify-center" data-placement="top"
+               class="tw-flex tw-justify-center tw-cursor-pointer" data-placement="top"
                data-toggle="tooltip">
             <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
           </div>
           <!-- Client side search on all columns only works on strings and date time -->
           <input #searchInput
+                 [disabled]="disableSearch"
                  [formControlName]="'search'"
+                 [ngClass]="disableSearch ? 'disabled-search' : '' "
+                 [readonly]="disableSearch"
                  kendoTextBox
                  placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
           />
@@ -85,6 +89,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <span [ngClass]="filtersCount > 0 ? 'tw-visible' : 'tw-invisible'"
                 class="badge badge-primary corner-badge">{{filtersCount}}</span>
         </button>
+
+        <div (click)="onClearFilterClick()"
+             *ngIf="withClearFilerText"
+             class="tw-text-darkGray tw-text-sm tw-ml-8 tw-flex tw-items-center tw-cursor-pointer tw-w-20">
+          {{ 'FILTER.CLEAR-FILTERS' | translate }}
+        </div>
       </div>
 
       <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex">
@@ -101,7 +111,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
               (selectionChange)="dropdownFilterValueChanged($event, filter.field)"
               [data]="filter.values"
               [defaultItem]="defaultFilterItem | translate"
-              [id]="filter"
+              [id]="filter.field"
             >
             </kendo-dropdownlist>
           </div>
@@ -115,8 +125,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
       <div *ngIf="excelExport || showGridBulkActions" class="tw-flex tw-justify-end tw-w-full tw-place-self-end">
 
-        <div *ngIf="excelExport" class="tw-ml-4">
-          <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
+        <div *ngIf="excelExport" [title]="'GRID.EXCEL-EXPORT' | translate"
+             class="tw-ml-4"
+             data-placement="top"
+             data-toggle="tooltip">
+          <button
+            icon="fa fa-file-export tw-bg-white tw-text-darkGray"
+            kendoGridExcelCommand
+            type="button">
           </button>
         </div>
 
@@ -137,9 +153,15 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           [autoSync]="true"
           class="small-button column-chooser tw-ml-2"></kendo-grid-column-chooser>
 
-        <div *ngIf="withRefreshButton" class="tw-pl-2">
+        <div *ngIf="withRefreshButton"
+             [title]="'GRID.REFRESH-GRID' | translate"
+             class="tw-pl-2 tw-cursor-pointer"
+             data-placement="top"
+             data-toggle="tooltip">
           <div
-            (click)="refreshButtonClickedEvent()" class="refresh-button border-gray">
+            (click)="refreshButtonClickedEvent()"
+            class="refresh-button border-gray"
+          >
             <img [ngClass]="loading ? 'tw-animate-spin' : ''"
                  src="assets/images/icons/refresh-icon.svg" />
           </div>
@@ -157,17 +179,18 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                               [resizable]=checkboxColumn.resizable
                               [showSelectAll]=checkboxColumn.showSelectAll
                               [sticky]="true"
-                              [width]=checkboxColumn.width
+                              [width]="60"
                               class="checkboxes">
   </kendo-grid-checkbox-column>
 
   <!--sticky last column for row actions in scrollable mode in case of grid has horizontal scroll and last column is not visible  -->
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
-                     [autoSize]="true"
                      [class]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1 ? 'transparent-background' : column.class"
                      [field]="column.field"
                      [hidden]="column.field === 'rowActions' && inlineAddOrEdit ? true : column.hidden"
                      [locked]="column.locked"
+                     [minResizableWidth]="80"
+                     [resizable]="true"
                      [sortable]="!column.sortingDisabled"
                      [sticky]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1"
                      [title]="column.translationKey | translate"
@@ -188,7 +211,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <!--- no type defined is string -->
-        <ng-container *ngIf="!column.type && dataItem[column.field] || dataItem[column.field] === 0">
+        <ng-container
+          *ngIf="!column.type && dataItem[column.field] || dataItem[column.field] === 0 && column.type !== columnType.LINK">
           <div [class]="column.class?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
             <ng-container *ngIf="column.icon; else noIcon">
@@ -204,8 +228,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SWITCH">
-          <kendo-switch [checked]="dataItem[column.field]"
-                        [readonly]="true"></kendo-switch>
+          <div (click)="switchClicked(dataItem, dataItem[column.field])" class="tw-flex">
+            <div class="tw-cursor-pointer">
+              <kendo-switch [checked]="dataItem[column.field]"
+                            [readonly]="true"
+                            class="tw-ml-2 tw-cursor-pointer"></kendo-switch>
+              <!-- set to readonly that switch value doesnt change and added click event to div (click event not working in switch is readonly) -->
+            </div>
+          </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE_ONLY">
@@ -244,10 +274,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
         <!-- hyperlink with event emitter -->
         <ng-container *ngIf="column.type === columnType.LINK">
-          <div [title]="dataItem[column.field]" data-placement="top"
+          <div [ngClass]="column.class"
+               [title]="dataItem[column.field]"
+               data-placement="top"
                data-toggle="tooltip">
             <a (click)="linkClicked(column.field, dataItem[this.kendoGridSelectByColumn], dataItem)"
-               class="tw-text-secondary tw-cursor-pointer">{{ dataItem[column.field] }}</a>
+               class="tw-text-secondary tw-cursor-pointer tw-mx-1">{{ dataItem[column.field] }}</a>
           </div>
         </ng-container>
 
@@ -295,7 +327,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   [title]="iconData.popoverText | translate" class="tw-mr-2 tw-w-4 tw-h-4" data-placement="top"
                   data-toggle="tooltip" />
 
-                <!-- active jobs special case popover with active-jobs -->
+                <!-- active jobs special case popover with active-jobs on meters and DC grid -->
                 <div *ngIf="iconData.field === 'hasActiveJobs'"
                      [ngbPopover]="tipContentNextRead"
                      [placement]="['right-top']" [title]="iconData.popoverText | translate"
@@ -305,7 +337,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   <img [src]="'assets/images/icons/' + iconData.iconName + '.svg'" class="tw-w-4 tw-h-4" />
 
                   <ng-template #tipContentNextRead id="tipContentNextRead">
-                    <app-scheduler-active-jobs [deviceId]="dataItem.deviceId"></app-scheduler-active-jobs>
+                    <app-scheduler-active-jobs
+                      [deviceId]="dataItem.deviceId ?? dataItem.concentratorId"></app-scheduler-active-jobs>
                   </ng-template>
                 </div>
 
@@ -365,8 +398,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         <div class="grid-row-button rows-{{ rowActions.length }} tw-inline-flex">
           <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
                *ngFor="let action of rowActions"
+               [ngbTooltip]="'GRID.ACTION-' + action.actionName.toUpperCase() | translate " [openDelay]="500"
                [src]="'assets/images/icons/' + action.iconName + '.svg'"
-               class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded" />
+               class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded"
+               container="body"
+               placement="top"
+               triggers="hover" />
         </div>
       </ng-container>
     </ng-template>
@@ -377,13 +414,24 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <kendo-grid-command-column *ngIf="inlineAddOrEdit">
     <ng-template kendoGridCellTemplate let-dataItem>
       <div class="inline-add-new-icons">
-        <img [src]="'assets/images/icons/inline-close-icon.svg'" class="inline-icon" kendoGridCancelCommand />
-        <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridSaveCommand />
+        <img [src]="'assets/images/icons/inline-close-icon.svg'"
+             [title]="'GRID.ACTION-CANCEL' | translate"
+             class="inline-icon"
+             data-placement="top" data-toggle="tooltip"
+             kendoGridCancelCommand />
+        <img [src]="'assets/images/icons/inline-check-icon.svg'"
+             [title]="'GRID.ACTION-SAVE' | translate"
+             class="inline-icon"
+             data-placement="top"
+             data-toggle="tooltip" kendoGridSaveCommand />
       </div>
 
       <ng-container *ngIf="dataItem[editFieldById] === editableRowId">
         <div class="inline-edit-icon">
-          <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridEditCommand />
+          <img [src]="'assets/images/icons/inline-check-icon.svg'"
+               [title]="'GRID.ACTION-SAVE' | translate"
+               class="inline-icon"
+               data-placement="top" kendoGridEditCommand />
         </div>
       </ng-container>
     </ng-template>
@@ -394,9 +442,10 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                     [fileName]="this.excelFileName"
   >
     <ng-container *ngFor="let column of gridColumns">
-      <kendo-excelexport-column *ngIf="!(column.field === 'icons' || column.field === 'rowActions')"
-                                [field]="column.field"
-                                [title]="column.translationKey | translate">
+      <kendo-excelexport-column
+        *ngIf="!(column.field === 'icons' || column.field === 'rowActions' || column.field === 'active') && column.type !== columnType.DATE_TIME"
+        [field]="column.field"
+        [title]="column.translationKey | translate">
       </kendo-excelexport-column>
     </ng-container>
 
@@ -433,7 +482,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
 
 
-        <div (click)="selectAll()" class="text-primary tw-font-medium tw-ml-5">
+        <div (click)="selectAll()" *ngIf="withRowSelection" class="text-primary tw-font-medium tw-ml-5">
           <span class="tw-mr-1">{{ 'GRID.SELECT-ALL' | translate }}</span>
         </div>
 
@@ -458,10 +507,15 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
         </button>
 
-        <div class="tw-mx-6 tw-text-darkGray tw-inline-flex">
-          {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }} of
-          <div
-            class="tw-font-bold tw-ml-1 tw-text-black">{{ totalPages }}</div>
+        <div class="tw-mx-6 tw-text-darkGray tw-inline-flex tw-text-sm">
+          <div class="tw-mx-1">
+            {{ 'GRID.PAGE' | translate | titlecase }}
+          </div>
+          {{ pageNumber }}
+          <div class="tw-mx-1">
+            {{ 'GRID.OF' | translate }}
+          </div>
+          <div>{{ totalPages }}</div>
         </div>
 
         <button (click)="navigateToNextPage()" [disabled]="loading" class="small-button "

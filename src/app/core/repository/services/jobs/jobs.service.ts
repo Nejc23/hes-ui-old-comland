@@ -6,36 +6,33 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { activeJobs, stopJob, cancelJob } from '../../consts/data-concentrator-units.const';
+import { activeJobs, cancelJob, stopJob } from '../../consts/data-concentrator-units.const';
 import { SchedulerJobsList } from '../../interfaces/jobs/scheduler-jobs-list.interface';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
 import {
+  deviceJobs,
+  enableJob,
+  executeJob,
+  notificationJobs,
+  schedulerActiveJobs,
   schedulerJobs,
   schedulerJobsList,
-  executeJob,
-  enableJob,
-  schedulerActiveJobs,
-  schedulerJobsListByJobId,
-  deviceJobs,
-  notificationJobs
+  schedulerJobsListByJobId
 } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
 import { DeviceJobs } from '../../interfaces/jobs/device-jobs.interface';
+
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
   constructor(private repository: RepositoryService) {}
 
-  getSchedulerJobsListForm(
-    param: GridRequestParams,
-    pageIndex: number,
-    visibleColumnNames: string[]
-  ): Observable<GridResponse<SchedulerJobsList>> {
-    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+  getSchedulerJobsListForm(param: GridRequestParams, pageIndex: number, pageSize?): Observable<GridResponse<SchedulerJobsList>> {
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, pageSize);
     return this.getSchedulerJobsList(actionRequestParams);
   }
 
@@ -161,14 +158,13 @@ export class JobsService {
     return new HttpRequest('POST', deviceJobs, payload as any);
   }
 
-  getActionRequestParams(param: GridRequestParams, pageIndex: number, allVisibleColumns: string[]): IActionRequestParams {
-    const pageSize = param.endRow - param.startRow;
+  getActionRequestParams(param: GridRequestParams, pageIndex: number, pageSize?: number): IActionRequestParams {
     const requestParam: IActionRequestParams = {
       pageSize,
       pageNumber: pageIndex + 1,
       textSearch: {
         value: '',
-        propNames: [],
+        propNames: ['all'],
         useWildcards: false
       },
       sort: [],
@@ -177,7 +173,7 @@ export class JobsService {
 
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;
-      requestParam.textSearch.propNames = allVisibleColumns;
+      requestParam.textSearch.propNames = ['active', 'description', 'type', 'nextRun', 'owner', 'deviceCount', 'id'];
       requestParam.textSearch.useWildcards = param.searchModel[0].useWildcards;
     }
 

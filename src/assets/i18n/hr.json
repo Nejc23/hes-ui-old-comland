@@ -5,7 +5,8 @@
     "BREADCRUMB": {
         "CONCENTRATOR": "Concentrator",
         "JOBS": "Jobs",
-        "OVERVIEW": "Overview - Meter Units"
+        "OVERVIEW": "Overview - Meter Units",
+        "DCU": "Concentrators"
     },
     "BUTTON": {
         "ACTIVATE": "Activate",
@@ -286,7 +287,8 @@
         "DOWNLOAD-CLIENT-CERT": "Download client certificate",
         "PROTECT-YOUR-CERT": "Protect your certificate",
         "ENTER-CLIENT-PASSWORD": "Enter the password for certificate",
-        "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again."
+        "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again.",
+        "CONCENTRATORS-OVERVIEW": "Data Concentrators overview"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - page not exists"
@@ -465,7 +467,9 @@
         "FIRSTINSTALLEDDATE": "Installed",
         "PROPERTY": "Property",
         "VALUE": "Value",
-        "DEVICEID": "Guid"
+        "DEVICEID": "Guid",
+        "SYNC-WINDOW-MIN": "Lower limit (ms)",
+        "SYNC-WINDOW-MAX": "Upper limit (ms)"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -560,7 +564,19 @@
         "EVERY-YEAR": "Every year",
         "DAY-EXTERNALID": "Day ID",
         "ROWS-PER-PAGE": "Rows per page",
-        "ACTIVE-JOBS": "Active jobs"
+        "ACTIVE-JOBS": "Active jobs",
+        "ACTION-DETAILS": "Open details",
+        "ACTION-REGISTERS": "Show registers",
+        "ACTION-DUPLICATE": "Duplicate",
+        "ACTION-EDIT": "Edit",
+        "ACTION-DELETE": "Delete",
+        "ACTION-REJECT": "Reject",
+        "ACTION-GRANT": "Grant",
+        "ACTION-SETTINGS": "Settings",
+        "ACTION-RUNJOB": "Run job",
+        "ACTION-SAVE": "Save",
+        "ACTION-CANCEL": "Cancel",
+        "ACTION-EXECUTE": "Execute job"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -632,7 +648,15 @@
         "TIME-SYNCHRONIZATION": "Time synchronization",
         "TOPOLOGY": "Topology",
         "TOPOLOGY-JOB": "Topology job",
-        "ACTIVE-JOBS": "Active jobs"
+        "ACTIVE-JOBS": "Active jobs",
+        "METER-TIME-SYNC-JOB": "Time synchronization (P2P)",
+        "METER-TIME-SYNCHRONIZATION": "Time synchronization (P2P)",
+        "METER-TIME-SYNC": {
+            "CONDITIONAL-SYNC": "Conditional synchronization",
+            "CONDITIONAL-SYNC-INFO": "Time will be synchronized if the clock on the meter is outside of upper and lower borders",
+            "CONDITIONAL-SYNC-ALERT": "Clock will be synchronized unconditionally every time job will be executed!"
+        },
+        "JOBS-OVERVIEW": "Jobs overview"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -731,7 +755,6 @@
         "CHECK-DEVICE-TEMPLATE": "Please, check your device template.",
         "CLEAR-ALARMS": "Clear Alarms",
         "CLEAR-FF": "Clear FF",
-        "CREATE-NEW": "Create new",
         "DROP-AVAILABLE-REGISTERS": "Drop available registers here.",
         "DROP-SUBTITLE": "Selected file must be in .xml file format.",
         "EDIT-METER": "Edit {{ protocol }} meter",
@@ -844,7 +867,13 @@
         },
         "TRANSFORMER-RATIO": "Transformer ratio",
         "CURRENT-RATIO": "Current ratio",
-        "VOLTAGE-RATIO": "Voltage ratio"
+        "VOLTAGE-RATIO": "Voltage ratio",
+        "METERS-OVERVIEW": "Meters overview",
+        "SHOW-RAW": "Show raw data",
+        "NORMALIZED-DATA": "Normalized data",
+        "RAW-DATA": "Raw data",
+        "CREATE-NEW-READING": "Create new reading",
+        "CREATE-NEW-TIME-SYNC": "Create new time sync"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {

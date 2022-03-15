@@ -12,7 +12,8 @@
           >
             {{ 'FORM.REGISTER' | translate }}
           </h4>
-          <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto" type="button"></button>
+          <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto"
+                  type="button"></button>
         </div>
         <div>
           <app-input-searcher
@@ -58,7 +59,8 @@
         </button>
 
         <div class="mt-2">
-          <h3 class="mb-0">{{ selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate) }}</h3>
+          <h3
+            class="mb-0">{{ selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate) }}</h3>
         </div>
         <div class="ms-auto">
           <button
@@ -73,8 +75,24 @@
           </button>
         </div>
       </div>
-      <app-date-range-picker (valueChange)="onRefresh()" [endProperty]="endDateProperty" [form]="form" [startProperty]="startDateProperty">
-      </app-date-range-picker>
+      <div class="tw-inline-flex tw-w-full">
+        <app-date-range-picker (valueChange)="onRefresh()" [endProperty]="endDateProperty" [form]="form"
+                               [startProperty]="startDateProperty" class="tw-w-1/2">
+        </app-date-range-picker>
+        <div *ngIf="normalizedValues && isDataFound" class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+          <div class="tw-text-mediumGray tw-flex tw-self-center tw-pr-3 tw-pt-0.5">
+            {{ 'PLC-METER.SHOW-RAW' | translate}}
+          </div>
+          <div>
+            <kendo-switch (valueChange)="onValueChanged($event)"
+                          [checked]="!showNormalizedValues"
+                          [title]="getPopoverText()"
+                          class="small-switch"
+                          data-placement="top"
+                          data-toggle="tooltip"></kendo-switch>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="mu-registers-body-scroll">
@@ -83,7 +101,8 @@
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
         <div class="card-body">
-          <div class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+          <div
+            class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
           <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
         </div>
       </div>
@@ -101,11 +120,15 @@
       <div *ngIf="isDataFound">
         <div class="row mt-4">
           <div *ngIf="!isEvent" class="col-12">
-            <app-registers-chart [categories]="chartCategories" [chartData]="chartData" [unit]="unit"></app-registers-chart>
+            <app-registers-chart [categories]="chartCategories"
+                                 [chartData]="chartData"
+                                 [showNormalizedData]="showNormalizedValues"
+                                 [unit]="unit"></app-registers-chart>
           </div>
           <div *ngIf="isEvent" class="col-12">
             <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
-            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp" [hours]="hours"></app-registers-column-chart>
+            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"
+                                        [hours]="hours"></app-registers-column-chart>
           </div>
         </div>
         <div class="row mt-4">
@@ -115,24 +138,25 @@
               'col-8': (showStatistics && registerStatisticsData && !isEvent) || isEvent
             }"
           >
-          <div *ngIf="gridData.length > 0">
-            <app-data-table [fetchData]="false"
-                            [gridColumns]="isEvent ? eventDataColumns : registerDataColumns"
-                            [gridData]="gridData"
-                            [noDataText]="'NO-DATA-FOUND'"
-                            [pageable]="true"
-                            [rowHeight]="44"
-                            [scrollable]="'virtual'"
-                            [skip]="0"
-                            [sort]="registerDataDefaultSort"
-                            [sortable]="true"
-                            [tableHeight]="446"
-                            [total]="gridData.length">
+            <div *ngIf="gridData.length > 0">
+              <app-data-table [fetchData]="false"
+                              [gridColumns]="isEvent ? eventDataColumns : registerDataColumns"
+                              [gridData]="gridData"
+                              [noDataText]="'NO-DATA-FOUND'"
+                              [pageable]="true"
+                              [rowHeight]="44"
+                              [scrollable]="'virtual'"
+                              [skip]="0"
+                              [sort]="registerDataDefaultSort"
+                              [sortable]="true"
+                              [tableHeight]="446"
+                              [totalCount]="gridData.length">
               </app-data-table>
+            </div>
           </div>
-        </div>
           <div *ngIf="showStatistics && !isEvent && registerStatisticsData" class="col-4">
-            <app-registers-statistics [data]="registerStatisticsData"></app-registers-statistics>
+            <app-registers-statistics [data]="registerStatisticsData"
+                                      [showNormalizedValues]="showNormalizedValues"></app-registers-statistics>
           </div>
           <div *ngIf="isEvent" class="col-4">
             <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
@@ -144,8 +168,8 @@
   </div>
 </div>
 <ng-template #hideShowFilters
-  ><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template
+><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template
 >
 <ng-template #tipContentRefresh
-  ><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template
+><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template
 >

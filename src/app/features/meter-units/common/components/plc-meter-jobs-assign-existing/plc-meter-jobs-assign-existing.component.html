@@ -7,7 +7,7 @@
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
           <div class="col-12">
-            <app-jobs-select [jobTypes]="[2]" (onSelectionChanged)="jobSelectionChanged()"></app-jobs-select>
+            <app-jobs-select [jobTypes]="[2,7]" (onSelectionChanged)="jobSelectionChanged()"></app-jobs-select>
             <div class="help-block mt-3" *ngIf="noJobsSelected">
               <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{selectionRequiredText}}</small>
             </div>

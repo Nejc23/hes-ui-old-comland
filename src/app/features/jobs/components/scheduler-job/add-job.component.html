@@ -1,4 +1,4 @@
-<div (click)="doAddJob()" class="card pt-4 pb-4">
+<!--<div (click)="doAddJob()" class="">
   <i [ngClass]="{'material-icons': !jobParams.isIconOutlined, 'material-icons-outlined': jobParams.isIconOutlined }"
      class="icon">
     {{jobParams.icon}}
@@ -6,5 +6,22 @@
   <div class="name text-truncate tw-px-2">{{jobParams.jobName}}</div>
   <div class="mt-2">
     <span class="badge badge-primary">{{jobParams.deviceType}}</span>
+  </div>
+</div>-->
+
+<div class="tw-flex tw-flex-row hover:tw-bg-lightestGray tw-rounded-lg" (click)="doAddJob()">
+  <div class="tw-select-none tw-cursor-pointer tw-flex tw-flex-1 tw-items-center tw-p-6">
+    <div class="tw-flex">
+      <i [ngClass]="{'material-icons': !jobParams.isIconOutlined, 'material-icons-outlined': jobParams.isIconOutlined }"
+         class="icon large">
+        {{jobParams.icon}}
+      </i>
+    </div>
+    <div class="tw-flex-1 tw-pl-1">
+      <div class="tw-name tw-text-truncate tw-px-2 tw-font-bold">{{jobParams.jobName}}</div>
+    </div>
+    <div>
+      <span class="badge badge-primary">{{jobParams.deviceType}}</span>
+    </div>
   </div>
 </div>

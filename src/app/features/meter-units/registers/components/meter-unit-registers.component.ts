@@ -99,8 +99,6 @@ export class MeterUnitRegistersComponent implements OnInit {
   public rowData: RegisterValue[] = [];
   public gridData: GridRegisterValue[] = [];
 
-  public pageSubtitle;
-
   public registerStatisticsData: RegisterStatistics;
 
   public range;
@@ -127,6 +125,9 @@ export class MeterUnitRegistersComponent implements OnInit {
   public eventsById: EventsById[];
   hours = false;
   unit = '';
+
+  normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
+  showNormalizedValues = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -181,6 +182,12 @@ export class MeterUnitRegistersComponent implements OnInit {
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
+    this.showNormalizedValues = false;
+    // show switch
+    this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
+    if (this.normalizedValues) {
+      this.showNormalizedValues = true;
+    }
     this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
     this.isEvent = selectedRegister.categorization === 'EVENT';
 
@@ -268,8 +275,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
       [this.rangeProperty]: [null],
-      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startDateProperty]: [
+        moment().subtract(1, 'days').set('hours', 0).set('minutes', 0).set('milliseconds', 0),
+        Validators.required
+      ],
+      [this.endDateProperty]: [moment().set('hours', 0).set('minutes', 0).set('milliseconds', 0), Validators.required],
       [this.startTimeProperty]: ['00:00'],
       [this.endTimeProperty]: ['00:00'],
       [this.showLineChartProperty]: [true, null],
@@ -279,9 +289,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
-    const startDate = moment(this.form.get('startDate').value).toDate();
-    const endDate = moment(this.form.get('endDate').value).toDate();
-
+    const startDate = moment(this.form.get('startDate').value).toDate().setHours(0, 0, 0, 0);
+    const endDate = moment(this.form.get('endDate').value).toDate().setHours(0, 0, 0, 0);
     if (!register || !startDate || !endDate) {
       this.isDataFound = false;
       return;
@@ -311,17 +320,20 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData);
+          this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
             this.setEventData();
           } else {
             this.toGridData(this.rowData);
           }
-
           this.chartCategories = values.map((v) => new Date(v.timestamp));
           this.chartData = [values];
-          if (values[0].valueWithUnit?.unit) {
-            this.unit = values[0].valueWithUnit.unit;
+          let dataField = 'valueWithUnit';
+          if (this.showNormalizedValues) {
+            dataField = 'normValueWithUnit';
+          }
+          if (values[0][dataField]?.unit) {
+            this.unit = values[0][dataField].unit;
           }
         }
       });
@@ -332,16 +344,18 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   toGridData(registerValues: RegisterValue[]) {
     this.gridData = [];
-    registerValues.forEach((register) => {
-      this.gridData.push({
-        requestId: register.requestId,
-        unit: register.valueWithUnit?.unit,
-        value: register.valueWithUnit?.value,
-        status: register.status,
-        timestamp: register.timestamp,
-        description: register.description
+    if (registerValues?.length > 0) {
+      registerValues.forEach((register) => {
+        this.gridData.push({
+          requestId: register.requestId,
+          unit: this.showNormalizedValues ? register.normValueWithUnit?.unit : register.valueWithUnit?.unit,
+          value: this.showNormalizedValues ? register.normValueWithUnit?.value : register.valueWithUnit?.value,
+          status: register.status,
+          timestamp: register.timestamp,
+          description: register.description
+        });
       });
-    });
+    }
   }
 
   eventToGridData(registerValues: EventRegisterValue[]) {
@@ -378,7 +392,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       this.hours = true;
       outData = this.rowData.map((d: EventRegisterValue) => ({
         //timestamp: d.timestamp,
-        timestamp: new Date(d.timestamp).setMinutes(0, 0, 0),
+        timestamp: new Date(d.timestamp).setHours(0, 0, 0),
         value: d.value,
         description: d.description
       }));
@@ -482,5 +496,18 @@ export class MeterUnitRegistersComponent implements OnInit {
   closePopover() {
     this.popover.close();
     this.setDate();
+  }
+
+  onValueChanged(event: boolean) {
+    this.showNormalizedValues = !event;
+    this.toGridData(this.rowData);
+    this.showData(this.selectedRegister, true);
+  }
+
+  getPopoverText() {
+    if (this.showNormalizedValues) {
+      return this.translate.instant('PLC-METER.NORMALIZED-DATA');
+    }
+    return this.translate.instant('PLC-METER.RAW-DATA');
   }
 }

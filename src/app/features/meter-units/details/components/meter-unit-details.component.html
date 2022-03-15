@@ -45,7 +45,12 @@
                   <div (click)="onScheduleReadJobs()" [permission]="permissionManageJobs"
                        appHideIfPermissionUnauthorized
                        class="dropdown-item">
-                    <a href="javascript:void(0)"><span>{{ 'PLC-METER.CREATE-NEW' | translate }}</span></a>
+                    <a href="javascript:void(0)"><span>{{ 'PLC-METER.CREATE-NEW-READING' | translate }}</span></a>
+                  </div>
+                  <div (click)="onScheduleMeterTimeSyncJobs()" [permission]="permissionManageJobs"
+                       appHideIfPermissionUnauthorized
+                       class="dropdown-item">
+                    <a href="javascript:void(0)"><span>{{ 'PLC-METER.CREATE-NEW-TIME-SYNC' | translate }}</span></a>
                   </div>
                   <div (click)="onJobsAssignExisting()" [permission]="permissionManageJobs"
                        appHideIfPermissionUnauthorized
@@ -298,11 +303,9 @@
                            [title]="basicDetails ? 'COMMON.BASIC-DETAILS' : 'COMMON.COMMUNICATION-DETAILS'"
                            [visible]="openEdit">
 
-    <app-edit-meter-unit-form (savedDataEvent)="saveDataEvent($event)"
-                              [basicDetails]="basicDetails"
+    <app-edit-meter-unit-form [basicDetails]="basicDetails"
                               [data]="data"
-                              [plcDevice]="isPlcDevice"
-                              [saveData]="saveData">
+                              [plcDevice]="isPlcDevice">
     </app-edit-meter-unit-form>
   </app-slide-out-component>
 

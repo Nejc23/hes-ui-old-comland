@@ -25,6 +25,7 @@ import { CronScheduleComponent } from '../../cron-schedule/components/cron-sched
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
+import { IActionRequestParams } from '../../../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -47,6 +48,7 @@ export class SchedulerJobComponent {
   selectedRowsCount = 0;
 
   form: FormGroup;
+  formMeterTimeSync: FormGroup;
 
   noRegisters = false;
   requiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
@@ -62,9 +64,12 @@ export class SchedulerJobComponent {
   showRegisters = false;
   showConcentrators = false;
   showAlarmNotification = false;
+  showMeterTimeSync = false;
 
   jobType: JobTypeEnumeration = JobTypeEnumeration.reading;
   public title = '';
+
+  actionFilters: IActionRequestParams = null;
 
   // alarm notifications
   filter: NotificationFilter;
@@ -78,6 +83,14 @@ export class SchedulerJobComponent {
       jobName: this.translate.instant('JOB.READING'),
       deviceType: this.translate.instant('JOB.METER').toUpperCase(),
       icon: 'line_weight',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
+    },
+    {
+      jobType: JobTypeEnumeration.meterTimeSync,
+      jobName: this.translate.instant('JOB.METER-TIME-SYNCHRONIZATION'),
+      deviceType: this.translate.instant('JOB.METER').toUpperCase(),
+      icon: 'restore',
+      isIconOutlined: true,
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
     },
     {
@@ -180,20 +193,6 @@ export class SchedulerJobComponent {
 
   initAddJobsForUser() {
     this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
-    const jobsLength = this.addJobsForUser.length;
-
-    for (let i = 0; i < jobsLength; i++) {
-      if (i < 3 && jobsLength > 3) {
-        this.addJobsForUser[i].cssClasses = 'border-bottom';
-      }
-
-      if (i % 3 > 0) {
-        if (!this.addJobsForUser[i].cssClasses) {
-          this.addJobsForUser[i].cssClasses = '';
-        }
-        this.addJobsForUser[i].cssClasses += ' border-start';
-      }
-    }
   }
 
   createForm(formData: SchedulerJob): FormGroup {
@@ -247,6 +246,9 @@ export class SchedulerJobComponent {
       }
       case JobTypeEnumeration.timeSync: {
         return this.translate.instant('JOB.DC-TIME-SYNC-JOB');
+      }
+      case JobTypeEnumeration.meterTimeSync: {
+        return this.translate.instant('JOB.METER-TIME-SYNC-JOB');
       }
       case JobTypeEnumeration.topology: {
         return this.translate.instant('JOB.TOPOLOGY-JOB');
@@ -320,6 +322,11 @@ export class SchedulerJobComponent {
         this.showAlarmNotification = true;
         break;
       }
+      case JobTypeEnumeration.meterTimeSync: {
+        this.showMeterTimeSync = true;
+        this.formMeterTimeSync = this.createFormMeterTimeSync(job);
+        break;
+      }
       default: {
         this.showConcentrators = true;
         break;
@@ -332,7 +339,7 @@ export class SchedulerJobComponent {
     this.selectedJobId = selectedJobId;
 
     this.form = this.createForm(job);
-    this.filter = job?.filter;
+    //this.filter = job?.filter;
     this.addresses = job?.addresses;
 
     this.form.get(this.registersProperty).clearValidators();
@@ -344,6 +351,17 @@ export class SchedulerJobComponent {
 
     this.title = this.setTitle();
     this.step = 1;
+  }
+
+  createFormMeterTimeSync(formData: SchedulerJob): FormGroup {
+    return this.formBuilder.group({
+      conditionalSync: [formData && formData.readingProperties ? !formData.readingProperties.unConditionalSync : false],
+      syncWindowMaxInMs: [
+        formData && formData.readingProperties ? formData.readingProperties.syncWindowMaxInMs : null,
+        Validators.required
+      ],
+      syncWindowMinInMs: [formData && formData.readingProperties ? formData.readingProperties.syncWindowMinInMs : null, Validators.required]
+    });
   }
 
   setJobType(jobTypeSetting: any) {
@@ -366,23 +384,52 @@ export class SchedulerJobComponent {
       }
     }
 
-    const formData: SchedulerJobForm = {
-      registers: this.form.get(this.registersProperty).value,
-      description: this.form.get(this.descriptionProperty).value,
-      devices: this.deviceFiltersAndSearch,
-      active: this.form.get(this.activeProperty).value,
-      jobType: this.jobType,
-      cronExpression: this.cronExpression,
-      startAtDate: this.form.get(this.startAtProperty).value,
-      endAtDate: this.form.get(this.endAtProperty).value,
+    let formData: SchedulerJobForm = null;
+    if (this.actionFilters != null) {
+      formData = this.actionFilters as SchedulerJobForm;
 
-      readingProperties: {
+      (formData.registers = this.form.get(this.registersProperty).value),
+        (formData.description = this.form.get(this.descriptionProperty).value),
+        (formData.devices = this.deviceFiltersAndSearch),
+        (formData.active = this.form.get(this.activeProperty).value),
+        (formData.jobType = this.jobType),
+        (formData.cronExpression = this.cronExpression),
+        (formData.startAtDate = this.form.get(this.startAtProperty).value),
+        (formData.endAtDate = this.form.get(this.endAtProperty).value),
+        (formData.tryFillDevices = true);
+      formData.readingProperties = {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
         iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
         intervalRange: this.form.get(this.intervalRangeProperty).value ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
         timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
-      }
-    };
+      };
+    } else {
+      formData = {
+        registers: this.form.get(this.registersProperty).value,
+        description: this.form.get(this.descriptionProperty).value,
+        devices: this.deviceFiltersAndSearch,
+        active: this.form.get(this.activeProperty).value,
+        jobType: this.jobType,
+        cronExpression: this.cronExpression,
+        startAtDate: this.form.get(this.startAtProperty).value,
+        endAtDate: this.form.get(this.endAtProperty).value,
+
+        //TODO: what are the correct values for these?
+        pageSize: 0,
+        pageNumber: 0,
+        sort: [],
+        textSearch: null,
+
+        readingProperties: {
+          usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
+          iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
+          intervalRange: this.form.get(this.intervalRangeProperty).value
+            ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
+            : 0,
+          timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
+        }
+      };
+    }
     return formData;
   }
 
@@ -405,9 +452,12 @@ export class SchedulerJobComponent {
     return this.jobType === JobTypeEnumeration.reading;
   }
 
+  prepareNewJobForDevicesRequest(params: IActionRequestParams) {
+    this.actionFilters = params;
+  }
+
   save(addNew: boolean) {
     // times and selected registers
-
     if (this.showRegisters) {
       const selectedRegisters = this.registers.getSelectedRowNames();
       const registers: RegistersSelectRequest[] = [];
@@ -427,12 +477,26 @@ export class SchedulerJobComponent {
 
     const values = this.fillData();
 
+    if (this.showMeterTimeSync) {
+      values.readingProperties.unConditionalSync = !this.formMeterTimeSync.get('conditionalSync').value;
+      if (this.formMeterTimeSync.get('conditionalSync').value) {
+        this.formUtils.touchElementsAndValidate(this.formMeterTimeSync);
+        if (!this.formMeterTimeSync.valid) {
+          return;
+        }
+        values.readingProperties.syncWindowMaxInMs = this.formMeterTimeSync.get('syncWindowMaxInMs').value;
+        values.readingProperties.syncWindowMinInMs = this.formMeterTimeSync.get('syncWindowMinInMs').value;
+      }
+    } else {
+      values.readingProperties.unConditionalSync = null;
+    }
+
     if (this.showAlarmNotification) {
       if (!this.notificationRules.validateForm()) {
         return;
       }
 
-      values.filter = this.notificationRules.getFilter();
+      //values.filter = this.notificationRules.getFilter();
       values.addresses = this.notificationRules.getAddresses();
       values.jobType = JobTypeEnumeration.alarmNotification;
     }

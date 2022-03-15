@@ -45,7 +45,8 @@ export interface RegisterDefinition {
 
 export interface RegisterValue {
   requestId?: string;
-  valueWithUnit?: ValueWithUnit;
+  valueWithUnit?: ValueWithUnit; // row Values
+  normValueWithUnit?: ValueWithUnit;
   status?: number;
   timestamp: string;
   description?: string;

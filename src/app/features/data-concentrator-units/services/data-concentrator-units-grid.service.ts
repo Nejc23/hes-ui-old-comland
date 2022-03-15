@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'lodash';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
+import { GridColumn, GridColumnType, GridRowAction } from 'src/app/shared/data-table/data-table.component';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
+import { gridSysNameColumnsEnum } from '../../global/enums/meter-units-global.enum';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
@@ -34,7 +35,80 @@ export class DataConcentratorUnitsGridService {
 
   gridName = 'grdDCU-requestIds';
 
-  columns = [];
+  concentratorsColumns: Array<GridColumn> = [
+    {
+      field: 'icons',
+      translationKey: '',
+      width: 20,
+      sortingDisabled: true,
+      class: 'no-padding',
+      type: GridColumnType.ICONS,
+      iconsData: [
+        {
+          field: gridSysNameColumnsEnum.hasActiveJobs,
+          iconName: 'clock-icon',
+          popoverText: 'GRID.ACTIVE-JOBS'
+        }
+      ]
+    },
+    {
+      field: gridSysNameColumnsEnum.state,
+      translationKey: 'GRID.STATE',
+      width: 120,
+      type: GridColumnType.BOLD_TEXT
+    },
+    {
+      field: gridSysNameColumnsEnum.name,
+      translationKey: 'GRID.NAME',
+      width: 140,
+      type: GridColumnType.LINK
+    },
+    {
+      field: 'id',
+      translationKey: 'GRID.SERIAL-NUMBER',
+      width: 140
+    },
+    {
+      field: 'hostname',
+      translationKey: 'GRID.HOSTNAME',
+      width: 200,
+      type: GridColumnType.LINK
+    },
+    {
+      field: gridSysNameColumnsEnum.type,
+      translationKey: 'GRID.TYPE',
+      width: 80
+    },
+    {
+      field: gridSysNameColumnsEnum.vendor,
+      translationKey: 'GRID.VENDOR',
+      width: 80
+    },
+    {
+      field: 'meters',
+      translationKey: 'COMMON.METERS',
+      width: 80,
+      type: GridColumnType.LINK
+    },
+    {
+      field: gridSysNameColumnsEnum.readStatusTimeStamp,
+      translationKey: 'GRID.READ-STATUS',
+      width: 80
+    },
+    {
+      field: 'lastCommunication',
+      translationKey: 'GRID.LAST-COMMUNICATION',
+      width: 160,
+      type: GridColumnType.DATE_TIME
+    }
+  ];
+
+  concentratorsRowActionConfiguration: Array<GridRowAction> = [
+    {
+      actionName: 'details',
+      iconName: 'eye-icon'
+    }
+  ];
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
@@ -373,15 +447,7 @@ export class DataConcentratorUnitsGridService {
   // set selected rows
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, (x) => x.id === selectedRow.data.id)) {
-        settings.selectedRows.push(selectedRow.data);
-      }
-    } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter((obj) => obj.id !== selectedRow.data.id);
-    } else if (selectedRow.length === 0) {
-      settings.selectedRows = [];
-    }
+    settings.selectedRows = selectedRow;
 
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
@@ -414,18 +480,8 @@ export class DataConcentratorUnitsGridService {
 
     if (!settings.excludedRows) {
       settings.excludedRows = [];
-    }
-
-    if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, (x) => x.id === excludedRow.data.id)) {
-        settings.excludedRows = settings.excludedRows.filter((obj) => obj.id !== excludedRow.data.id);
-      }
-    } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, (x) => x.id === excludedRow.data.id)) {
-        settings.excludedRows.push(excludedRow.data);
-      }
-    } else if (excludedRow.length === 0) {
-      settings.excludedRows = [];
+    } else {
+      settings.excludedRows = excludedRow;
     }
 
     this.gridSettingsSessionStoreService.setGridSettings(

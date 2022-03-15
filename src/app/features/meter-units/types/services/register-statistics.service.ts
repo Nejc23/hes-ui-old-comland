@@ -8,14 +8,18 @@ import { RegisterStatistics } from '../../registers/interfaces/data-processing-r
 export class RegisterStatisticsService {
   constructor() {}
 
-  getRegisterStatistics(registerValues: RegisterValue[]): RegisterStatistics {
+  getRegisterStatistics(registerValues: RegisterValue[], normalizedData: boolean): RegisterStatistics {
+    let dataField = 'valueWithUnit';
+    if (normalizedData) {
+      dataField = 'normValueWithUnit';
+    }
     if (registerValues == null || registerValues.length === 0) {
       return null;
     }
 
     const values = registerValues
-      .filter((f) => f.valueWithUnit?.value && !isNaN(Number(f.valueWithUnit.value)))
-      .map((r) => Number(r.valueWithUnit.value));
+      .filter((f) => f[dataField]?.value && !isNaN(Number(f[dataField]?.value)))
+      .map((r) => Number(r[dataField]?.value));
     if (values && values.length > 0) {
       const avg = values.reduce((a, b) => a + b) / values.length;
       const min = Math.min(...values);
@@ -23,8 +27,8 @@ export class RegisterStatisticsService {
 
       return {
         averageValue: avg,
-        minValue: registerValues.find((r) => Number(r.valueWithUnit.value) === min),
-        maxValue: registerValues.find((r) => Number(r.valueWithUnit.value) === max)
+        minValue: registerValues.find((r) => Number(r[dataField]?.value) === min),
+        maxValue: registerValues.find((r) => Number(r[dataField]?.value) === max)
       };
     } else {
       return null;

@@ -1,6 +1,7 @@
 export interface IActionRequestParams {
   pageSize: number;
   pageNumber: number;
+  includedIds?: string[];
   sort: IActionSortParams[];
   textSearch: IActionSearchParam;
   filter?: IActionFilterParams[];
@@ -170,8 +171,8 @@ export interface IActionResponseJobsAssignExisting extends IActionResponseParams
 }
 
 export interface IActionRequestParamsAlarms extends IActionRequestParams {
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
 }
 
 export interface IActionRequestSecurityChangePassword extends IActionRequestParams {

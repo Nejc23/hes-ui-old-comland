@@ -97,23 +97,34 @@
 }
 
 .green {
-  color: #37A350;
+  color: #ffffff !important;
   padding: 3px 8px;
-  background: rgba(55, 163, 80, 0.1);
+  background: rgba(55, 163, 80, 1);
   border-radius: 2px;
+
+  a {
+    color: #ffffff !important;
+  }
 }
 
 .red {
-  color: #BC1839;
+  color: #ffffff;
   padding: 3px 8px;
-  background: rgba(252, 235, 238, 1);
+  background: rgba(230, 15, 15, 1);
   border-radius: 2px;
 }
 
 .blue {
-  color: #47A8BD;
+  color: #ffffff;
   padding: 3px 8px;
-  background: rgba(71, 168, 189, 0.1);
+  background: rgba(71, 168, 189, 1);
+  border-radius: 2px;
+}
+
+.orange {
+  color: #ffffff;
+  padding: 3px 8px;
+  background: rgba(240, 122, 5, 1);
   border-radius: 2px;
 }
 
@@ -319,6 +330,7 @@
 ::ng-deep .k-grid-header {
   background-color: white;
   border-color: white;
+  padding: 0 8px 0 0 !important;
 }
 
 .corner-badge {
@@ -416,4 +428,38 @@
   width: 30px;
   background-color: white;
   border-radius: 2px;
+}
+
+// kendo k-bare hover
+::ng-deep button.k-button.k-bare {
+  background-color: white !important;
+  border: 1px solid #A9ABAF !important;
+
+  &:hover {
+    background-color: white !important;
+  }
+
+  &::after {
+    box-shadow: none;
+  }
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+.green-badge {
+  a {
+    color: #37A350 !important;
+    padding: 3px 8px 3px 8px;
+    background: rgba(55, 163, 80, 0.2);
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: text !important; // until we add back link
+  }
+}
+
+.disabled-search {
+  cursor: not-allowed !important;
 }

@@ -1,6 +1,6 @@
 export const gridSysNameColumnsEnum = {
   deviceId: 'deviceId',
-  state: 'status',
+  state: 'state',
   type: 'type',
   vendor: 'vendor',
   tags: 'tags'

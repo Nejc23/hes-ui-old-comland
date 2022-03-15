@@ -1,9 +1,6 @@
-import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
@@ -23,11 +20,10 @@ import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 // consts
-import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import { enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
 import { SettingsStoreEmitterService } from '../../../core/repository/services/settings-store/settings-store-emitter.service';
 import { SidebarToggleService } from '../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
-import { GridUtils } from '../../global/grid.utils';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { DcuUnitsGridLayoutStore } from '../interfaces/dcu-units-grid-layout.store';
@@ -39,6 +35,16 @@ import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.component';
 import { OperationType } from './operations/dc-operations.component';
 import { EventManagerService } from '../../../core/services/event-manager.service';
+import {
+  ColumnVisibilityChangedEvent,
+  GridColumn,
+  GridRowAction,
+  LinkClickedEvent,
+  PageChangedEvent
+} from '../../../shared/data-table/data-table.component';
+import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-response.interface';
+import { Router } from '@angular/router';
+import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -52,43 +58,16 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   dcuUnitsGridLayoutStore: DcuUnitsGridLayoutStore;
 
   // grid variables
-  columns = [];
-  totalCount = 0;
   filtersInfo: FiltersInfo;
-  public localeText;
-  // N/A
-  notAvailableText = this.staticTextService.notAvailableTekst;
-  overlayNoRowsTemplate = this.translate.instant('GRID.NO-RECORDS-FOUND');
-  overlayLoadingTemplate = this.translate.instant('COMMON.LOADING-DATA');
-  noData = false;
-  public hideFilter = true;
-  public filterCount = 0;
-  // ---------------------- ag-grid ------------------
-  agGridSettings = configAgGrid;
-  public modules: Module[] = AllModules;
-  public gridOptions: Partial<GridOptions>;
-  public gridApi;
-  public gridColumnApi;
-  public icons;
-  public frameworkComponents;
-  public sideBar;
   requestModel: GridRequestParams = {
+    excludeIds: [],
+    deviceIds: [],
     requestId: null,
     startRow: 0,
     endRow: 0,
     sortModel: [],
     searchModel: [],
-    filterModel: {
-      states: [{ id: 0, value: '' }],
-      readStatus: {
-        operation: { id: '', value: '' },
-        value1: 0,
-        value2: null
-      },
-      types: [0],
-      tags: [{ id: 0, value: '' }],
-      showOptionFilter: []
-    }
+    filterModel: {}
   };
   pageSizes: Codelist<number>[] = [
     { id: 20, value: '20' },
@@ -96,9 +75,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     { id: 100, value: '100' }
   ];
   selectedPageSize: Codelist<number> = this.pageSizes[0];
-  form: FormGroup;
-  datasource: any;
-  isGridLoaded = false;
   areSettingsLoaded = false;
   messageDataFwUpgraded = this.translate.instant('DCU.FW-UPGRADE-SUCCESSFUL');
   messageActionFailed = this.translate.instant('DCU.FW-UPGRADE-FAILED');
@@ -106,6 +82,20 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   taskStatusFailure = 'TASK_FAILURE';
   refreshInterval = gridRefreshInterval;
   componentType = OperationType;
+  filtersOpened = false;
+  // kendo UI grid settings
+  gridData: GridResponse<DataConcentratorUnitsList>;
+  pageNumber = 1;
+  pageSize = 20;
+  totalCount = 0;
+  loading = false;
+  wildCardsSearch = false;
+  searchText = '';
+  selectedRowsIds = [];
+  selectAllEnabled = false;
+  concentratorsColumns: Array<GridColumn> = [];
+  concentratorsRowActionConfiguration: Array<GridRowAction> = [];
+
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
   private dcuConcentratorDeleted: Subscription;
@@ -128,24 +118,22 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private sidebarToggleService: SidebarToggleService,
-    public fb: FormBuilder,
     private dcuOperationsService: DataConcentratorUnitsOperationsService,
     private toast: ToastNotificationService,
     private jobsSelectGridService: JobsSelectGridService,
     private translate: TranslateService,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private elRef: ElementRef,
+    private router: Router
   ) {
-    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
-      this.refreshGrid();
-    });
-    this.filtersInfo = {
-      isSet: false,
-      count: 0,
-      text: staticTextService.noFilterAppliedTekst
-    };
+    // grid columns and row actions configuration
+    this.concentratorsColumns = this.dataConcentratorUnitsGridService.concentratorsColumns;
+    this.concentratorsRowActionConfiguration = this.dataConcentratorUnitsGridService.concentratorsRowActionConfiguration;
 
-    this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
-    this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions(this);
+    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe(() => {
+      this.getData();
+    });
+
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
         if (event !== null) {
@@ -156,102 +144,77 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.vendors = event.vendorsFilter;
           this.requestModel.filterModel.types = event.typesFilter.map((t) => t.id);
           this.requestModel.filterModel.tags = event.tagsFilter;
-          this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
           this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
           this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
         }
-        this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
     });
+
     this.dcuAddedSubscription = this.eventService.eventEmitterDcuAdded.subscribe({
       next: (dcu: DataConcentratorUnitsList) => {
         if (dcu) {
           this.dataConcentratorUnitsService.dcuSync();
-          this.refreshGrid();
+          this.getData();
         }
       }
     });
-
-    // subscribe to changes of columns visibility from other components
-    this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe((listOfVisibleColumns) => {
-      gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
-    });
-
-    this.form = this.createForm(this.pageSizes[0]);
   }
-
-  // form - rights
-  // get formFunctionality() {
-  //   return FunctionalityEnumerator.DCU;
-  // }
-  // actions - rights
-  // get actionDCUUpgrade() {
-  //   return ActionEnumerator.DCUUpgrade;
-  // }
-  // get actionDCUConfiguration() {
-  //   return ActionEnumerator.DCUConfiguration;
-  // }
 
   get permissionAdd() {
     return PermissionEnumerator.Manage_Concentrators;
   }
 
-  // checking if at least one row on the grid is selected
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      return selectedRows && selectedRows.length > 0;
-    }
-    return false;
-  }
-
-  get pageSizeProperty() {
-    return 'pageSize';
-  }
-
-  // ag-grid
-
   ngOnInit() {
-    // set grid columns
-    this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
-    // set right sidebar on the grid
-    // this.sideBar = this.dataConcentratorUnitsGridService.setSideBar(); // no toopanel anymore
-
-    this.localeText = {
-      // for side panel
-      columns: this.translate.instant('GRID.COLUMNS'),
-      filters: this.translate.instant('GRID.FILTERS'),
-
-      // for filter panel
-      page: this.translate.instant('GRID.PAGE'),
-      more: this.translate.instant('GRID.MORE'),
-      to: this.translate.instant('GRID.TO'),
-      of: this.translate.instant('GRID.OF'),
-      next: this.translate.instant('GRID.NEXT'),
-      last: this.translate.instant('GRID.LAST'),
-      first: this.translate.instant('GRID.FIRST'),
-      previous: this.translate.instant('GRID.PREVIOUS'),
-      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS'),
-
-      selectAll: this.translate.instant('GRID.SELECT-ALL')
-    };
-
     this.bredcrumbService.setPageName('');
+    this.selectedRowsIds = JSON.parse(localStorage.getItem('concentratorsSelectedRowsIds')) ?? [];
+    this.selectAllEnabled = JSON.parse(localStorage.getItem('concentratorsSelectAllEnabled')) ?? false;
+    this.requestModel.excludeIds = JSON.parse(localStorage.getItem('concentratorsExcludedIds')) ?? [];
+
+    this.concentratorsColumns
+      .filter((item) => item.field !== 'icons')
+      .filter((item) => item.field !== 'rowActions')
+      .map((columns) => (columns.hidden = false));
+
+    this.getDcuUnitsGridLayoutStore();
 
     this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
-      this.deselectAll();
-      this.refreshGrid();
+      this.selectedRowsIds = [];
+      this.getData();
     });
   }
 
-  // ag-grid
+  getData() {
+    this.loading = true;
+    if (this.pageNumber === 0) {
+      this.pageNumber++;
+    }
+    this.dataConcentratorUnitsService
+      .getGridDcuForm(
+        this.requestModel,
+        this.pageNumber,
+        this.concentratorsColumns.map((column) => column.field),
+        this.pageSize
+      )
+      .subscribe(
+        (data) => {
+          this.loading = false;
+          this.gridData = data;
+          this.totalCount = this.gridData.totalCount;
+          if (this.totalCount === 0) {
+            this.pageNumber = 0;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+          this.loading = false;
+        }
+      );
+  }
 
   ngOnDestroy(): void {
-    if (this.layoutChangeSubscription) {
-      this.layoutChangeSubscription.unsubscribe();
-    }
     if (this.dcuAddedSubscription) {
       this.dcuAddedSubscription.unsubscribe();
     }
@@ -263,66 +226,29 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ag-grid
-
-  // button click refresh grid
-  refreshGrid() {
-    this.gridApi.purgeServerSideCache([]);
-  }
-
-  // search string changed call get data
   searchData($event: string) {
-    if (this.isGridLoaded && this.areSettingsLoaded) {
-      if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
-        this.deselectAll();
-        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
+    if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
 
-        const useWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
+      const useWildcards = this.wildCardsSearch;
 
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
 
-        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-        this.gridApi.onFilterChanged();
-      }
+      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
+      this.selectedRowsIds = [];
+      this.requestModel.excludeIds = [];
+      this.selectAllEnabled = false;
+
+      localStorage.setItem('concentratorsExcludedIds', JSON.stringify(this.requestModel?.excludeIds));
+      localStorage.setItem('concentratorsSelectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      localStorage.setItem('concentratorsSelectAllEnabled', JSON.stringify(this.selectAllEnabled));
+
+      this.getData();
+      this.saveSettingsStore();
     }
-  }
-
-  // ----------------------- ag-grid set DATASOURCE end --------------------------
-
-  // ----------------------- ag-grid set DATASOURCE ------------------------------
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-
-    this.agGridSharedFunctionsService.addSelectDeselectAllText();
-
-    this.icons = {
-      filter: ''
-    };
-
-    this.getDcuUnitsGridLayoutStore();
-  }
-
-  onFirstDataRendered(params) {}
-
-  // ag-grid change visibillity of columns
-  onColumnVisible(params) {
-    this.dataConcentratorUnitsGridService.onColumnVisibility(params);
-
-    if (this.isGridLoaded && this.areSettingsLoaded) {
-      this.saveSettingsStore(this.requestModel.sortModel);
-    }
-    this.resizeColumns();
-  }
-
-  // click on check-box in the grid
-  onSelectionChanged() {
-    if (this.gridApi) {
-      this.gridApi.refreshHeader();
-    }
-    // this.eventService.checkChange(true);
   }
 
   setSearch() {
@@ -341,6 +267,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   // set filter in request model
   setFilter() {
+    this.pageNumber = 1;
     if (
       !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
@@ -362,7 +289,13 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     } else {
       this.setFilterInfo();
     }
+    this.saveSettingsStore();
     return this.requestModel.filterModel;
+  }
+
+  applyFilters() {
+    this.requestModel.filterModel = this.setFilter();
+    this.getData();
   }
 
   // fill text in header - about selected filters
@@ -372,117 +305,29 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.filtersInfo = this.staticTextService.getFiltersInfo(
       filter.name,
       filter.statesFilter && filter.statesFilter.length > 0,
-      filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
+      filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0,
       filter.typesFilter && filter.typesFilter.length > 0,
-      filter.vendorsFilter && filter.vendorsFilter.length > 0 ? true : false,
+      filter.vendorsFilter && filter.vendorsFilter.length > 0,
       filter.tagsFilter && filter.tagsFilter.length > 0
     );
   }
 
-  isFilterSet(): boolean {
-    const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-    return (
-      (tmpFilter.name !== '' && tmpFilter.name !== undefined) ||
-      (tmpFilter.statesFilter && tmpFilter.statesFilter.length > 0) ||
-      (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
-      (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
-      (tmpFilter.vendorsFilter &&
-        tmpFilter.vendorsFilter.length > 0 &&
-        tmpFilter.vendorsFilter[0].value &&
-        tmpFilter.vendorsFilter[0].value !== undefined &&
-        tmpFilter.vendorsFilter[0].value !== '') ||
-      (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0)
-    );
+  getFilterInfo(): number {
+    const filterInfo: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+    return this.staticTextService.getFiltersInfo(
+      filterInfo.name,
+      filterInfo.statesFilter && filterInfo.statesFilter.length > 0,
+      filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0,
+      filterInfo.typesFilter && filterInfo.typesFilter.length > 0,
+      filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0,
+      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0
+    ).count;
   }
 
   clearFilter() {
     this.gridFilterSessionStoreService.clearGridLayout();
-    this.refreshGrid();
+    this.getData();
   }
-
-  reloadGrid() {
-    this.refreshGrid();
-  }
-
-  // on change page in the grid
-  onPaginationChange(params) {
-    const currentApiPage = params.api.paginationGetCurrentPage();
-    const currentSessionPage = this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex();
-
-    if (currentApiPage !== currentSessionPage) {
-      if (this.isGridLoaded && this.areSettingsLoaded) {
-        if (params.newPage) {
-          this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(currentApiPage);
-        }
-      } else {
-        // params.api.paginationGoToPage(currentSessionPage);
-      }
-    }
-  }
-
-  // check if "select all" was clicked
-  checkSelectedAll() {
-    return this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll();
-  }
-
-  // if selected-all clicked, than disable deselection of the rows
-  onRowSelect(params) {
-    if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows(params.node);
-    } else {
-      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
-    }
-  }
-
-  // select rows on load grid from session
-  selectRows(api: any) {
-    const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-    api.forEachNode((node) => {
-      if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-        const startRow = api.getFirstDisplayedRow();
-        const endRow = api.getLastDisplayedRow();
-        const excludedRows = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows();
-        api.forEachNode((node2) => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, (x) => x.id === node2.data.id)) {
-            node2.setSelected(true);
-          }
-        });
-      } else if (
-        node.data !== undefined &&
-        selectedRows !== undefined &&
-        selectedRows.length > 0 &&
-        !this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll() &&
-        _.find(selectedRows, (x) => x.id === node.data.id && !node.selected) !== undefined
-      ) {
-        node.setSelected(true);
-      }
-    });
-  }
-
-  // click on the link "select all"
-  selectAll() {
-    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
-    this.eventService.selectDeselectAll(this.gridApi.paginationGetCurrentPage());
-  }
-
-  // form actions
-
-  // click on the link "deselect all"
-  deselectAll() {
-    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-    this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
-    this.eventService.selectDeselectAll(-1); // -1 = deselect all
-  }
-
-  // tsg button click
-  onTag() {
-    //
-  }
-
-  // TODO
 
   onDelete(selectedGuid?: string) {
     const params = this.dcOperationsService.getOperationRequestParam(
@@ -497,22 +342,22 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     component.applyRequestParams(params, this.getSelectedCount());
   }
 
-  getTotalCountWithoutExcluded(): string {
-    const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
-    if (excludedRowsLength === 0) {
-      return this.totalCount.toString();
+  getSelectedCount(): number {
+    if (this.selectAllEnabled) {
+      return this.totalCount - (this.requestModel?.excludeIds?.length ?? 0);
     } else {
-      return this.translate.instant('GRID.SELECTED-OF-ALL', { selected: this.totalCount - excludedRowsLength, all: this.totalCount });
+      return this.selectedRowsIds?.length ?? 0;
     }
   }
 
-  getSelectedCount(): number {
-    if (this.checkSelectedAll()) {
-      const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
-      return this.totalCount - excludedRowsLength;
-    } else {
-      return this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows().length;
+  rowActionsClicked(event: any) {
+    if (event.actionName === 'details') {
+      this.openDetailsPage(event.rowData.concentratorId);
     }
+  }
+
+  openDetailsPage(id: string) {
+    this.router.navigate([`/dataConcentratorUnits/${id}`]);
   }
 
   addDcu() {
@@ -522,17 +367,10 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     };
     const modalRef = this.modalService.open(AddDcuFormComponent, options);
     modalRef.result
-      .then((result) => {
-        this.refreshGrid();
+      .then(() => {
+        this.getData();
       })
       .catch(() => {});
-  }
-
-  toggleFilter() {
-    if (this.areSettingsLoaded) {
-      this.hideFilter = !this.hideFilter;
-      this.saveSettingsStore(this.requestModel.sortModel);
-    }
   }
 
   // ******************************************************************************** */
@@ -583,91 +421,24 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, 1);
   }
 
-  filterChanged() {
-    this.reloadGrid();
-    this.deselectAll();
-  }
-
-  // *******************************************************************************
-
-  gridSizeChanged() {
-    this.resizeColumns();
-  }
-
   getAllDisplayedColumnsNames(): string[] {
-    if (this.gridColumnApi) {
-      const columns = this.gridColumnApi.getAllDisplayedColumns();
-      return columns.map((c) => c.colId);
-    }
-    return;
-  }
-
-  resizeColumns() {
-    GridUtils.resizeColumns(this.gridColumnApi, this.gridOptions);
-  }
-
-  setGridDataSource() {
-    const that = this;
-    that.datasource = {
-      getRows(paramsRow) {
-        if (!that.areSettingsLoaded) {
-          return;
-        }
-
-        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
-
-        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
-
-        that.requestModel.sortModel = paramsRow.request.sortModel;
-        that.requestModel.filterModel = that.setFilter();
-        that.requestModel.searchModel = that.setSearch();
-
-        if (that.isGridLoaded) {
-          that.saveSettingsStore(that.requestModel.sortModel);
-        }
-
-        that.dataConcentratorUnitsService
-          .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-          .subscribe((data) => {
-            that.gridApi.hideOverlay();
-
-            if (data === undefined || data == null || data.totalCount === 0) {
-              that.totalCount = 0;
-              that.gridApi.showNoRowsOverlay();
-              // that.noData = true;
-            } else {
-              that.totalCount = data.totalCount;
-              // that.noData = false;
-            }
-
-            paramsRow.successCallback(data ? data.data : [], that.totalCount);
-            // params.failCallback();
-            that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-
-            that.resizeColumns();
-            that.selectRows(that.gridApi);
-            that.isGridLoaded = true;
-          });
-        // }
-      }
-    };
-    that.gridApi.setServerSideDatasource(that.datasource);
+    return this.concentratorsColumns?.filter((column) => column.hidden !== true).map((column) => column.field);
   }
 
   getDcuUnitsGridLayoutStore() {
     this.settingsStoreService.getCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey).subscribe(
       (settings) => {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
-        this.addSettingsToSession(settings);
+        if (settings) {
+          this.addSettingsToSession(settings);
+          this.setFilter();
+        }
         this.areSettingsLoaded = true;
-        this.setGridDataSource();
-        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+        this.getData();
       },
-      (error) => {
+      () => {
         this.areSettingsLoaded = true;
-        this.setGridDataSource();
-        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+        this.getData();
       }
     );
   }
@@ -675,38 +446,41 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   addSettingsToSession(settings: DcuUnitsGridLayoutStore) {
     if (settings) {
       if (settings.currentPageIndex) {
+        this.pageNumber = settings.currentPageIndex + 1;
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
       }
 
       if (settings.dcuLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
       }
-      if (settings.sortModel && this.gridColumnApi) {
-        this.requestModel.sortModel = settings.sortModel;
-        this.gridColumnApi.applyColumnState({ state: settings.sortModel });
+
+      if (settings.visibleColumns) {
+        this.concentratorsColumns
+          .filter((item) => item.field !== 'icons')
+          .filter((item) => item.field !== 'rowActions')
+          .map((column) => (column.hidden = true));
+
+        this.concentratorsColumns.forEach((column) => {
+          if (settings.visibleColumns.includes(column.field)) {
+            column.hidden = false;
+          }
+        });
       }
 
       if (settings.searchText) {
-        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(settings.searchText);
+        this.searchText = settings.searchText;
+        this.setSearch();
       }
 
       if (settings.searchWildcards) {
+        this.wildCardsSearch = true;
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards(settings.searchWildcards);
-      }
-
-      if (settings.visibleColumns && settings.visibleColumns.length > 0) {
-        this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
+        this.setSearch();
       }
 
       if (settings.pageSize) {
-        this.selectedPageSize = settings.pageSize;
-        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
-        this.setGridPageSize();
+        this.pageSize = settings.pageSize.id;
       }
-
-      this.hideFilter = settings.hideFilter;
-
-      this.settingsStoreEmitterService.settingsLoaded();
     }
   }
 
@@ -718,8 +492,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
       searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards(),
       visibleColumns: this.getAllDisplayedColumnsNames(),
-      pageSize: this.selectedPageSize,
-      hideFilter: this.hideFilter
+      pageSize: this.pageSizes.find((pageSize) => pageSize.id === this.pageSize),
+      hideFilter: true
     };
 
     if (
@@ -738,45 +512,18 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  createForm(pageSize: Codelist<number>): FormGroup {
-    return this.fb.group({
-      [this.pageSizeProperty]: pageSize
-    });
-  }
-
-  pageSizeChanged(selectedValue: any) {
-    if (this.isGridLoaded && this.areSettingsLoaded) {
-      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-      this.selectedPageSize = selectedValue;
-      this.setGridPageSize();
-    }
-  }
-
-  setGridPageSize() {
-    const api: any = this.gridApi;
-    api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
-    this.gridApi.setServerSideDatasource(this.datasource);
-  }
-
-  toggleWildcards($event: boolean) {
-    if (this.isGridLoaded && this.areSettingsLoaded) {
-      if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards()) {
-        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards($event);
-
-        if (this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
-          this.deselectAll();
-          // const value = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
-          // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
-
-          this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-          this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-          this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-          this.gridApi.onFilterChanged();
-        } else {
-          this.saveSettingsStore(this.requestModel.sortModel);
-        }
-      }
-    }
+  toggleWildcards(event: boolean) {
+    this.wildCardsSearch = event;
+    this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards(event);
+    this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+    this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+    this.requestModel.searchModel = this.setSearch();
+    this.selectedRowsIds = JSON.parse(localStorage.getItem('concentratorsSelectedRowsIds')) ?? [];
+    this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
+    this.requestModel.excludeIds = JSON.parse(localStorage.getItem('concentratorsExcludedIds')) ?? [];
+    this.getData();
+    this.saveSettingsStore(this.requestModel.sortModel);
   }
 
   refresh() {
@@ -797,7 +544,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
           }
         })
       );
-      this.refreshGrid();
+      this.getData();
     }
   }
 
@@ -831,27 +578,109 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.disable, params, 1);
   }
 
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
+  addWidth() {
+    return this.elRef.nativeElement.parentElement.offsetWidth;
   }
 
-  private noFilters() {
-    return (
-      this.requestModel.filterModel == null ||
-      ((this.requestModel.filterModel.states === undefined ||
-        this.requestModel.filterModel.states.length === 0 ||
-        this.requestModel.filterModel.states[0].id === 0) &&
-        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
-        (this.requestModel.filterModel.tags === undefined ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (this.requestModel.filterModel.types === undefined ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendors === undefined || this.requestModel.filterModel.vendors.length === 0))
-    );
+  calculateHeight() {
+    return window.innerHeight - 220;
+  }
+
+  columnVisibilityChanged(event: ColumnVisibilityChangedEvent) {
+    this.concentratorsColumns.find((column) => column.field === event.field).hidden = event.hidden;
+    this.saveSettingsStore();
+  }
+
+  selectedRows(event: any) {
+    this.selectedRowsIds = event;
+    localStorage.setItem('concentratorsSelectedRowsIds', JSON.stringify(this.selectedRowsIds));
+    const rowsData = this.gridData.data.filter((item) => this.selectedRowsIds.includes(item.concentratorId));
+
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(rowsData);
+    this.requestModel.deviceIds = this.selectedRowsIds;
+  }
+
+  excludedIdsFromSelectAll(event: SelectionEvent) {
+    if (event.deselectedRows.length > 0) {
+      event.deselectedRows.forEach((row) => {
+        this.requestModel.excludeIds.push(row.dataItem.concentratorId);
+      });
+    }
+    if (event.selectedRows.length > 0) {
+      event.selectedRows.forEach((row) => {
+        this.requestModel.excludeIds = this.requestModel.excludeIds.filter((id) => id !== row.dataItem.concentratorId);
+      });
+    }
+    if (this.selectAllEnabled) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
+      const rowsData = this.gridData.data.filter((item) => this.requestModel.excludeIds.includes(item.concentratorId));
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows(rowsData);
+      localStorage.setItem('concentratorsExcludedIds', JSON.stringify(this.requestModel?.excludeIds));
+    }
+    console.log(this.requestModel.excludeIds);
+  }
+
+  selectAll(event: boolean) {
+    if (event) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
+
+      this.selectAllEnabled = true;
+      this.requestModel.deviceIds = [];
+      this.requestModel.excludeIds = [];
+      this.selectedRowsIds = [];
+      localStorage.setItem('concentratorsSelectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      localStorage.setItem('concentratorsSelectAllEnabled', JSON.stringify(this.selectAllEnabled));
+      localStorage.setItem('concentratorsExcludedIds', JSON.stringify(this.requestModel.excludeIds));
+    }
+  }
+
+  deSelectAll(event: boolean) {
+    if (event) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
+
+      this.selectAllEnabled = false;
+      this.selectedRowsIds = [];
+      this.requestModel.excludeIds = [];
+      localStorage.setItem('concentratorsSelectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      localStorage.setItem('concentratorsSelectAllEnabled', JSON.stringify(this.selectAllEnabled));
+      localStorage.setItem('concentratorsSelectedRowsIds', JSON.stringify(this.selectedRowsIds));
+    }
+  }
+
+  linkClicked(event: LinkClickedEvent) {
+    if (event.field === 'name') {
+      this.openDetailsPage(event.id);
+    }
+    if (event.field === 'hostname') {
+      window.open(`https://${event.rowData.hostname}`, '_blank');
+    }
+    if (event.field === 'meters') {
+      this.router.navigate(['/meterUnits'], { queryParams: { search: event.rowData.name } });
+    }
+  }
+
+  filterIconClicked(event: boolean) {
+    if (event) {
+      this.filtersOpened = !this.filtersOpened;
+    }
+  }
+
+  closeSlideOut() {
+    this.filtersOpened = false;
+  }
+
+  // page changed on grid
+  loadMoreData(event: PageChangedEvent) {
+    this.pageNumber = event.pageNumber;
+    if (event.rowsPerPage && event.rowsPerPage !== this.pageSize) {
+      this.pageNumber = 1; // init page number after page size increased
+      this.pageSize = event.rowsPerPage;
+    }
+    this.getData();
+    this.saveSettingsStore();
   }
 }

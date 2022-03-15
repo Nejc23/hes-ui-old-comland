@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { GridFilterParams, GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { TranslateService } from '@ngx-translate/core';
+import { GridColumn, GridColumnType, GridRowAction } from '../../../../shared/data-table/data-table.component';
+import { gridSysNameColumnsEnum } from '../../../global/enums/meter-units-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +18,259 @@ export class MeterUnitsTypeGridService {
   gridNameBreakerState = 'grdMUT-breaker-state-requestIds';
   gridNameCiiState = 'grdMUT-cii-state-requestIds';
   gridNameRelaysState = 'grdMUT-relays-state-requestIds';
-
-  columns = [];
-  paramsDCU = {} as GridRequestParams;
   meterUnitsId: number;
+
+  metersColumns: Array<GridColumn> = [
+    {
+      field: 'icons',
+      translationKey: '',
+      width: 95,
+      sortingDisabled: true,
+      class: 'no-padding',
+      type: GridColumnType.ICONS,
+      iconsData: [
+        {
+          field: gridSysNameColumnsEnum.templateId,
+          iconName: 'warning-red-icon',
+          popoverText: 'GRID.MISSING-TEMPLATE'
+        },
+        {
+          field: gridSysNameColumnsEnum.readyForActivation,
+          iconName: 'hourglass-icon',
+          popoverText: 'GRID.READY-FOR-ACTIVATION'
+        },
+        {
+          field: gridSysNameColumnsEnum.isHls,
+          iconName: 'lock-icon',
+          popoverText: 'GRID.HIGH-LEVEL-SECURITY'
+        },
+        {
+          field: gridSysNameColumnsEnum.hasActiveJobs,
+          iconName: 'clock-icon',
+          popoverText: 'GRID.ACTIVE-JOBS'
+        }
+      ]
+    },
+    {
+      field: gridSysNameColumnsEnum.jobStatus,
+      translationKey: 'GRID.JOB-STATUS',
+      width: 100,
+      type: GridColumnType.JOB_STATUS
+    },
+    {
+      field: gridSysNameColumnsEnum.state,
+      translationKey: 'GRID.STATE',
+      width: 120,
+      type: GridColumnType.BOLD_TEXT
+    },
+    {
+      field: gridSysNameColumnsEnum.protocolType,
+      translationKey: 'GRID.PROTOCOL',
+      width: 80
+    },
+    {
+      field: gridSysNameColumnsEnum.name,
+      translationKey: 'GRID.NAME',
+      width: 200,
+      type: GridColumnType.LINK
+    },
+    {
+      field: gridSysNameColumnsEnum.serialNumber,
+      translationKey: 'GRID.SERIAL-NUMBER',
+      width: 200
+    },
+    {
+      field: gridSysNameColumnsEnum.externalId,
+      translationKey: 'GRID.EXTERNAL-ID',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.logicalDeviceName,
+      translationKey: 'GRID.LOGICAL-DEVICE-NAME',
+      width: 200
+    },
+    {
+      field: gridSysNameColumnsEnum.moduleId,
+      translationKey: 'GRID.MODULE-ID',
+      width: 150
+    },
+    {
+      field: gridSysNameColumnsEnum.parent,
+      translationKey: 'GRID.PARENT',
+      width: 200,
+      type: GridColumnType.LINK
+    },
+    {
+      field: gridSysNameColumnsEnum.parametrisationId,
+      translationKey: 'GRID.PARAM-ID',
+      width: 150
+    },
+    {
+      field: gridSysNameColumnsEnum.timeOfUseId,
+      translationKey: 'GRID.TIME-OF-USE-ID',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.vendor,
+      translationKey: 'GRID.VENDOR',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.medium,
+      translationKey: 'GRID.MEDIUM',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.firmware,
+      translationKey: 'GRID.FIRMWARE',
+      width: 140
+    },
+    {
+      field: gridSysNameColumnsEnum.id1,
+      translationKey: 'GRID.ID1',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.id2,
+      translationKey: 'GRID.ID2',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.id3,
+      translationKey: 'GRID.ID3',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.id4,
+      translationKey: 'GRID.ID4',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.id5,
+      translationKey: 'GRID.ID5',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.id6,
+      translationKey: 'GRID.ID6',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.configurationId,
+      translationKey: 'GRID.ID-CONFIGURATION',
+      width: 200
+    },
+    {
+      field: gridSysNameColumnsEnum.disconnectorState,
+      translationKey: 'GRID.DISCONNECTOR-STATE',
+      width: 200,
+      type: GridColumnType.COLORED_ENUM,
+      coloredValues: [
+        {
+          enumValue: 'connected',
+          color: 'green'
+        },
+        {
+          enumValue: 'readyforreconnection',
+          color: 'blue'
+        },
+        {
+          enumValue: 'disconnected',
+          color: 'red'
+        }
+      ]
+    },
+    {
+      field: gridSysNameColumnsEnum.instantValues,
+      translationKey: 'GRID.RELAY',
+      width: 100,
+      type: GridColumnType.INSTANT_VALUES
+    },
+    {
+      field: gridSysNameColumnsEnum.ciiState,
+      translationKey: 'GRID.CII-STATE',
+      width: 100,
+      type: GridColumnType.COLORED_ENUM,
+      coloredValues: [
+        {
+          enumValue: 'on',
+          color: 'green'
+        },
+        {
+          enumValue: 'off',
+          color: 'red'
+        }
+      ]
+    },
+    // {
+    //   field: gridSysNameColumnsEnum.tags,
+    //   translationKey: 'GRID.TAGS',
+    //   width: 100
+    // },
+    {
+      field: gridSysNameColumnsEnum.readStatusTimeStamp,
+      translationKey: 'GRID.READ-STATUS',
+      width: 120
+    },
+    {
+      field: gridSysNameColumnsEnum.limiter1Normal.toLowerCase(),
+      translationKey: 'GRID.LIMITER-1-NORMAL',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.limiter1Emergency.toLowerCase(),
+      translationKey: 'GRID.LIMITER-1-EMERGENCY',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.limiter2Normal.toLowerCase(),
+      translationKey: 'GRID.LIMITER-2-NORMAL',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.limiter2Emergency.toLowerCase(),
+      translationKey: 'GRID.LIMITER-2-EMERGENCY',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.currentL1.toLowerCase(),
+      translationKey: 'GRID.CURRENT-L1',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.currentL2.toLowerCase(),
+      translationKey: 'GRID.CURRENT-L2',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    },
+    {
+      field: gridSysNameColumnsEnum.currentL3.toLowerCase(),
+      translationKey: 'GRID.CURRENT-L3',
+      width: 180,
+      type: GridColumnType.UNIT_WITH_VALUE
+    }
+  ];
+
+  metersRowActionConfiguration: Array<GridRowAction> = [
+    {
+      actionName: 'details',
+      iconName: 'eye-icon'
+    },
+    {
+      actionName: 'registers',
+      iconName: 'chart-icon'
+    }
+  ];
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private gridColumnShowHideService: GridColumnShowHideService,
-    private translate: TranslateService
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {}
 
   public set meterUnitsTypeId(id: number) {
@@ -40,105 +280,8 @@ export class MeterUnitsTypeGridService {
     this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT') ? this.sessionNameForGridState : 'grdStateMUT';
   }
 
-  /**
-   *  grid columns settings
-   */
-  // TODO CLEANUP
-  // grid settings
-  public setGridOptions(component: any) {
-    return {
-      context: { forma: component.form, componentParent: component },
-      rowModelType: configAgGrid.rowModelType,
-      defaultColDef: {
-        sortable: configAgGridDefCol.sortable,
-        resizable: configAgGridDefCol.resizable,
-        floatingFilterComponentParams: configAgGridDefCol.floatingFilterComponentParams,
-        checkboxSelection: isFirstColumn,
-        filter: true
-      },
-      animateRows: configAgGrid.animateRows,
-      suppressCellSelection: true,
-      debug: configAgGrid.debug,
-      onColumnMoved: this.onColumnMoved,
-      onColumnResized: this.onColumnMoved,
-      onColumnPinned: this.onColumnMoved,
-      onSortChanged: this.onSortChanged,
-      onColumnVisible: this.onColumnVisible
-    };
-  }
-
-  /*
-  public setSideBar() {
-    return {
-      toolPanels: [
-        {
-          id: 'columns',
-          labelDefault: 'Columns',
-          labelKey: 'columns',
-          iconKey: 'columns',
-          toolPanel: 'agColumnsToolPanel',
-          toolPanelParams: {
-            suppressRowGroups: true,
-            suppressValues: true,
-            suppressPivots: true,
-            suppressPivotMode: true,
-            suppressSideButtons: true,
-            suppressColumnFilter: true,
-            suppressColumnExpandAll: true
-          }
-        }
-      ]
-    };
-  }*/
-
-  public onColumnVisibility(params) {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
-  }
-
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-  }
-
-  public getCookieDataSortModel() {
-    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
-  }
-
-  public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsLayout, requestModel: GridFilterParams) {
-    if (
-      JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
-      JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
-      JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
-      JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
-      JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
-      JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&
-      JSON.stringify(sessionFilter.ciiStateFilter) === JSON.stringify(requestModel.ciiState) &&
-      JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
-      JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate) &&
-      JSON.stringify(sessionFilter.showOptionFilter) === JSON.stringify(requestModel.showOptionFilter) &&
-      JSON.stringify(sessionFilter.protocolFilter) === JSON.stringify(requestModel.protocol) &&
-      JSON.stringify(sessionFilter.mediumFilter) === JSON.stringify(requestModel.medium)
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  public getCurrentRowIndex(pageSize: number): GridPagination {
-    const index = this.getSessionSettingsPageIndex();
-    const result: GridPagination = {
-      currentPage: 0,
-      startRow: 0,
-      endRow: configAgGrid.paginationPageSize
-    };
-
-    if (index !== undefined && index !== null) {
-      result.currentPage = index;
-      result.startRow = index * pageSize;
-      result.endRow = index * pageSize + pageSize;
-    }
-
-    return result;
   }
 
   // is selected all
@@ -183,24 +326,6 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.selectedRows,
-      settings
-    );
-  }
-
-  // get excluded rows
-  public getSessionSettingsExcludedRows() {
-    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    return settings.excludedRows;
-  }
-
-  // cleer excluded rows
-  public setSessionSettingsClearExcludedRows() {
-    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    settings.excludedRows = [];
-
-    this.gridSettingsSessionStoreService.setGridSettings(
-      this.sessionNameForGridState,
-      GridSettingsSessionStoreTypeEnum.excludedRows,
       settings
     );
   }
@@ -254,17 +379,6 @@ export class MeterUnitsTypeGridService {
     );
   }
 
-  // set searched wildcard
-  public setSessionSettingsSearchedWildcards(searchedWildcards: boolean) {
-    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    settings.searchWildcards = searchedWildcards;
-    this.gridSettingsSessionStoreService.setGridSettings(
-      this.sessionNameForGridState,
-      GridSettingsSessionStoreTypeEnum.searchWildcards,
-      settings
-    );
-  }
-
   // page index
   public getSessionSettingsPageIndex() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -290,10 +404,6 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
   }
 
-  getAllMyGridLinkRequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
-  }
-
   saveMyGridLink_BreakerState_RequestId(requestId: string) {
     this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameBreakerState, requestId);
   }
@@ -304,30 +414,6 @@ export class MeterUnitsTypeGridService {
 
   saveMyGridLink_RelaysState_RequestId(requestId: string) {
     this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameRelaysState, requestId);
-  }
-
-  removeMyGridLink_BreakerState_RequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameBreakerState, requestId);
-  }
-
-  removeMyGridLink_CiiState_RequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameCiiState, requestId);
-  }
-
-  removeMyGridLink_RelaysState_RequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameRelaysState, requestId);
-  }
-
-  getAllMyGridLink_BreakerState_RequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
-  }
-
-  getAllMyGridLink_CiiState_RequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameCiiState);
-  }
-
-  getAllMyGridLink_RelaysState_RequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameRelaysState);
   }
 
   saveCryptoimportId(importId: string) {
@@ -341,27 +427,4 @@ export class MeterUnitsTypeGridService {
   getAllCryptoImportIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllCryptoImportIds();
   }
-
-  private onColumnMoved = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
-  };
-
-  private onSortChanged = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
-  };
-
-  private onColumnVisible = (params) => {
-    // send to subscribers the visibility of columns
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
-  };
-}
-
-// extra functions for grid
-// set check box to first column
-function isFirstColumn(params) {
-  const displayedColumns = params.columnApi.getAllDisplayedColumns();
-  const thisIsFirstColumn = displayedColumns[0] === params.column;
-  return thisIsFirstColumn;
 }

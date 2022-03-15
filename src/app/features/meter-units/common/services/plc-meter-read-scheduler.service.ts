@@ -17,7 +17,7 @@ export class PlcMeterReadScheduleService {
       registers: values.registers,
 
       readingProperties: values.readingProperties,
-
+      deviceIds: values.deviceIds,
       active: values.active,
       jobType: values.jobType,
 
@@ -25,9 +25,14 @@ export class PlcMeterReadScheduleService {
       endAt: values.endAtDate ? moment(values.endAtDate).format() : null,
       cronExpression: values.cronExpression,
       filter: values.filter,
-      addresses: values.addresses
-    };
+      addresses: values.addresses,
 
+      pageSize: values.pageSize,
+      pageNumber: values.pageNumber,
+      sort: values.sort,
+      textSearch: values.textSearch,
+      tryFillDevices: values.tryFillDevices
+    };
     return serviceData;
   }
 

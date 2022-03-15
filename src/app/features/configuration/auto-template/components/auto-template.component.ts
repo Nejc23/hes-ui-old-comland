@@ -22,19 +22,14 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
 import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
+import { process } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-auto-templates',
   templateUrl: './auto-template.component.html'
 })
 export class AutoTemplateComponent implements OnInit {
-  private gridApi;
-  private gridColumnApi;
-
-  private gridApiJobs;
-
   public modules: Module[] = AllModules;
-
   public columnDefs;
   public columnDefsJobs;
   public defaultColDef;
@@ -43,33 +38,20 @@ export class AutoTemplateComponent implements OnInit {
   public rowDataJobs: SchedulerJobsList[];
   public cellRendererParams;
   public cellRendererParamsJobs;
-
   public context;
   public editType;
   public frameworkComponents;
   public frameworkComponentsJobs;
   public gridOptions;
   public getRowHeight;
-
   public headerTitle = this.translate.instant('MENU.AUTO-TEMPLATES');
   public form: FormGroup;
-
-  private expadedTemplates: string[] = [];
-
-  private templateId: string;
-
   // jobList$: Observable<CodelistExt<string>[]>;
   allJobList: CodelistExt<string>[];
   jobList: CodelistExt<string>[];
-
   hide = false;
   activeElement: TemplatesList = { templateId: '', name: '' };
-
   templates: TemplatesList[];
-  // get jobsProperty() {
-  //   return nameOf<DcuForm>(o => o.type);
-  // }
-
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -77,6 +59,14 @@ export class AutoTemplateComponent implements OnInit {
     sortModel: [],
     searchModel: []
   };
+  private gridApi;
+  private gridColumnApi;
+  private gridApiJobs;
+  private expadedTemplates: string[] = [];
+  // get jobsProperty() {
+  //   return nameOf<DcuForm>(o => o.type);
+  // }
+  private templateId: string;
 
   constructor(
     private service: AutoTemplatesGridService,
@@ -198,6 +188,7 @@ export class AutoTemplateComponent implements OnInit {
   }
 
   onFirstDataRendered(params) {}
+
   onFirstDataRenderedJobs(params) {}
 
   onGridReady(params) {
@@ -237,7 +228,9 @@ export class AutoTemplateComponent implements OnInit {
   ngOnInit() {
     this.serviceRepository.getTemplates().subscribe((temp) => {
       this.templates = temp;
-
+      this.templates = process(this.templates, {
+        sort: [{ field: 'name', dir: 'asc' }]
+      }).data;
       // select first template
       if (this.templates && this.templates.length > 0) {
         this.onSelect(this.templates[0]);
@@ -348,43 +341,6 @@ export class AutoTemplateComponent implements OnInit {
   //   });
   //   return rows;
   // }
-
-  private prepareData(templates: TemplatesList[], rules: AutoTemplateRuleList[]) {
-    const rows: AutoTemplateList[] = [];
-    templates.forEach((template) => {
-      let rulesNew: AutoTemplateRule[] = [];
-      rules.forEach((r) => {
-        if (r.templateId === template.templateId) {
-          rulesNew = r.autoTemplateRules;
-        }
-      });
-
-      const templateNew: AutoTemplateList = {
-        templateId: template.templateId,
-        name: template.name,
-        rules: rulesNew
-      };
-
-      rows.push(templateNew);
-      this.expandTemplateRows();
-    });
-    return rows;
-  }
-
-  private expandTemplateRows() {
-    const that = this.gridApi;
-    if (this.expadedTemplates != null && this.expadedTemplates.length > 0) {
-      this.expadedTemplates.forEach((element) => {
-        this.gridApi.forEachNode((node) => {
-          if (node.data.templateId.localeCompare(element) === 0) {
-            setTimeout(() => {
-              that.getDisplayedRowAtIndex(node.rowIndex).setExpanded(true);
-            }, 0);
-          }
-        });
-      });
-    }
-  }
 
   addNewRuleItem() {
     // if not new row is added jet add new else return
@@ -618,5 +574,42 @@ export class AutoTemplateComponent implements OnInit {
 
   showJobSection(): boolean {
     return this.rowData && this.rowData.filter((d) => d.autoTemplateRuleId !== 'new').length > 0;
+  }
+
+  private prepareData(templates: TemplatesList[], rules: AutoTemplateRuleList[]) {
+    const rows: AutoTemplateList[] = [];
+    templates.forEach((template) => {
+      let rulesNew: AutoTemplateRule[] = [];
+      rules.forEach((r) => {
+        if (r.templateId === template.templateId) {
+          rulesNew = r.autoTemplateRules;
+        }
+      });
+
+      const templateNew: AutoTemplateList = {
+        templateId: template.templateId,
+        name: template.name,
+        rules: rulesNew
+      };
+
+      rows.push(templateNew);
+      this.expandTemplateRows();
+    });
+    return rows;
+  }
+
+  private expandTemplateRows() {
+    const that = this.gridApi;
+    if (this.expadedTemplates != null && this.expadedTemplates.length > 0) {
+      this.expadedTemplates.forEach((element) => {
+        this.gridApi.forEachNode((node) => {
+          if (node.data.templateId.localeCompare(element) === 0) {
+            setTimeout(() => {
+              that.getDisplayedRowAtIndex(node.rowIndex).setExpanded(true);
+            }, 0);
+          }
+        });
+      });
+    }
   }
 }
