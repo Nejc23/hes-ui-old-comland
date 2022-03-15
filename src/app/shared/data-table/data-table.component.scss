@@ -97,27 +97,34 @@
 }
 
 .green {
-  color: #37A350 !important;
+  color: #ffffff !important;
   padding: 3px 8px;
-  background: rgba(55, 163, 80, 0.1);
+  background: rgba(55, 163, 80, 1);
   border-radius: 2px;
 
   a {
-    color: #37A350 !important;
+    color: #ffffff !important;
   }
 }
 
 .red {
-  color: #BC1839;
+  color: #ffffff;
   padding: 3px 8px;
-  background: rgba(252, 235, 238, 1);
+  background: rgba(230, 15, 15, 1);
   border-radius: 2px;
 }
 
 .blue {
-  color: #47A8BD;
+  color: #ffffff;
   padding: 3px 8px;
-  background: rgba(71, 168, 189, 0.1);
+  background: rgba(71, 168, 189, 1);
+  border-radius: 2px;
+}
+
+.orange {
+  color: #ffffff;
+  padding: 3px 8px;
+  background: rgba(240, 122, 5, 1);
   border-radius: 2px;
 }
 

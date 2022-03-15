@@ -144,7 +144,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         },
         {
           enumValue: 'ReadyForReConnection',
-          color: 'yellow'
+          color: 'orange'
         }
       ]
     }

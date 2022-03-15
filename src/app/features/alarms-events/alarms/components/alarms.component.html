@@ -1,51 +1,88 @@
-<div class="tw-mb-2">
-  <app-date-range-picker
-    (valueChange)="dateRangeChanged()"
-    [endProperty]="endTimeProperty"
-    [form]="form"
-    [startProperty]="startTimeProperty">
-  </app-date-range-picker>
-</div>
-
-<div class="content-body-scroll">
-  <div>
-    <ag-grid-angular #agGrid
-                     (firstDataRendered)="onFirstDataRendered($event)"
-                     (gridReady)="onGridReady($event)"
-
-                     (gridSizeChanged)="gridSizeChanged()"
-                     (paginationChanged)="onPaginationChange($event)"
-                     [cacheBlockSize]="selectedPageSize.id"
-                     [cacheOverflowSize]="2"
-                     [columnDefs]="columnDefs"
-                     [frameworkComponents]="frameworkComponents"
-                     [gridOptions]="gridOptions"
-                     [localeText]="localeText"
-                     [maxBlocksInCache]="1"
-                     [maxConcurrentDatasourceRequests]="2"
-                     [modules]="modules"
-                     [overlayLoadingTemplate]="overlayLoadingTemplate"
-                     [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-                     [paginationPageSize]="selectedPageSize.id"
-                     [pagination]="true"
-                     [rowData]="rowData"
-
-                     [suppressColumnVirtualisation]="true"
-                     class="ag-theme-epoint custom-paging"
-                     domLayout="autoHeight"
-                     style="width: 100%; height: calc(100% - 25px);"
-                     suppressRowClickSelection="true"
-                     suppressSizeToFit="true"
-    >
-    </ag-grid-angular>
-    <div class="ag-paging-panel-selection d-flex">
-      <div class="ms-auto">
-        <app-select-dropdown (selectedValueChanged)="pageSizeChanged($event)" [disabled]="false" [form]="form"
-                             [property]="pageSizeProperty" [selectOptions]="pageSizes">
-        </app-select-dropdown>
-      </div>
-    </div>
+<div [style.width.px]="addWidth()" class="sticky-header bottom-line">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title [title]="'ALARM.ALARMS-OVERVIEW'" class="tw-h-36 tw-mt-10 tw--m-5"> </app-page-title>
   </div>
 </div>
 
-<ng-template #tipContentRefresh><span>{{'COMMON.REFRESH-ALARMS' | translate }}</span></ng-template>
+<div class="tw-pt-10">
+  <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+    <kendo-tabstrip-tab [selected]="true" title="{{ 'ALARM.ALARMS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-mt-4">
+          <app-date-range-picker
+            (valueChange)="getAlarmsDataList()"
+            [endProperty]="endTimeAlarmsProperty"
+            [form]="alarmsForm"
+            [labelText]="'FORM.TIMERANGE'"
+            [startProperty]="startTimeAlarmsProperty"
+          >
+          </app-date-range-picker>
+        </div>
+        <app-data-table
+          *ngIf="alarmsDataList && alarmsDataList.data"
+          (pageChangedEvent)="loadMoreAlarmsData($event)"
+          (sortChangeEvent)="alarmsSortChange($event)"
+          [clientSideSearchAndFilters]="false"
+          [fetchData]="true"
+          [gridColumns]="alarmsDataColumnsConfiguration"
+          [gridData]="alarmsDataList.data"
+          [loading]="alarmsLoading"
+          [kendoGridSelectByColumn]="'timeStamp'"
+          [noDataText]="'COMMON.NO-DATA-FOUND'"
+          [pageNumber]="alarmsPageNumber"
+          [pageSize]="alarmsPageSize"
+          [pageable]="true"
+          [rowHeight]="null"
+          [scrollable]="'scrollable'"
+          [showGridBulkActions]="true"
+          [sort]="alarmsSort"
+          [sortable]="true"
+          [tableHeight]="calculateHeight()"
+          [totalCount]="alarmsDataListCount"
+          [withRefreshButton]="true"
+          [withRowSelection]="false"
+          [withSearch]="false"
+        >
+        </app-data-table>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+    <kendo-tabstrip-tab title="{{ 'ALARM.EVENTS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-mt-4">
+          <app-date-range-picker
+            (valueChange)="getEventsDataList()"
+            [endProperty]="endTimeEventsProperty"
+            [form]="eventsForm"
+            [labelText]="'FORM.TIMERANGE'"
+            [startProperty]="startTimeEventsProperty"
+          >
+          </app-date-range-picker>
+        </div>
+        <app-data-table
+          *ngIf="eventsDataList && eventsDataList.events"
+          (pageChangedEvent)="loadMoreEventsData($event)"
+          [fetchData]="true"
+          [gridColumns]="eventsDataColumnsConfiguration"
+          [gridData]="eventsDataList.events"
+          [loading]="eventsLoading"
+          [kendoGridSelectByColumn]="'timeStamp'"
+          [noDataText]="'COMMON.NO-DATA-FOUND'"
+          [pageNumber]="eventsPageNumber"
+          [pageSize]="eventsPageSize"
+          [pageable]="true"
+          [rowHeight]="null"
+          [scrollable]="'scrollable'"
+          [showGridBulkActions]="true"
+          [sortable]="false"
+          [tableHeight]="calculateHeight()"
+          [totalCount]="eventsDataListCount"
+          [withRefreshButton]="true"
+          [withRowSelection]="false"
+          [withSearch]="false"
+        >
+        </app-data-table>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+</div>
