@@ -162,6 +162,7 @@ export class MeterUnitsListComponent implements OnInit {
         }
       ];
       this.meterIdsFilterApplied = true;
+      this.selectedRowsIds = [];
       this.getMetersListData(true);
     });
 
