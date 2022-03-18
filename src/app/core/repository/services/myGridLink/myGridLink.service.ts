@@ -8,6 +8,7 @@ import {
   activeImports,
   enumMyGridLink,
   getCommonRegisterGroups,
+  getDataExportJobs,
   identityToken,
   importDevices,
   importTemplates,
@@ -87,6 +88,9 @@ import {
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
 import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
+import { TemplatesList } from '../../interfaces/auto-templates/templates-list.interface';
+import { templates } from '../../consts/auto-templates.const';
+import { DataExportJobs } from './data-export-jobs.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -432,5 +436,13 @@ export class MyGridLinkService {
 
   getActiveImportsRequest(): HttpRequest<any> {
     return new HttpRequest('GET', `${enumMyGridLink.managment}${activeImports}`);
+  }
+
+  getDataExportJobs(): Observable<DataExportJobs[]> {
+    return this.repository.makeRequest(this.getDataExportJobsRequest());
+  }
+
+  getDataExportJobsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${enumMyGridLink.managment}${getDataExportJobs}`);
   }
 }

@@ -5,13 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { environment } from 'src/environments/environment';
+import { MyGridLinkService } from '../../../../../core/repository/services/myGridLink/myGridLink.service';
 
 export interface ExportDataPayload extends IActionRequestParams {
   startDate: string;
   endDate: string;
   location?: string;
   upload: boolean;
-  exportType: string;
+  jobId: string;
 }
 
 @Component({
@@ -24,22 +25,22 @@ export class ExportDataComponent implements OnInit {
   @Input() params;
   payload: ExportDataPayload;
   //MOCK todo get from BE
-  exportTypes: Array<any> = [
-    { id: 'CCB Billing 1', value: 'LP1: A+, LP1: A+_T0, LP1: A+_T1, LP1: A+_T2', apiId: 'CCB1' }, // apiId = jobId
-    { id: 'CCB Billing 2', value: 'LP1: A+, LP1: A+_T0 ', apiId: 'CCB2' },
-    { id: 'Monthly Billing 1', value: 'BV1: A+, BV1: A+_T0, BV1: A+_T1, BV1: A+_T2', apiId: 'MONTHLY' },
-    { id: 'Events', value: 'All events for a given period', apiId: 'EVENTS' }
-  ];
+  exportTypes: Array<any> = [];
   invalidRange = false;
   maxDateRange = environment.exportDataMaxRange;
 
-  constructor(private formBuilder: FormBuilder, private translate: TranslateService, private modal: NgbActiveModal) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private translate: TranslateService,
+    private myGridService: MyGridLinkService,
+    private modal: NgbActiveModal
+  ) {
     this.form = this.createForm();
   }
 
   createForm() {
     return this.formBuilder.group({
-      exportType: this.exportTypes[0], // jobId
+      exportType: [], // jobId
       location: '',
       upload: false,
       startDate: [moment().subtract(1, 'month').set('minute', 0).set('hours', 0).set('second', 0), Validators.required],
@@ -51,7 +52,21 @@ export class ExportDataComponent implements OnInit {
 
   // id (jobId)
   // time range /  startDate -endData
-  ngOnInit() {}
+  ngOnInit() {
+    this.myGridService.getDataExportJobs().subscribe((jobs) => {
+      this.exportTypes = jobs
+        .map((j) => {
+          return { id: j.description, value: j.value, apiId: j.jobId };
+        })
+        .sort((a, b) => {
+          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+        });
+
+      if (this.exportTypes && this.exportTypes[0]) {
+        this.form.controls['exportType'].setValue(this.exportTypes[0]);
+      }
+    });
+  }
 
   dateChanged() {
     this.checkIfDatesValid(this.form.get('startDate').value, this.form.get('endDate').value);
@@ -66,7 +81,7 @@ export class ExportDataComponent implements OnInit {
       startDate: this.form.get('startDate').value,
       endDate: this.form.get('endDate').value,
       upload: this.form.get('upload').value,
-      exportType: this.form.get('exportType').value.apiId,
+      jobId: this.form.get('exportType').value.apiId,
       location: this.form.get('location').value,
       deviceIds: this.params.deviceIds,
       pageNumber: this.params.pageNumber,
