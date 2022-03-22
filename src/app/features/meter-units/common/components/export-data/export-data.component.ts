@@ -100,7 +100,10 @@ export class ExportDataComponent implements OnInit {
     response = this.myGridService.triggerDataExportJob(this.payload);
 
     response.subscribe(
-      (value) => {},
+      (value) => {
+        this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
+        this.modal.dismiss();
+      },
       (e) => {
         this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
       }
