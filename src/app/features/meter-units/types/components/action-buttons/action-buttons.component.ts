@@ -169,6 +169,10 @@ export class ActionButtonsComponent {
     return PermissionEnumerator.Sync_Time;
   }
 
+  get permissionDataExport() {
+    return PermissionEnumerator.Data_Export;
+  }
+
   // --> Operations action click (bulk or selected row)
   onDisconnectorStatus(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
