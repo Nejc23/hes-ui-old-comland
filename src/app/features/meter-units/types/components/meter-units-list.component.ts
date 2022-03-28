@@ -465,7 +465,12 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   applyFilters(saveUserSettings = true) {
-    this.clearLocalStorage();
+    if (saveUserSettings) {
+      // filter changed. clear selection
+      this.clearLocalStorage();
+      // save filters to user settings
+      this.saveUserSettings();
+    }
     this.pageNumber = 1;
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     console.log(filter);
@@ -487,10 +492,6 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
     this.getFilterCount();
     this.appliedFiltersFromUser = true;
-    // save filters to user settings
-    if (saveUserSettings) {
-      this.saveUserSettings();
-    }
     this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
     if (this.selectAllEnabled && localStorage.getItem('excludedIds')) {
       this.requestModel.excludeIds = JSON.parse(localStorage.getItem('excludedIds'));
@@ -593,6 +594,7 @@ export class MeterUnitsListComponent implements OnInit {
   clearLocalStorage() {
     this.requestModel.deviceIds = [];
     this.requestModel.excludeIds = [];
+    this.selectedRowsIds = [];
     this.selectAllEnabled = false;
     localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
