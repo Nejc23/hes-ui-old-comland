@@ -8,6 +8,7 @@ import {
   activeImports,
   enumMyGridLink,
   getCommonRegisterGroups,
+  getDataExportJobs,
   identityToken,
   importDevices,
   importTemplates,
@@ -22,6 +23,7 @@ import {
   onDemandSetMonitor,
   securityConcentratorRekey,
   triggerConcUpgrade,
+  triggerDataExport,
   triggerDeviceUpgrade,
   triggerSetTimeOfUse,
   updateMeterState
@@ -87,6 +89,10 @@ import {
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
 import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
+import { TemplatesList } from '../../interfaces/auto-templates/templates-list.interface';
+import { templates } from '../../consts/auto-templates.const';
+import { DataExportJobs } from './data-export-jobs.interface';
+import { ExportDataPayload } from '../../../../features/meter-units/common/components/export-data/export-data.component';
 
 @Injectable({
   providedIn: 'root'
@@ -432,5 +438,21 @@ export class MyGridLinkService {
 
   getActiveImportsRequest(): HttpRequest<any> {
     return new HttpRequest('GET', `${enumMyGridLink.managment}${activeImports}`);
+  }
+
+  getDataExportJobs(): Observable<DataExportJobs[]> {
+    return this.repository.makeRequest(this.getDataExportJobsRequest());
+  }
+
+  getDataExportJobsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${enumMyGridLink.managment}${getDataExportJobs}`);
+  }
+
+  triggerDataExportJob(params: ExportDataPayload): Observable<any> {
+    return this.repository.makeRequest(this.triggerDataExportJobRequest(params));
+  }
+
+  triggerDataExportJobRequest(params: ExportDataPayload): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDataExport}`, params);
   }
 }

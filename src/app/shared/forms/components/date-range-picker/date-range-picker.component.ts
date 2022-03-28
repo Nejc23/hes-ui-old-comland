@@ -28,6 +28,9 @@ export class DateRangePickerComponent implements OnInit {
   @Input() setDefaultDate = true; // default date is yesterday
   @Input() withoutYear = false;
   @Input() labelText = 'FORM.SELECT-DATE';
+  @Input() alignCenter = true;
+  @Input() fullWidth = false;
+
   minDateMomentJs;
 
   format = environment.dateTimeFormat;

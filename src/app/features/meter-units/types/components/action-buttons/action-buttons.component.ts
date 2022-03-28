@@ -23,6 +23,8 @@ import { ModalService } from '../../../../../core/modals/services/modal.service'
 import { ConcentratorService } from '../../../../../core/repository/services/concentrator/concentrator.service';
 import { TranslateService } from '@ngx-translate/core';
 import { GridRequestParams } from '../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
+import { ExportDataComponent } from '../../../common/components/export-data/export-data.component';
+import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-action-buttons',
@@ -165,6 +167,10 @@ export class ActionButtonsComponent {
 
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
+  }
+
+  get permissionDataExport() {
+    return PermissionEnumerator.Data_Export;
   }
 
   // --> Operations action click (bulk or selected row)
@@ -585,5 +591,23 @@ export class ActionButtonsComponent {
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount
     );
+  }
+
+  onExportData(selectedGuid?: string) {
+    const params: IActionRequestParams = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+    const modalRef = this.modalService.open(ExportDataComponent, { size: 'md' });
+    modalRef.componentInstance.params = params;
+
+    modalRef.result
+      .then(() => {
+        // todo
+        console.log('success');
+      })
+      .catch(() => {});
   }
 }

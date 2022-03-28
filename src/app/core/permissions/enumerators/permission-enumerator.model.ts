@@ -41,5 +41,6 @@ export enum PermissionEnumerator {
   Read_Meter = 'Read_Meter',
   Meter_Discovery = 'Meter_Discovery',
   Device_Import = 'Device_Import',
-  Vault_Access_Grants = 'Vault_Access_Grants'
+  Vault_Access_Grants = 'Vault_Access_Grants',
+  Data_Export = 'Data_Export'
 }
