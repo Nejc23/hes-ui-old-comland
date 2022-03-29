@@ -177,16 +177,19 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   activeJobsColumnsConfiguration: Array<GridColumn> = [
     {
       field: 'description',
-      translationKey: 'FORM.NAME'
+      translationKey: 'FORM.NAME',
+      width: 120
     },
     {
       field: 'type',
-      translationKey: 'FORM.TYPE'
+      translationKey: 'FORM.TYPE',
+      width: 145
     },
     {
       field: 'nextRun',
       translationKey: 'FORM.NEXT-START',
-      type: GridColumnType.DATE_TIME
+      type: GridColumnType.DATE_TIME,
+      width: 120
     }
   ];
 
