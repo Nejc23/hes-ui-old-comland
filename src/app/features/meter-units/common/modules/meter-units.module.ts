@@ -23,6 +23,7 @@ import { TouConfigurationImportComponent } from '../components/plc-meter-tou-con
 import { GridCellProtocolComponent } from '../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { ActionButtonsComponent } from '../../types/components/action-buttons/action-buttons.component';
 import { ExtraDetailsComponent } from '../../details/components/extra-details/extra-details.component';
+import { ExportDataComponent } from '../components/export-data/export-data.component';
 
 @NgModule({
   entryComponents: [],
@@ -46,7 +47,8 @@ import { ExtraDetailsComponent } from '../../details/components/extra-details/ex
     TouConfigurationImportComponent,
     GridCellProtocolComponent,
     ActionButtonsComponent,
-    ExtraDetailsComponent
+    ExtraDetailsComponent,
+    ExportDataComponent
   ],
   exports: [RegistersColumnChartComponent],
   imports: [

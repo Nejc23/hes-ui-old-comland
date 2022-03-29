@@ -32,6 +32,9 @@ export const onDemandRelaysDisconnect = '/on-demand/relay/disconnect';
 export const onDemandRelaysState = '/on-demand/relay/get-state';
 export const onDemandRelaysMode = '/on-demand/relay/mode';
 
+export const triggerDataExport = '/trigger-data-export';
+export const getDataExportJobs = '/data-export-jobs';
+
 export const linkDeviceTemplate = '/link-device-template';
 
 export const upgrade = '/upgrade';

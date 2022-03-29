@@ -55,16 +55,16 @@
                 ><span>{{ 'PLC-METER.CREATE-NEW-READING' | translate }}</span></a
                 >
               </div>
-               <div
-	              (click)="onScheduleMeterTimeSyncJobs()"
-	              [permission]="permissionManageJobs"
-	              appHideIfPermissionUnauthorized
-	              class="dropdown-item"
-	            >
-	              <a href="javascript:void(0)"
-	              ><span>{{ 'PLC-METER.CREATE-NEW-TIME-SYNC' | translate }}</span></a
+              <div
+                (click)="onScheduleMeterTimeSyncJobs()"
+                [permission]="permissionManageJobs"
+                appHideIfPermissionUnauthorized
+                class="dropdown-item"
               >
-            </div>
+                <a href="javascript:void(0)"
+                ><span>{{ 'PLC-METER.CREATE-NEW-TIME-SYNC' | translate }}</span></a
+                >
+              </div>
               <div
                 (click)="onJobsAssignExisting()"
                 [permission]="permissionManageJobs"
@@ -476,12 +476,22 @@
     </div>
   </div>
 
-  <button *ngIf="false" [disabled]="true" class="btn btn-primary" type="button">
-    <i class="far fa-tags"></i>
-    <span>{{ 'COMMON.TAGS' | translate }}</span>
+  <button
+    [permission]="permissionDataExport"
+    appHideIfPermissionUnauthorized
+    (click)="onExportData()"
+    class="btn btn-primary tw-ml-2"
+    href="javascript:void(0)"
+  >
+    {{ 'BUTTON.EXPORT' | translate }}
   </button>
-  <button *ngIf="false" [disabled]="true" class="btn btn-primary" type="button">
-    <i class="far fa-chart-bar" disabled></i>
-    <span>{{ 'COMMON.DATA' | translate }}</span>
-  </button>
+
+  <!--  <button *ngIf="false" [disabled]="true" class="btn btn-primary" type="button">-->
+  <!--    <i class="far fa-tags"></i>-->
+  <!--    <span>{{ 'COMMON.TAGS' | translate }}</span>-->
+  <!--  </button>-->
+  <!--  <button *ngIf="false" [disabled]="true" class="btn btn-primary" type="button">-->
+  <!--    <i class="far fa-chart-bar" disabled></i>-->
+  <!--    <span>{{ 'COMMON.DATA' | translate }}</span>-->
+  <!--  </button>-->
 </div>
