@@ -2,12 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { environment } from 'src/environments/environment';
 import { MyGridLinkService } from '../../../../../core/repository/services/myGridLink/myGridLink.service';
-import { MeterUnitsTypeEnum } from '../../../types/enums/meter-units-type.enum';
-import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { Observable } from 'rxjs';
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 

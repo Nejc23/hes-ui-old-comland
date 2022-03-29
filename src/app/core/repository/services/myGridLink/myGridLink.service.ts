@@ -89,8 +89,6 @@ import {
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
 import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
-import { TemplatesList } from '../../interfaces/auto-templates/templates-list.interface';
-import { templates } from '../../consts/auto-templates.const';
 import { DataExportJobs } from './data-export-jobs.interface';
 import { ExportDataPayload } from '../../../../features/meter-units/common/components/export-data/export-data.component';
 
