@@ -134,7 +134,7 @@ export class MeterUnitsListComponent implements OnInit {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
         this.searchFromQueryParams = params['search'];
-        this.clearLocalStorage();
+        this.clearSessionStorage();
       }
     });
     this.breadcrumbService.setPageName('');
@@ -304,7 +304,7 @@ export class MeterUnitsListComponent implements OnInit {
     this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
     this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
     this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
-    this.clearLocalStorage();
+    this.clearSessionStorage();
 
     this.selectedRowsIds = [];
     this.requestModel.excludeIds = [];
@@ -323,7 +323,7 @@ export class MeterUnitsListComponent implements OnInit {
 
   selectedRows(event: any) {
     this.selectedRowsIds = event;
-    localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+    sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     this.requestModel.deviceIds = this.selectedRowsIds;
   }
 
@@ -429,6 +429,8 @@ export class MeterUnitsListComponent implements OnInit {
       this.searchText = settings.searchText;
     }
     this.wildCardsSearch = settings.searchWildcards ?? false; // todo check
+    this.selectedRowsIds = JSON.parse(sessionStorage.getItem('selectedRowsIds')) ?? [];
+
     if (this.searchText) {
       this.requestModel.searchModel = [
         {
@@ -467,7 +469,7 @@ export class MeterUnitsListComponent implements OnInit {
   applyFilters(saveUserSettings = true) {
     if (saveUserSettings) {
       // filter changed. clear selection
-      this.clearLocalStorage();
+      this.clearSessionStorage();
       // save filters to user settings
       this.saveUserSettings();
     }
@@ -491,12 +493,12 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
     this.getFilterCount();
-    this.appliedFiltersFromUser = true;
-    this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
-    if (this.selectAllEnabled && localStorage.getItem('excludedIds')) {
-      this.requestModel.excludeIds = JSON.parse(localStorage.getItem('excludedIds'));
+    this.selectAllEnabled = JSON.parse(sessionStorage.getItem('selectAllEnabled')) ?? false;
+    if (this.selectAllEnabled && sessionStorage.getItem('excludedIds')) {
+      this.requestModel.excludeIds = JSON.parse(sessionStorage.getItem('excludedIds'));
       this.requestModel.deviceIds = [];
     }
+    this.appliedFiltersFromUser = true;
     this.getMetersListData(true);
   }
 
@@ -535,9 +537,9 @@ export class MeterUnitsListComponent implements OnInit {
       this.selectAllEnabled = true;
       this.requestModel.deviceIds = [];
       this.requestModel.excludeIds = [];
-      localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-      localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
-      localStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
+      sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
+      sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     }
   }
 
@@ -546,8 +548,8 @@ export class MeterUnitsListComponent implements OnInit {
       this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
       this.selectAllEnabled = false;
       this.selectedRowsIds = [];
-      localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-      localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
+      sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
     }
   }
 
@@ -563,7 +565,7 @@ export class MeterUnitsListComponent implements OnInit {
       });
     }
     if (this.selectAllEnabled) {
-      localStorage.setItem('excludedIds', JSON.stringify(this.requestModel?.excludeIds));
+      sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel?.excludeIds));
     }
     console.log(this.requestModel.excludeIds);
   }
@@ -591,14 +593,14 @@ export class MeterUnitsListComponent implements OnInit {
     this.eventManager.emitCustom('ClearFilter', true);
   }
 
-  clearLocalStorage() {
+  clearSessionStorage() {
     this.requestModel.deviceIds = [];
     this.requestModel.excludeIds = [];
     this.selectedRowsIds = [];
     this.selectAllEnabled = false;
-    localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-    localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
-    localStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
+    sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+    sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
+    sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
   }
 }
