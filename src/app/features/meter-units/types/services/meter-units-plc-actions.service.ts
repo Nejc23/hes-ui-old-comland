@@ -708,153 +708,148 @@ export class MeterUnitsPlcActionsService {
       requestParam.deviceIds = [];
       requestParam.deviceIds.push(guid);
     } else {
-      // select from grid
       requestParam.deviceIds = requestModel.deviceIds;
-    }
-    // select all enabled on grid, dont send ids
-    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      requestParam.excludeIds = requestModel.excludeIds;
-      requestParam.deviceIds = [];
-      requestParam.pageSize = allItems;
-      requestParam.pageNumber = 1;
+      // select all enabled on grid, dont send ids
+      if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
+        console.log('Select ALL ENABLED on grid:');
+        requestParam.excludeIds = requestModel.excludeIds;
+        requestParam.deviceIds = [];
+        requestParam.pageSize = allItems;
+        requestParam.pageNumber = 1;
 
-      requestParam.textSearch.value = '';
+        requestParam.textSearch.value = '';
 
-      if (requestModel.searchModel?.length > 0 && requestModel.searchModel[0].value?.length > 0) {
-        requestParam.textSearch.value = requestModel.searchModel[0].value;
-        requestParam.textSearch.propNames = visibleColumnsNames;
-        requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
+        if (requestModel.searchModel?.length > 0 && requestModel.searchModel[0].value?.length > 0) {
+          requestParam.textSearch.value = requestModel.searchModel[0].value;
+          requestParam.textSearch.propNames = visibleColumnsNames;
+          requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
+        }
+
+        // create filter object
+        if (requestModel.filterModel) {
+          requestParam.filter = [];
+          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+            requestModel.filterModel.states.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.state),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+
+          if (requestModel.filterModel.protocol && requestModel.filterModel.protocol.length > 0) {
+            requestModel.filterModel.protocol.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.protocolType),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+
+          if (requestModel.filterModel.vendors && requestModel.filterModel.vendors?.length > 0) {
+            requestModel.filterModel.vendors.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.vendor),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.firmware && requestModel.filterModel.firmware?.length > 0) {
+            requestModel.filterModel.firmware.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.firmware),
+                propValue: row.value,
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+          if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState?.length > 0) {
+            requestModel.filterModel.disconnectorState.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState?.length > 0) {
+            requestModel.filterModel.ciiState.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.ciiState),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.tags && requestModel.filterModel.tags?.length > 0) {
+            requestModel.filterModel.tags.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.tags),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+
+          // show operations filter
+          if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter?.length > 0) {
+            requestModel.filterModel.showOptionFilter.map((row) => {
+              if (row.id === 1) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 2) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                  propValue: 'false',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 3) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 4) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.isHls),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 5) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.isHls),
+                  propValue: 'false',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+            });
+          }
+
+          if (requestModel.sortModel && requestModel.sortModel.length > 0) {
+            requestModel.sortModel.map((row) =>
+              requestParam.sort.push({
+                propName: capitalize(row.colId),
+                index: 0,
+                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+              })
+            );
+          }
+        }
       }
-
-      // create filter object
-      if (requestModel.filterModel) {
-        requestParam.filter = [];
-        if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
-          requestModel.filterModel.states.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.state),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            })
-          );
-        }
-
-        if (requestModel.filterModel.protocol && requestModel.filterModel.protocol.length > 0) {
-          requestModel.filterModel.protocol.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.protocolType),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            })
-          );
-        }
-
-        if (requestModel.filterModel.vendors && requestModel.filterModel.vendors?.length > 0) {
-          requestModel.filterModel.vendors.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.vendor),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            })
-          );
-        }
-        if (requestModel.filterModel.firmware && requestModel.filterModel.firmware?.length > 0) {
-          requestModel.filterModel.firmware.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.firmware),
-              propValue: row.value,
-              filterOperation: filterOperationEnum.contains
-            })
-          );
-        }
-        if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState?.length > 0) {
-          requestModel.filterModel.disconnectorState.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            })
-          );
-        }
-        if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState?.length > 0) {
-          requestModel.filterModel.ciiState.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.ciiState),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            })
-          );
-        }
-        if (requestModel.filterModel.tags && requestModel.filterModel.tags?.length > 0) {
-          requestModel.filterModel.tags.map((row) =>
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.tags),
-              propValue: row.id.toString(),
-              filterOperation: filterOperationEnum.contains
-            })
-          );
-        }
-
-        // show operations filter
-        if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter?.length > 0) {
-          requestModel.filterModel.showOptionFilter.map((row) => {
-            if (row.id === 1) {
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
-                propValue: 'true',
-                filterOperation: filterOperationEnum.equal
-              });
-            }
-            if (row.id === 2) {
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
-                propValue: 'false',
-                filterOperation: filterOperationEnum.equal
-              });
-            }
-            if (row.id === 3) {
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
-                propValue: 'true',
-                filterOperation: filterOperationEnum.equal
-              });
-            }
-            if (row.id === 4) {
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.isHls),
-                propValue: 'true',
-                filterOperation: filterOperationEnum.equal
-              });
-            }
-            if (row.id === 5) {
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.isHls),
-                propValue: 'false',
-                filterOperation: filterOperationEnum.equal
-              });
-            }
-          });
-        }
-
-        if (requestModel.sortModel && requestModel.sortModel.length > 0) {
-          requestModel.sortModel.map((row) =>
-            requestParam.sort.push({
-              propName: capitalize(row.colId),
-              index: 0,
-              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
-            })
-          );
-        }
-      }
     }
-    console.log('deviceIds:');
-    console.log(requestParam.deviceIds);
-    console.log('Select all enabled:');
-    console.log(this.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-    console.log('Filter:');
-    console.log(requestParam.filter);
-    console.log('Search:');
-    console.log(requestParam.textSearch);
+    console.log('-- OPERATIONS PAYLOAD --');
+    console.log(requestParam);
+    console.log('-------------');
     return requestParam;
   }
 

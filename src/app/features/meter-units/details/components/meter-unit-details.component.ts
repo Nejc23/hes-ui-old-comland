@@ -67,7 +67,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     private meterPropertyService: MeterPropertyService,
     private eventsService: EventManagerService
   ) {
-    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
     this.eventService.eventEmitterRefreshDevices.subscribe({
       next: () => {
         this.getData();

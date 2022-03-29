@@ -185,9 +185,8 @@ export class MeterUnitsListComponent implements OnInit {
     if (this.selectedRowsIds.length > 0) {
       this.requestModel.deviceIds = this.selectedRowsIds;
     }
-    this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
     this.metersColumns.map((columns) => (columns.hidden = false));
-    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(this.selectAllEnabled);
+    this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
     // currently, we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
     // get layout and load data
     this.getMeterUnitsLayoutGridLayoutStore();
@@ -493,7 +492,15 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
     this.getFilterCount();
-    this.selectAllEnabled = JSON.parse(sessionStorage.getItem('selectAllEnabled')) ?? false;
+    debugger;
+    this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
+
+    if (!this.selectAllEnabled) {
+      this.requestModel.deviceIds = this.selectedRowsIds;
+    } else {
+      this.selectedRowsIds = [];
+    }
+
     if (this.selectAllEnabled && sessionStorage.getItem('excludedIds')) {
       this.requestModel.excludeIds = JSON.parse(sessionStorage.getItem('excludedIds'));
       this.requestModel.deviceIds = [];
@@ -538,7 +545,6 @@ export class MeterUnitsListComponent implements OnInit {
       this.requestModel.deviceIds = [];
       this.requestModel.excludeIds = [];
       sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-      sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
       sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     }
   }
@@ -549,7 +555,6 @@ export class MeterUnitsListComponent implements OnInit {
       this.selectAllEnabled = false;
       this.selectedRowsIds = [];
       sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-      sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
     }
   }
 
@@ -599,7 +604,6 @@ export class MeterUnitsListComponent implements OnInit {
     this.selectedRowsIds = [];
     this.selectAllEnabled = false;
     sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-    sessionStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
     sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
   }
