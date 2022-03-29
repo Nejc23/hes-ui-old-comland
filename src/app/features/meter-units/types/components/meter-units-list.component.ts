@@ -492,7 +492,6 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
     this.getFilterCount();
-    debugger;
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
 
     if (!this.selectAllEnabled) {
