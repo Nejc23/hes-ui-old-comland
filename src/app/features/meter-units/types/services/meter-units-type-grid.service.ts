@@ -168,15 +168,15 @@ export class MeterUnitsTypeGridService {
       coloredValues: [
         {
           enumValue: 'connected',
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: 'readyforreconnection',
-          color: 'blue'
+          color: 'white-on-blue'
         },
         {
           enumValue: 'disconnected',
-          color: 'red'
+          color: 'white-on-red'
         }
       ]
     },
@@ -194,11 +194,11 @@ export class MeterUnitsTypeGridService {
       coloredValues: [
         {
           enumValue: 'on',
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: 'off',
-          color: 'red'
+          color: 'white-on-red'
         }
       ]
     },

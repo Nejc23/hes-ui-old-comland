@@ -5,7 +5,7 @@
 </div>
 
 <div class="tw-pt-10">
-  <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+  <kendo-tabstrip class="tw-pt-10">
     <kendo-tabstrip-tab [selected]="true" title="{{ 'ALARM.ALARMS' | translate }}">
       <ng-template kendoTabContent>
         <div class="tw-mt-4">
@@ -49,19 +49,19 @@
 
     <kendo-tabstrip-tab title="{{ 'ALARM.EVENTS' | translate }}">
       <ng-template kendoTabContent>
-        <div class="tw-mt-4">
-          <app-date-range-picker
-            (valueChange)="getEventsDataList()"
-            [endProperty]="endTimeEventsProperty"
-            [form]="eventsForm"
-            [labelText]="'FORM.TIMERANGE'"
-            [startProperty]="startTimeEventsProperty"
-          >
-          </app-date-range-picker>
-        </div>
+        <app-data-table-toolbar
+          (exportDataClickekdEvent)="exportData($event)"
+          (reloadGridDataEvent)="getEventsDataList()"
+          [exportOptions]="exportOptions"
+          [filters]="filters"
+          [form]="eventsForm"
+          [gridDataLoading]="eventsLoading"
+        >
+        </app-data-table-toolbar>
         <app-data-table
           *ngIf="eventsDataList && eventsDataList.events"
           (pageChangedEvent)="loadMoreEventsData($event)"
+          (sortChangeEvent)="sortChange($event)"
           [fetchData]="true"
           [gridColumns]="eventsDataColumnsConfiguration"
           [gridData]="eventsDataList.events"
@@ -74,7 +74,8 @@
           [rowHeight]="null"
           [scrollable]="'scrollable'"
           [showGridBulkActions]="true"
-          [sortable]="false"
+          [sort]="eventsSort"
+          [sortable]="true"
           [tableHeight]="calculateHeight()"
           [totalCount]="eventsDataListCount"
           [withRefreshButton]="true"

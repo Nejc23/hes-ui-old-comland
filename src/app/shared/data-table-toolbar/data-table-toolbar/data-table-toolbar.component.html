@@ -1,0 +1,61 @@
+<div class="tw-flex tw-mt-4 tw-gap-4">
+  <div>
+    <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ 'COMMON.SEARCH' | translate }}:</div>
+    <div [formGroup]="form" class="tw-inline-flex gray-border tw-w-56 search-input">
+      <div [title]="'Search'" class="tw-flex tw-justify-center tw-cursor-pointer" data-placement="top" data-toggle="tooltip">
+        <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
+      </div>
+      <input [formControlName]="'eventsSearchValue'" kendoTextBox placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}" />
+    </div>
+  </div>
+
+  <app-date-range-picker
+    #dateRangePicker
+    [endProperty]="endTimeProperty"
+    [form]="form"
+    [labelText]="'FORM.TIMERANGE'"
+    [startProperty]="startTimeProperty"
+    [withButtons]="false"
+  >
+  </app-date-range-picker>
+
+  <div [formGroup]="form" class="tw-flex tw-gap-4">
+    <div *ngFor="let filter of filters; let i = index" class="">
+      <div *ngIf="filter.label" class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ filter.label | translate }}:</div>
+
+      <div class="gray-border">
+        <kendo-dropdownlist
+          [data]="filter.values"
+          [defaultItem]="'COMMON.ALL' | translate"
+          [id]="filter.field"
+          [formControlName]="filter.field"
+        >
+        </kendo-dropdownlist>
+      </div>
+    </div>
+
+    <div class="tw-ml-4 tw-w-28 tw-place-self-center tw-mt-4">
+      <a (click)="resetSearchAndFilters()" class="tw-text-darkGray tw-cursor-pointer">{{ 'FILTER.CLEAR-FILTERS' | translate }}</a>
+    </div>
+  </div>
+  <div class="tw-flex tw-justify-end tw-w-full tw-place-self-center tw-mt-4">
+    <div
+      *ngIf="withExportButton && exportOptions && exportOptions.length > 0"
+      [title]="'GRID.EXPORT-DATA-TO' | translate"
+      data-placement="top"
+      data-toggle="tooltip"
+    >
+      <kendo-dropdownbutton
+        (itemClick)="exportData($event)"
+        [data]="exportOptions"
+        [iconClass]="'fa fa-file-export export-to-button'"
+        [popupSettings]="{ animate: true, align: 'right' }"
+      ></kendo-dropdownbutton>
+    </div>
+    <div *ngIf="withRefreshButton" [title]="'GRID.REFRESH-GRID' | translate" class="tw-ml-2" data-placement="top" data-toggle="tooltip">
+      <div (click)="reloadGridData()" class="tw-cursor-pointer refresh-button border-gray">
+        <img [ngClass]="gridDataLoading ? 'tw-animate-spin' : ''" src="assets/images/icons/refresh-icon.svg" />
+      </div>
+    </div>
+  </div>
+</div>

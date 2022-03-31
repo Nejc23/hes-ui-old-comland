@@ -1,7 +1,7 @@
 import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlarmsComponent } from '../../alarms/components/alarms.component';
+import { AlarmsEventsComponent } from '../../alarms/components/alarms-events.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
         data: {
           breadcrumb: null
         },
-        component: AlarmsComponent
+        component: AlarmsEventsComponent
       }
     ]
   }
