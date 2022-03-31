@@ -9,17 +9,12 @@
     </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item [data]="formattedEvents" categoryField="timestamp" field="count" type="column">
+    <kendo-chart-series-item [data]="eventsByTimestamp" categoryField="timestamp" field="count" type="column">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem">
           <div style="text-align: center">
             <div class="text-black-50 small">
-              <ng-container *ngIf="hours">
-                {{ dataItem.timestamp | formatDateTime }}
-              </ng-container>
-              <ng-container *ngIf="!hours">
-                {{ dataItem.timestamp }}
-              </ng-container>
+              {{ dataItem.timestamp | formatDateTime }}
             </div>
             <div>{{ dataItem.count }}</div>
           </div>
