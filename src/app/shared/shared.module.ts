@@ -117,6 +117,8 @@ import { AddTimeUnitComponent } from '../features/meter-units/common/components/
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DownloadDataConcentratorClientCertComponent } from '../features/data-concentrator-units/components/download/download-dc-client-cert.component';
 import { MeterTimeSyncComponent } from '../features/jobs/components/scheduler-job/meter-time-sync.component';
+import { DataTableToolbarComponent } from './data-table-toolbar/data-table-toolbar/data-table-toolbar.component';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -211,7 +213,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent
+    AddTimeUnitComponent,
+    DataTableToolbarComponent
   ],
   imports: [
     CommonModule,
@@ -254,7 +257,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LeafletModule,
     GridModule,
     ExcelModule,
-    LabelModule
+    LabelModule,
+    ButtonsModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -350,7 +354,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent
+    AddTimeUnitComponent,
+    DataTableToolbarComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

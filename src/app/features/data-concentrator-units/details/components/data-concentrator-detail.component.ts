@@ -140,11 +140,11 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       coloredValues: [
         {
           enumValue: 'Installed',
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: 'ReadyForReConnection',
-          color: 'orange'
+          color: 'white-on-orange'
         }
       ]
     }

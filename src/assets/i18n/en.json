@@ -298,7 +298,7 @@
     "PAGE-NOT-FOUND": "404 - page not exists"
   },
   "FILTER": {
-    "CLEAR-FILTERS": "Clear Filters",
+    "CLEAR-FILTERS": "Clear filters",
     "FILTERED-BY": "Filtered by: ",
     "TEMPLATE-LIST": "Configurations list",
     "TITLE": "Filters"
@@ -496,6 +496,7 @@
     "DEVICES": "Devices",
     "DISCONNECTOR-STATE": "Disconnector State",
     "EXCEL-EXPORT": "Export in excel",
+    "EXPORT-DATA-TO": "Export data to",
     "FILTERS": "filters",
     "FIRMWARE": "Firmware",
     "FIRST": "first",

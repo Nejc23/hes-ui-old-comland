@@ -1,5 +1,5 @@
 import { DataProcessingRequest } from './../../interfaces/data-processing/data-processing-request.interface';
-import { getEvents, getInstantaneousValues, getProfiles, getEventsData } from './../../consts/data-processing.const';
+import { getEvents, getInstantaneousValues, getProfiles } from './../../consts/data-processing.const';
 import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Injectable } from '@angular/core';
@@ -12,8 +12,6 @@ import {
 } from '../../interfaces/data-processing/profile-definitions-for-device.interface';
 import { map } from 'rxjs/operators';
 import { RegistersFilter } from 'src/app/features/meter-units/registers/interfaces/data-processing-request.interface';
-import { EventDataRequestDto } from 'src/app/api/alarms-events/event-data-request-dto';
-import { EventData } from 'src/app/api/alarms-events/event-data-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -106,16 +104,8 @@ export class DataProcessingService {
     return this.repository.makeRequest(this.getEventsRequest(request));
   }
 
-  getEventsData(request: EventDataRequestDto): Observable<EventData> {
-    return this.repository.makeRequest(this.getEventsDataRequest(request));
-  }
-
   getEventsRequest(request: DataProcessingRequest): HttpRequest<EventProfileDefinitionsForDevice[]> {
     return new HttpRequest('POST', `${getEvents}`, request as any);
-  }
-
-  getEventsDataRequest(request: EventDataRequestDto): HttpRequest<EventData> {
-    return new HttpRequest('POST', `${getEventsData}`, request as any);
   }
 
   getInstantaneousValues(request: DataProcessingRequest): Observable<RegisterDefinitionsForDevice[]> {

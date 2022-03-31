@@ -31,23 +31,23 @@ export class VaultAccessComponent implements OnInit {
       coloredValues: [
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.CONFIRMED`),
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.AUTO_CONFIRMED`),
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.ISSUED`),
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.AUTO_ISSUED`),
-          color: 'green'
+          color: 'white-on-green'
         },
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.REJECTED`),
-          color: 'red'
+          color: 'white-on-red'
         }
       ]
     },
@@ -85,7 +85,7 @@ export class VaultAccessComponent implements OnInit {
       coloredValues: [
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.UNCONFIRMED`),
-          color: 'blue'
+          color: 'white-on-blue'
         }
       ]
     },

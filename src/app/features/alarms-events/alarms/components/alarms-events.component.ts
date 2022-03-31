@@ -7,19 +7,21 @@ import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operat
 import * as moment from 'moment';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { EventData } from 'src/app/api/alarms-events/event-data-dto';
-import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
-import { EventDataRequestDto } from 'src/app/api/alarms-events/event-data-request-dto';
 import { Observable } from 'rxjs';
-import { GridColumn, GridColumnType, PageChangedEvent } from 'src/app/shared/data-table/data-table.component';
+import { GridColumn, GridColumnType, GridFilter, PageChangedEvent } from 'src/app/shared/data-table/data-table.component';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { SortDescriptor } from '@progress/kendo-data-query';
+import { debounceTime } from 'rxjs/operators';
+import { GetDataV2Service } from 'src/app/api/data-processing/services';
+import { EventDataRequest, ExportEventDataRequest } from 'src/app/api/data-processing/models';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-alarms-events-alarms',
-  templateUrl: './alarms.component.html',
-  styles: []
+  templateUrl: './alarms-events.component.html',
+  styleUrls: ['./alarms-events.component.scss']
 })
-export class AlarmsComponent implements OnInit {
+export class AlarmsEventsComponent implements OnInit {
   // Alarms
   alarmsDataList$: Observable<GridResponse<IAlarmsList>>;
   alarmsDataList: GridResponse<IAlarmsList>;
@@ -55,15 +57,15 @@ export class AlarmsComponent implements OnInit {
       coloredValues: [
         {
           enumValue: 'LOW',
-          color: 'blue'
+          color: 'white-on-blue'
         },
         {
           enumValue: 'MEDIUM',
-          color: 'orange'
+          color: 'white-on-orange'
         },
         {
           enumValue: 'HIGH',
-          color: 'red'
+          color: 'white-on-red'
         }
       ],
       width: 100
@@ -141,12 +143,35 @@ export class AlarmsComponent implements OnInit {
     }
   ];
 
+  // Events search & filter
+  wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
+  filters: Array<GridFilter> = [];
+  protocols = [];
+  manufacturers = [];
+
+  eventsSort: SortDescriptor[] = [
+    {
+      field: 'timeStamp',
+      dir: 'desc'
+    }
+  ];
+
+  exportOptions: Array<any> = [
+    {
+      text: 'Excel'
+    },
+    {
+      text: 'CSV'
+    }
+  ];
+
   constructor(
     private formBuilder: FormBuilder,
     private alarmingService: AlarmingService,
     private breadcrumbService: BreadcrumbService,
-    private dataProcessingService: DataProcessingService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private dataV2Service: GetDataV2Service,
+    private toast: ToastNotificationService
   ) {
     this.alarmsForm = this.createAlarmsForm();
     this.eventsForm = this.createEventsForm();
@@ -172,6 +197,11 @@ export class AlarmsComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbService.setPageName('');
+
+    this.eventsForm.valueChanges.pipe(debounceTime(700)).subscribe((data) => {
+      this.eventsPageNumber = 0;
+      this.getEventsDataList();
+    });
   }
 
   createAlarmsForm(): FormGroup {
@@ -185,10 +215,13 @@ export class AlarmsComponent implements OnInit {
 
   createEventsForm(): FormGroup {
     return this.formBuilder.group({
+      eventsSearchValue: null,
       [this.startTimeEventsProperty]: [moment().subtract(1, 'days'), Validators.required],
       [this.endTimeEventsProperty]: [moment(), Validators.required],
       startTime: ['00:00'],
-      endTime: ['00:00']
+      endTime: ['00:00'],
+      manufacturer: null,
+      protocol: null
     });
   }
 
@@ -249,19 +282,24 @@ export class AlarmsComponent implements OnInit {
     const endDate = new Date(this.eventsForm.get(this.endTimeEventsProperty).value);
     endDate.setSeconds(0, 0);
 
-    const request: EventDataRequestDto = {
-      startTime: startDate,
-      endTime: endDate,
+    const request: EventDataRequest = {
+      startTime: startDate.toISOString(),
+      endTime: endDate.toISOString(),
       pageNumber: this.eventsPageNumber,
-      pageSize: this.eventsPageSize
+      pageSize: this.eventsPageSize,
+      searchInput: this.eventsForm.controls['eventsSearchValue'].value,
+      manufacturer: this.getDropdownSelectedValue('manufacturer'),
+      protocol: this.getDropdownSelectedValue('protocol'),
+      sortBy: this.eventsSort[0].field,
+      sortDir: this.eventsSort[0].dir === 'asc' ? 'asc' : 'desc',
+      requestId: ''
     };
 
     this.eventsLoading = true;
 
-    this.eventsDataList$ = this.dataProcessingService.getEventsData(request);
-    this.eventsDataList$.subscribe((data) => {
-      this.eventsDataList = data;
+    this.dataV2Service.v2GetEventsDataPost({ body: request }).subscribe((data) => {
       this.eventsLoading = false;
+      this.eventsDataList = data;
       if (data) {
         this.eventsDataListCount = data.totalRowCount;
         if (this.eventsDataListCount === 0) {
@@ -270,7 +308,31 @@ export class AlarmsComponent implements OnInit {
       } else {
         this.eventsDataListCount = 0;
       }
+      this.manufacturers = [...new Set(this.eventsDataList.events.map((event) => event.manufacturer.toString().toUpperCase()).sort())];
+      this.protocols = [...new Set(this.eventsDataList.events.map((event) => event.protocol.toString().toUpperCase()).sort())];
+
+      this.filters = [
+        {
+          field: 'manufacturer',
+          values: this.manufacturers,
+          label: 'GRID.VENDOR'
+        },
+        {
+          field: 'protocol',
+          values: this.protocols,
+          label: 'GRID.PROTOCOL'
+        }
+      ];
     });
+  }
+
+  getDropdownSelectedValue(fieldName: string) {
+    const dropdownField = this.eventsForm.controls[fieldName];
+
+    if (dropdownField && dropdownField.value !== 'All') {
+      return this.eventsForm.controls[fieldName].value;
+    }
+    return null;
   }
 
   loadMoreAlarmsData(event: PageChangedEvent) {
@@ -289,6 +351,82 @@ export class AlarmsComponent implements OnInit {
       this.eventsPageSize = event.rowsPerPage;
     }
     this.getEventsDataList();
+  }
+
+  sortChange(sort: SortDescriptor[]) {
+    if (sort[0].dir || sort[0].field === 'timeStamp') {
+      this.eventsSort = sort;
+    } else {
+      // if no direction is given, fall back to default sort
+      this.eventsSort = [
+        {
+          field: 'timeStamp',
+          dir: 'desc'
+        }
+      ];
+    }
+    this.getEventsDataList();
+  }
+
+  exportData(event: any) {
+    if (event && event.text) {
+      let exportFileType: string;
+      switch (event.text) {
+        case 'CSV':
+          exportFileType = 'csv';
+          break;
+        case 'Excel':
+        default:
+          exportFileType = 'xlsx';
+          break;
+      }
+
+      const startDate = new Date(this.eventsForm.get(this.startTimeEventsProperty).value);
+      startDate.setSeconds(0, 0);
+      const endDate = new Date(this.eventsForm.get(this.endTimeEventsProperty).value);
+      endDate.setSeconds(0, 0);
+
+      const request: ExportEventDataRequest = {
+        startTime: startDate.toISOString(),
+        endTime: endDate.toISOString(),
+        searchInput: this.eventsForm.controls['eventsSearchValue'].value,
+        manufacturer: this.eventsForm.controls['manufacturer'].value,
+        protocol: this.eventsForm.controls['protocol'].value,
+        exportFileType: exportFileType,
+        pageSize: 0,
+        pageNumber: 0,
+        requestId: ''
+      };
+
+      this.dataV2Service.v2ExportEventsDataPost({ body: request }).subscribe(
+        (res) => {
+          const dateTimeNow = new Date().toISOString().slice(0, -5); // Formats date as 2022-04-01T12_55_52
+          const filename: string = `e-Point-events_export_${dateTimeNow}.${exportFileType}`;
+
+          const binaryData = [];
+          binaryData.push(res.body);
+
+          const downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: 'blob' }));
+          downloadLink.setAttribute('download', filename);
+
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        },
+        (err) => {
+          const reader = new FileReader();
+          const that = this;
+          reader.onloadend = function (e) {
+            let errorMessage = JSON.parse((<any>e.target).result)?.exportError[0];
+            if (!errorMessage) {
+              errorMessage = 'Error at exporting. Please try again';
+            }
+            that.toast.errorToast(errorMessage);
+          };
+          reader.readAsText(err.error);
+        }
+      );
+    }
   }
 
   addWidth() {
