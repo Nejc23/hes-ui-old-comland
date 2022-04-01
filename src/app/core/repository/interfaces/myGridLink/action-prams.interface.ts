@@ -17,6 +17,7 @@ export interface IActionRequestParams {
   types?: string[];
   states?: string[];
   enabled?: boolean;
+  selectAll?: boolean;
 }
 
 export interface IActionSearchParam {

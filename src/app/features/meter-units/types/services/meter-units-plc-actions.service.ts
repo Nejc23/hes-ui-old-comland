@@ -440,7 +440,6 @@ export class MeterUnitsPlcActionsService {
         const payload = data as DeleteMeterDataPayload;
         params.from = payload.startDate;
         params.to = payload.endDate;
-        debugger;
 
         this.service.deleteDeviceData(params).subscribe(
           (value) => {
@@ -734,7 +733,8 @@ export class MeterUnitsPlcActionsService {
         useWildcards: false
       },
       sort: [],
-      initiateReading: false // TODO get data from BE
+      initiateReading: false, // TODO get data from BE
+      selectAll: this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()
     };
     // details page
     if (guid && guid.length > 0) {
