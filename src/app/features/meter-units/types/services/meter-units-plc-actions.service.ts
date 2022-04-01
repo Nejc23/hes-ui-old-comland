@@ -1,43 +1,47 @@
-import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
-import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
-import { SecurityActivateHlsComponent } from '../../common/components/security/security-activate-hls.component';
-import { Router } from '@angular/router';
-import { PlcMeterSetDisplaySettingsComponent } from '../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { capitalize } from 'src/app/shared/forms/functions/string.functions';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
+import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
+import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
+import {
+  DeleteMeterDataPayload,
+  PlcDeleteMeterDataComponent
+} from '../../common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
+import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
-import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
-import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
-import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
 import { PlcMeterRelaysConnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-connect.component';
 import { PlcMeterRelaysDisconnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
-import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { toLower } from 'lodash';
-import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
-import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
-import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
-import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
+import { PlcMeterSetDisplaySettingsComponent } from '../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
+import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
-import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
-import { TranslateService } from '@ngx-translate/core';
-import { EventManagerService } from '../../../../core/services/event-manager.service';
-import { capitalize } from 'src/app/shared/forms/functions/string.functions';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { SecurityActivateHlsComponent } from '../../common/components/security/security-activate-hls.component';
+import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
+import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
+import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
 
 @Injectable({
   providedIn: 'root'
@@ -134,10 +138,10 @@ export class MeterUnitsPlcActionsService {
           const options: NgbModalOptions = {
             size: 'md'
           };
-          const modalRef = this.modalService.open(StatusJobComponent, options);
-          modalRef.componentInstance.requestId = data; // requestId
-          modalRef.componentInstance.jobName = actionName;
-          modalRef.componentInstance.deviceCount = params.deviceIds.length;
+          const modalRefStatusJob = this.modalService.open(StatusJobComponent, options);
+          modalRefStatusJob.componentInstance.requestId = data; // requestId
+          modalRefStatusJob.componentInstance.jobName = actionName;
+          modalRefStatusJob.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -159,10 +163,10 @@ export class MeterUnitsPlcActionsService {
           const options: NgbModalOptions = {
             size: 'md'
           };
-          const modalRef = this.modalService.open(StatusJobComponent, options);
-          modalRef.componentInstance.requestId = data; // requestId
-          modalRef.componentInstance.jobName = actionName;
-          modalRef.componentInstance.deviceCount = params.deviceIds.length;
+          const modalRefStatusJob = this.modalService.open(StatusJobComponent, options);
+          modalRefStatusJob.componentInstance.requestId = data; // requestId
+          modalRefStatusJob.componentInstance.jobName = actionName;
+          modalRefStatusJob.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -335,7 +339,6 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  // // delete button click ali se rabi ?????????
   onDelete(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
@@ -347,7 +350,7 @@ export class MeterUnitsPlcActionsService {
     const operationName = this.translate.instant('COMMON.DELETE-DEVICES');
 
     // todo REFACTOR {{ VALUE }}
-    component.modalTitle = `${operationName} (${selectedRowsCount}` + this.translate.instant('COMMON.SELECTED') + ')';
+    component.modalTitle = `${operationName} (${selectedRowsCount} ` + this.translate.instant('COMMON.SELECTED') + ')';
     component.modalBody =
       this.translate.instant('MODAL.ARE-YOU-SURE-TEXT') + `${toLower(operationName)}` + this.translate.instant('MODAL.FOR-DEVICES') + '?'; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
 
@@ -422,6 +425,36 @@ export class MeterUnitsPlcActionsService {
         // on dismiss (CLOSE)
       }
     );*/
+  }
+
+  onDeleteMeterData(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
+    const options: NgbModalOptions = { size: 'md' };
+    const modalRef = this.modalService.open(PlcDeleteMeterDataComponent, options);
+
+    params.includedIds = params.deviceIds;
+    modalRef.componentInstance.params = params;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        const payload = data as DeleteMeterDataPayload;
+        params.from = payload.startDate;
+        params.to = payload.endDate;
+        debugger;
+
+        this.service.deleteDeviceData(params).subscribe(
+          (value) => {
+            this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
+          },
+          (e) => {
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+          }
+        );
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   onSetDisplaySettings(paramsOld: RequestFilterParams, params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
@@ -587,10 +620,10 @@ export class MeterUnitsPlcActionsService {
               size: 'md'
             };
             if (value) {
-              const modalRef = this.modalService.open(StatusJobComponent, options);
-              modalRef.componentInstance.requestId = value.requestId;
-              modalRef.componentInstance.jobName = operationName;
-              modalRef.componentInstance.deviceCount = value.deviceIds.length;
+              const modalRefStatusJob = this.modalService.open(StatusJobComponent, options);
+              modalRefStatusJob.componentInstance.requestId = value.requestId;
+              modalRefStatusJob.componentInstance.jobName = operationName;
+              modalRefStatusJob.componentInstance.deviceCount = value.deviceIds.length;
             }
           },
           (e) => {

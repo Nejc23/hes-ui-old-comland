@@ -1,0 +1,8 @@
+.modal-header-title-inline {
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep .k-dateinput {
+  width: 181px;
+}

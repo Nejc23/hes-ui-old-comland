@@ -1,28 +1,28 @@
 import { Component, Input } from '@angular/core';
-import { PermissionEnumerator } from '../../../../../core/permissions/enumerators/permission-enumerator.model';
-import { MeterUnitsTypeEnum } from '../../enums/meter-units-type.enum';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { GridColumnShowHideService } from '../../../../../core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { AuthService } from '../../../../../core/auth/services/auth.service';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { PermissionEnumerator } from '../../../../../core/permissions/enumerators/permission-enumerator.model';
+import { GridRequestParams } from '../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
+import { CodelistMeterUnitsRepositoryService } from '../../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
+import { ConcentratorService } from '../../../../../core/repository/services/concentrator/concentrator.service';
+import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
+import { MyGridLinkService } from '../../../../../core/repository/services/myGridLink/myGridLink.service';
+import { SettingsStoreEmitterService } from '../../../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { SettingsStoreService } from '../../../../../core/repository/services/settings-store/settings-store.service';
+import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
+import { GridLayoutSessionStoreService } from '../../../../../core/utils/services/grid-layout-session-store.service';
+import { GridSettingsCookieStoreService } from '../../../../../core/utils/services/grid-settings-cookie-store.service';
+import { AgGridSharedFunctionsService } from '../../../../../shared/ag-grid/services/ag-grid-shared-functions.service';
+import { BreadcrumbService } from '../../../../../shared/breadcrumbs/services/breadcrumb.service';
+import { JobsSelectGridService } from '../../../../jobs/jobs-select/services/jobs-select-grid.service';
+import { MeterUnitsTypeEnum } from '../../enums/meter-units-type.enum';
+import { MeterUnitsPlcActionsService } from '../../services/meter-units-plc-actions.service';
 import { MeterUnitsTypeGridService } from '../../services/meter-units-type-grid.service';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
-import { GridSettingsCookieStoreService } from '../../../../../core/utils/services/grid-settings-cookie-store.service';
-import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
-import { GridLayoutSessionStoreService } from '../../../../../core/utils/services/grid-layout-session-store.service';
-import { CodelistMeterUnitsRepositoryService } from '../../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
-import { MyGridLinkService } from '../../../../../core/repository/services/myGridLink/myGridLink.service';
-import { AuthService } from '../../../../../core/auth/services/auth.service';
-import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
-import { AgGridSharedFunctionsService } from '../../../../../shared/ag-grid/services/ag-grid-shared-functions.service';
-import { GridColumnShowHideService } from '../../../../../core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { BreadcrumbService } from '../../../../../shared/breadcrumbs/services/breadcrumb.service';
-import { MeterUnitsPlcActionsService } from '../../services/meter-units-plc-actions.service';
-import { SettingsStoreService } from '../../../../../core/repository/services/settings-store/settings-store.service';
-import { SettingsStoreEmitterService } from '../../../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { JobsSelectGridService } from '../../../../jobs/jobs-select/services/jobs-select-grid.service';
-import { ModalService } from '../../../../../core/modals/services/modal.service';
-import { ConcentratorService } from '../../../../../core/repository/services/concentrator/concentrator.service';
-import { TranslateService } from '@ngx-translate/core';
-import { GridRequestParams } from '../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { ExportDataComponent } from '../../../common/components/export-data/export-data.component';
 import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 
@@ -63,6 +63,10 @@ export class ActionButtonsComponent {
   // permission rights
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
+  }
+
+  get permissionDeleteMeterData() {
+    return PermissionEnumerator.Delete_Meter_Data;
   }
 
   get permissionManageJobs() {
@@ -302,6 +306,17 @@ export class ActionButtonsComponent {
     );
 
     this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount);
+  }
+
+  onDeleteData(selectedGuid?: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+
+    this.plcActionsService.onDeleteMeterData(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount);
   }
 
   // popup

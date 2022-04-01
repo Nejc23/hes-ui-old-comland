@@ -19,6 +19,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   @Input() singleCalendar = false;
   @Input() initValues = false;
   @Input() minDate;
+  @Input() maxDate;
 
   initDateFrom;
   initDateTo;
@@ -74,7 +75,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     }
     if (this.form.controls?.startDate?.errors?.minError) {
       this.form.controls.startDate.setValue(this.minDate.toDate());
-      this.form.controls.endDate.setValue(this.minDate.toDate());
+      this.form.controls.endDate.setValue(this.maxDate.toDate());
       this.datePicker.updateView();
     }
   }

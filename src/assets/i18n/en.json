@@ -1,6 +1,6 @@
 {
   "ALARM": {
-  	"ALARMS": "Alarms",
+    "ALARMS": "Alarms",
     "ALARMS-OVERVIEW": "Alarms & Events overview",
     "EVENTS": "Events",
     "NO-ALARMS": "No Alarms have been added yet"
@@ -478,7 +478,9 @@
     "SYNC-WINDOW-MAX": "Upper limit (ms)",
     "IMPORT-DEVICES-FILER-LABEL": "Compare meter id with (works with filter from file only)",
     "EXPORT-TYPE": "Export type",
-    "LOCATION": "Location"
+    "LOCATION": "Location",
+    "DATE": "Date",
+    "TIME-RANGE": "Time range"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -889,7 +891,17 @@
     "CREATE-NEW-READING": "Create new reading",
     "CREATE-NEW-TIME-SYNC": "Create new time sync",
     "MAXIMUM-IMPORT-MESSAGE": "Maximum number of identifiers exceeded!",
-    "MAXIMUM-IMPORT-ERROR": "{{ value1 }} identifier detected,  {{ value2 }} allowed."
+    "MAXIMUM-IMPORT-ERROR": "{{ value1 }} identifier detected,  {{ value2 }} allowed.",
+    "DELETE": {
+      "DELETE": "Delete",
+      "DELETE-DATA": "Delete data",
+      "METER": "Meter",
+      "DATA": "Data",
+      "DELETE-DATA-BEFORE-DATE-OPTION": "Before date",
+      "DELETE-DATA-AFTER-DATE-OPTION": "After date",
+      "DELETE-DATA-ALL-DATA-OPTION": "All time",
+      "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
+    }
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {

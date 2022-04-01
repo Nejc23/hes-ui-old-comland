@@ -5,6 +5,7 @@ export enum PermissionEnumerator {
   Concentrator_FW_Upgrade = 'Concentrator_FW_Upgrade',
   View_Meters = 'View_Meters',
   Manage_Meters = 'Manage_Meters',
+  Delete_Meter_Data = 'Delete_Meter_Data',
   Meter_FW_Upgrade = 'Meter_FW_Upgrade',
   Disconnector_Connect = 'Disconnector_Connect',
   Disconnector_Disconnect = 'Disconnector_Disconnect',

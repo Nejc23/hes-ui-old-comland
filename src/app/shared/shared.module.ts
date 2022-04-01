@@ -36,6 +36,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
 import { TouConfigurationComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
+import { PlcDeleteMeterDataComponent } from '../features/meter-units/common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
 import { RegistersSelectComponent } from '../features/registers-select/component/registers-select.component';
 import { TouConfigSelectComponent } from '../features/tou-config-select/component/tou-config-select.component';
@@ -191,6 +192,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     MeterTimeSyncComponent,
     PlcReadRegistersComponent,
+    PlcDeleteMeterDataComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
     PageTitleComponent,
@@ -330,6 +332,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MeterTimeSyncComponent,
     AddJobComponent,
     PlcReadRegistersComponent,
+    PlcDeleteMeterDataComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
     AddJobComponent,
@@ -390,6 +393,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     MeterTimeSyncComponent,
     PlcReadRegistersComponent,
+    PlcDeleteMeterDataComponent,
     SecurityRekeyConcentratorComponent,
     DownloadDataConcentratorClientCertComponent,
     ImportDevicesComponent
