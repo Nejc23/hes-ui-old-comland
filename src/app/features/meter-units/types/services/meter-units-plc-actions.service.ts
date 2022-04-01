@@ -733,7 +733,8 @@ export class MeterUnitsPlcActionsService {
         useWildcards: false
       },
       sort: [],
-      initiateReading: false // TODO get data from BE
+      initiateReading: false, // TODO get data from BE
+      selectAll: this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()
     };
     // details page
     if (guid && guid.length > 0) {
