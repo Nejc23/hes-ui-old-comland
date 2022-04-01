@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Placement } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@progress/kendo-angular-intl';
+import * as moment from 'moment';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { environment } from 'src/environments/environment';
-import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { Placement } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-date-range-picker',
@@ -25,6 +25,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() withTime = true;
   @Input() popoverPlacement: Placement = 'bottom-left';
   @Input() minDate: Date;
+  @Input() maxDate: Date;
   @Input() setDefaultDate = true; // default date is yesterday
   @Input() withoutYear = false;
   @Input() labelText = 'FORM.SELECT-DATE';
@@ -32,6 +33,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() fullWidth = false;
 
   minDateMomentJs;
+  maxDateMomentJs;
 
   format = environment.dateTimeFormat;
 
@@ -84,6 +86,9 @@ export class DateRangePickerComponent implements OnInit {
     }
     if (this.minDate) {
       this.minDateMomentJs = moment(this.minDate);
+    }
+    if (this.maxDate) {
+      this.maxDateMomentJs = moment(this.maxDate);
     }
   }
 

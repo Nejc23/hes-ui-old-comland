@@ -1,0 +1,56 @@
+<app-modal-template (dismiss)="onDismiss()">
+  <div modal-header class="modal-header-title-inline">
+    <img [src]="'assets/images/icons/warning-icon.svg'" class="me-3" />
+    {{ 'PLC-METER.DELETE.DELETE-DATA' | translate }}
+  </div>
+
+  <div modal-body>
+    <div class="tw-w-56">
+      <app-select-input
+        [clearButton]="false"
+        [form]="form"
+        [property]="'timeRangeTypes'"
+        [label]="'TIME-RANGE'"
+        class="full-dropdown"
+        [selectOptions]="timeRangeTypes"
+        (selectedValueChanged)="timeRangeTypeChanged()"
+      >
+      </app-select-input>
+    </div>
+
+    <div class="tw-w-56">
+      <app-date-range-picker
+        *ngIf="selectedTimeRangeType != 3"
+        [form]="form"
+        [startProperty]="startDateProperty"
+        [endProperty]="endDateProperty"
+        [popoverPlacement]="'bottom-left'"
+        [maxDate]="today"
+        [setDefaultDate]="false"
+        [singleCalendar]="true"
+        [withButtons]="false"
+        [withRefreshButton]="false"
+        [withTime]="false"
+        [labelText]="'FORM.DATE'"
+        class="mb-3"
+      >
+      </app-date-range-picker>
+    </div>
+    <div class="tw-pt-3">
+      <div class="alert alert-danger d-flex" role="alert">
+        {{ 'PLC-METER.DELETE.DELETE-DATA-WARNING-MESSAGE' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div modal-footer>
+    <div class="tw-flex tw-w-full tw-justify-content-between">
+      <button (click)="onDismiss()" class="btn text-secondary mr-auto" type="button">
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
+      </button>
+      <button (click)="onConfirm()" [disabled]="!form.valid" class="btn btn-primary" type="submit">
+        <span>{{ 'BUTTON.DELETE' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</app-modal-template>
