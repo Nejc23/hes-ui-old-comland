@@ -443,14 +443,14 @@ export class MeterUnitsListComponent implements OnInit {
     this.pageSize = settings.pageSize.id;
     // this.meterUnitsLayout
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, this.meterUnitsTypeGridLayoutStore.meterUnitsLayout);
-
-    // set visible columns icons and rowActions are always visible
     if (this.meterUnitsTypeGridLayoutStore.visibleColumns.length > 0) {
+      this.metersColumns.map((column) => (column.hidden = true));
+      // set visible columns icons and rowActions are always visible
       this.metersColumns
         .filter((item) => item.field !== 'icons')
         .filter((item) => item.field !== '"rowActions"')
-        .map((column) => (column.hidden = true));
-
+        .map((column) => (column.hidden = false));
+      // apply visible columns from
       this.meterUnitsTypeGridLayoutStore.visibleColumns.forEach((columnName) => {
         const existingColumn: GridColumn = this.metersColumns.find((column) => column.field.toLowerCase() === columnName.toLowerCase());
         if (existingColumn) {

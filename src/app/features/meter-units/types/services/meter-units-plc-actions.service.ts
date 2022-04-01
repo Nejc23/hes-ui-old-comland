@@ -440,7 +440,6 @@ export class MeterUnitsPlcActionsService {
         const payload = data as DeleteMeterDataPayload;
         params.from = payload.startDate;
         params.to = payload.endDate;
-        debugger;
 
         this.service.deleteDeviceData(params).subscribe(
           (value) => {

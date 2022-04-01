@@ -305,7 +305,8 @@ export class DataTableComponent implements OnInit, OnChanges {
         this.gridColumns.push({
           field: 'rowActions',
           width: width,
-          translationKey: ''
+          translationKey: '',
+          hidden: false
         });
       }
     }
