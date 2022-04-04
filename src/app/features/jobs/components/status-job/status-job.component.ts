@@ -39,16 +39,6 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.requestId) {
       this.getProgress();
-
-      this.interval = setInterval(() => {
-        if (this.statusJobProgress.deviceCount <= this.deviceCount) {
-          if (this.statusJobProgress.progress < 100) {
-            this.getProgress();
-          } else {
-            this.clearInt();
-          }
-        }
-      }, this.intervalSeconds * 1000);
     }
   }
 
@@ -64,6 +54,16 @@ export class StatusJobComponent implements OnInit, OnDestroy {
         if (this.statusJobProgress.progress == 0) {
           this.statusJobProgress.progress += 10;
         }
+
+        this.interval = setTimeout(() => {
+          if (this.statusJobProgress.deviceCount <= this.deviceCount) {
+            if (this.statusJobProgress.progress < 100) {
+              this.getProgress();
+            } else {
+              this.clearInt();
+            }
+          }
+        }, this.intervalSeconds * 1000);
       },
       (error) => {
         console.log('error: ' + error);
@@ -91,7 +91,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   clearInt() {
     this.finished = true;
     this.cdTimer.stop();
-    clearInterval(this.interval);
+    clearTimeout(this.interval);
     this.interval = null;
   }
 }
