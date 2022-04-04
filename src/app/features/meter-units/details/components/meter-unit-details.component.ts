@@ -3,7 +3,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,22 +24,23 @@ import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type
 import { MeterPropertyService } from '../../../../api/concentrator-inventory/services/meter-property.service';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { process } from '@progress/kendo-data-query';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
   styleUrls: ['./meter-unit-details.component.scss']
 })
-export class MeterUnitDetailsComponent implements OnInit {
+export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   public saveError;
   public data: MeterUnitDetails;
   public detailsForm: FormGroup;
   public routerLinkUrl = '/meterUnits';
   communicationForm: FormGroup;
+  subscription: Subscription;
 
   plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
   isPlcDevice = false;
   openEdit = false;
-  saveData = false;
   basicDetails = false;
   DeviceStateEnum = DeviceState;
   extraDetailsVisible = false;
@@ -67,17 +68,15 @@ export class MeterUnitDetailsComponent implements OnInit {
     private meterPropertyService: MeterPropertyService,
     private eventsService: EventManagerService
   ) {
-    this.eventService.eventEmitterRefreshDevices.subscribe({
-      next: () => {
-        this.getData();
-      }
-    });
-    this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
-      this.getMetadata();
-    });
-
-    this.eventsService.getCustom('SavedDataEvent').subscribe(() => {
-      this.getData();
+    this.activatedRoute.params.subscribe((params) => {
+      this.deviceId = params.deviceId;
+      this.requestModel = {
+        deviceIds: [this.deviceId],
+        filter: null,
+        search: null,
+        excludeIds: null,
+        InitiateReading: false // TODO get data from BE
+      };
     });
   }
 
@@ -225,24 +224,20 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      this.deviceId = params.deviceId;
-      this.requestModel = {
-        deviceIds: [this.deviceId],
-        filter: null,
-        search: null,
-        excludeIds: null,
-        InitiateReading: false // TODO get data from BE
-      };
+    this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
+      this.getMetadata();
     });
 
+    this.subscription = this.eventsService.getCustom('RefreshMeterDetailsPage').subscribe((id) => {
+      this.getData(id);
+      this.closeSlideOut();
+    });
     // get MeterUnit
-    this.getData();
+    this.getData(this.deviceId);
   }
 
-  getData() {
-    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
-      this.saveData = false;
+  getData(deviceId: string) {
+    this.meterUnitsService.getMeterUnitFromConcentrator(deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
       this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
       if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
@@ -497,15 +492,20 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   closeSlideOut() {
-    //  this.saveData = false;
+    this.eventsService.emitCustom('CloseSlideOut', true);
     this.openEdit = false;
   }
 
   update() {
-    this.eventsService.emitCustom('SaveDataEvent', true);
+    console.log('SaveButtonClicked on modal');
+    this.eventsService.emitCustom('SaveButtonClicked', true);
   }
 
   isEditVisible() {
     return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

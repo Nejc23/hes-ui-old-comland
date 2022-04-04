@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
@@ -26,12 +26,13 @@ import { ToastNotificationService } from '../../../../../core/toast-notification
 import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
 import { MuForm } from '../../../types/interfaces/mu-form.interface';
 import { EventManagerService } from '../../../../../core/services/event-manager.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-meter-unit-form',
   templateUrl: './edit-meter-unit-form.component.html'
 })
-export class EditMeterUnitFormComponent implements OnInit, OnChanges {
+export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
   form: FormGroup;
@@ -45,6 +46,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   connectionTypes: Codelist<number>[] = [{ id: 1, value: this.translate.instant('FORM.IP') }];
   defaultConnectionType = this.connectionTypes[0];
   shortNameSelected = false;
+  subscription: Subscription;
 
   communicationTypes: RadioOption[] = [
     { value: '1' as string, label: this.translate.instant('FORM.WRAPPER') },
@@ -82,7 +84,19 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     private codelistServiceMu: CodelistMeterUnitsRepositoryService,
     private translate: TranslateService,
     private eventsService: EventManagerService
-  ) {}
+  ) {
+    this.subscription = this.eventsService.getCustom('SaveButtonClicked').subscribe(() => {
+      this.update();
+    });
+
+    this.eventsService.getCustom('CloseSlideOut').subscribe(() => {
+      // re init form data
+      this.form = this.setFormEdit();
+      this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
+      const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
+      this.form.get(this.manufacturerProperty).setValue(manufacturer);
+    });
+  }
 
   get nameProperty() {
     return nameOf<MuForm>((o) => o.name);
@@ -201,14 +215,12 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   }
 
   get isDlms() {
-    return this.data.driver?.toLowerCase() === 'dlms';
+    return this.data?.driver?.toLowerCase() === 'dlms';
   }
 
   ngOnInit() {
     this.form = this.setFormEdit();
-    this.eventsService.getCustom('SaveDataEvent').subscribe((res) => {
-      this.update();
-    });
+    console.log(this.form);
     this.codelistServiceMu.meterUnitVendorCodelist(null).subscribe((manufacturers) => {
       this.manufacturers = this.isDlms ? manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : manufacturers;
       const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
@@ -223,6 +235,11 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       // update template name
       this.form.get(this.templateStringProperty).setValue(this.data.templateName);
       this.checkTemplate();
+
+      this.form = this.setFormEdit();
+      this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
+      const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
+      this.form.get(this.manufacturerProperty).setValue(manufacturer);
     }
   }
 
@@ -466,14 +483,13 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       muFormData = this.fillUpdateData();
       request = this.muService.updateMuForm(muFormData);
     }
-
     const successMessage = this.translate.instant('PLC-METER.METER-UNIT-UPDATED');
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.toast.successToast(successMessage);
-          this.eventsService.emitCustom('SavedDataEvent', true);
+          this.eventsService.emitCustom('RefreshMeterDetailsPage', this.data.deviceId);
         },
         (errResult) => {
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
@@ -719,5 +735,11 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       delete this.form.get(this.portProperty).errors['incorrect'];
       this.form.get(this.portProperty).updateValueAndValidity();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.data = null;
+    this.form.reset();
+    this.subscription.unsubscribe();
   }
 }
