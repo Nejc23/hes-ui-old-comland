@@ -38,7 +38,8 @@
     "CONTINUE-WITH-EDITING": "Continue with editing",
     "REJECT": "Reject",
     "GRANT": "Grant",
-    "ADD-NEW": "Add new"
+    "ADD-NEW": "Add new",
+    "REMOVE": "Remove"
   },
   "COMMON": {
     "0-100-RANGE": "Value must be in the range between 0 and 100",
@@ -589,6 +590,7 @@
     "ACTION-SAVE": "Save",
     "ACTION-CANCEL": "Cancel",
     "ACTION-EXECUTE": "Execute job",
+    "ACTION-REMOVEFROMJOB": "Remove from job",
     "EXTERNAL-ID": "External Id",
     "EVENT-ID": "Event ID",
     "EVENT-ID-RAW": "Event ID (raw)",
@@ -646,13 +648,15 @@
       "MORE-SAVE-OPTIONS": "More Save options",
       "SELECT-JOB": "To continue, select a job type, please.",
       "STOP": "Do you want to stop running job now?",
-      "UPDATED": "updated"
+      "UPDATED": "updated",
+      "REMOVE": "Do you want to remove device from scheduled job \"{{ jobName }}\"?"
     },
     "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status?",
     "SCHEDULER-JOB-DISABLED": "Scheduler job disabled!",
     "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
     "SCHEDULER-JOB-STARTED": "Scheduler job started!",
     "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
+    "SCHEDULER-JOB-REMOVED": "Scheduler job removed!",
     "STATUS-JOB": {
       "ERROR": "Error getting status job",
       "PROGRESS": "Progress",

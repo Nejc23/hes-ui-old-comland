@@ -19,7 +19,8 @@ import {
   schedulerActiveJobs,
   schedulerJobs,
   schedulerJobsList,
-  schedulerJobsListByJobId
+  schedulerJobsListByJobId,
+  removeDeviceFromScheduler
 } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
@@ -264,5 +265,13 @@ export class JobsService {
 
   getNotificationJobRequest(id: string): HttpRequest<any> {
     return new HttpRequest('GET', `${notificationJobs}/${id}`);
+  }
+
+  removeDeviceFromSchedulerJob(scheduleJobId: string, deviceId: string): Observable<any> {
+    return this.repository.makeRequest(this.removeDeviceFromSchedulerJobRequest(scheduleJobId, deviceId));
+  }
+
+  removeDeviceFromSchedulerJobRequest(scheduleJobId: string, deviceId: string): HttpRequest<any> {
+    return new HttpRequest('DELETE', `${removeDeviceFromScheduler}/${scheduleJobId}/${deviceId}`, null);
   }
 }

@@ -1,0 +1,19 @@
+<app-card-item
+  (buttonClickEvent)="goToJobs()"
+  [buttonIconName]="'list-icon'"
+  [buttonLabel]="'BUTTON.GO-TO-JOBS'"
+  [title]="'JOB.ACTIVE-JOBS'"
+>
+  <app-data-table
+    (rowActionClickedEvent)="rowActionsClicked($event)"
+    [gridColumns]="activeJobsColumnsConfiguration"
+    [gridData]="activeJobs"
+    [loading]="jobsLoading"
+    [fetchData]="true"
+    [pageSize]="activeJobs.length"
+    [rowActions]="activeJobsRowActionsConfiguration"
+    [rowHeight]="null"
+    [scrollable]="'scrollable'"
+    [tableClass]="'max-height-385'"
+  ></app-data-table>
+</app-card-item>

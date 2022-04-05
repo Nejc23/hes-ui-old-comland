@@ -120,6 +120,7 @@ import { DownloadDataConcentratorClientCertComponent } from '../features/data-co
 import { MeterTimeSyncComponent } from '../features/jobs/components/scheduler-job/meter-time-sync.component';
 import { DataTableToolbarComponent } from './data-table-toolbar/data-table-toolbar/data-table-toolbar.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { ActiveJobCardItemComponent } from './widgets/active-job-card-item/active-job-card-item.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -216,7 +217,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSummaryComponent,
     TouConfigListComponent,
     AddTimeUnitComponent,
-    DataTableToolbarComponent
+    DataTableToolbarComponent,
+    ActiveJobCardItemComponent
   ],
   imports: [
     CommonModule,
@@ -358,7 +360,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSummaryComponent,
     TouConfigListComponent,
     AddTimeUnitComponent,
-    DataTableToolbarComponent
+    DataTableToolbarComponent,
+    ActiveJobCardItemComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

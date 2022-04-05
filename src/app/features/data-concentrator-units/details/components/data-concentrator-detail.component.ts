@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
@@ -21,17 +21,10 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
-import {
-  GridColumn,
-  GridColumnType,
-  GridFilter,
-  GridRowAction,
-  PageChangedEvent
-} from '../../../../shared/data-table/data-table.component';
+import { GridColumn, GridColumnType, GridFilter, PageChangedEvent } from '../../../../shared/data-table/data-table.component';
 import { MeterUnitsService } from '../../../../core/repository/services/meter-units/meter-units.service';
 import { IActionRequestParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
-import { DcOperationsService } from '../../services/dc-operations.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
@@ -39,13 +32,7 @@ import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { EventsByTimestamp } from '../../../meter-units/registers/interfaces/events-processing.interface';
 import { EventRegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { JobsService } from '../../../../core/repository/services/jobs/jobs.service';
-import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
-import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
 import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
-import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
-import { CodelistMeterUnitsRepositoryService } from '../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
-import { SchedulerJobsEventEmitterService } from '../../../jobs/services/scheduler-jobs-event-emitter.service';
 import { OperationType } from '../../components/operations/dc-operations.component';
 import { DeviceState } from '../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
@@ -78,8 +65,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   map: any;
   options: any;
   miniCardItemTypeEnum = MiniCardItemType;
-  activeJobs: any = [];
-  jobsLoading = false;
   meters: Array<MeterUnitsList> = [];
   metersTotal = 0;
   events: EventRegisterValue[] = [];
@@ -164,34 +149,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
     })
   });
-  activeJobsRowActionsConfiguration: Array<GridRowAction> = [
-    {
-      actionName: 'settings',
-      iconName: 'settings-icon'
-    },
-    {
-      actionName: 'runJob',
-      iconName: 'play-icon'
-    }
-  ];
-  activeJobsColumnsConfiguration: Array<GridColumn> = [
-    {
-      field: 'description',
-      translationKey: 'FORM.NAME',
-      width: 120
-    },
-    {
-      field: 'type',
-      translationKey: 'FORM.TYPE',
-      width: 145
-    },
-    {
-      field: 'nextRun',
-      translationKey: 'FORM.NEXT-START',
-      type: GridColumnType.DATE_TIME,
-      width: 120
-    }
-  ];
 
   componentType = OperationType;
 
@@ -206,7 +163,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
-    private dcOperationsService: DcOperationsService,
     private dcuEventsService: DataConcentratorUnitsGridEventEmitterService,
     private modalService: ModalService,
     private translate: TranslateService,
@@ -214,10 +170,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private meterUnitsTypeService: MeterUnitsService,
     private router: Router,
     private dataProcessingService: DataProcessingService,
-    private activeJobsService: JobsService,
-    private toast: ToastNotificationService,
-    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private schedulerJobsEventService: SchedulerJobsEventEmitterService,
     private eventsService: EventManagerService
   ) {
     this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
@@ -365,7 +317,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
         this.loadGridData(this.metersGridPageNumber);
         this.loadRegistersData();
-        this.getActiveJobs();
         // notifications
         this.alarms = [
           {
@@ -758,82 +709,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     this.chartVisible = !this.chartVisible;
   }
 
-  getActiveJobs() {
-    this.jobsLoading = true;
-    this.activeJobsService.getSchedulerActiveJobsList(this.concentratorId).subscribe((res) => {
-      this.jobsLoading = false;
-      this.activeJobs = res;
-    });
-  }
-
-  goToJobs() {
-    this.router.navigate(['/schedulerJobs']);
-  }
-
-  rowActionsClicked(event: any) {
-    if (event.actionName === 'runJob') {
-      this.runJob(event.id);
-    } else {
-      this.editJob(event.rowData);
-    }
-  }
-
-  // TODO CLEANUP move to service
-  runJob(id: any) {
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    let response: Observable<any> = new Observable();
-    const operation = this.translate.instant('COMMON.EXECUTE');
-    response = this.activeJobsService.executeSchedulerJob(id);
-
-    component.btnConfirmText = operation;
-    component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
-    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.EXECUTE');
-
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        response.subscribe(
-          (value) => {
-            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
-            this.getActiveJobs();
-          },
-          (e) => {
-            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
-          }
-        );
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  editJob(data: any) {
-    const params = {
-      data: data
-    };
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    if (params.data.jobType === JobTypeEnumeration.discovery) {
-      this.editDiscoveryJob(params, options);
-    } else if (params.data.jobType === JobTypeEnumeration.timeSync) {
-      // dc time sync
-      this.editDcTimeSyncJob(params, options);
-    } else if (params.data.jobType === JobTypeEnumeration.readEvents) {
-      // dc read events job
-      this.editDcReadEventsJob(params, options);
-    } else if (params.data.jobType === JobTypeEnumeration.topology) {
-      this.editTopologyJob(params, options);
-    } else if (params.data.jobType === JobTypeEnumeration.alarmNotification) {
-      this.editAlarmNotificationJob(params, options);
-    } else {
-      this.editReadingJob(params, options);
-    }
-  }
-
   hasUserAccess(params: any): boolean {
     if (!this.permissionService.hasAccess(PermissionEnumerator.Manage_Jobs)) {
       return false;
@@ -855,148 +730,5 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
   isEditVisible(): boolean {
     return this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators);
-  }
-
-  private editReadingJob(data: any, options: NgbModalOptions) {
-    const params = {
-      data: data
-    };
-
-    const selectedJobId = params.data.id;
-
-    const timeUnits$ = this.codelistService.timeUnitCodeslist();
-    const job$ = this.activeJobsService.getJob(selectedJobId);
-
-    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.reading);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.getActiveJobs();
-          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  private editDiscoveryJob(params: any, options: NgbModalOptions) {
-    const selectedJobId = params.data.id;
-
-    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.discovery);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-          this.getActiveJobs();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  private editTopologyJob(params: any, options: NgbModalOptions) {
-    const selectedJobId = params.data.id;
-
-    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.topology);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-          this.getActiveJobs();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  private editDcTimeSyncJob(params: any, options: NgbModalOptions) {
-    const selectedJobId = params.data.id;
-
-    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.timeSync);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-          this.getActiveJobs();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  private editDcReadEventsJob(params: any, options: NgbModalOptions) {
-    const selectedJobId = params.data.id;
-
-    const timeUnits$ = this.codelistService.timeUnitCodeslist();
-    const job$ = this.activeJobsService.getJob(selectedJobId);
-
-    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.readEvents);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-          this.getActiveJobs();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  private editAlarmNotificationJob(params: any, options: NgbModalOptions) {
-    const selectedJobId = params.data.id;
-
-    forkJoin({
-      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
-      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
-      severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
-      this.activeJobsService.getNotificationJob(selectedJobId).subscribe((job) => {
-        const modalRef = this.modalService.open(SchedulerJobComponent, options);
-        const component: SchedulerJobComponent = modalRef.componentInstance;
-        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
-
-        modalRef.result.then(
-          (data) => {
-            // on close (CONFIRM)
-            this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
-            this.getActiveJobs();
-          },
-          (reason) => {
-            // on dismiss (CLOSE)
-          }
-        );
-      });
-    });
   }
 }
