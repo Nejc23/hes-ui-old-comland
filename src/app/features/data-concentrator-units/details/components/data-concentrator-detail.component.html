@@ -119,17 +119,7 @@
             <!--              ></app-data-table>-->
             <!--            </app-card-item>-->
 
-            <app-card-item (buttonClickEvent)="goToJobs()"
-                           [buttonIconName]="'list-icon'"
-                           [buttonLabel]="'BUTTON.GO-TO-JOBS'"
-                           [title]="'JOB.ACTIVE-JOBS'">
-
-              <app-data-table (rowActionClickedEvent)="rowActionsClicked($event)"
-                              [gridColumns]="activeJobsColumnsConfiguration"
-                              [gridData]="activeJobs"
-                              [rowActions]="activeJobsRowActionsConfiguration"
-                              [tableClass]="'max-height-385'"></app-data-table>
-            </app-card-item>
+            <app-active-job-card-item [deviceId]="concentratorId"> </app-active-job-card-item>
 
             <!--            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"-->
             <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->

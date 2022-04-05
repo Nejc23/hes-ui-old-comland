@@ -165,7 +165,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() stickyHeader = false;
   @Input() tableHeight = 450;
   @Input() totalCount; // total items count (totalCount from backend)
-  @Input() rowHeight: 44; // required for virtual scroll
+  @Input() rowHeight: number = 44; // required for virtual scroll
   @Input() fetchData = false; // fetch data from API on next page
   @Input() excelFileName = '';
   @Input() noDataText = 'COMMON.NO-RECORDS-FOUND';
