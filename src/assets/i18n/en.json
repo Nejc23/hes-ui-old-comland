@@ -680,7 +680,8 @@
     "EN": "English",
     "FR": "Français",
     "IT": "Italiano",
-    "SL": "Slovenščina"
+    "SL": "Slovenščina",
+    "CZ": "Czech"
   },
   "LOGIN": {
     "BACK-TO-LOGIN": "Back to login",
