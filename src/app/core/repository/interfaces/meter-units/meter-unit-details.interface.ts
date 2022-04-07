@@ -21,6 +21,8 @@ export interface MeterUnitDetails {
   referencingType: ReferenceType;
   externalId?: string;
   firstInstallDate: Date;
+  stateChanged?: Date;
+  stateChangedBy?: string;
 }
 
 export enum DeviceState {

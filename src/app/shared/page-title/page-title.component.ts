@@ -13,6 +13,7 @@ export class PageTitleComponent {
   @Input() state: DeviceState;
   @Input() backButton = false;
   @Input() routerUrl = '';
+  @Input() stateToolTipMessage = '';
 
   @Output() backButtonClickedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 

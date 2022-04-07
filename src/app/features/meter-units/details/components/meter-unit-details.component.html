@@ -8,6 +8,7 @@
       [state]="data.deviceState"
       [subtitle]="'PROTOCOL.' + data.protocolType?.toUpperCase()"
       [title]="data.name ? data.name : data.serialNumber"
+      [stateToolTipMessage]="stateToolTipMessage"
       class="tw-h-36 tw-mt-10 tw--m-5"
     >
     </app-page-title>
