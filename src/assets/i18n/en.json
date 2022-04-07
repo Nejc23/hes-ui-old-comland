@@ -901,7 +901,8 @@
       "DELETE-DATA-AFTER-DATE-OPTION": "After date",
       "DELETE-DATA-ALL-DATA-OPTION": "All time",
       "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
-    }
+    },
+    "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {

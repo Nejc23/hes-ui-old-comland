@@ -1,18 +1,15 @@
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ActivatedRoute } from '@angular/router';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { DeviceState, MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
@@ -20,8 +17,7 @@ import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/mete
 import { DeviceMetaDataDto } from '../../../../api/concentrator-inventory/models/device-meta-data-dto';
 import { environment } from '../../../../../environments/environment';
 import * as moment from 'moment';
-import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
-import { MeterPropertyService } from '../../../../api/concentrator-inventory/services/meter-property.service';
+import { MeterPropertyService } from '../../../../api/concentrator-inventory/services';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { process } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
@@ -48,6 +44,8 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
 
   deviceId;
   deviceMetadata: Array<DeviceMetaDataDto> = [];
+  stateToolTipMessage = '';
+
   private requestModel;
 
   constructor(
@@ -55,16 +53,11 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     private meterUnitsService: MeterUnitsService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private formUtils: FormsUtilsService,
     private plcActionsService: MeterUnitsPlcActionsService,
-    private codeList: CodelistMeterUnitsRepositoryService,
-    private router: Router,
-    private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef,
     private permissionService: PermissionService,
     private eventService: MeterUnitsTypeGridEventEmitterService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private meterPropertyService: MeterPropertyService,
     private eventsService: EventManagerService
   ) {
@@ -246,6 +239,13 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
       this.createForm();
       this.getMetadata();
       this.closeSlideOut();
+      if (response.stateChanged && response.stateChangedBy) {
+        this.stateToolTipMessage = this.translate.instant('PLC-METER.STATE-CHANGED-TOOLTIP', {
+          changedOn: moment(response.stateChanged).format(environment.dateDisplayFormat),
+          changedAt: moment(response.stateChanged).format(environment.timeFormat),
+          changedBy: response.stateChangedBy
+        });
+      }
     });
   }
 
