@@ -352,6 +352,7 @@
       "INVALID-HOSTNAME": "Hostname is invalid",
       "ID-EXIST": "Id exist",
       "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated",
+      "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists",
       "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
     },
     "EXPRESSION": "Expression",
