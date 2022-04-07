@@ -3,7 +3,7 @@
 
   <div modal-body>
     <ng-container>
-      <kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="false" style="min-height: 650px">
+      <kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="true" style="min-height: 650px">
         <kendo-tabstrip-tab [selected]="true" title="{{ 'COMMON.BASIC' | translate }}">
           <ng-template kendoTabContent>
             <div>

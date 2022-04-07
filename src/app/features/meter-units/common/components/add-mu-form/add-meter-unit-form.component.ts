@@ -464,6 +464,11 @@ export class AddMeterUnitFormComponent implements OnInit {
               this.toast.errorToast(error);
             }
           }
+          // I hope that this is going to be temporary
+          else if (errResult?.error?.errorCode === 1000 && errResult?.error?.message.startsWith('Device with given vendor')) {
+            this.form.get(this.manufacturerProperty).setErrors({ duplicatedSerialAndManufacturer: true });
+            this.form.get(this.manufacturerProperty).markAsDirty();
+          }
           this.selectTabWithErrors();
         } // error
       );
