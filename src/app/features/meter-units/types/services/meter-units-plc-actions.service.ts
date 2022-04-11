@@ -362,6 +362,7 @@ export class MeterUnitsPlcActionsService {
             this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
+              this.eventService.emitCustom('RefreshMeterUnitsListEvent', { refresh: true, deselectRows: true });
             } else {
               this.eventService.emitCustom('RefreshMeterUnitsListEvent', { refresh: true, deselectRows: true });
             }
@@ -584,6 +585,11 @@ export class MeterUnitsPlcActionsService {
           this.translate.instant('MODAL.ARE-YOU-SURE-TEXT') +
           ' ' +
           this.translate.instant('MODAL.UNCONDITIONAL-TIME-SYNCHRONIZATION').toLowerCase();
+        break;
+      //  MeterUnitsTypeEnum.updateShortNames
+      case MeterUnitsTypeEnum.updateShortNames:
+        response = this.service.updateShortNames(params);
+        operationName = this.translate.instant('COMMON.UPDATE-SHORT-NAMES');
         break;
     }
     // component.btnConfirmText = operationName;

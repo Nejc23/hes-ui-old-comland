@@ -61,10 +61,35 @@
                 </div>
               </div>
             </div>
-            <div [permission]="permissionAssignTemplates" appHideIfPermissionUnauthorized>
-              <a (click)="onJobsTemplates()" class="dropdown-item custom-hover-display"
-                 href="javascript:void(0)"><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a>
+
+
+            <div [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div class="dropdown-submenu">
+                <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle
+                   href="javascript:void(0)"><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a>
+                <div class="dropdown-menu">
+                  <div (click)="onJobsTemplates()" [permission]="permissionAssignTemplates"
+                       appHideIfPermissionUnauthorized
+                       class="dropdown-item">
+                    <a href="javascript:void(0)"><span>{{ 'PLC-METER.ASSIGN-CONFIGURATION' | translate }}</span></a>
+                  </div>
+                  <div (click)="onUpdateShortNames()"
+                       [permission]="permissionUpdateShortNames"
+                       appHideIfPermissionUnauthorized
+                       class="dropdown-item">
+                    <a href="javascript:void(0)"><span>{{ 'PLC-METER.UPDATE-SHORT-NAMES' | translate }}</span></a>
+                  </div>
+                  <!-- TODO -->
+                </div>
+              </div>
             </div>
+
+            <!--            <div [permission]="permissionAssignTemplates" appHideIfPermissionUnauthorized>-->
+            <!--              <a (click)="onJobsTemplates()" class="dropdown-item custom-hover-display"-->
+            <!--                 href="javascript:void(0)"><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a>-->
+            <!--            </div>-->
+            <!--            -->
+
 
             <div [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
                  [permissionsBelow]="[permissionFwUpgrade]"

@@ -177,6 +177,10 @@ export class ActionButtonsComponent {
     return PermissionEnumerator.Data_Export;
   }
 
+  get permissionUpdateShortNames() {
+    return PermissionEnumerator.Update_Short_Names;
+  }
+
   // --> Operations action click (bulk or selected row)
   onDisconnectorStatus(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
@@ -426,6 +430,20 @@ export class ActionButtonsComponent {
     );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.readThresholdsMonitor,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount
+    );
+  }
+
+  onUpdateShortNames(selectedGuid?: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.updateShortNames,
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount
     );

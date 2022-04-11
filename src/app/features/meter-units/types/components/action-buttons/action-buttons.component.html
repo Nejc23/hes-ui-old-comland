@@ -29,12 +29,13 @@
         <div [permission]="permissionManageJobs" appHideIfPermissionUnauthorized class="dropdown-item">
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'COMMON.JOBS' | translate }}</span></a
+            ><span>{{ 'COMMON.JOBS' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onScheduleReadJobs()" [permission]="permissionManageJobs" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onScheduleReadJobs()" [permission]="permissionManageJobs" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.CREATE-NEW-READING' | translate }}</span></a
+                ><span>{{ 'PLC-METER.CREATE-NEW-READING' | translate }}</span></a
                 >
               </div>
               <div
@@ -54,7 +55,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.ASSIGN-EXISTING' | translate }}</span></a
+                ><span>{{ 'PLC-METER.ASSIGN-EXISTING' | translate }}</span></a
                 >
               </div>
             </div>
@@ -66,10 +67,44 @@
             ></div>
           </div>
         </div>
-        <div [permission]="permissionAssignTemplates" appHideIfPermissionUnauthorized>
-          <a (click)="onJobsTemplates()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+
+
+        <div [permission]="permissionAssignTemplates" appHideIfPermissionUnauthorized class="dropdown-item">
+          <div class="dropdown-submenu">
+            <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle
+               href="javascript:void(0)"
             ><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a
-          >
+            >
+            <div class="dropdown-menu">
+              <div
+                (click)="onJobsTemplates()"
+                [permission]="permissionAssignTemplates"
+                appHideIfPermissionUnauthorized
+                class="dropdown-item"
+              >
+                <a href="javascript:void(0)"
+                ><span>{{ 'PLC-METER.ASSIGN-CONFIGURATION' | translate }}</span></a
+                >
+              </div>
+
+              <div
+                (click)="onUpdateShortNames()"
+                [permission]="permissionUpdateShortNames"
+                appHideIfPermissionUnauthorized
+                class="dropdown-item"
+              >
+                <a href="javascript:void(0)"
+                ><span>{{ 'PLC-METER.UPDATE-SHORT-NAMES' | translate }}</span></a
+                >
+              </div>
+            </div>
+
+            <div
+              [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
+              [permissionsBelow]="[permissionFwUpgrade]"
+              appHideDividerIfPermissionsUnauthorized
+            ></div>
+          </div>
         </div>
 
         <div
@@ -82,17 +117,19 @@
         <div [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized class="dropdown-item">
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'PLC-METER.FW-UPGRADE-TITLE' | translate }}</span></a
+            ><span>{{ 'PLC-METER.FW-UPGRADE-TITLE' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onUpgrade()" [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onUpgrade()" [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.UPLOAD-IMAGE' | translate }}</span></a
+                ><span>{{ 'PLC-METER.UPLOAD-IMAGE' | translate }}</span></a
                 >
               </div>
-              <div (click)="onActivateUpgrade()" [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onActivateUpgrade()" [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.ACTIVATE-IMAGE' | translate }}</span></a
+                ><span>{{ 'PLC-METER.ACTIVATE-IMAGE' | translate }}</span></a
                 >
               </div>
             </div>
@@ -128,12 +165,13 @@
         >
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a
+            ><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onConnect()" [permission]="permissionDisconnectorConnect" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onConnect()" [permission]="permissionDisconnectorConnect" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.CONNECT' | translate }}</span></a
+                ><span>{{ 'COMMON.CONNECT' | translate }}</span></a
                 >
               </div>
               <div
@@ -143,7 +181,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a
+                ><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a
                 >
               </div>
               <div
@@ -153,7 +191,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.STATE' | translate }}</span></a
+                ><span>{{ 'COMMON.STATE' | translate }}</span></a
                 >
               </div>
               <div
@@ -163,7 +201,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.MODE' | translate }}</span></a
+                ><span>{{ 'COMMON.MODE' | translate }}</span></a
                 >
               </div>
             </div>
@@ -176,22 +214,25 @@
         >
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'COMMON.CII' | translate }}</span></a
+            ><span>{{ 'COMMON.CII' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onCiiActivate()" [permission]="permissionCiiActivate" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onCiiActivate()" [permission]="permissionCiiActivate" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.ACTIVATE' | translate }}</span></a
+                ><span>{{ 'COMMON.ACTIVATE' | translate }}</span></a
                 >
               </div>
-              <div (click)="onCiiDeactivate()" [permission]="permissionCiiDeactivate" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onCiiDeactivate()" [permission]="permissionCiiDeactivate" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.DEACTIVATE' | translate }}</span></a
+                ><span>{{ 'COMMON.DEACTIVATE' | translate }}</span></a
                 >
               </div>
-              <div (click)="onCiiState()" [permission]="permissionCiiState" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onCiiState()" [permission]="permissionCiiState" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.STATE' | translate }}</span></a
+                ><span>{{ 'COMMON.STATE' | translate }}</span></a
                 >
               </div>
             </div>
@@ -204,12 +245,13 @@
         >
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'COMMON.RELAYS' | translate }}</span></a
+            ><span>{{ 'COMMON.RELAYS' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onRelaysConnect()" [permission]="permissionRelaysConnect" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onRelaysConnect()" [permission]="permissionRelaysConnect" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.CONNECT' | translate }}</span></a
+                ><span>{{ 'COMMON.CONNECT' | translate }}</span></a
                 >
               </div>
               <div
@@ -219,17 +261,19 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a
+                ><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a
                 >
               </div>
-              <div (click)="onRelaysState()" [permission]="permissionRelaysState" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onRelaysState()" [permission]="permissionRelaysState" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.STATE' | translate }}</span></a
+                ><span>{{ 'COMMON.STATE' | translate }}</span></a
                 >
               </div>
-              <div (click)="onRelaysSetMode()" [permission]="permissionRelaysSetMode" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onRelaysSetMode()" [permission]="permissionRelaysSetMode" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'COMMON.MODE' | translate }}</span></a
+                ><span>{{ 'COMMON.MODE' | translate }}</span></a
                 >
               </div>
             </div>
@@ -255,7 +299,7 @@
         ></div>
         <div [permission]="permissionTouUpload" appHideIfPermissionUnauthorized>
           <a (click)="onTou()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.TOU-UPLOAD' | translate }}</span></a
+          ><span>{{ 'PLC-METER.TOU-UPLOAD' | translate }}</span></a
           >
         </div>
         <div
@@ -267,19 +311,20 @@
 
         <div [permission]="permissionSyncTime" appHideIfPermissionUnauthorized>
           <a (click)="onSyncTime()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'COMMON.SYNCHRONIZE-TIME' | translate }}</span></a
+          ><span>{{ 'COMMON.SYNCHRONIZE-TIME' | translate }}</span></a
           >
         </div>
 
         <div [permissions]="[permissionSetLimiter]" appHideIfAllPermissionsUnauthorized class="dropdown-item">
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'COMMON.LIMITER' | translate }}</span></a
+            ><span>{{ 'COMMON.LIMITER' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onSetLimiter()" [permission]="permissionSetLimiter" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onSetLimiter()" [permission]="permissionSetLimiter" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a
+                ><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a
                 >
               </div>
               <div
@@ -289,7 +334,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a
+                ><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a
                 >
               </div>
             </div>
@@ -300,12 +345,13 @@
           <!-- TODO permissions -->
           <div class="dropdown-submenu">
             <a class="dropdown-toggle disabled" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0)"
-              ><span>{{ 'COMMON.MONITOR' | translate }}</span></a
+            ><span>{{ 'COMMON.MONITOR' | translate }}</span></a
             >
             <div class="dropdown-menu">
-              <div (click)="onSetMonitor()" [permission]="permissionSetMonitor" appHideIfPermissionUnauthorized class="dropdown-item">
+              <div (click)="onSetMonitor()" [permission]="permissionSetMonitor" appHideIfPermissionUnauthorized
+                   class="dropdown-item">
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a
+                ><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a
                 >
               </div>
               <div
@@ -315,7 +361,7 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                  ><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a
+                ><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a
                 >
               </div>
             </div>
@@ -324,32 +370,33 @@
 
         <div [permission]="permissionClearFF" appHideIfPermissionUnauthorized>
           <a (click)="onClearFF()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.CLEAR-FF' | translate }}</span></a
+          ><span>{{ 'PLC-METER.CLEAR-FF' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionSetDisplay" appHideIfPermissionUnauthorized>
           <a (click)="onSetDisplaySettings()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.SET-DISPLAY-SETTINGS-TITLE' | translate }}</span></a
+          ><span>{{ 'PLC-METER.SET-DISPLAY-SETTINGS-TITLE' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionClearAlarms" appHideIfPermissionUnauthorized>
           <a (click)="onClearAlarms()" class="dropdown-item custom-hover-display gray-line" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a
+          ><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
           <a (click)="onEnableMeter()" class="dropdown-item custom-hover-display item-padding" href="javascript:void(0)"
-            ><span>{{ 'COMMON.ENABLE-METER' | translate }}</span></a
+          ><span>{{ 'COMMON.ENABLE-METER' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
-          <a (click)="onDisableMeter()" class="dropdown-item custom-hover-display item-padding" href="javascript:void(0)"
-            ><span>{{ 'COMMON.DISABLE-METER' | translate }}</span></a
+          <a (click)="onDisableMeter()" class="dropdown-item custom-hover-display item-padding"
+             href="javascript:void(0)"
+          ><span>{{ 'COMMON.DISABLE-METER' | translate }}</span></a
           >
         </div>
         <div>
           <a (click)="onReadMeter()" class="dropdown-item custom-hover-display item-padding" href="javascript:void(0)"
-            ><span>{{ 'COMMON.READ-METER' | translate }}</span></a
+          ><span>{{ 'COMMON.READ-METER' | translate }}</span></a
           >
         </div>
       </div>
@@ -367,7 +414,7 @@
       <div class="dropdown-menu" style="min-width: 13rem">
         <div [permission]="permissionSecurityActivateHls" appHideIfPermissionUnauthorized>
           <a (click)="onSecurityActivateHls()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.SECURITY.ACTIVATE-HLS-TITLE' | translate }}</span></a
+          ><span>{{ 'PLC-METER.SECURITY.ACTIVATE-HLS-TITLE' | translate }}</span></a
           >
         </div>
         <div
@@ -378,12 +425,12 @@
         ></div>
         <div [permission]="permissionSecurityRekey" appHideIfPermissionUnauthorized>
           <a (click)="onSecurityRekey()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.SECURITY.REKEY' | translate }}</span></a
+          ><span>{{ 'PLC-METER.SECURITY.REKEY' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionSecurityChangePassword" appHideIfPermissionUnauthorized>
           <a (click)="onSecurityChangePassword()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.SECURITY.CHANGE-PASSWORD-TITLE' | translate }}</span></a
+          ><span>{{ 'PLC-METER.SECURITY.CHANGE-PASSWORD-TITLE' | translate }}</span></a
           >
         </div>
       </div>
@@ -401,12 +448,12 @@
       <div class="dropdown-menu" style="min-width: 13rem">
         <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
           <a (click)="onDelete()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.DELETE.METER' | translate }}</span></a
+          ><span>{{ 'PLC-METER.DELETE.METER' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionDeleteMeterData" appHideIfPermissionUnauthorized>
           <a (click)="onDeleteData()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            ><span>{{ 'PLC-METER.DELETE.DATA' | translate }}</span></a
+          ><span>{{ 'PLC-METER.DELETE.DATA' | translate }}</span></a
           >
         </div>
       </div>
@@ -414,9 +461,9 @@
   </div>
 
   <button
+    (click)="onExportData()"
     [permission]="permissionDataExport"
     appHideIfPermissionUnauthorized
-    (click)="onExportData()"
     class="btn btn-primary tw-ml-2"
     href="javascript:void(0)"
   >

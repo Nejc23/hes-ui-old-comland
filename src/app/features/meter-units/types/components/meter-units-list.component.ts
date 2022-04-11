@@ -139,11 +139,11 @@ export class MeterUnitsListComponent implements OnInit {
     });
     this.breadcrumbService.setPageName('');
     this.eventManager.getCustom('RefreshMeterUnitsListEvent').subscribe((event) => {
+      if (event.deselectRows) {
+        this.clearSessionStorage();
+      }
       if (event.refresh) {
         this.getMetersListData(true);
-        if (event.deselectRows) {
-          this.selectedRowsIds = [];
-        }
       }
     });
 
