@@ -57,3 +57,5 @@ export const importDevices = '/devices/import';
 export const activeImports = '/tasks/device-import';
 
 export const updateMeterState = '/update-meters-state';
+
+export const readShortNames = '/on-demand/trigger-read-short-names';

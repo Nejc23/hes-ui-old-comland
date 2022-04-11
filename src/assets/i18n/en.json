@@ -229,7 +229,8 @@
     "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
     "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
     "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
-    "VALID-FROM": "Valid from"
+    "VALID-FROM": "Valid from",
+    "UPDATE-SHORT-NAMES": "Update short names"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -908,6 +909,8 @@
       "DELETE-DATA-ALL-DATA-OPTION": "All time",
       "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
     },
+    "UPDATE-SHORT-NAMES": "Update short names",
+    "ASSIGN-CONFIGURATION": " Assign existing configuration",
     "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}"
   },
   "TOOLS": {

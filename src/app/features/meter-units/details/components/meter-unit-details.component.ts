@@ -216,6 +216,10 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     return PermissionEnumerator.Sync_Time;
   }
 
+  get permissionUpdateShortNames() {
+    return PermissionEnumerator.Update_Short_Names;
+  }
+
   ngOnInit() {
     this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
       this.getMetadata();
@@ -503,6 +507,11 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
 
   isEditVisible() {
     return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
+  }
+
+  onUpdateShortNames() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.updateShortNames, params, 1);
   }
 
   ngOnDestroy(): void {

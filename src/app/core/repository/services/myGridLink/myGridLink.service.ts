@@ -21,6 +21,7 @@ import {
   onDemandSetBreakerMode,
   onDemandSetLimiter,
   onDemandSetMonitor,
+  readShortNames,
   securityConcentratorRekey,
   triggerConcUpgrade,
   triggerDataExport,
@@ -460,5 +461,13 @@ export class MyGridLinkService {
 
   triggerDataExportJobRequest(params: ExportDataPayload): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDataExport}`, params);
+  }
+
+  updateShortNames(param: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.updateShortNamesRequest(param));
+  }
+
+  updateShortNamesRequest(param: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${readShortNames}`, param);
   }
 }

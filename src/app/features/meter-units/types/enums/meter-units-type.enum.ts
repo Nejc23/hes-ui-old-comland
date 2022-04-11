@@ -19,5 +19,6 @@ export enum MeterUnitsTypeEnum {
   syncTime = 'syncTime',
   readMeter = 'readMeter',
   enableMeter = 'enableMeter',
-  disableMeter = 'disableMeter'
+  disableMeter = 'disableMeter',
+  updateShortNames = 'updateShortNames'
 }
