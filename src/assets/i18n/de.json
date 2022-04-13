@@ -1,6 +1,9 @@
 {
     "ALARM": {
-        "NO-ALARMS": "Es wurden noch keine Alarme hinzugefügt"
+        "NO-ALARMS": "Es wurden noch keine Alarme hinzugefügt",
+        "ALARMS": "Alarme",
+        "ALARMS-OVERVIEW": "Alarme & Ereignisse Übersicht",
+        "EVENTS": "Ereignisse"
     },
     "BREADCRUMB": {
         "CONCENTRATOR": "Datenkonzentrator",
@@ -35,7 +38,8 @@
         "CONTINUE-WITH-EDITING": "Weiter mit der Bearbeitung",
         "REJECT": "Ablehnen",
         "GRANT": "gewähren",
-        "ADD-NEW": "Hinzufügen"
+        "ADD-NEW": "Hinzufügen",
+        "REMOVE": "Remove"
     },
     "COMMON": {
         "0-100-RANGE": "Der Wert muss im Bereich von 0-100 liegen",
@@ -224,7 +228,9 @@
         "EXTRA-DETAILS-UPDATED": "Eigenschaften erfolgreich aktualisiert",
         "EXTRA-DETAILS-ADDED-FAILED": "Fehler beim speichern der Eigenschaften",
         "EXTRA-DETAILS-UPDATE-FAILED": "Fehler beim aktualisieren der Eigenschaften",
-        "VALID-FROM": "Gültig von"
+        "VALID-FROM": "Gültig von",
+        "IMPORT-SUBTITLE-CSV-XLSX": "Die ausgewählte Datei muss im .csv oder .xlsx Format sein.",
+        "UPDATE-SHORT-NAMES": "Update short names"
     },
     "DAY": {
         "CURRENT-MONTH": "Aktueller Monat",
@@ -347,7 +353,8 @@
             "INVALID-HOSTNAME": "Hostname ist ungültig",
             "ID-EXIST": "Die ID existiert",
             "DUPLICATED-HOSTNAME": "Die Kombination aus Hostname und Port ist doppelt vorhanden",
-            "INVALID-FIELDS": "Die Eingabe erfüllt nicht die Anforderungen (Anzahl Zeichen)"
+            "INVALID-FIELDS": "Die Eingabe erfüllt nicht die Anforderungen (Anzahl Zeichen)",
+            "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists"
         },
         "EXPRESSION": "Cron-Syntax",
         "EXTERNAL-ID": "Externe ID",
@@ -469,7 +476,14 @@
         "VALUE": "Wert",
         "DEVICEID": "GUID",
         "SYNC-WINDOW-MIN": "Untere Grenze (ms)",
-        "SYNC-WINDOW-MAX": "Obere Grenze (ms)"
+        "SYNC-WINDOW-MAX": "Obere Grenze (ms)",
+        "IMPORT-DEVICES-FILER-LABEL": "Seriennummer vergleichen mit (funktioniert nur mit Filter aus Datei)",
+        "TIMERANGE": "Zeitraum",
+        "TIMESTAMP": "Zeitstempel",
+        "EXPORT-TYPE": "Export type",
+        "LOCATION": "Location",
+        "DATE": "Date",
+        "TIME-RANGE": "Time range"
     },
     "GRID": {
         "ACTIVE": "Aktiv",
@@ -576,7 +590,13 @@
         "ACTION-RUNJOB": "Job ausführen",
         "ACTION-SAVE": "Speichern",
         "ACTION-CANCEL": "Abbrechen",
-        "ACTION-EXECUTE": "Job ausführen"
+        "ACTION-EXECUTE": "Job ausführen",
+        "EXTERNAL-ID": "Externe ID",
+        "EVENT-ID": "Ereignis ID",
+        "EVENT-ID-RAW": "Ereignis ID (Roh)",
+        "METER-ID": "Seriennummer",
+        "EXPORT-DATA-TO": "Export data to",
+        "ACTION-REMOVEFROMJOB": "Remove from job"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -605,8 +625,8 @@
         "DC": "DC",
         "DC-READ-EVENTS-JOB": "DC Ereignisse - Auslese Job",
         "DC-TIME-SYNC-JOB": "DC Zeit-Synchronisations-Job",
-        "DISCOVERY": "Zähler Entdeckung",
-        "DISCOVERY-JOB": "Zähler Entdeckung Job",
+        "DISCOVERY": "Zählererkennung",
+        "DISCOVERY-JOB": "Zählererkennung Job",
         "EXISTING-JOBS-ASSIGNED": "Bestehender Job wurde erfolgreich zugewiesen",
         "JOB-CANCELED": "Job gelöscht!",
         "JOB-STOPPED": "Job gestoppt!",
@@ -630,7 +650,8 @@
             "MORE-SAVE-OPTIONS": "Mehr Speicher-Optionen",
             "SELECT-JOB": "Bitte einen Job-Typ wählen",
             "STOP": "Möchten Sie den laufenden Job jetzt beenden?",
-            "UPDATED": "aktualisiert"
+            "UPDATED": "aktualisiert",
+            "REMOVE": "Do you want to remove device from scheduled job \"{{ jobName }}\"?"
         },
         "SCHEDULER-JOB-CHANGE-STATUS": "Möchten Sie den Jobs-Status ändern?",
         "SCHEDULER-JOB-DISABLED": "Job wurde deaktiviert",
@@ -656,7 +677,8 @@
             "CONDITIONAL-SYNC-INFO": "Die Zeit wird synchronisiert, wenn die Uhr auf dem Zähler außerhalb der oberen und unteren Grenzen liegt",
             "CONDITIONAL-SYNC-ALERT": "Die Uhr wird bei jeder Auftragsausführung bedingungslos synchronisiert!"
         },
-        "JOBS-OVERVIEW": "Jobs-Übersicht"
+        "JOBS-OVERVIEW": "Jobs-Übersicht",
+        "SCHEDULER-JOB-REMOVED": "Scheduler job removed!"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -664,7 +686,8 @@
         "EN": "Englisch",
         "FR": "Französisch",
         "IT": "Italienisch",
-        "SL": "Slovenščina"
+        "SL": "Slovenščina",
+        "CZ": "Czech"
     },
     "LOGIN": {
         "BACK-TO-LOGIN": "Zurück zum Login",
@@ -715,7 +738,7 @@
         "UNSAVED-CHANGES-TEXT": "Sind Sie sicher, dass Sie fortfahren möchten? Alle nicht gespeicherten Änderungen bei diesem Schritt gehen verloren."
     },
     "OPERATION": {
-        "DEVICE-DISCOVERY": "Zähler Entdeckung",
+        "DEVICE-DISCOVERY": "Zählererkennung",
         "FW-UPGRADE": "FW Aktualisierung",
         "OPERATIONS": "Befehle",
         "SYNC-TIME": "Zeit-Sync",
@@ -873,7 +896,22 @@
         "NORMALIZED-DATA": "Berechnete Daten",
         "RAW-DATA": "Rohdaten",
         "CREATE-NEW-READING": "Neue Ablesung erstellen",
-        "CREATE-NEW-TIME-SYNC": "Neue Zeitsynchronisation erstellen "
+        "CREATE-NEW-TIME-SYNC": "Neue Zeitsynchronisation erstellen ",
+        "MAXIMUM-IMPORT-MESSAGE": "Maximale Anzahl von Identifikatoren überschritten!",
+        "MAXIMUM-IMPORT-ERROR": "{{ value1 }} Identifikator erkannt, {{ value2 }} erlaubt.",
+        "DELETE": {
+            "DELETE": "Delete",
+            "DELETE-DATA": "Delete data",
+            "METER": "Meter",
+            "DATA": "Data",
+            "DELETE-DATA-BEFORE-DATE-OPTION": "Before date",
+            "DELETE-DATA-AFTER-DATE-OPTION": "After date",
+            "DELETE-DATA-ALL-DATA-OPTION": "All time",
+            "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
+        },
+        "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
+        "UPDATE-SHORT-NAMES": "Update short names",
+        "ASSIGN-CONFIGURATION": " Assign existing configuration"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1260,5 +1298,13 @@
     "EXTRA-DETAILS-MODAL": {
         "TITLE": "Löschen der Eigenschaften",
         "TEXT": "Möchten sie die Eigenschaften wirklich löschen"
+    },
+    "EXPORT-DATA": {
+        "TITLE": "Export data",
+        "RANGE": "Range",
+        "LOCATION": "Location",
+        "UPLOAD-TO": "Upload to SFTP",
+        "UPLOAD-TEXT": "If enabled files will be uploaded to the SFTP as specified in the configuration",
+        "INVALID-RANGE": "Invalid date range"
     }
 }

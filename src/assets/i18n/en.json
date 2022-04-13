@@ -1,9 +1,9 @@
 {
   "ALARM": {
+    "NO-ALARMS": "No Alarms have been added yet",
     "ALARMS": "Alarms",
     "ALARMS-OVERVIEW": "Alarms & Events overview",
-    "EVENTS": "Events",
-    "NO-ALARMS": "No Alarms have been added yet"
+    "EVENTS": "Events"
   },
   "BREADCRUMB": {
     "CONCENTRATOR": "Concentrator",
@@ -105,7 +105,6 @@
     "HOURLY": "Hourly",
     "IMAGE-READY-FOR-ACTIVATION": "Image ready for activation",
     "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
-    "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
     "IMPORT-SUCCESSFUL": "Import successful",
     "IN-RANGE": "In Range",
     "INACTIVE": "Inactive",
@@ -230,6 +229,7 @@
     "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
     "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
     "VALID-FROM": "Valid from",
+    "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
     "UPDATE-SHORT-NAMES": "Update short names"
   },
   "DAY": {
@@ -300,7 +300,7 @@
     "PAGE-NOT-FOUND": "404 - page not exists"
   },
   "FILTER": {
-    "CLEAR-FILTERS": "Clear filters",
+    "CLEAR-FILTERS": "Clear Filters",
     "FILTERED-BY": "Filtered by: ",
     "TEMPLATE-LIST": "Configurations list",
     "TITLE": "Filters"
@@ -353,8 +353,8 @@
       "INVALID-HOSTNAME": "Hostname is invalid",
       "ID-EXIST": "Id exist",
       "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated",
-      "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists",
-      "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
+      "INVALID-FIELDS": "Input does not meet minimum required amount of characters",
+      "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists"
     },
     "EXPRESSION": "Expression",
     "EXTERNAL-ID": "External Id",
@@ -421,8 +421,6 @@
     "THRESHOLD": "Threshold",
     "THRESHOLD-EMERGENCY": "Threshold emergency",
     "THRESHOLD-NORMAL": "Threshold normal",
-    "TIMERANGE": "Time range",
-    "TIMESTAMP": "Timestamp",
     "TYPE": "Type",
     "UPLOAD": "Upload",
     "UPLOAD-FILED": "Upload failed",
@@ -480,6 +478,8 @@
     "SYNC-WINDOW-MIN": "Lower limit (ms)",
     "SYNC-WINDOW-MAX": "Upper limit (ms)",
     "IMPORT-DEVICES-FILER-LABEL": "Compare meter id with (works with filter from file only)",
+    "TIMERANGE": "Time range",
+    "TIMESTAMP": "Timestamp",
     "EXPORT-TYPE": "Export type",
     "LOCATION": "Location",
     "DATE": "Date",
@@ -501,7 +501,6 @@
     "DEVICES": "Devices",
     "DISCONNECTOR-STATE": "Disconnector State",
     "EXCEL-EXPORT": "Export in excel",
-    "EXPORT-DATA-TO": "Export data to",
     "FILTERS": "filters",
     "FIRMWARE": "Firmware",
     "FIRST": "first",
@@ -592,11 +591,12 @@
     "ACTION-SAVE": "Save",
     "ACTION-CANCEL": "Cancel",
     "ACTION-EXECUTE": "Execute job",
-    "ACTION-REMOVEFROMJOB": "Remove from job",
     "EXTERNAL-ID": "External Id",
     "EVENT-ID": "Event ID",
     "EVENT-ID-RAW": "Event ID (raw)",
-    "METER-ID": "Meter ID"
+    "METER-ID": "Meter ID",
+    "EXPORT-DATA-TO": "Export data to",
+    "ACTION-REMOVEFROMJOB": "Remove from job"
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -658,7 +658,6 @@
     "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
     "SCHEDULER-JOB-STARTED": "Scheduler job started!",
     "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
-    "SCHEDULER-JOB-REMOVED": "Scheduler job removed!",
     "STATUS-JOB": {
       "ERROR": "Error getting status job",
       "PROGRESS": "Progress",
@@ -678,7 +677,8 @@
       "CONDITIONAL-SYNC-INFO": "Time will be synchronized if the clock on the meter is outside of upper and lower borders",
       "CONDITIONAL-SYNC-ALERT": "Clock will be synchronized unconditionally every time job will be executed!"
     },
-    "JOBS-OVERVIEW": "Jobs overview"
+    "JOBS-OVERVIEW": "Jobs overview",
+    "SCHEDULER-JOB-REMOVED": "Scheduler job removed!"
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",
@@ -909,9 +909,9 @@
       "DELETE-DATA-ALL-DATA-OPTION": "All time",
       "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
     },
+    "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
     "UPDATE-SHORT-NAMES": "Update short names",
-    "ASSIGN-CONFIGURATION": " Assign existing configuration",
-    "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}"
+    "ASSIGN-CONFIGURATION": " Assign existing configuration"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {

@@ -1,6 +1,9 @@
 {
     "ALARM": {
-        "NO-ALARMS": "Non sono ancora stati aggiunti allarmi"
+        "NO-ALARMS": "Non sono ancora stati aggiunti allarmi",
+        "ALARMS": "Alarms",
+        "ALARMS-OVERVIEW": "Alarms & Events overview",
+        "EVENTS": "Events"
     },
     "BREADCRUMB": {
         "CONCENTRATOR": "Concentratore",
@@ -35,7 +38,8 @@
         "CONTINUE-WITH-EDITING": "Continuare con le modifiche",
         "REJECT": "Respingere",
         "GRANT": "Concedere",
-        "ADD-NEW": "Mettere nuovo"
+        "ADD-NEW": "Mettere nuovo",
+        "REMOVE": "Remove"
     },
     "COMMON": {
         "0-100-RANGE": "Valore deve essere tra 0-100",
@@ -224,7 +228,9 @@
         "EXTRA-DETAILS-UPDATED": "I dettagli extra sono stati aggiornati con successo",
         "EXTRA-DETAILS-ADDED-FAILED": "C'è stato un errore nel salvare i dettagli extra",
         "EXTRA-DETAILS-UPDATE-FAILED": "C'è stato un errore nell'aggiornare i dettagli extra",
-        "VALID-FROM": "Valido dal"
+        "VALID-FROM": "Valido dal",
+        "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
+        "UPDATE-SHORT-NAMES": "Update short names"
     },
     "DAY": {
         "CURRENT-MONTH": "Corrente mese",
@@ -347,7 +353,8 @@
             "INVALID-HOSTNAME": "Il nome Host non è valido",
             "ID-EXIST": "L'ID esiste",
             "DUPLICATED-HOSTNAME": "La combinazione del hostname e del port è duplicata",
-            "INVALID-FIELDS": "L'input non corrisponde al numero minimo di caratteri richiesti"
+            "INVALID-FIELDS": "L'input non corrisponde al numero minimo di caratteri richiesti",
+            "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists"
         },
         "EXPRESSION": "Espressione",
         "EXTERNAL-ID": "Id esterno",
@@ -469,7 +476,14 @@
         "VALUE": "Valore",
         "DEVICEID": "Guida",
         "SYNC-WINDOW-MIN": "Limite inferiore (ms)",
-        "SYNC-WINDOW-MAX": "Limite superiore (ms)"
+        "SYNC-WINDOW-MAX": "Limite superiore (ms)",
+        "IMPORT-DEVICES-FILER-LABEL": "Compare meter id with (works with filter from file only)",
+        "TIMERANGE": "Time range",
+        "TIMESTAMP": "Timestamp",
+        "EXPORT-TYPE": "Export type",
+        "LOCATION": "Location",
+        "DATE": "Date",
+        "TIME-RANGE": "Time range"
     },
     "GRID": {
         "ACTIVE": "Attivo",
@@ -576,7 +590,13 @@
         "ACTION-RUNJOB": "Eseguire Job",
         "ACTION-SAVE": "Salva",
         "ACTION-CANCEL": "Cancellare",
-        "ACTION-EXECUTE": "Eseguire il Job"
+        "ACTION-EXECUTE": "Eseguire il Job",
+        "EXTERNAL-ID": "External Id",
+        "EVENT-ID": "Event ID",
+        "EVENT-ID-RAW": "Event ID (raw)",
+        "METER-ID": "Meter ID",
+        "EXPORT-DATA-TO": "Export data to",
+        "ACTION-REMOVEFROMJOB": "Remove from job"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -630,7 +650,8 @@
             "MORE-SAVE-OPTIONS": "Ulteriori opzioni di messa in memoria",
             "SELECT-JOB": "Per continuare, si prega di selezionare un tipo di Job",
             "STOP": "Volete fermare il corrente job adesso?",
-            "UPDATED": "attualizzato"
+            "UPDATED": "attualizzato",
+            "REMOVE": "Do you want to remove device from scheduled job \"{{ jobName }}\"?"
         },
         "SCHEDULER-JOB-CHANGE-STATUS": "Volete cambiare lo stato dello Scheduler Job ?",
         "SCHEDULER-JOB-DISABLED": "Scheduler Job non attivato!",
@@ -656,7 +677,8 @@
             "CONDITIONAL-SYNC-INFO": "Il tempo sarà sincronizzato se l'orologio del contatore è al di fuori dei limiti superiore e inferiore\n",
             "CONDITIONAL-SYNC-ALERT": "L'orologio sarà sincronizzato incondizionatamente ogni volta che il lavoro sarà eseguito!"
         },
-        "JOBS-OVERVIEW": "Panoramica dei Jobs"
+        "JOBS-OVERVIEW": "Panoramica dei Jobs",
+        "SCHEDULER-JOB-REMOVED": "Scheduler job removed!"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -664,7 +686,8 @@
         "EN": "inglese",
         "FR": "francese",
         "IT": "Italiano",
-        "SL": "Slovenščina"
+        "SL": "Slovenščina",
+        "CZ": "Czech"
     },
     "LOGIN": {
         "BACK-TO-LOGIN": "Tornare al login",
@@ -873,7 +896,22 @@
         "NORMALIZED-DATA": "Dati normalizzati",
         "RAW-DATA": "Dati grezzi",
         "CREATE-NEW-READING": "Creare una nuova lettura",
-        "CREATE-NEW-TIME-SYNC": "Creare nuova sincronizzazione del tempo"
+        "CREATE-NEW-TIME-SYNC": "Creare nuova sincronizzazione del tempo",
+        "MAXIMUM-IMPORT-MESSAGE": "Maximum number of identifiers exceeded!",
+        "MAXIMUM-IMPORT-ERROR": "{{ value1 }} identifier detected,  {{ value2 }} allowed.",
+        "DELETE": {
+            "DELETE": "Delete",
+            "DELETE-DATA": "Delete data",
+            "METER": "Meter",
+            "DATA": "Data",
+            "DELETE-DATA-BEFORE-DATE-OPTION": "Before date",
+            "DELETE-DATA-AFTER-DATE-OPTION": "After date",
+            "DELETE-DATA-ALL-DATA-OPTION": "All time",
+            "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
+        },
+        "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
+        "UPDATE-SHORT-NAMES": "Update short names",
+        "ASSIGN-CONFIGURATION": " Assign existing configuration"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1260,5 +1298,13 @@
     "EXTRA-DETAILS-MODAL": {
         "TITLE": "Annullare la proprietà extra",
         "TEXT": "Sieti sicuri di voler annullare la proprietà extra dal dispositivo ?"
+    },
+    "EXPORT-DATA": {
+        "TITLE": "Export data",
+        "RANGE": "Range",
+        "LOCATION": "Location",
+        "UPLOAD-TO": "Upload to SFTP",
+        "UPLOAD-TEXT": "If enabled files will be uploaded to the SFTP as specified in the configuration",
+        "INVALID-RANGE": "Invalid date range"
     }
 }

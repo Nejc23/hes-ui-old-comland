@@ -38,7 +38,8 @@
         "CONTINUE-WITH-EDITING": "Pokračujte v úpravách",
         "REJECT": "Odmítnout",
         "GRANT": "Grant",
-        "ADD-NEW": "Přidat nový"
+        "ADD-NEW": "Přidat nový",
+        "REMOVE": "Remove"
     },
     "COMMON": {
         "0-100-RANGE": "Hodnota musí být v rozsahu od 0 do 100",
@@ -228,7 +229,8 @@
         "EXTRA-DETAILS-ADDED-FAILED": "Při ukládání dalších podrobností došlo k chybě",
         "EXTRA-DETAILS-UPDATE-FAILED": "Při aktualizaci dalších podrobností došlo k chybě",
         "VALID-FROM": "Platnost od",
-        "IMPORT-SUBTITLE-CSV-XLSX": "Vybraný soubor musí být ve formátu souboru .csv nebo .xlsx."
+        "IMPORT-SUBTITLE-CSV-XLSX": "Vybraný soubor musí být ve formátu souboru .csv nebo .xlsx.",
+        "UPDATE-SHORT-NAMES": "Update short names"
     },
     "DAY": {
         "CURRENT-MONTH": "Aktuální měsíc",
@@ -351,7 +353,8 @@
             "INVALID-HOSTNAME": "Název hostitele je neplatný",
             "ID-EXIST": "Id existuje",
             "DUPLICATED-HOSTNAME": "Kombinace názvu hostitele a portu je duplikována",
-            "INVALID-FIELDS": "Vstup nesplňuje minimální požadovaný počet znaků"
+            "INVALID-FIELDS": "Vstup nesplňuje minimální požadovaný počet znaků",
+            "DUPLICATED-SERIAL-MANUFACTURER": "Device with given manufacturer and serial number already exists"
         },
         "EXPRESSION": "Výraz",
         "EXTERNAL-ID": "Externí id",
@@ -592,7 +595,8 @@
         "EVENT-ID": "ID události",
         "EVENT-ID-RAW": "ID události (nezpracované)",
         "METER-ID": "ID měřiče",
-        "EXPORT-DATA-TO": "Export data to"
+        "EXPORT-DATA-TO": "Export data to",
+        "ACTION-REMOVEFROMJOB": "Remove from job"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -646,7 +650,8 @@
             "MORE-SAVE-OPTIONS": "Více možností uložení",
             "SELECT-JOB": "Chcete-li pokračovat, vyberte typ úlohy.",
             "STOP": "Chcete nyní přestat pracovat?",
-            "UPDATED": "aktualizováno"
+            "UPDATED": "aktualizováno",
+            "REMOVE": "Do you want to remove device from scheduled job \"{{ jobName }}\"?"
         },
         "SCHEDULER-JOB-CHANGE-STATUS": "Chcete změnit stav úlohy plánovače?",
         "SCHEDULER-JOB-DISABLED": "Úloha plánovače zakázána!",
@@ -672,15 +677,17 @@
             "CONDITIONAL-SYNC-INFO": "Čas bude synchronizován, pokud jsou hodiny na měřiči mimo horní a dolní hranici",
             "CONDITIONAL-SYNC-ALERT": "Hodiny budou bezpodmínečně synchronizovány při každém provedení úlohy!"
         },
-        "JOBS-OVERVIEW": "Přehled pracovních míst"
+        "JOBS-OVERVIEW": "Přehled pracovních míst",
+        "SCHEDULER-JOB-REMOVED": "Scheduler job removed!"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
-        "DE": "Německy",
+        "DE": "německy",
         "EN": "Angličtina",
         "FR": "Français",
-        "IT": "Italština",
-        "SL": "Slovenština"
+        "IT": "italština",
+        "SL": "slovenština",
+        "CZ": "Czech"
     },
     "LOGIN": {
         "BACK-TO-LOGIN": "Zpět k přihlášení",
@@ -901,7 +908,10 @@
             "DELETE-DATA-AFTER-DATE-OPTION": "After date",
             "DELETE-DATA-ALL-DATA-OPTION": "All time",
             "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
-        }
+        },
+        "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
+        "UPDATE-SHORT-NAMES": "Update short names",
+        "ASSIGN-CONFIGURATION": " Assign existing configuration"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
