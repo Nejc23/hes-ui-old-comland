@@ -157,12 +157,14 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
       moment(this.form.controls.startDate.value)
         .set('hour', this.form.controls.startTime.value.split(':')[0])
         .set('minute', this.form.controls.startTime.value.split(':')[1])
+        .set('seconds', 0)
         .toDate()
     );
     this.form.controls.endDate.setValue(
       moment(this.form.controls.endDate.value)
         .set('hour', this.form.controls.endTime.value.split(':')[0])
         .set('minute', this.form.controls.endTime.value.split(':')[1])
+        .set('seconds', 0)
         .toDate()
     );
     console.log(this.form.controls.startDate.value + ' - ' + this.form.controls.endDate.value);

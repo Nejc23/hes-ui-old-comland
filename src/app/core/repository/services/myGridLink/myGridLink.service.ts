@@ -447,12 +447,12 @@ export class MyGridLinkService {
     return new HttpRequest('GET', `${enumMyGridLink.managment}${activeImports}`);
   }
 
-  getDataExportJobs(): Observable<DataExportJobs[]> {
-    return this.repository.makeRequest(this.getDataExportJobsRequest());
+  getDataExportJobs(isExport = true): Observable<DataExportJobs[]> {
+    return this.repository.makeRequest(this.getDataExportJobsRequest(isExport));
   }
 
-  getDataExportJobsRequest(): HttpRequest<any> {
-    return new HttpRequest('GET', `${enumMyGridLink.managment}${getDataExportJobs}`);
+  getDataExportJobsRequest(isExport: boolean): HttpRequest<any> {
+    return new HttpRequest('GET', `${enumMyGridLink.managment}${getDataExportJobs}?isExport=${isExport}`);
   }
 
   triggerDataExportJob(params: ExportDataPayload): Observable<any> {
