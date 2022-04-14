@@ -483,7 +483,8 @@
     "EXPORT-TYPE": "Export type",
     "LOCATION": "Location",
     "DATE": "Date",
-    "TIME-RANGE": "Time range"
+    "TIME-RANGE": "Time range",
+    "REPORT-TYPE": "Report type"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -1305,6 +1306,7 @@
     "LOCATION": "Location",
     "UPLOAD-TO": "Upload to SFTP",
     "UPLOAD-TEXT": "If enabled files will be uploaded to the SFTP as specified in the configuration",
-    "INVALID-RANGE": "Invalid date range"
+    "INVALID-RANGE": "Invalid date range",
+    "REPORT": "Report"
   }
 }

@@ -1,55 +1,108 @@
-<app-modal-template (dismiss)="onDismiss()">
-
+<app-modal-template (dismiss)="onDismiss()" [loading]="loading">
   <div modal-header>
     {{ 'EXPORT-DATA.TITLE' | translate }}
   </div>
 
   <div modal-body>
 
-    <div class="tw-pt-3">
-      <app-select-input
-        [clearButton]="false"
-        [disabled]="false"
-        [form]="form"
-        [property]="'exportType'"
-        [selectOptions]="exportTypes"
-        [textField]="'id'"
-        [valueField]="'apiId'"
-        [withDescription]="true"
-        class="full-dropdown"
-        label="Export-type"
-      >
-      </app-select-input>
-    </div>
+    <kendo-tabstrip (tabSelect)="selectedTab($event)" [keepTabContent]="false">
+      <kendo-tabstrip-tab [selected]="true" title="  {{ 'EXPORT-DATA.TITLE' | translate }}">
 
-    <div class="tw-pt-5">
-      <app-date-range-picker
-        (valueChange)="dateChanged()"
-        [alignCenter]="false"
-        [endProperty]="'endDate'"
-        [form]="form"
-        [fullWidth]="true"
-        [startProperty]="'startDate'"
-        [withButtons]="false"
-        [withRefreshButton]="false"
-      >
-      </app-date-range-picker>
-    </div>
+        <ng-template kendoTabContent>
+          <div class="tw-pt-3">
+            <app-select-input
+              [clearButton]="false"
+              [disabled]="false"
+              [form]="form"
+              [property]="'exportType'"
+              [selectOptions]="exportTypes"
+              [textField]="'id'"
+              [valueField]="'apiId'"
+              [withDescription]="true"
+              class="full-dropdown"
+              label="Export-type"
+            >
+            </app-select-input>
+          </div>
 
-    <div *ngIf="invalidRange" class="alert alert-danger mt-3 tw-text-sm" role="alert">
-      <span class="text-danger">{{ 'EXPORT-DATA.INVALID-RANGE' | translate }}</span>
-    </div>
+          <div class="tw-pt-5">
+            <app-date-range-picker
+              (valueChange)="dateChanged()"
+              [alignCenter]="false"
+              [endProperty]="'endDate'"
+              [form]="form"
+              [fullWidth]="true"
+              [startProperty]="'startDate'"
+              [withButtons]="false"
+              [withRefreshButton]="false"
+            >
+            </app-date-range-picker>
+          </div>
 
-    <div class="tw-pt-5">
-      <app-label-with-switch [form]="form" [property]="'upload'" message="EXPORT-DATA.UPLOAD-TO"
-                             secondaryMessage="EXPORT-DATA.UPLOAD-TEXT">
-      </app-label-with-switch>
-    </div>
+          <div *ngIf="invalidRange" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+            <span class="text-danger">{{ 'EXPORT-DATA.INVALID-RANGE' | translate }}</span>
+          </div>
 
-    <div *ngIf="form.controls.upload.value !== true" class="tw-pt-6">
-      <app-input-text [form]="form" [property]="'location'" label="Location" placeholder="/">
-      </app-input-text>
-    </div>
+          <div class="tw-pt-5">
+            <app-label-with-switch [form]="form" [property]="'upload'" message="EXPORT-DATA.UPLOAD-TO"
+                                   secondaryMessage="EXPORT-DATA.UPLOAD-TEXT">
+            </app-label-with-switch>
+          </div>
+
+          <div *ngIf="form.controls.upload.value !== true" class="tw-pt-6">
+            <app-input-text [form]="form" [property]="'location'" label="Location" placeholder="/">
+            </app-input-text>
+          </div>
+        </ng-template>
+
+      </kendo-tabstrip-tab>
+
+      <kendo-tabstrip-tab title="  {{ 'EXPORT-DATA.REPORT' | translate }}">
+
+        <ng-template kendoTabContent>
+          <div class="tw-pt-3">
+            <app-select-input
+              [clearButton]="false"
+              [disabled]="false"
+              [form]="form"
+              [property]="'reportType'"
+              [selectOptions]="reportTypes"
+              [textField]="'id'"
+              [valueField]="'apiId'"
+              [withDescription]="true"
+              class="full-dropdown"
+              label="Report-type"
+            >
+            </app-select-input>
+          </div>
+
+          <div class="tw-pt-5">
+            <app-date-range-picker
+              (valueChange)="dateChanged()"
+              [alignCenter]="false"
+              [endProperty]="'endDate'"
+              [form]="form"
+              [fullWidth]="true"
+              [startProperty]="'startDate'"
+              [withButtons]="false"
+              [withRefreshButton]="false"
+            >
+            </app-date-range-picker>
+          </div>
+
+          <div *ngIf="invalidRange" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+            <span class="text-danger">{{ 'EXPORT-DATA.INVALID-RANGE' | translate }}</span>
+          </div>
+
+          <div *ngIf="form.controls.upload.value !== true" class="tw-pt-6">
+            <app-input-text [form]="form" [property]="'location'" label="Location" placeholder="/">
+            </app-input-text>
+          </div>
+        </ng-template>
+
+      </kendo-tabstrip-tab>
+    </kendo-tabstrip>
+
 
   </div>
 
