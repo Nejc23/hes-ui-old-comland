@@ -51,7 +51,8 @@ export class JobsSelectGridService {
         suppressMovable: true,
         headerName: this.translate.instant('GRID.DESCRIPTION'),
         headerTooltip: this.translate.instant('GRID.DESCRIPTION'),
-        resizable: false
+        resizable: false,
+        cellRenderer: 'gridCellNameComponent'
       },
       {
         field: 'type',
@@ -252,6 +253,7 @@ export class JobsSelectGridService {
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
   }
+
   public getCookieDataSortModel() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }

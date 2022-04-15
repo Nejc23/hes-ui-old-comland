@@ -4,8 +4,9 @@
     <sup *ngIf="required"> *</sup>
   </label>
   <kendo-datetimepicker
-    (blur)="onBlur()" (valueChange)="onValueChange($event)" [formControlName]="property"
-    [format]="'dd.MM.yyyy'"
+    (blur)="onBlur()" (valueChange)="onValueChange($event)" [cancelButton]="false"
+    [formControlName]="property"
+    [format]="'dd.MM.yyyy HH:ss'"
     [max]="max"
     [min]="min"
     [name]="property"

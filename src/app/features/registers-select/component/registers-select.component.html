@@ -16,6 +16,7 @@
 <ag-grid-angular #agGrid (firstDataRendered)="onFirstDataRendered($event)" (gridReady)="onGridReady($event)"
                  (rowSelected)="selectionChanged($event)"
                  [columnDefs]="columnDefs"
+                 [frameworkComponents]="frameworkComponents"
                  [isRowSelectable]="isRowSelectable"
                  [modules]="modules"
                  [paginationPageSize]="10"
