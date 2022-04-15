@@ -295,21 +295,9 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         <ng-container *ngIf="column.type === columnType.JOB_STATUS">
           <div [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
-            <div (click)="openJobStatusModal(dataItem.deviceId)" *ngIf="dataItem[column.field]" role="button">
-              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.running"
-                 class="fad fa-circle-notch text-success"></i>
-              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.success"
-                 class="far fa-check-circle text-success"></i>
-              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.failed"
-                 class="fas fa-exclamation-circle text-danger"></i>
-              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.pending"
-                 class="far fa-pause-circle text-warning"></i>
-              <span [ngClass]="{
-                        'text-success':dataItem[column.field].toLowerCase() == jobStatus.running || dataItem[column.field].toLowerCase() == jobStatus.success,
-                        'text-danger': dataItem[column.field].toLowerCase() == jobStatus.failed,
-                        'text-warning': dataItem[column.field].toLowerCase() == jobStatus.pending}"
-                    class="text-truncate flex-shrink-1">{{dataItem[column.field]}}
-              </span>
+            <div (click)="openJobStatusModal(dataItem.deviceId)" *ngIf="dataItem[column.field]" class="tw-pt-3"
+                 role="button">
+              <img src="assets/images/icons/{{dataItem[column.field].toLowerCase()}}-icon.svg" />
             </div>
           </div>
         </ng-container>
