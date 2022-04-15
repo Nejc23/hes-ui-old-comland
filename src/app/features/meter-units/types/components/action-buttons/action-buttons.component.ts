@@ -229,7 +229,6 @@ export class ActionButtonsComponent {
   }
 
   onCiiState(selectedGuid?: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -491,7 +490,12 @@ export class ActionButtonsComponent {
 
   // on clear alarms
   onClearAlarms(selectedGuid?: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.clearAlarms,
       params,
