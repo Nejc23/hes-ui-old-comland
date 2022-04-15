@@ -1,12 +1,11 @@
 import { IActionRequestSetDisplaySettings } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { ResponseCommonRegisterGroup, RegisterDefinitions } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RegisterDefinitions, ResponseCommonRegisterGroup } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { PlcMeterSetDisplaySettingsGridService } from '../../services/plc-meter-set-display-settings-grid.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
@@ -21,8 +20,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   form: FormGroup;
   deviceIdsParam = [];
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
   actionRequest: IActionRequestParams;
 
@@ -63,6 +60,10 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     this.form = this.createForm();
   }
 
+  get groupListProperty() {
+    return 'groupList';
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group(
       {
@@ -81,9 +82,10 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     this.myGridService
       .getCommonRegisterGroup({
         deviceIds: this.deviceIdsParam,
-        filter: this.filterParam,
-        search: this.searchParam,
+        filter: this.actionRequest.filter,
+        textSearch: this.actionRequest.textSearch,
         excludeIds: this.excludeIdsParam,
+        sort: [],
         type: '11'
       })
       .subscribe((result: ResponseCommonRegisterGroup[]) => {
@@ -109,6 +111,8 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     this.setRegisterList();
   }
 
+  // properties - START
+
   fillData(): IActionRequestSetDisplaySettings {
     const displayRegisters: string[] = [];
     this.registerListRight.map((r) => displayRegisters.push(r.name));
@@ -126,12 +130,6 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     };
 
     return data;
-  }
-
-  // properties - START
-
-  get groupListProperty() {
-    return 'groupList';
   }
 
   // properties - END

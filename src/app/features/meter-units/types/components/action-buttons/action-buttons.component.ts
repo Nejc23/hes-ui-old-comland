@@ -239,7 +239,6 @@ export class ActionButtonsComponent {
   }
 
   onCiiState(selectedGuid?: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -391,14 +390,24 @@ export class ActionButtonsComponent {
   // popup
   onSetMonitor(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-MONITOR');
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-LIMITER');
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
@@ -440,8 +449,7 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+    this.plcActionsService.onRelaysConnect(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // popup
@@ -453,8 +461,7 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+    this.plcActionsService.onRelaysDisconnect(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // popup
@@ -466,8 +473,7 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+    this.plcActionsService.onRelaysState(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // popup
@@ -479,8 +485,7 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+    this.plcActionsService.onRelaysSetMode(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // popup
@@ -499,7 +504,6 @@ export class ActionButtonsComponent {
   // popup
   onSetDisplaySettings(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
-    const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -507,12 +511,17 @@ export class ActionButtonsComponent {
       this.searchColumnNames
     );
 
-    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+    this.plcActionsService.onSetDisplaySettings(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
   }
 
   // on clear alarms
   onClearAlarms(selectedGuid?: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.clearAlarms,
       params,
@@ -570,7 +579,12 @@ export class ActionButtonsComponent {
 
   // popup
   onSyncTime(selectedGuid?: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.syncTime,
       params,
@@ -579,7 +593,6 @@ export class ActionButtonsComponent {
   }
 
   onEnableMeter(selectedGuid?: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -594,7 +607,6 @@ export class ActionButtonsComponent {
   }
 
   onDisableMeter(selectedGuid?: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,

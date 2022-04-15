@@ -1,5 +1,6 @@
 import { GridSearchParams } from './../helpers/grid-request-params.interface';
 import { GridFilterParams } from '../helpers/grid-request-params.interface';
+import { IActionFilterParams, IActionSearchParam, IActionSortParams } from './action-prams.interface';
 
 export interface IdentityToken {
   AccessToken: string;
@@ -31,6 +32,7 @@ export interface ResponseConnectDisconnectData {
   search?: GridSearchParams[];
   excludeIds?: string[];
 }
+
 /*
 // TOU
 export interface RequestTOUData {
@@ -63,11 +65,13 @@ export interface OnDemandRequestData {
 // Set Monitor list of names from register definition
 export interface RequestCommonRegisterGroup {
   deviceIds: string[];
-  filter?: GridFilterParams;
-  search?: GridSearchParams[];
+  sort: IActionSortParams[];
+  textSearch: IActionSearchParam;
+  filter?: IActionFilterParams[];
   excludeIds?: string[];
   type: string;
 }
+
 export interface ResponseCommonRegisterGroup {
   registerGroupId?: string;
   name: string;
@@ -79,6 +83,7 @@ export interface ResponseCommonRegisterGroup {
   groupId?: string;
   registerDefinitions: RegisterDefinitions[];
 }
+
 export interface RegisterDefinitions {
   registerDefinitionId: string;
   name: string;
@@ -93,11 +98,13 @@ export interface RegisterDefinitions {
 // Set Monitor bulk action
 export interface RequestSetMonitor {
   deviceIds: string[];
-  filter?: GridFilterParams;
-  search?: GridSearchParams[];
+  sort: IActionSortParams[];
+  textSearch: IActionSearchParam;
+  filter?: IActionFilterParams[];
   excludeIds?: string[];
   monitorObjects: MonitorObjects[];
 }
+
 export interface MonitorObjects {
   name: string;
   threshold: number;
@@ -120,6 +127,7 @@ export interface RequestLimiterGetRegisters {
   excludeIds?: string[];
   type: number;
 }
+
 /*export interface ResponseLimiterGetRegisters {
   registerId: string;
   name: string;
@@ -129,11 +137,13 @@ export interface RequestLimiterGetRegisters {
 
 export interface RequestSetLimiter {
   deviceIds: string[];
-  filter?: GridFilterParams;
-  search?: GridSearchParams[];
+  sort?: IActionSortParams[];
+  textSearch: IActionSearchParam;
+  filter?: IActionFilterParams[];
   excludeIds?: string[];
   limiterDefinitions: LimiterDefinitions[];
 }
+
 export interface LimiterDefinitions {
   thresholdNormal: number;
   thresholdEmergency: number;

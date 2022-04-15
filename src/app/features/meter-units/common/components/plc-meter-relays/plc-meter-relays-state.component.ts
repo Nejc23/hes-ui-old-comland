@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { IActionRequestParams, IActionRequestRelays } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
@@ -18,9 +17,6 @@ import { ToastNotificationService } from './../../../../../core/toast-notificati
 export class PlcMeterRelaysStateComponent {
   form: FormGroup;
   actionRequest: IActionRequestParams;
-
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
   actionName = this.translate.instant('PLC-METER.RELAY-STATE-TITLE');
 
   public selectedRowsCount: number;

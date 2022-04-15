@@ -1,12 +1,11 @@
 import { IActionRequestParams, IActionRequestRelaysMode } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ResponseCommonRegisterGroup } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
@@ -19,9 +18,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class PlcMeterRelaysSetModeComponent implements OnInit {
   form: FormGroup;
   actionRequest: IActionRequestParams;
-
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
 
   relays$: Codelist<string>[];
   modes: Codelist<number>[];
@@ -41,6 +37,14 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
     this.form = this.createForm();
   }
 
+  get relayProperty() {
+    return 'relay';
+  }
+
+  get modeProperty() {
+    return 'mode';
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.relayProperty]: [null, [Validators.required]],
@@ -48,13 +52,16 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
     });
   }
 
+  // properties - START
+
   ngOnInit() {
     this.myGridService
       .getCommonRegisterGroup({
         deviceIds: this.actionRequest.deviceIds,
-        filter: this.filterParam, // TODO: should be from this.actionRequest.
-        search: this.searchParam,
+        filter: this.actionRequest.filter, // TODO: should be from this.actionRequest.
+        textSearch: this.actionRequest.textSearch,
         excludeIds: this.actionRequest.excludeIds,
+        sort: [],
         type: '19' // "RELAY"
       })
       .subscribe((result: ResponseCommonRegisterGroup[]) => {
@@ -92,15 +99,6 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
     };
 
     return formData;
-  }
-  // properties - START
-
-  get relayProperty() {
-    return 'relay';
-  }
-
-  get modeProperty() {
-    return 'mode';
   }
 
   // properties - END

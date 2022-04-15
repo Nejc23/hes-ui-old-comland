@@ -5,10 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
@@ -20,10 +18,6 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
-import {
-  DeleteMeterDataPayload,
-  PlcDeleteMeterDataComponent
-} from '../../common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
@@ -42,6 +36,11 @@ import { SecurityChangePasswordComponent } from '../../common/components/securit
 import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
+import { CodelistRepositoryService } from '../../../../core/repository/services/codelists/codelist-repository.service';
+import {
+  DeleteMeterDataPayload,
+  PlcDeleteMeterDataComponent
+} from '../../common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 
 @Injectable({
   providedIn: 'root'
@@ -138,10 +137,10 @@ export class MeterUnitsPlcActionsService {
           const options: NgbModalOptions = {
             size: 'md'
           };
-          const modalRefStatusJob = this.modalService.open(StatusJobComponent, options);
-          modalRefStatusJob.componentInstance.requestId = data; // requestId
-          modalRefStatusJob.componentInstance.jobName = actionName;
-          modalRefStatusJob.componentInstance.deviceCount = params.deviceIds.length;
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = selectedRowsCount;
         }
       },
       (reason) => {
@@ -163,10 +162,10 @@ export class MeterUnitsPlcActionsService {
           const options: NgbModalOptions = {
             size: 'md'
           };
-          const modalRefStatusJob = this.modalService.open(StatusJobComponent, options);
-          modalRefStatusJob.componentInstance.requestId = data; // requestId
-          modalRefStatusJob.componentInstance.jobName = actionName;
-          modalRefStatusJob.componentInstance.deviceCount = params.deviceIds.length;
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -175,13 +174,10 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetMonitor(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onSetMonitor(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterMonitorComponent);
 
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.params = params;
 
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
@@ -198,16 +194,13 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onReadMonitorThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onReadMonitorThreshold(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     this.bulkOperation(MeterUnitsTypeEnum.readThresholdsMonitor, params, selectedRowsCount);
   }
 
-  onSetLimiter(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onSetLimiter(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.params = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.actionRequst = modalRef.result.then(
@@ -223,17 +216,13 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onReadLimiterThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onReadLimiterThreshold(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     this.bulkOperation(MeterUnitsTypeEnum.readThresholdsLimiter, params, selectedRowsCount);
   }
 
-  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
+  onRelaysConnect(params: IActionRequestParams, selectedRowsCount: number, actionName) {
     const modalRef = this.modalService.open(PlcMeterRelaysConnectComponent);
     modalRef.componentInstance.actionRequest = params;
-
-    // TODO: this should be removed when there is a new filtering structure on every method
-    modalRef.componentInstance.filterParam = paramsLegacy.filter;
-    modalRef.componentInstance.searchParam = paramsLegacy.search;
     modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
@@ -250,13 +239,9 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onRelaysDisconnect(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterRelaysDisconnectComponent);
     modalRef.componentInstance.actionRequest = params;
-
-    // TODO: this should be removed when there is a new filtering structure on every method
-    modalRef.componentInstance.filterParam = paramsLegacy.filter;
-    modalRef.componentInstance.searchParam = paramsLegacy.search;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionName = actionName;
 
@@ -273,13 +258,9 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
+  onRelaysState(params: IActionRequestParams, selectedRowsCount: number, actionName) {
     const modalRef = this.modalService.open(PlcMeterRelaysStateComponent);
     modalRef.componentInstance.actionRequest = params;
-
-    // TODO: this should be removed when there is a new filtering structure on every method
-    modalRef.componentInstance.filterParam = paramsLegacy.filter;
-    modalRef.componentInstance.searchParam = paramsLegacy.search;
     modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
@@ -297,13 +278,9 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+  onRelaysSetMode(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterRelaysSetModeComponent);
     modalRef.componentInstance.actionRequest = params;
-
-    // TODO: this should be removed when there is a new filtering structure on every method
-    modalRef.componentInstance.filterParam = paramsLegacy.filter;
-    modalRef.componentInstance.searchParam = paramsLegacy.search;
     modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
@@ -375,56 +352,6 @@ export class MeterUnitsPlcActionsService {
         // on dismiss (CLOSE)
       }
     );
-
-    /*  let selectedText = 'all';
-    const object: GridBulkActionRequestParams = {
-      id: [],
-      filter: {
-        states: [],
-        types: [],
-        vendor: { id: 0, value: '' },
-        tags: []
-      }
-    };
-    if (!this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      selectedRows.forEach(element => {
-        object.id.push(element.id);
-      });
-      object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
-    } else {
-      object.filter = this.requestModel.filterModel;
-      object.id = null;
-    }
-
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.confirmDelete = true;
-    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        const request = this.meterUnitsTypeService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
-          (response: any) => {
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode(node => {
-              node.setSelected(false);
-            });
-
-            this.gridApi.onFilterChanged();
-          },
-          () => {}
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );*/
   }
 
   onDeleteMeterData(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
@@ -456,13 +383,13 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetDisplaySettings(paramsOld: RequestFilterParams, params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
+  onSetDisplaySettings(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
 
-    modalRef.componentInstance.deviceIdsParam = paramsOld.deviceIds;
-    modalRef.componentInstance.filterParam = paramsOld.filter;
-    modalRef.componentInstance.searchParam = paramsOld.search;
-    modalRef.componentInstance.excludeIdsParam = paramsOld.excludeIds;
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.textSearch;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.actionName = actionName;
@@ -481,10 +408,6 @@ export class MeterUnitsPlcActionsService {
   }
 
   // actions without popup
-  // TODO: ONLY FOR TESTING !!!
-  // deviceIdsParam = [];
-  // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-  // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
@@ -524,19 +447,6 @@ export class MeterUnitsPlcActionsService {
         response = this.service.postMyGridCiiDeactivateDevice(params);
         operationName = this.translate.instant('COMMON.CII-DEACTIVATE');
         break;
-      /*case MeterUnitsTypeEnum.touConfig:
-        const paramsConf: RequestTOUData = {
-          deviceIds: params.deviceIds,
-          filter: params.filter,
-          search: params.search,
-          excludeIds: params.excludeIds,
-          timeOfUseId: '1'
-        }; // TODO: timeOfUseId read form store?
-
-        response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName =  `Configure TOU`;
-        selectedText = `${ `for`} ${selectedText}`;
-        break;*/
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
         operationName = this.translate.instant('COMMON.ACTIVATE-FW-UPGRADE');
@@ -597,7 +507,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // if checkbox value is true
         if (data) {
-          params[component.checkboxField] = data; // field must be defined inIActionRequestParams
+          params[component.checkboxField] = component.checkboxValue; // field must be defined inIActionRequestParams
         }
         // on close (CONFIRM)
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
@@ -693,31 +603,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  getRequestFilterParam(guid: string, requestModel: GridRequestParams): RequestFilterParams {
-    const requestParam: RequestFilterParams = {
-      deviceIds: [],
-      filter: null,
-      search: null,
-      excludeIds: null
-    };
-    // select from row
-    if (guid && guid.length > 0) {
-      requestParam.deviceIds.push(guid);
-    } else {
-      requestParam.deviceIds = requestModel.deviceIds;
-    }
-    // select all button from grid
-    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      // excluded ids, filter, search and empty deviceIds are sent
-      requestParam.filter = requestModel.filterModel;
-      requestParam.search = requestModel.searchModel;
-      requestParam.excludeIds = requestModel.excludeIds;
-      requestParam.deviceIds = [];
-    }
-    return requestParam;
-  }
-
-  // working version with search and filters
+  // working payload version with search, filters and select all without ids
   getOperationRequestParam(
     guid: string,
     requestModel: GridRequestParams,
@@ -733,7 +619,8 @@ export class MeterUnitsPlcActionsService {
         useWildcards: false
       },
       sort: [],
-      initiateReading: false, // TODO get data from BE
+      initiateReading: false, // TODO get data from BE when BE,
+      unconditionalSync: false,
       selectAll: this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()
     };
     // details page

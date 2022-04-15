@@ -8,21 +8,18 @@ import {
   RequestSetMonitor,
   ResponseCommonRegisterGroup
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetMonitorService } from '../../services/plc-meter-set-monitor.service';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { TranslateService } from '@ngx-translate/core';
+import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-plc-meter-monitor',
   templateUrl: './plc-meter-monitor.component.html'
 })
 export class PlcMeterMonitorComponent implements OnInit {
-  deviceIdsParam = [];
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
-  excludeIdsParam?: string[];
+  params: IActionRequestParams;
   actionName = this.translate.instant('PLC-METER.SET-MONITOR');
 
   form: FormGroup;
@@ -43,10 +40,11 @@ export class PlcMeterMonitorComponent implements OnInit {
   ngOnInit() {
     const formData: RequestCommonRegisterGroup = {
       type: 'MONITOR',
-      deviceIds: this.deviceIdsParam,
-      filter: this.filterParam,
-      search: this.searchParam,
-      excludeIds: this.excludeIdsParam
+      deviceIds: this.params.deviceIds,
+      filter: this.params.filter,
+      textSearch: this.params.textSearch,
+      excludeIds: this.params.excludeIds,
+      sort: []
     };
 
     this.myGridService.getCommonRegisterGroup(formData).subscribe((result: ResponseCommonRegisterGroup[]) => {
@@ -75,10 +73,11 @@ export class PlcMeterMonitorComponent implements OnInit {
     }
     const formData: RequestSetMonitor = {
       monitorObjects: this.setMonitorService.fillMonitorObjectDataFromForm(this.form, this.formTemplate),
-      deviceIds: this.deviceIdsParam,
-      filter: this.filterParam,
-      search: this.searchParam,
-      excludeIds: this.excludeIdsParam
+      deviceIds: this.params.deviceIds,
+      filter: this.params.filter,
+      textSearch: this.params.textSearch,
+      excludeIds: this.params.excludeIds,
+      sort: []
     };
 
     const request = this.myGridService.setMonitor(formData);
