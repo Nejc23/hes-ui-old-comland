@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import {
-  RequestSetLimiter,
   LimiterDefinitions,
+  RequestSetLimiter,
   ResponseCommonRegisterGroup
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
+import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-plc-meter-limiter',
@@ -22,9 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class PlcMeterLimiterComponent implements OnInit {
   form: FormGroup;
   deviceIdsParam = [];
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
-  excludeIdsParam?: string[];
+  params: IActionRequestParams;
   registers$: Codelist<string>[];
   public selectedRowsCount: number;
 
@@ -38,6 +36,28 @@ export class PlcMeterLimiterComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.form = this.createForm();
+  }
+
+  get registerProperty() {
+    return 'register';
+  }
+
+  get tresholdNormalProperty() {
+    return 'tresholdNormal';
+  }
+
+  get tresholdEmergencyProperty() {
+    return 'tresholdEmergency';
+  }
+
+  // properties - START
+
+  get minOverTresholdDurationProperty() {
+    return 'minOverTresholdDuration';
+  }
+
+  get minUnderTresholdDurationProperty() {
+    return 'minUnderTresholdDuration';
   }
 
   createForm(): FormGroup {
@@ -58,10 +78,11 @@ export class PlcMeterLimiterComponent implements OnInit {
   ngOnInit() {
     this.myGridService
       .getCommonRegisterGroup({
-        deviceIds: this.deviceIdsParam,
-        filter: this.filterParam,
-        search: this.searchParam,
-        excludeIds: this.excludeIdsParam,
+        deviceIds: this.params.deviceIds,
+        filter: this.params.filter,
+        textSearch: this.params.textSearch,
+        sort: [],
+        excludeIds: this.params.excludeIds,
         type: '10'
       })
       .subscribe((result: ResponseCommonRegisterGroup[]) => {
@@ -85,35 +106,15 @@ export class PlcMeterLimiterComponent implements OnInit {
     const formData: RequestSetLimiter = {
       limiterDefinitions: data,
       deviceIds: this.deviceIdsParam,
-      filter: this.filterParam,
-      search: this.searchParam,
-      excludeIds: this.excludeIdsParam
+      filter: this.params.filter,
+      textSearch: this.params.textSearch,
+      sort: [],
+      excludeIds: this.params.excludeIds
     };
 
     return formData;
   }
 
-  // properties - START
-
-  get registerProperty() {
-    return 'register';
-  }
-
-  get tresholdNormalProperty() {
-    return 'tresholdNormal';
-  }
-
-  get tresholdEmergencyProperty() {
-    return 'tresholdEmergency';
-  }
-
-  get minOverTresholdDurationProperty() {
-    return 'minOverTresholdDuration';
-  }
-
-  get minUnderTresholdDurationProperty() {
-    return 'minUnderTresholdDuration';
-  }
   // properties - END
 
   onDismiss() {

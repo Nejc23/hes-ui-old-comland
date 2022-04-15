@@ -13,7 +13,7 @@ export interface IActionRequestParams {
   from?: string;
   to?: string;
   groups?: any[]; // TODO enum
-  unconditionalSync?: string;
+  unconditionalSync?: boolean;
   types?: string[];
   states?: string[];
   enabled?: boolean;

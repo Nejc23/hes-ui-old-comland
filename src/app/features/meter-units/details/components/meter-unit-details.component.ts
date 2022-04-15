@@ -346,32 +346,28 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   onRelaysConnect() {
     const actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1, actionName);
+    this.plcActionsService.onRelaysConnect(params, 1, actionName);
   }
 
   // popup
   onRelaysDisconnect() {
     const actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1, actionName);
+    this.plcActionsService.onRelaysDisconnect(params, 1, actionName);
   }
 
   // popup
   onRelaysState() {
     const actionName = this.translate.instant('PLC-METER.RELAY-STATE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy, 1, actionName);
+    this.plcActionsService.onRelaysState(params, 1, actionName);
   }
 
   // popup
   onRelaysSetMode() {
     const actionName = this.translate.instant('PLC-METER.RELAY-MODE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1, actionName);
+    this.plcActionsService.onRelaysSetMode(params, 1, actionName);
   }
 
   onClearFF() {
@@ -412,7 +408,6 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   // popup
   onTou() {
     const actionName = this.translate.instant('PLC-METER.TOU-UPLOAD');
-    // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onTou(params, 1, actionName);
   }
@@ -427,26 +422,26 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   // popup
   onSetMonitor() {
     const actionName = this.translate.instant('PLC-METER.SET-MONITOR');
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onSetMonitor(params, 1, actionName);
   }
 
   onReadMonitorThreshold() {
     const actionName = this.translate.instant('PLC-METER.READ-MONITOR-THRESHOLDS');
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onReadMonitorThreshold(params, 1, actionName);
   }
 
   // popup
   onSetLimiter() {
     const actionName = this.translate.instant('PLC-METER.SET-LIMITER');
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onSetLimiter(params, 1, actionName);
   }
 
   onReadLimiterThreshold() {
     const actionName = this.translate.instant('PLC-METER.READ-LIMITER-THRESHOLDS');
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onReadLimiterThreshold(params, 1, actionName);
   }
 
@@ -459,11 +454,8 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
 
   onSetDisplaySettings() {
     const actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
-
-    const paramsOld = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-
-    this.plcActionsService.onSetDisplaySettings(paramsOld, params, 1, actionName);
+    this.plcActionsService.onSetDisplaySettings(params, 1, actionName);
   }
 
   onClearAlarms() {
