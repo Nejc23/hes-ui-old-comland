@@ -18,7 +18,8 @@ import { AutoTemplateRegister } from '../../../../core/repository/interfaces/aut
 import {
   EventRegisterValue,
   GridRegisterValue,
-  RegisterValue
+  RegisterValue,
+  ValueWithUnit
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
@@ -128,6 +129,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
   showNormalizedValues = false;
+
+  basicUnits = ['w', 'wh', 'var', 'varh'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -317,6 +320,10 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
+          // ['w', 'wh'].includes(values[0].valueWithUnit.unit.toLowerCase())
+          this.rowData.map((value) => {
+            value.valueWithUnit = this.transformValue(value.valueWithUnit);
+          });
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
             this.setEventData();
@@ -506,5 +513,13 @@ export class MeterUnitRegistersComponent implements OnInit {
       return this.translate.instant('PLC-METER.NORMALIZED-DATA');
     }
     return this.translate.instant('PLC-METER.RAW-DATA');
+  }
+
+  transformValue(value: ValueWithUnit) {
+    if (this.basicUnits.includes(value.unit.toLowerCase())) {
+      value.value = Math.round(parseInt(value.value) / 1000).toString();
+      value.unit = 'k' + value.unit;
+    }
+    return value;
   }
 }

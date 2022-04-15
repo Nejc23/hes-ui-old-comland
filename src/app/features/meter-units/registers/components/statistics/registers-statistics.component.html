@@ -1,6 +1,6 @@
 <div *ngIf="this.data?.averageValue" class="card bg-light shadow mb-3 border-0">
   <div class="text-black-50 pt-2 ps-2 small">{{ 'PLC-METER.AVERAGE-VALUE' | translate }}</div>
-  <div class="display-3 p-2 text-center">{{this.data.averageValue | number }}</div>
+  <div class="display-3 p-2 text-center">{{this.data.averageValue | number : '1.2-2' }}</div>
 </div>
 
 <div *ngIf="this.data?.maxValue" class="card bg-light shadow mb-3 border-0">
