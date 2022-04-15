@@ -95,7 +95,8 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         sort: 'asc',
         headerName: this.translate.instant('GRID.NAME'),
-        headerTooltip: this.translate.instant('GRID.NAME')
+        headerTooltip: this.translate.instant('GRID.NAME'),
+        cellRenderer: 'gridCellNameComponent'
       },
       {
         field: 'id',
@@ -148,7 +149,8 @@ export class DataConcentratorUnitsSelectGridService {
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
-      onSortChanged: this.onSortChanged
+      onSortChanged: this.onSortChanged,
+      enableBrowserTooltips: true
     };
   }
 
@@ -272,6 +274,7 @@ export class DataConcentratorUnitsSelectGridService {
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
   }
+
   public getCookieDataSortModel() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }

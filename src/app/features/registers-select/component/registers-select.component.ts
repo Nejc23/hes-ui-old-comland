@@ -31,6 +31,7 @@ export class RegistersSelectComponent implements OnInit {
   totalCount = 0;
   selectedAll = false;
   allHaveTemplate = true;
+  frameworkComponents: any;
 
   constructor(
     private registersSelectService: RegistersSelectService,
@@ -39,6 +40,21 @@ export class RegistersSelectComponent implements OnInit {
     public staticTextService: ActionFormStaticTextService,
     private jobsService: JobsService
   ) {}
+
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.gridApi.getSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  get searchProperty() {
+    return 'content';
+  }
 
   createForm(): FormGroup {
     return this.fb.group({
@@ -92,6 +108,7 @@ export class RegistersSelectComponent implements OnInit {
   ngOnInit() {
     this.form = this.createForm();
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
+    this.frameworkComponents = this.registersSelectGridService.setFrameworkComponents();
   }
 
   getSelectedRowNames() {
@@ -99,17 +116,6 @@ export class RegistersSelectComponent implements OnInit {
     const req: SchedulableRegistersType[] = [];
     selectedRows.forEach((x) => req.push(x.name));
     return req;
-  }
-
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
   }
 
   deselectAllRows() {
@@ -145,10 +151,6 @@ export class RegistersSelectComponent implements OnInit {
   selectionChanged($event: any) {
     this.selectedAll = this.getSelectedRowNames().length === this.totalCount;
     this.onSelectionChanged.emit(this.getSelectedRowNames().length > 0 ? true : false);
-  }
-
-  get searchProperty() {
-    return 'content';
   }
 
   isRowSelectable(rowNode) {
