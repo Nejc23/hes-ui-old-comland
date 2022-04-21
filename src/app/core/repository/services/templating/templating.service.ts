@@ -2,10 +2,11 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { getCommonRegisterGroups, getTemplatingDefaultValues } from '../../consts/templating.const';
+import { getCommonRegisterGroups, getEventMappingGroupCodeTables, getTemplatingDefaultValues } from '../../consts/templating.const';
 import { IActionRequestGetCommonRegisterGroups } from '../../interfaces/myGridLink/action-prams.interface';
 import { ResponseCommonRegisterGroup } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { GetDefaultInformationResponse } from '../../interfaces/templating/get-default-information.request.interface';
+import { EventMappingGroupCodeTablesDto } from 'src/app/api/templating/event-mapping-group-code-tables-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,13 @@ export class TemplatingService {
 
   getDefaultValuesRequest(templateId: string): HttpRequest<any> {
     return new HttpRequest('GET', `${getTemplatingDefaultValues}/${templateId}`);
+  }
+
+  getGetEventMappingGroupCodeTables(): Observable<EventMappingGroupCodeTablesDto> {
+    return this.repository.makeRequest(this.getGetEventMappingGroupCodeTablesRequest());
+  }
+
+  getGetEventMappingGroupCodeTablesRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${getEventMappingGroupCodeTables}`);
   }
 }

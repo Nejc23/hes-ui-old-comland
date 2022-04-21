@@ -86,6 +86,7 @@ export interface GridFilter {
   label?: string;
   field: string;
   values: any[];
+  isMultiselect?: boolean;
 }
 
 export interface CheckboxColumn {

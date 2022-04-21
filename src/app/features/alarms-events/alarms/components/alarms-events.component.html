@@ -52,6 +52,7 @@
         <app-data-table-toolbar
           (exportDataClickekdEvent)="exportData($event)"
           (reloadGridDataEvent)="getEventsDataList()"
+          (wildCardsEnabledEvent)="toggleWildcards($event)"
           [exportOptions]="exportOptions"
           [filters]="filters"
           [form]="eventsForm"
@@ -78,6 +79,7 @@
           [sortable]="true"
           [tableHeight]="calculateHeight()"
           [totalCount]="eventsDataListCount"
+          [wildCardsEnabled]="true"
           [withRefreshButton]="true"
           [withRowSelection]="false"
           [withSearch]="false"

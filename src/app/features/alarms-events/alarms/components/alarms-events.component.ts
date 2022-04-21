@@ -15,6 +15,7 @@ import { debounceTime } from 'rxjs/operators';
 import { GetDataV2Service } from 'src/app/api/data-processing/services';
 import { EventDataRequest, ExportEventDataRequest } from 'src/app/api/data-processing/models';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -30,6 +31,7 @@ export class AlarmsEventsComponent implements OnInit {
   alarmsPageSize = 20;
   alarmsDataListCount = 0;
   alarmsLoading = false;
+  wildCardsSearch = false;
 
   public alarmsSort: SortDescriptor[] = [
     {
@@ -148,6 +150,8 @@ export class AlarmsEventsComponent implements OnInit {
   filters: Array<GridFilter> = [];
   protocols = [];
   manufacturers = [];
+  eventIds: Array<any>;
+  rawEventIds: Array<any>;
 
   eventsSort: SortDescriptor[] = [
     {
@@ -171,7 +175,8 @@ export class AlarmsEventsComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private elRef: ElementRef,
     private dataV2Service: GetDataV2Service,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private templatingService: TemplatingService
   ) {
     this.alarmsForm = this.createAlarmsForm();
     this.eventsForm = this.createEventsForm();
@@ -214,6 +219,8 @@ export class AlarmsEventsComponent implements OnInit {
   }
 
   createEventsForm(): FormGroup {
+    this.getGetEventMappingGroupCodeLists();
+
     return this.formBuilder.group({
       eventsSearchValue: null,
       [this.startTimeEventsProperty]: [moment().subtract(1, 'days'), Validators.required],
@@ -221,7 +228,22 @@ export class AlarmsEventsComponent implements OnInit {
       startTime: ['00:00'],
       endTime: ['00:00'],
       manufacturer: null,
-      protocol: null
+      protocol: null,
+      eventIds: [],
+      rawEventIds: []
+    });
+  }
+
+  getGetEventMappingGroupCodeLists() {
+    this.templatingService.getGetEventMappingGroupCodeTables().subscribe((values) => {
+      const epointEventListItems: Array<{ value: number; text: string }> = [];
+      const rawEventListItems = [...epointEventListItems];
+
+      values.epointEventCodeTable.map((x) => epointEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
+      this.eventIds = epointEventListItems;
+
+      values.rawEventCodeTable.map((x) => rawEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
+      this.rawEventIds = rawEventListItems;
     });
   }
 
@@ -273,6 +295,8 @@ export class AlarmsEventsComponent implements OnInit {
   }
 
   getEventsDataList() {
+    this.eventsLoading = true;
+
     if (this.eventsPageNumber === 0) {
       this.eventsPageNumber++;
     }
@@ -287,15 +311,16 @@ export class AlarmsEventsComponent implements OnInit {
       endTime: endDate.toISOString(),
       pageNumber: this.eventsPageNumber,
       pageSize: this.eventsPageSize,
-      searchInput: this.eventsForm.controls['eventsSearchValue'].value,
+      searchInput: this.getDropdownSelectedValue('eventsSearchValue'),
+      wildCardsSearch: this.wildCardsSearch,
       manufacturer: this.getDropdownSelectedValue('manufacturer'),
       protocol: this.getDropdownSelectedValue('protocol'),
       sortBy: this.eventsSort[0].field,
       sortDir: this.eventsSort[0].dir === 'asc' ? 'asc' : 'desc',
-      requestId: ''
+      requestId: '',
+      eventIds: this.getDropdownSelectedValue('eventIds')?.map((x) => x.value),
+      rawEventIds: this.getDropdownSelectedValue('rawEventIds')?.map((x) => x.value)
     };
-
-    this.eventsLoading = true;
 
     this.dataV2Service.v2GetEventsDataPost({ body: request }).subscribe((data) => {
       this.eventsLoading = false;
@@ -312,6 +337,18 @@ export class AlarmsEventsComponent implements OnInit {
       this.protocols = [...new Set(this.eventsDataList.events.map((event) => event.protocol.toString().toUpperCase()).sort())];
 
       this.filters = [
+        {
+          field: 'rawEventIds',
+          values: this.rawEventIds,
+          label: 'GRID.EVENT-ID-RAW',
+          isMultiselect: true
+        },
+        {
+          field: 'eventIds',
+          values: this.eventIds,
+          label: 'GRID.EVENT-ID',
+          isMultiselect: true
+        },
         {
           field: 'manufacturer',
           values: this.manufacturers,
@@ -368,6 +405,11 @@ export class AlarmsEventsComponent implements OnInit {
     this.getEventsDataList();
   }
 
+  toggleWildcards(event: boolean) {
+    this.wildCardsSearch = event;
+    this.getEventsDataList();
+  }
+
   exportData(event: any) {
     if (event && event.text) {
       let exportFileType: string;
@@ -389,13 +431,16 @@ export class AlarmsEventsComponent implements OnInit {
       const request: ExportEventDataRequest = {
         startTime: startDate.toISOString(),
         endTime: endDate.toISOString(),
-        searchInput: this.eventsForm.controls['eventsSearchValue'].value,
-        manufacturer: this.eventsForm.controls['manufacturer'].value,
-        protocol: this.eventsForm.controls['protocol'].value,
+        searchInput: this.getDropdownSelectedValue('eventsSearchValue'),
+        wildCardsSearch: this.wildCardsSearch,
+        manufacturer: this.getDropdownSelectedValue('manufacturer'),
+        protocol: this.getDropdownSelectedValue('protocol'),
         exportFileType: exportFileType,
         pageSize: 0,
         pageNumber: 0,
-        requestId: ''
+        requestId: '',
+        eventIds: this.getDropdownSelectedValue('eventIds')?.map((x) => x.value),
+        rawEventIds: this.getDropdownSelectedValue('rawEventIds')?.map((x) => x.value)
       };
 
       this.dataV2Service.v2ExportEventsDataPost({ body: request }).subscribe(
