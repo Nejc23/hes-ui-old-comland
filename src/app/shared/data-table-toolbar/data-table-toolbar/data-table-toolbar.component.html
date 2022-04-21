@@ -1,8 +1,14 @@
-<div class="tw-flex tw-mt-4 tw-gap-4">
+<div class="tw-flex tw-flex-wrap tw-mt-4 tw-gap-4">
   <div>
     <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ 'COMMON.SEARCH' | translate }}:</div>
     <div [formGroup]="form" class="tw-inline-flex gray-border tw-w-56 search-input">
-      <div [title]="'Search'" class="tw-flex tw-justify-center tw-cursor-pointer" data-placement="top" data-toggle="tooltip">
+      <div
+        (click)="searchIconClicked()"
+        [title]="getWildCardToolTipText()"
+        class="tw-flex tw-justify-center tw-cursor-pointer"
+        data-placement="top"
+        data-toggle="tooltip"
+      >
         <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
       </div>
       <input [formControlName]="'eventsSearchValue'" kendoTextBox placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}" />
@@ -25,12 +31,22 @@
 
       <div class="gray-border">
         <kendo-dropdownlist
+          *ngIf="!filter.isMultiselect"
           [data]="filter.values"
           [defaultItem]="'COMMON.ALL' | translate"
           [id]="filter.field"
           [formControlName]="filter.field"
         >
         </kendo-dropdownlist>
+        <kendo-multiselect
+          kendoMultiSelectSummaryTag
+          *ngIf="filter.isMultiselect"
+          [data]="filter.values"
+          [formControlName]="filter.field"
+          style="min-width: 220px"
+          textField="text"
+          valueField="value"
+        ></kendo-multiselect>
       </div>
     </div>
 
@@ -38,7 +54,7 @@
       <a (click)="resetSearchAndFilters()" class="tw-text-darkGray tw-cursor-pointer">{{ 'FILTER.CLEAR-FILTERS' | translate }}</a>
     </div>
   </div>
-  <div class="tw-flex tw-justify-end tw-w-full tw-place-self-center tw-mt-4">
+  <div class="tw-flex tw-place-self-center tw-mt-4 tw-ml-auto">
     <div
       *ngIf="withExportButton && exportOptions && exportOptions.length > 0"
       [title]="'GRID.EXPORT-DATA-TO' | translate"

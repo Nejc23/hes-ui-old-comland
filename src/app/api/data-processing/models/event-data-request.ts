@@ -10,8 +10,11 @@ export interface EventDataRequest {
   protocol?: DeviceProtocol;
   requestId: string;
   searchInput?: null | string;
+  wildCardsSearch: boolean;
   sortBy?: null | string;
   sortDir?: null | string;
   startTime: string;
   tenantId?: string;
+  eventIds?: [];
+  rawEventIds?: [];
 }
