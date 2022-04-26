@@ -230,7 +230,8 @@
     "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
     "VALID-FROM": "Valid from",
     "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
-    "UPDATE-SHORT-NAMES": "Update short names"
+    "UPDATE-SHORT-NAMES": "Update short names",
+    "SERIAL-MISMATCH": "Serial mismatch"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -597,7 +598,8 @@
     "EVENT-ID-RAW": "Event ID (raw)",
     "METER-ID": "Meter ID",
     "EXPORT-DATA-TO": "Export data to",
-    "ACTION-REMOVEFROMJOB": "Remove from job"
+    "ACTION-REMOVEFROMJOB": "Remove from job",
+    "SERIAL-MISMATCH": "Serial mismatch!"
   },
   "JOB": {
     "ACTIVE-JOB": {

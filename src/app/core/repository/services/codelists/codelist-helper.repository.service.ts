@@ -26,7 +26,8 @@ export class CodelistHelperService {
       { id: 2, value: this.translate.instant('COMMON.WITHOUT-TEMPLATE') },
       { id: 3, value: this.translate.instant('COMMON.IMAGE-READY-FOR-ACTIVATION') },
       { id: 4, value: this.translate.instant('COMMON.HLS-ENABLED') },
-      { id: 5, value: this.translate.instant('COMMON.HLS-DISABLED') }
+      { id: 5, value: this.translate.instant('COMMON.HLS-DISABLED') },
+      { id: 6, value: this.translate.instant('COMMON.SERIAL-MISMATCH') }
     ];
 
     return showOptions;

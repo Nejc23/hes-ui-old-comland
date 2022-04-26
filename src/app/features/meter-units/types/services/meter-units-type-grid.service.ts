@@ -24,7 +24,7 @@ export class MeterUnitsTypeGridService {
     {
       field: 'icons',
       translationKey: '',
-      width: 95,
+      width: 120,
       sortingDisabled: true,
       class: 'no-padding',
       type: GridColumnType.ICONS,
@@ -33,6 +33,11 @@ export class MeterUnitsTypeGridService {
           field: gridSysNameColumnsEnum.templateId,
           iconName: 'warning-red-icon',
           popoverText: 'GRID.MISSING-TEMPLATE'
+        },
+        {
+          field: gridSysNameColumnsEnum.serialMismatch,
+          iconName: 'warning-red-icon',
+          popoverText: 'GRID.SERIAL-MISMATCH'
         },
         {
           field: gridSysNameColumnsEnum.readyForActivation,

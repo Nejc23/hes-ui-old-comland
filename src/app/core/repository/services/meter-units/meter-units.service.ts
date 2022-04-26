@@ -381,7 +381,6 @@ export class MeterUnitsService {
           })
         );
       }
-
       // show operations filter
       if (param.filterModel.showOptionFilter && param.filterModel.showOptionFilter.length > 0) {
         param.filterModel.showOptionFilter.map((row) => {
@@ -417,6 +416,13 @@ export class MeterUnitsService {
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.isHls),
               propValue: 'false',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 6) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.serialMismatch),
+              propValue: 'true',
               filterOperation: filterOperationEnum.equal
             });
           }

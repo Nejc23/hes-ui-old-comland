@@ -758,6 +758,13 @@ export class MeterUnitsPlcActionsService {
                   filterOperation: filterOperationEnum.equal
                 });
               }
+              if (row.id === 6) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.serialMismatch),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
             });
           }
 
