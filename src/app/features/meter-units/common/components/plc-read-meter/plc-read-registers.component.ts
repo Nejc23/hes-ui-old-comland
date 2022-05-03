@@ -144,7 +144,8 @@ export class PlcReadRegistersComponent implements OnInit {
             return { 'padding-left': '34px' };
           }
           return null;
-        }
+        },
+        sort: 'asc'
       }
     ];
   }
