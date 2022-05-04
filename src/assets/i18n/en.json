@@ -205,8 +205,9 @@
     "COMMUNICATION-DETAILS": "Communication module details",
     "BASIC-DETAILS": "Details",
     "IN-PROGRESS": "In progress",
-    "ACTIVE-IMPORTS": "Currently active imports",
+    "ACTIVE-IMPORTS": "Import history",
     "NUMBER-OF-DEVICES": "{{noOfDevices}} meters will be imported or updated",
+    "NUMBER-OF-DEVICES-IMPORTED": "Total number of meters: {{noOfDevicesImported}}, Added: {{noOfDevicesAdded}}, Updated: {{noOfDevicesUpdated}}, Failed: {{nrOfDevicesFailed}}",
     "ENABLE-METER": "Enable meter",
     "DISABLE-METER": "Disable meter",
     "IMPORT-SUBTITLE-XML": "Selected file must be in XML format.",
@@ -889,7 +890,11 @@
     "IMPORT": {
       "EXCEL-TEMPLATE": "Import meters template",
       "DESCRIPTION": "Import device feature enables adding and updating devices via Excel (XSLT) file. Use provided Excel template as the starting point.",
-      "DOWNLOAD": "Download"
+      "DOWNLOAD": "Download",
+      "TASK_SUCCESS": "Success",
+      "TASK_PARTIAL_SUCCESS": "Partial success",
+      "TASK_FAILURE": "Failed",
+      "TASK_EXECUTING": "Executing"
     },
     "TRANSFORMER-RATIO": "Transformer ratio",
     "CURRENT-RATIO": "Current ratio",

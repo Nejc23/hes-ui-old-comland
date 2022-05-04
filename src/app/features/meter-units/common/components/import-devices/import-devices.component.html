@@ -61,15 +61,18 @@
           <div class="tw-text-sm tw-text-black tw-font-medium">
             {{ imports.fileName }}
           </div>
-          <div class="tw-mt-1 tw-text-darkGray tw-text-xs tw-font-normal">
+          <div class="tw-mt-1 tw-text-darkGray tw-text-xs tw-font-normal" *ngIf="imports.result == 'PENDING'">
             {{ 'COMMON.NUMBER-OF-DEVICES' | translate: { noOfDevices: imports.nrOfDevices } }}
+          </div>
+          <div class="tw-mt-1 tw-text-darkGray tw-text-xs tw-font-normal" *ngIf="imports.result != 'PENDING'">
+            {{ 'COMMON.NUMBER-OF-DEVICES-IMPORTED' | translate: { noOfDevicesAdded: imports.nrOfInsertedDevices, noOfDevicesImported: imports.nrOfDevices, noOfDevicesUpdated: imports.nrOfUpdatedDevices, nrOfDevicesFailed: imports.nrOfFailedDevices } }}
           </div>
         </div>
       </div>
 
-      <div
-        class="tw-inline-flex tw-bg-opacity-20 tw-rounded tw-h-5 tw-w-24 tw-items-center tw-font-medium tw-justify-center tw-capitalize tw-text-xs tw-bg-lightBlue tw-text-lightBlue tw-mr-6">
-        {{ 'COMMON.IN-PROGRESS' | translate | uppercase }}
+      <div [ngClass]="{'tw-bg-lost tw-text-lost': imports.result === 'TASK_EXECUTING', 'tw-bg-green tw-text-green': imports.result === 'TASK_SUCCESS', 'tw-bg-yellow tw-text-yellow': imports.result === 'TASK_PARTIAL_SUCCESS', 'tw-bg-red tw-text-red': imports.result === 'TASK_FAILURE' }"
+        class="tw-inline-flex tw-bg-opacity-20 tw-rounded tw-h-7 tw-w-28 tw-items-center tw-font-medium tw-justify-center tw-capitalize tw-text-xs tw-mr-6">
+        {{ 'PLC-METER.IMPORT.'+ imports.result | translate | uppercase }}
       </div>
 
     </div>

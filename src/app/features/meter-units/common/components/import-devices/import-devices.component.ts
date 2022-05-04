@@ -15,6 +15,11 @@ import { ModalService } from '../../../../../core/modals/services/modal.service'
 export interface ActiveImport {
   fileName: string;
   nrOfDevices: number;
+  nrOfImportedDevices: number;
+  nrOfInsertedDevices: number;
+  nrOfUpdatedDevices: number;
+  nrOfFailedDevices: number;
+  result: string;
 }
 
 @Component({
