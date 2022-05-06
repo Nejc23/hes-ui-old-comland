@@ -76,7 +76,8 @@ export class RegistersSelectGridService {
         sortable: true,
         headerName: this.translate.instant('GRID.NAME'),
         headerTooltip: this.translate.instant('GRID.NAME'),
-        cellRenderer: 'gridCellNameComponent'
+        cellRenderer: 'gridCellNameComponent',
+        sort: 'asc'
       },
       {
         field: 'type',
