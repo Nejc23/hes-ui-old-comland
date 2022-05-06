@@ -198,6 +198,7 @@ export class TouConfigListComponent implements OnInit {
   }
 
   selectionChanged(selectedRows: string[]) {
+    this.selectedKeys = selectedRows;
     this.showGridBulkActions = selectedRows.length > 0;
   }
 
@@ -212,7 +213,7 @@ export class TouConfigListComponent implements OnInit {
 
       modalRef.result.then(() => {
         const batch: Observable<any>[] = [];
-        for (const key of event.selectedKeys) {
+        for (const key of this.selectedKeys) {
           batch.push(this.touService.deleteConfiguration(key));
         }
         const joinedObservables = forkJoin(batch);
