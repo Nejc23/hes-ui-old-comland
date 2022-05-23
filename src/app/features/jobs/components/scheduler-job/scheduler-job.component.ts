@@ -10,7 +10,6 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
@@ -49,6 +48,7 @@ export class SchedulerJobComponent {
 
   form: FormGroup;
   formMeterTimeSync: FormGroup;
+  loading = false;
 
   noRegisters = false;
   requiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
@@ -137,7 +137,6 @@ export class SchedulerJobComponent {
   constructor(
     private meterService: PlcMeterReadScheduleService,
     private codelistService: CodelistRepositoryService,
-    private jobsService: JobsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
@@ -286,7 +285,6 @@ export class SchedulerJobComponent {
     this.severities = severities;
     this.sources = sources;
 
-    console.log('setFormNotificationJobAddNew');
     this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
   }
 
@@ -320,6 +318,7 @@ export class SchedulerJobComponent {
       }
       case JobTypeEnumeration.alarmNotification: {
         this.showAlarmNotification = true;
+        this.filter = job?.notificationFilter;
         break;
       }
       case JobTypeEnumeration.meterTimeSync: {
@@ -339,7 +338,7 @@ export class SchedulerJobComponent {
     this.selectedJobId = selectedJobId;
 
     this.form = this.createForm(job);
-    //this.filter = job?.filter;
+
     this.addresses = job?.addresses;
 
     this.form.get(this.registersProperty).clearValidators();
@@ -457,6 +456,7 @@ export class SchedulerJobComponent {
   }
 
   save(addNew: boolean) {
+    this.loading = true;
     // times and selected registers
     if (this.showRegisters) {
       const selectedRegisters = this.registers.getSelectedRowNames();
@@ -496,7 +496,7 @@ export class SchedulerJobComponent {
         return;
       }
 
-      //values.filter = this.notificationRules.getFilter();
+      values.notificationFilter = this.notificationRules.getFilter();
       values.addresses = this.notificationRules.getAddresses();
       values.jobType = JobTypeEnumeration.alarmNotification;
     }
@@ -529,6 +529,9 @@ export class SchedulerJobComponent {
       (error) => {
         console.log('Error saving job ', error);
         this.toast.errorToast(this.translate.instant('JOB.SCHEDULER-JOB.ERROR-SAVING') + ' ' + error);
+      },
+      () => {
+        this.loading = false;
       }
     );
   }
@@ -605,10 +608,6 @@ export class SchedulerJobComponent {
 
   dcuSelectionChanged(hasValues: boolean) {
     this.noDCUs = !hasValues;
-  }
-
-  callAction() {
-    alert('abc');
   }
 
   addJob(jobType: JobTypeEnumeration) {

@@ -524,6 +524,10 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     this.breadcrumbService.setPageName(jobDescription);
   }
 
+  selectedRows() {
+    return this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
+  }
+
   onRemoveFromJob() {
     const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
     const deviceIdsParam = [];

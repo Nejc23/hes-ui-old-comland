@@ -9,6 +9,7 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { ExportHelper } from 'src/app/features/helpers/export.helper';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
@@ -22,17 +23,18 @@ import {
   ValueWithUnit
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
+import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 import { RegisterGroup, RegistersFilter, RegisterStatistics } from '../interfaces/data-processing-request.interface';
 import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
-import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
-import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
 })
 export class MeterUnitRegistersComponent implements OnInit {
   @ViewChild('popover') popover;
+  showNormalizedValues = false;
 
   eventDataColumns: Array<GridColumn> = [
     {
@@ -51,8 +53,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       width: 350
     }
   ];
-
-  registerDataColumns: Array<GridColumn> = [
+  registerNormalizedDataColumns: Array<GridColumn> = [
     {
       field: 'timestamp',
       translationKey: 'GRID.TIMESTAMP',
@@ -60,7 +61,31 @@ export class MeterUnitRegistersComponent implements OnInit {
     },
     {
       field: 'value',
-      translationKey: 'GRID.VALUE'
+      translationKey: 'GRID.VALUE',
+      type: GridColumnType.WITH_DECIMAL,
+      digitsInfo: '1.3-3' // always 3 decimal places
+    },
+    {
+      field: 'unit',
+      translationKey: 'GRID.UNIT'
+    },
+    {
+      field: 'status',
+      translationKey: 'GRID.STATUS'
+    }
+  ];
+
+  registerColumnsRowData: Array<GridColumn> = [
+    {
+      field: 'timestamp',
+      translationKey: 'GRID.TIMESTAMP',
+      type: GridColumnType.DATE_TIME
+    },
+    {
+      field: 'value',
+      translationKey: 'GRID.VALUE',
+      type: GridColumnType.WITH_DECIMAL,
+      digitsInfo: '1.0-20' // as stored in DB
     },
     {
       field: 'unit',
@@ -110,6 +135,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public isRegisterSelected = false;
   public isDataFound = false;
+  calculatedValues = false;
+  normalizedDataEmpty = false;
 
   public chartCategories: Date[];
   public chartData: any[][];
@@ -117,7 +144,6 @@ export class MeterUnitRegistersComponent implements OnInit {
   public form: FormGroup;
 
   public hideFilter;
-
   public registerSearch;
 
   public categorization;
@@ -128,9 +154,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   unit = '';
 
   normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
-  showNormalizedValues = false;
 
-  basicUnits = ['w', 'wh', 'var', 'varh'];
+  basicUnits = ['w', 'wh', 'va', 'var', 'varh', 'vah'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -142,7 +167,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     private registerStatisticsService: RegisterStatisticsService,
     private formUtils: FormsUtilsService,
     private codeList: CodelistMeterUnitsRepositoryService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private exportHelper: ExportHelper
   ) {}
 
   get registerProperty() {
@@ -182,6 +208,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   changeRegisterOptionId() {
+    this.gridData = [];
+    this.rowData = [];
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
@@ -312,6 +340,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     };
 
     this.rowData = null;
+    this.calculatedValues = false;
+    this.normalizedDataEmpty = false;
     this.registerStatisticsData = null;
     try {
       this.dataProcessingService.getChartData(this.registersFilter).subscribe((values) => {
@@ -320,9 +350,13 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          // ['w', 'wh'].includes(values[0].valueWithUnit.unit.toLowerCase())
           this.rowData.map((value) => {
-            value.valueWithUnit = this.transformValue(value.valueWithUnit);
+            if (value.valueWithUnit?.value && value.valueWithUnit?.unit) {
+              value.valueWithUnit = this.transformValue(value.valueWithUnit);
+            }
+            if (value.normValueWithUnit?.value && value.normValueWithUnit?.unit) {
+              value.normValueWithUnit = this.transformValue(value.normValueWithUnit);
+            }
           });
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
@@ -330,15 +364,18 @@ export class MeterUnitRegistersComponent implements OnInit {
           } else {
             this.toGridData(this.rowData);
           }
-          this.chartCategories = values.map((v) => new Date(v.timestamp));
-          this.chartData = [values];
+          this.chartCategories = this.rowData.map((v) => new Date(v.timestamp));
+          this.chartData = [this.rowData];
           let dataField = 'valueWithUnit';
           if (this.showNormalizedValues) {
             dataField = 'normValueWithUnit';
+            this.checkIfDataExist();
           }
-          if (values[0][dataField]?.unit) {
-            this.unit = values[0][dataField].unit;
+          const findUnit = this.rowData.find((item) => item[dataField]?.unit !== undefined) ?? '';
+          if (findUnit !== '') {
+            this.unit = findUnit[dataField].unit ?? '';
           }
+          this.calculatedValues = true;
         }
       });
     } catch (error) {
@@ -517,9 +554,38 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   transformValue(value: ValueWithUnit) {
     if (this.basicUnits.includes(value.unit.toLowerCase())) {
-      value.value = Math.round(parseInt(value.value) / 1000).toString();
+      value.value = (parseInt(value.value) / 1000).toString();
       value.unit = 'k' + value.unit;
     }
     return value;
+  }
+
+  checkIfDataExist() {
+    const dataExist = this.rowData.some((value) => value.normValueWithUnit?.unit !== undefined) ?? [];
+    if (!dataExist) {
+      this.normalizedDataEmpty = true;
+    }
+  }
+
+  getCurrentDateTime() {
+    return moment().format(environment.dateTimeFileFormat);
+  }
+
+  exportToCSV() {
+    const gridColumnsFields = Array<string>();
+    const gridColumnsHeader = Array<string>();
+    const gridColumns = this.isEvent
+      ? this.eventDataColumns
+      : this.showNormalizedValues
+      ? this.registerNormalizedDataColumns
+      : this.registerColumnsRowData;
+    gridColumns.forEach((value: GridColumn) => {
+      gridColumnsFields.push(value.field);
+      gridColumnsHeader.push(this.translate.instant(value.translationKey));
+    });
+
+    const fileName = `meter-data_${this.getCurrentDateTime()}_${this.deviceId}.csv`;
+
+    this.exportHelper.exportToCSV(this.gridData, gridColumnsFields, gridColumnsHeader, fileName);
   }
 }

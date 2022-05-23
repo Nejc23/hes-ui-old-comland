@@ -1,4 +1,4 @@
-<app-modal-template (dismiss)="onDismiss()">
+<app-modal-template (dismiss)="onDismiss()" [loading]="loading">
 
   <div *ngIf="step === 0" modal-header>{{ 'JOB.SCHEDULER-JOB.CREATE-JOB' | translate }}</div>
   <div *ngIf="step > 0" modal-header>{{title}} {{getSelectedRowsCount()}}</div>

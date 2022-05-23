@@ -30,9 +30,9 @@ export class MeterUnitsTypeGridService {
       type: GridColumnType.ICONS,
       iconsData: [
         {
-          field: gridSysNameColumnsEnum.templateId,
+          field: 'hasConfigurationErrors',
           iconName: 'warning-red-icon',
-          popoverText: 'GRID.MISSING-TEMPLATE'
+          popoverTextErrorField: 'errorList'
         },
         {
           field: gridSysNameColumnsEnum.serialMismatch,
@@ -55,6 +55,12 @@ export class MeterUnitsTypeGridService {
           popoverText: 'GRID.ACTIVE-JOBS'
         }
       ]
+    },
+    {
+      field: gridSysNameColumnsEnum.sla,
+      translationKey: 'GRID.SLA',
+      width: 80,
+      type: GridColumnType.SLA
     },
     {
       field: gridSysNameColumnsEnum.jobStatus,

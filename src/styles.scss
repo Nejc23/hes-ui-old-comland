@@ -474,3 +474,39 @@ kendo-popup {
     right: 130px;
   }
 }
+
+// pill message
+.pill-green {
+  color: #36BF36;
+  padding: 3px 8px 3px 8px;
+  background: #E7F8E7;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.pill-orange {
+  color: #F07A05;
+  padding: 3px 8px 3px 8px;
+  background: #FEF0E1;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.pill-red {
+  color: #E60F0F;
+  padding: 3px 8px 3px 8px;
+  background: #FEE1E1;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.btn-secondary {
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}

@@ -21,7 +21,6 @@ import { IActionRequestParams } from '../../../../../core/repository/interfaces/
 })
 export class PlcMeterLimiterComponent implements OnInit {
   form: FormGroup;
-  deviceIdsParam = [];
   params: IActionRequestParams;
   registers$: Codelist<string>[];
   public selectedRowsCount: number;
@@ -105,7 +104,7 @@ export class PlcMeterLimiterComponent implements OnInit {
 
     const formData: RequestSetLimiter = {
       limiterDefinitions: data,
-      deviceIds: this.deviceIdsParam,
+      deviceIds: this.params.deviceIds,
       filter: this.params.filter,
       textSearch: this.params.textSearch,
       sort: [],

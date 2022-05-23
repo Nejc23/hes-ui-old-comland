@@ -5,8 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { IActionRequestParams, IRegisterTypesEnum } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
@@ -15,9 +15,14 @@ import { SchedulerJobComponent } from 'src/app/features/jobs/components/schedule
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { capitalize } from 'src/app/shared/forms/functions/string.functions';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { CodelistRepositoryService } from '../../../../core/repository/services/codelists/codelist-repository.service';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
+import {
+  DeleteMeterDataPayload,
+  PlcDeleteMeterDataComponent
+} from '../../common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
@@ -36,11 +41,6 @@ import { SecurityChangePasswordComponent } from '../../common/components/securit
 import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
-import { CodelistRepositoryService } from '../../../../core/repository/services/codelists/codelist-repository.service';
-import {
-  DeleteMeterDataPayload,
-  PlcDeleteMeterDataComponent
-} from '../../common/components/plc-delete-meter-data/plc-delete-meter-data.component';
 
 @Injectable({
   providedIn: 'root'
@@ -369,12 +369,27 @@ export class MeterUnitsPlcActionsService {
         params.from = payload.startDate;
         params.to = payload.endDate;
 
-        this.service.deleteDeviceData(params).subscribe(
-          (value) => {
-            this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
+        // Confirmation dialog.
+        const confirmOptions: NgbModalOptions = { size: 'lg' };
+        const confirmModalRef = this.modalService.open(ModalConfirmComponent, confirmOptions);
+        const component: ModalConfirmComponent = confirmModalRef.componentInstance;
+        component.btnConfirmText = this.translate.instant('COMMON.CONFIRM');
+        component.modalTitle = this.translate.instant('PLC-METER.DELETE.ARE-YOU-SURE-MESSAGE');
+        component.modalBody = this.translate.instant('PLC-METER.DELETE.ARE-YOU-SURE-WARNING-MESSAGE');
+
+        confirmModalRef.result.then(
+          (confirmData) => {
+            this.service.deleteDeviceData(params).subscribe(
+              (value) => {
+                this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
+              },
+              (e) => {
+                this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+              }
+            );
           },
-          (e) => {
-            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+          (reason) => {
+            // on dismiss (CLOSE)
           }
         );
       },
@@ -761,6 +776,13 @@ export class MeterUnitsPlcActionsService {
               if (row.id === 6) {
                 requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.serialMismatch),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 7) {
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.timeDeviation),
                   propValue: 'true',
                   filterOperation: filterOperationEnum.equal
                 });

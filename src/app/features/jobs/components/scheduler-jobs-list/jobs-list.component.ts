@@ -27,6 +27,8 @@ import { GridColumn, GridRowAction, PageChangedEvent } from '../../../../shared/
 import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
 import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
 import { JobTypeEnumeration } from '../../enums/job-type.enum';
+import { Router } from '@angular/router';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-jobs-list',
@@ -45,6 +47,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
   jobColumns: Array<GridColumn>;
   gridData: Array<SchedulerJobsList>;
   rowActions: Array<GridRowAction>;
+  sort: SortDescriptor[];
   pageNumber = 1;
   totalCount = 0;
   pageSize = 20;
@@ -114,7 +117,8 @@ export class JobsListComponent implements OnInit, OnDestroy {
     private permissionService: PermissionService,
     private translate: TranslateService,
     private elRef: ElementRef,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private router: Router
   ) {
     this.refreshSubscription = this.eventService.eventEmitterRefresh.subscribe({
       next: (event: boolean) => {
@@ -154,7 +158,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.jobColumns = this.schedulerJobsListGridService.columns;
     this.rowActions = this.schedulerJobsListGridService.rowActions;
-
+    this.sort = this.schedulerJobsListGridService.sort;
     this.breadcrumbService.setPageName('');
     this.getSchedulerJobsListGridLayoutStore();
   }
@@ -338,11 +342,11 @@ export class JobsListComponent implements OnInit, OnDestroy {
 
   linkClicked(row: any) {
     // commented until we fixed views
-    // let baseUrl = '/schedulerJobs/meter-units';
-    // if (row.rowData.jobType === 1 || row.rowData.jobType === 3 || row.rowData.jobType === 5 || row.rowData.jobType === 4) {
-    //   baseUrl = '/schedulerJobs/concentrators';
-    // }
-    // this.router.navigate([baseUrl, row.id]);
+    const baseUrl = '/schedulerJobs/meter-units';
+    if (!(row.rowData.jobType === 1 || row.rowData.jobType === 3 || row.rowData.jobType === 5 || row.rowData.jobType === 4)) {
+      this.router.navigate([baseUrl, row.id]);
+    }
+    // else redirect to DC baseUrl = '/schedulerJobs/concentrators';
   }
 
   setRequestData() {

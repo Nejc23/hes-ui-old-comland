@@ -40,5 +40,7 @@ export const gridSysNameColumnsEnum = {
   hasActiveJobs: 'hasActiveJobs',
   templateId: 'templateId',
   externalId: 'externalId',
-  serialMismatch: 'serialMismatch'
+  sla: 'sla',
+  serialMismatch: 'serialMismatch',
+  timeDeviation: 'timeDeviation'
 };

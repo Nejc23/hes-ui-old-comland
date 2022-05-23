@@ -426,6 +426,13 @@ export class MeterUnitsService {
               filterOperation: filterOperationEnum.equal
             });
           }
+          if (row.id === 7) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.timeDeviation),
+              propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
         });
       }
 

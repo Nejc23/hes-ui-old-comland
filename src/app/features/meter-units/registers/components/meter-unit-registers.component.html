@@ -76,100 +76,150 @@
         </div>
       </div>
       <div class="tw-inline-flex tw-w-full">
-        <app-date-range-picker (valueChange)="onRefresh()" [endProperty]="endDateProperty" [form]="form"
-                               [startProperty]="startDateProperty" class="tw-w-1/2">
+        <app-date-range-picker
+          (valueChange)="onRefresh()"
+          [endProperty]="endDateProperty"
+          [form]="form"
+          [startProperty]="startDateProperty"
+          class="tw-w-1/2"
+        >
         </app-date-range-picker>
-        <div *ngIf="normalizedValues && isDataFound" class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+
+        <!-- raw and norm data -->
+        <div *ngIf="normalizedValues && isDataFound && calculatedValues && !isEvent"
+             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
           <div class="tw-text-mediumGray tw-flex tw-self-center tw-pr-3 tw-pt-0.5">
-            {{ 'PLC-METER.SHOW-RAW' | translate}}
+            {{ 'PLC-METER.SHOW-RAW' | translate }}
           </div>
           <div>
-            <kendo-switch (valueChange)="onValueChanged($event)"
-                          [checked]="!showNormalizedValues"
-                          [title]="getPopoverText()"
-                          class="small-switch"
-                          data-placement="top"
-                          data-toggle="tooltip"></kendo-switch>
+            <kendo-switch
+              (valueChange)="onValueChanged($event)"
+              [checked]="!showNormalizedValues"
+              [title]="getPopoverText()"
+              class="small-switch"
+              data-placement="top"
+              data-toggle="tooltip"
+            ></kendo-switch>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mu-registers-body-scroll">
-      <div *ngIf="!isRegisterSelected" class="card text-center border-0 mt-5">
-        <div class="card-header border-0 bg-transparent">
-          <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
-        </div>
-        <div class="card-body">
-          <div
-            class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
-          <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
-        </div>
-      </div>
-      <div *ngIf="isRegisterSelected && !isDataFound" class="card text-center border-0 mt-5">
-        <div class="card-header border-0 bg-transparent">
-          <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
-        </div>
-        <div class="card-body">
-          <div class="small-title pb-2">{{ 'COMMON.NO-DATA-FOUND' | translate }}</div>
-          <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
-          <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
-        </div>
-      </div>
-
-      <div *ngIf="isDataFound">
-        <div class="row mt-4">
-          <div *ngIf="!isEvent" class="col-12">
-            <app-registers-chart [categories]="chartCategories"
-                                 [chartData]="chartData"
-                                 [showNormalizedData]="showNormalizedValues"
-                                 [unit]="unit"></app-registers-chart>
-          </div>
-          <div *ngIf="isEvent" class="col-12">
-            <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
-            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"
-                                        [hours]="hours"></app-registers-column-chart>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div
-            [ngClass]="{
-              'col-12': (!showStatistics || !registerStatisticsData) && !isEvent,
-              'col-8': (showStatistics && registerStatisticsData && !isEvent) || isEvent
-            }"
-          >
-            <div *ngIf="gridData.length > 0">
-              <app-data-table [fetchData]="false"
-                              [gridColumns]="isEvent ? eventDataColumns : registerDataColumns"
-                              [gridData]="gridData"
-                              [noDataText]="'NO-DATA-FOUND'"
-                              [pageable]="true"
-                              [rowHeight]="44"
-                              [scrollable]="'virtual'"
-                              [skip]="0"
-                              [sort]="registerDataDefaultSort"
-                              [sortable]="true"
-                              [tableHeight]="446"
-                              [totalCount]="gridData.length">
-              </app-data-table>
+          <div *ngIf="gridData?.length > 0">
+            <div (click)="exportToCSV()"
+                 *ngIf="(showNormalizedValues && !normalizedDataEmpty) || !showNormalizedValues"
+                 [ngbTooltip]="tipContentExportToCsv">
+              <img class="tw-h-7 tw-mx-4" src="assets/images/icons/export-csv-icon.svg" />
             </div>
           </div>
-          <div *ngIf="showStatistics && !isEvent && registerStatisticsData" class="col-4">
-            <app-registers-statistics [data]="registerStatisticsData"
-                                      [showNormalizedValues]="showNormalizedValues"></app-registers-statistics>
+        </div>
+
+        <!-- raw data only -->
+        <div *ngIf="gridData.length > 0 && !normalizedValues"
+             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+          <div (click)="exportToCSV()" [ngbTooltip]="tipContentExportToCsv">
+            <img class="tw-h-7 tw-mx-4" src="assets/images/icons/export-csv-icon.svg" />
           </div>
-          <div *ngIf="isEvent" class="col-4">
-            <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
-            <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
+        </div>
+      </div>
+
+
+      <div class="mu-registers-body-scroll">
+        <div *ngIf="!isRegisterSelected" class="card text-center border-0 mt-5">
+          <div class="card-header border-0 bg-transparent">
+            <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+          </div>
+          <div class="card-body">
+            <div
+              class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
+          </div>
+        </div>
+        <div *ngIf="isRegisterSelected && !isDataFound" class="card text-center border-0 mt-5">
+          <div class="card-header border-0 bg-transparent">
+            <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+          </div>
+          <div class="card-body">
+            <div class="small-title pb-2">{{ 'PLC-METER.NO-RAW-DATA-FOUND' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="isRegisterSelected && showNormalizedValues && isDataFound && normalizedDataEmpty && !isEvent"
+          class="card text-center border-0 mt-5"
+        >
+          <div class="card-header border-0 bg-transparent">
+            <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+          </div>
+          <div class="card-body">
+            <div class="small-title pb-2">{{ 'COMMON.NO-NORMALIZED-DATA' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="(isDataFound && !showNormalizedValues && calculatedValues) || ( isDataFound && showNormalizedValues && !normalizedDataEmpty && calculatedValues)">
+          <div class="row mt-4">
+            <div *ngIf="!isEvent" class="col-12">
+              <app-registers-chart
+                [categories]="chartCategories"
+                [chartData]="chartData"
+                [showNormalizedData]="showNormalizedValues"
+                [unit]="unit"
+              ></app-registers-chart>
+            </div>
+            <div *ngIf="isEvent" class="col-12">
+              <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
+              <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"
+                                          [hours]="hours"></app-registers-column-chart>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div
+              [ngClass]="{
+                'col-12': (!showStatistics || !registerStatisticsData) && !isEvent,
+                'col-8': (showStatistics && registerStatisticsData && !isEvent) || isEvent
+              }"
+            >
+              <div *ngIf="calculatedValues && gridData.length > 0">
+                <app-data-table
+                  [fetchData]="false"
+                  [gridColumns]="isEvent ? eventDataColumns : showNormalizedValues ? registerNormalizedDataColumns : registerColumnsRowData"
+                  [gridData]="gridData"
+                  [noDataText]="'NO-DATA-FOUND'"
+                  [pageable]="true"
+                  [rowHeight]="44"
+                  [scrollable]="'virtual'"
+                  [skip]="0"
+                  [sort]="registerDataDefaultSort"
+                  [sortable]="true"
+                  [tableHeight]="446"
+                  [totalCount]="gridData.length"
+                >
+                </app-data-table>
+              </div>
+            </div>
+            <div *ngIf="showStatistics && !isEvent && registerStatisticsData" class="col-4">
+              <app-registers-statistics
+                [data]="registerStatisticsData"
+                [showNormalizedValues]="showNormalizedValues"
+              ></app-registers-statistics>
+            </div>
+            <div *ngIf="isEvent" class="col-4">
+              <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
+              <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ng-template #hideShowFilters
+  ><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template
+  >
+  <ng-template #tipContentRefresh
+  ><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template
+  >
+  <ng-template #tipContentExportToCsv
+  ><span>{{ 'GRID.CSV-EXPORT' | translate }}</span></ng-template
+  >
 </div>
-<ng-template #hideShowFilters
-><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template
->
-<ng-template #tipContentRefresh
-><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template
->

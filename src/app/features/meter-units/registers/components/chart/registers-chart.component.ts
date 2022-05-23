@@ -26,7 +26,7 @@ export class RegistersChartComponent {
   }
 
   public labelContent = (e: any) => {
-    if (this.chartData.length > 0) {
+    if (this.chartData?.length > 0) {
       return e.value + ' ' + this.unit;
     }
     return e.value;
