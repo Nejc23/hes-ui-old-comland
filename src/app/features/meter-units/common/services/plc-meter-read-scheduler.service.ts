@@ -31,7 +31,8 @@ export class PlcMeterReadScheduleService {
       pageNumber: values.pageNumber,
       sort: values.sort,
       textSearch: values.textSearch,
-      tryFillDevices: values.tryFillDevices
+      tryFillDevices: values.tryFillDevices,
+      notificationFilter: values.notificationFilter
     };
     return serviceData;
   }

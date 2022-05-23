@@ -10,6 +10,7 @@ import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GridColumn, GridColumnType, GridRowAction } from '../../../shared/data-table/data-table.component';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,13 @@ export class SchedulerJobsListGridService {
     {
       actionName: 'deleteJob',
       iconName: 'delete'
+    }
+  ];
+
+  sort: SortDescriptor[] = [
+    {
+      field: 'description',
+      dir: 'asc'
     }
   ];
 

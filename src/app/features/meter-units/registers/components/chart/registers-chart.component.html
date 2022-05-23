@@ -28,9 +28,9 @@
           <div style="text-align: center">
             <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
             <div
-              *ngIf="!showNormalizedData">{{ dataItem.valueWithUnit?.value }} {{ dataItem.valueWithUnit?.unit }}</div>
+              *ngIf="!showNormalizedData">{{ dataItem.valueWithUnit?.value | number : '1.0-20' }} {{ dataItem.valueWithUnit?.unit }}</div>
             <div
-              *ngIf="showNormalizedData">{{ dataItem.normValueWithUnit?.value }} {{ dataItem.normValueWithUnit?.unit }}</div>
+              *ngIf="showNormalizedData">{{ dataItem.normValueWithUnit?.value | number : '1.3-3' }} {{ dataItem.normValueWithUnit?.unit }}</div>
             <div>{{ dataItem.status }}</div>
           </div>
         </ng-template>

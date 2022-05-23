@@ -1,3 +1,5 @@
+import { NotificationFilter } from '../jobs/scheduler-job.interface';
+
 export interface IActionRequestParams {
   pageSize: number;
   pageNumber: number;
@@ -18,6 +20,7 @@ export interface IActionRequestParams {
   states?: string[];
   enabled?: boolean;
   selectAll?: boolean;
+  notificationFilter?: NotificationFilter;
 }
 
 export interface IActionSearchParam {

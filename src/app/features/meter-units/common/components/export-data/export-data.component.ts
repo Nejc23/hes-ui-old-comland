@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { MyGridLinkService } from '../../../../../core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { Observable } from 'rxjs';
+import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 
 export interface ExportDataPayload extends IActionRequestParams {
   startDate: string;
@@ -61,7 +62,6 @@ export class ExportDataComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.getDataExportJobs();
-    this.getDataReportJobs();
   }
 
   dateChanged() {
@@ -73,9 +73,18 @@ export class ExportDataComponent implements OnInit {
   }
 
   onConfirm() {
+    const startDate = moment(this.form.controls.startDate.value, environment.dateDisplayFormat)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(dateServerFormat);
+    const endDate = moment(this.form.controls.endDate.value, environment.dateDisplayFormat)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(dateServerFormat);
+
     this.payload = {
-      startDate: this.form.get('startDate').value,
-      endDate: this.form.get('endDate').value,
+      startDate: startDate,
+      endDate: endDate,
       upload: this.form.get('upload').value,
       jobId: !this.reportTab ? this.form.get('exportType').value.apiId : this.form.get('reportType').value.apiId,
       location: this.form.get('location').value,
@@ -125,6 +134,7 @@ export class ExportDataComponent implements OnInit {
       if (this.exportTypes && this.exportTypes[0]) {
         this.form.controls['exportType'].setValue(this.exportTypes[0]);
       }
+      this.getDataReportJobs();
       this.loading = false;
     });
   }

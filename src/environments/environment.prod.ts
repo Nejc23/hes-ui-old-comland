@@ -6,6 +6,7 @@ export const environment = {
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
+  dateTimeFileFormat: 'DD-MM-yyyy_HH-mm',
   dateDisplayFormat: 'DD. MM. YYYY',
   dateOnlyFormat: 'DD. MM',
   dateFormat: 'dd.MM.yyyy',

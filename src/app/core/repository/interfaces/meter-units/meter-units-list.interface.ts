@@ -32,4 +32,12 @@ export interface MeterUnitsList {
   serialNumber: string;
   instantValues?: InstantValue[];
   protocolType: string;
+  sla: SlaValue;
+  hasConfigurationErrors?: boolean;
+  errorList?: string;
+}
+
+export interface SlaValue {
+  color: string;
+  value: number;
 }

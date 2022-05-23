@@ -300,7 +300,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.form.get(this.importDevicesField).setValue(this.filterFromFiles[0]);
     this.form.get(this.fileProperty).setValue(null);
     this.eventsService.emitCustom('ClearMeterIdsFilter', this.meterIdsFilterEvent);
-
     this.clearFile = true;
     this.meterIds = [];
     this.fileValid = false;
@@ -429,6 +428,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   }
 
   parseFile(ids) {
+    const importDevicesField = this.form.get(this.importDevicesField).value;
+    this.clearFilters();
+    this.form.get(this.importDevicesField).setValue(importDevicesField);
     this.showImportError = false;
     this.fileValid = false;
     this.meterIds = ids;
@@ -456,5 +458,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       field: this.form.get(this.importDevicesField).value.id
     };
     this.applyMeterIdsToGrid();
+  }
+
+  clearFilters() {
+    this.gridFilterSessionStoreService.clearGridLayout();
+    this.doFillData();
   }
 }

@@ -251,7 +251,7 @@
 .kendo-grid {
   ::ng-deep ::-webkit-scrollbar {
     width: 0.45rem;
-    height: 16px;
+    height: 8px;
   }
 
   ::ng-deep ::-webkit-scrollbar-track {
@@ -467,4 +467,25 @@
 
 .disabled-search {
   cursor: not-allowed !important;
+}
+
+.pill {
+  font-weight: 500;
+  font-size: 11px;
+  border-radius: 2px;
+
+  &.orange {
+    color: #F07A05;
+    background: #FEF0E1;
+  }
+
+  &.green {
+    color: #36BF36;
+    background: #E7F8E7;
+  }
+
+  &.red {
+    color: #E60F0F;
+    background: #FEE1E1;
+  }
 }

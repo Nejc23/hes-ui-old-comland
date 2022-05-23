@@ -6,7 +6,7 @@ import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-co
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
-import { GridFilterParams, GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
@@ -21,11 +21,8 @@ export class MeterUnitsForJobGridService {
   cookieNameForGridSettings = 'grdColMUT-allId-';
   cookieNameForGridSort = 'grdColMUTSort-allId-';
   sessionNameForGridState = 'grdStateMUT-allId-';
-  gridName = 'grdMUT-requestAllIds';
-  gridNameBreakerState = 'grdMUT-breaker-state-requestAllIds';
 
   columns = [];
-  paramsDCU = {} as GridRequestParams;
   meterUnitsId: number;
 
   constructor(
@@ -52,20 +49,6 @@ export class MeterUnitsForJobGridService {
       gridCellNameComponent: AllForJobGridCellNameComponent,
       gridCellVendorComponent: AllForJobGridCellVendorComponent,
       gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent
-
-      // gridCellMeterIdComponent: GridCellMeterIdComponent,
-      // gridCellTagsComponent: GridCellTagsComponent,
-      //
-
-      // gidCellParentComponent: GridCellParentComponent,
-      // gridCellModuleIdComponent: GridCellModuleIdComponent,
-      // gridCellFirmwareComponent: GridCellFirmwareComponent,
-
-      // gridCellTimeOfUseIdComponent: GridCellTimeOfUseIdComponent,
-      // gridCellBreakerStateComponent: GridCellBreakerStateComponent,
-      // gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
-      // gridCellIconComponent: GridCellIconComponent,
-      // gridCellJobStatusComponent: GridCellJobStatusComponent
     };
   }
 
@@ -89,7 +72,7 @@ export class MeterUnitsForJobGridService {
       },
       {
         field: gridSysNameColumnsEnum.name,
-        headerName: `Name`,
+        headerName: this.translate.instant('GRID.NAME'),
         pinned: false,
         sortable: true,
         filter: false,
@@ -106,18 +89,6 @@ export class MeterUnitsForJobGridService {
         headerTooltip: this.translate.instant('GRID.SERIAL-NUMBER')
       },
       {
-        field: gridSysNameColumnsEnum.logicalDeviceName,
-        headerName: this.translate.instant('GRID.LOGICAL-DEVICE-NAME'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellNameComponent',
-        headerTooltip: this.translate.instant('GRID.LOGICAL-DEVICE-NAME'),
-        suppressMenu: true,
-        suppressMovable: true,
-        resizable: false
-      },
-      {
         field: gridSysNameColumnsEnum.vendor,
         headerName: this.translate.instant('GRID.VENDOR'),
         pinned: false,
@@ -127,23 +98,17 @@ export class MeterUnitsForJobGridService {
         headerTooltip: this.translate.instant('GRID.VENDOR')
       },
       {
-        field: gridSysNameColumnsEnum.parent,
-        headerName: this.translate.instant('GRID.PARENT'),
+        field: 'protocol',
+        headerName: this.translate.instant('GRID.PROTOCOL'),
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gidCellParentComponent',
-        headerTooltip: this.translate.instant('GRID.PARENT'),
-        suppressMenu: true,
-        suppressMovable: true,
-        resizable: false
+        cellRenderer: 'gridCellVendorComponent',
+        headerTooltip: this.translate.instant('GRID.PROTOCOL')
       }
     ];
   }
 
-  // get stored grid settings from session configuration
-  // ---------------------------------------------------------
-  // is selected all
   public getSessionSettingsSelectedAll() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.isSelectedAll;
@@ -155,13 +120,11 @@ export class MeterUnitsForJobGridService {
     return settings.searchText;
   }
 
-  // searched wildcard
   public getSessionSettingsSearchedWildcards() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.searchWildcards;
   }
 
-  // set searched text
   public setSessionSettingsSearchedText(text: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     settings.searchText = text;
@@ -172,7 +135,6 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  // set searched wildcard
   public setSessionSettingsSearchedWildcards(searchWildcards: boolean) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     settings.searchWildcards = searchWildcards;
@@ -183,7 +145,6 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  // set is selected all
   public setSessionSettingsSelectedAll(selectAll: boolean) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     settings.isSelectedAll = selectAll;
@@ -194,13 +155,11 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  // get excluded rows
   public getSessionSettingsExcludedRows() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.excludedRows;
   }
 
-  // cleer excluded rows
   public setSessionSettingsClearExcludedRows() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     settings.excludedRows = [];
@@ -212,7 +171,6 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {
@@ -238,13 +196,11 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  // selected rows
   public getSessionSettingsSelectedRows() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.selectedRows;
   }
 
-  // set selected rows
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
@@ -302,13 +258,11 @@ export class MeterUnitsForJobGridService {
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  // page index
   public getSessionSettingsPageIndex() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.pageIndex;
   }
 
-  // set page index
   public setSessionSettingsPageIndex(index: number) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     settings.pageIndex = index;
@@ -327,19 +281,6 @@ export class MeterUnitsForJobGridService {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }
 
-  // saveMyGridLinkRequestId(requestId: string) {
-  //   this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
-  // }
-
-  // removeMyGridLinkRequestId(requestId: string) {
-  //   this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
-  // }
-
-  // getAllMyGridLinkRequestIds(): string[] {
-  //   return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
-  // }
-
-  // grid settings
   public setGridOptions() {
     return {
       rowModelType: configAgGrid.rowModelType,
@@ -360,14 +301,6 @@ export class MeterUnitsForJobGridService {
     };
   }
 
-  removeMyGridLink_BreakerState_RequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameBreakerState, requestId);
-  }
-
-  getAllMyGridLink_BreakerState_RequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
-  }
-
   private onColumnMoved = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
@@ -379,8 +312,6 @@ export class MeterUnitsForJobGridService {
   };
 }
 
-// extra functions for grid
-// set check box to first column
 function isFirstColumn(params) {
   const displayedColumns = params.columnApi.getAllDisplayedColumns();
   const thisIsFirstColumn = displayedColumns[0] === params.column;

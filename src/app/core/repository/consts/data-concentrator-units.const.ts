@@ -47,3 +47,5 @@ export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/ch
 
 // Validations
 export const validateHostname = `${dataConcentrator}/validations/hostname`;
+// SLA data for meters
+export const slaMeterData = `/api/data-processing/v2/sla`;

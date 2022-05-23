@@ -2,7 +2,12 @@ import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Injectable } from '@angular/core';
 import { ActiveJob } from '../../../../features/jobs/interfaces/active-job-progress.interface';
-import { basePathDcOperations, getActiveJobs, jobStateSummary } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import {
+  basePathDcOperations,
+  getActiveJobs,
+  jobStateSummary,
+  slaMeterData
+} from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { Observable } from 'rxjs';
 import { StatusJobProgress } from '../../../../features/jobs/interfaces/status-job-progress.interface';
 import { getPropertyData } from '../../consts/meter-units.const';
@@ -55,5 +60,13 @@ export class ConcentratorService {
       registerTypes: registerTypes
     };
     return new HttpRequest('POST', getPropertyData, body);
+  }
+
+  getSlaData(deviceIds: string[], dateFrom: string): Observable<any> {
+    return this.repository.makeRequest(this.getSlaDataRequest(deviceIds, dateFrom));
+  }
+
+  getSlaDataRequest(deviceIds: string[], dateFrom: string): HttpRequest<any> {
+    return new HttpRequest('POST', slaMeterData, { deviceIds: deviceIds, from: dateFrom });
   }
 }

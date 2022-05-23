@@ -12,21 +12,18 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'scheduler-active-jobs.component.html'
 })
 export class SchedulerActiveJobsComponent implements OnInit {
-  @Input() defaultItemCount = 5;
   @Input() deviceId: string;
 
   public modules: Module[] = AllModules;
 
   isContentLoaded = false;
   isMoreButtonVisible = false;
-
   public gridApi;
 
   public frameworkComponents;
   columnDefs = [];
   allActiveJobs$: Observable<SchedulerJobsList[]>;
   allActiveJobs: SchedulerJobsList[];
-  visibleActiveJobs: SchedulerJobsList[];
 
   constructor(
     private activeJobsService: JobsService,
@@ -34,11 +31,6 @@ export class SchedulerActiveJobsComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
-  }
-
-  public showMore(): void {
-    this.visibleActiveJobs = this.allActiveJobs;
-    this.isMoreButtonVisible = false;
   }
 
   ngOnInit() {
@@ -56,15 +48,6 @@ export class SchedulerActiveJobsComponent implements OnInit {
     this.allActiveJobs$ = this.activeJobsService.getSchedulerActiveJobsList(this.deviceId);
     this.allActiveJobs$.subscribe((x) => {
       this.allActiveJobs = x;
-
-      if (this.allActiveJobs.length > this.defaultItemCount) {
-        this.isMoreButtonVisible = true;
-        this.visibleActiveJobs = this.allActiveJobs.slice(0, this.defaultItemCount);
-      } else {
-        this.visibleActiveJobs = this.allActiveJobs;
-        this.isMoreButtonVisible = false;
-      }
-
       this.isContentLoaded = true;
     });
   }
@@ -80,9 +63,5 @@ export class SchedulerActiveJobsComponent implements OnInit {
   // set momemnt text (last communication) out of date and time
   setMomentNextRun(time: string): string {
     return time != null && time.length > 0 ? moment(time).fromNow() : this.translate.instant('COMMON.NA');
-  }
-
-  getShowAllText(): string {
-    return this.translate.instant('COMMON.NA') + this.allActiveJobs.length + this.translate.instant('COMMON.JOBS');
   }
 }

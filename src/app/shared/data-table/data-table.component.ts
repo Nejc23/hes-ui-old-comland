@@ -1,4 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
   CellClickEvent,
   ExcelExportEvent,
@@ -8,26 +13,22 @@ import {
   RowArgs,
   RowClassArgs
 } from '@progress/kendo-angular-grid';
+import { PagerPosition, PagerType } from '@progress/kendo-angular-grid/dist/es2015/pager/pager-settings';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
-import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 import { orderBy, process, SortDescriptor } from '@progress/kendo-data-query';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query/dist/npm/filtering/filter-descriptor.interface';
-import { environment } from '../../../environments/environment';
-import { PagerPosition, PagerType } from '@progress/kendo-angular-grid/dist/es2015/pager/pager-settings';
-import { Codelist } from '../repository/interfaces/codelists/codelist.interface';
-import { DisconnectorStateEnum, jobStatus } from 'src/app/features/meter-units/types/consts/meter-units.consts';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { ActiveJobsListComponent } from '../../features/jobs/components/active-jobs-list/active-jobs-list.component';
-import { ModalService } from '../../core/modals/services/modal.service';
-import { dateServerFormat } from '../forms/consts/date-format';
-import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
-import { brand } from '../../../environments/brand/default/brand';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { ExportHelper } from 'src/app/features/helpers/export.helper';
+import { DisconnectorStateEnum, jobStatus } from 'src/app/features/meter-units/types/consts/meter-units.consts';
+import { brand } from '../../../environments/brand/default/brand';
+import { environment } from '../../../environments/environment';
+import { ModalService } from '../../core/modals/services/modal.service';
+import { ActiveJobsListComponent } from '../../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { FormData } from '../card-item/card-item.component';
-import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
+import { dateServerFormat } from '../forms/consts/date-format';
+import { Codelist } from '../repository/interfaces/codelists/codelist.interface';
 
 export interface GridColumn {
   translationKey: string;
@@ -46,12 +47,14 @@ export interface GridColumn {
   linkUrl?: string;
   locked?: boolean;
   formField?: string;
+  digitsInfo?: string;
 }
 
 export interface IconData {
   field: string;
   iconName: string;
   popoverText?: string;
+  popoverTextErrorField?: string;
 }
 
 export enum GridColumnType {
@@ -68,7 +71,9 @@ export enum GridColumnType {
   JOB_STATUS = 'job-status',
   ICONS = 'icons',
   UNIT_WITH_VALUE = 'unit-with-value',
-  INSTANT_VALUES = 'instant-values'
+  INSTANT_VALUES = 'instant-values',
+  SLA = 'sla',
+  WITH_DECIMAL = 'with-decimal'
 }
 
 export interface GridRowAction {
@@ -192,6 +197,9 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() editFieldById = ''; // id needs to be defined for inline edit
   @Input() noDataTextAlignLeft = false;
   @Input() disableSearch = false;
+  @Input() csvExport = false;
+  @Input() csvFileName = '';
+  @Input() csvHeaderColumns: Array<string> = null;
 
   searchForm: FormGroup;
   wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
@@ -263,7 +271,12 @@ export class DataTableComponent implements OnInit, OnChanges {
   editedRowIndex;
   @Input() selectAllEnabled = false;
 
-  constructor(private modalService: ModalService, private translate: TranslateService, private fb: FormBuilder) {}
+  constructor(
+    private modalService: ModalService,
+    private translate: TranslateService,
+    private fb: FormBuilder,
+    private exportHelper: ExportHelper
+  ) {}
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
@@ -336,7 +349,7 @@ export class DataTableComponent implements OnInit, OnChanges {
       this.selectedKeys = this.gridData.map((item) => item[this.kendoGridSelectByColumn]);
       console.log(this.selectedKeys);
       if (this.excludedIdsFromSelection) {
-        this.selectedKeys = this.selectedKeys.filter((id) => !this.excludedIdsFromSelection.includes(id)); //
+        this.selectedKeys = this.selectedKeys.filter((id) => !this.excludedIdsFromSelection.includes(id));
       }
       if (this.totalCount === 0) {
         this.pageNumber = 0;
@@ -594,7 +607,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   getCurrentDateTime() {
-    return moment().format(environment.dateDisplayFormat) + ' ' + moment().format(environment.timeFormatLong);
+    return moment().format(environment.dateTimeFormat) + ' ' + moment().format(environment.timeFormatLong);
   }
 
   public sortChange(sort: SortDescriptor[]): void {
@@ -618,6 +631,7 @@ export class DataTableComponent implements OnInit, OnChanges {
       this.applyFilter('', '');
     }
     this.clearFiltersClickedEvent.emit(true);
+    this.searchInputChangedEvent.emit('');
   }
 
   filtersApplied() {
@@ -703,7 +717,10 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   onClearFilterClick() {
+    this.searchTerm = '';
+    this.searchInput.nativeElement.value = '';
     this.clearFilerTextClickEvent.emit(true);
+    this.searchInputChangedEvent.emit('');
   }
 
   // meter units grid specific columns from old grid
@@ -821,6 +838,26 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   switchClicked(rowData: any, value: boolean) {
     this.switchValueChanged(rowData[this.kendoGridSelectByColumn], value);
+  }
+
+  exportToCSV(fileName: string) {
+    if (fileName.length == 0) {
+      fileName = 'data_' + this.getCurrentDateTime() + '.xlsx';
+    }
+
+    const dataFields = Array<string>();
+    if (this.csvHeaderColumns == null) {
+      this.csvHeaderColumns = new Array<string>();
+    }
+    this.gridColumns.forEach((value: GridColumn) => {
+      dataFields.push(value.field);
+
+      if (this.csvHeaderColumns == null) {
+        this.csvHeaderColumns.push(value.translationKey);
+      }
+    });
+
+    this.exportHelper.exportToCSV(this.gridData, dataFields, this.csvHeaderColumns, fileName);
   }
 
   private closeEditor(rowIndex = this.editedRowIndex) {

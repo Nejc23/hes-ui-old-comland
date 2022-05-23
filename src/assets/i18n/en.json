@@ -232,7 +232,9 @@
     "VALID-FROM": "Valid from",
     "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
     "UPDATE-SHORT-NAMES": "Update short names",
-    "SERIAL-MISMATCH": "Serial mismatch"
+    "SERIAL-MISMATCH": "Serial mismatch",
+    "NO-NORMALIZED-DATA": "Normalized data not found",
+    "TIME-DEVIATION": "Time deviation"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -504,6 +506,7 @@
     "DEVICES": "Devices",
     "DISCONNECTOR-STATE": "Disconnector State",
     "EXCEL-EXPORT": "Export in excel",
+    "CSV-EXPORT": "Export in csv",
     "FILTERS": "filters",
     "FIRMWARE": "Firmware",
     "FIRST": "first",
@@ -600,7 +603,9 @@
     "METER-ID": "Meter ID",
     "EXPORT-DATA-TO": "Export data to",
     "ACTION-REMOVEFROMJOB": "Remove from job",
-    "SERIAL-MISMATCH": "Serial mismatch!"
+    "SLA": "SLA-1",
+    "SERIAL-MISMATCH": "Serial mismatch!",
+    "TIME-DEVIATION": "Time deviation!"
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -812,6 +817,7 @@
     "READ-LIMITER-THRESHOLDS": "Read limiter thresholds",
     "READ-MONITOR-THRESHOLDS": "Read monitor thresholds",
     "READ-THRESHOLDS": "Read thresholds",
+    "NO-RAW-DATA-FOUND": "Raw data not found",
     "REGISTER": {
       "CHANGE-TIME": "Try changing the time period.",
       "EVENT-TYPE": "Event type",
@@ -915,7 +921,9 @@
       "DELETE-DATA-BEFORE-DATE-OPTION": "Before date",
       "DELETE-DATA-AFTER-DATE-OPTION": "After date",
       "DELETE-DATA-ALL-DATA-OPTION": "All time",
-      "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
+      "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!",
+      "ARE-YOU-SURE-MESSAGE": "Are you sure you would like to delete meter data?",
+      "ARE-YOU-SURE-WARNING-MESSAGE": "This action is irreversible and may result in a loss of data!"
     },
     "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
     "UPDATE-SHORT-NAMES": "Update short names",
