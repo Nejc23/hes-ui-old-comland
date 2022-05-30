@@ -366,7 +366,7 @@
     "FILE-NOT-SUPPORTED": "File is not supported",
     "FILE-TYPE": "File type",
     "FILES": "Files",
-    "FILL-LAST-BLOCK": "Fill last block",
+    "FILL-LAST-BLOCK": "Override fill last block",
     "FIRMWARE": "Firmware",
     "FOR-LAST": "For last",
     "GATEWAY": "Gateway",
