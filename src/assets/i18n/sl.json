@@ -205,7 +205,7 @@
         "COMMUNICATION-DETAILS": "Communication module details",
         "BASIC-DETAILS": "Details",
         "IN-PROGRESS": "In progress",
-        "ACTIVE-IMPORTS": "Currently active imports",
+        "ACTIVE-IMPORTS": "Import history",
         "NUMBER-OF-DEVICES": "{{noOfDevices}} meters will be imported or updated",
         "ENABLE-METER": "Enable meter",
         "DISABLE-METER": "Disable meter",
@@ -230,7 +230,11 @@
         "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
         "VALID-FROM": "Valid from",
         "IMPORT-SUBTITLE-CSV-XLSX": "Selected file must be in .csv or .xlsx file format.",
-        "UPDATE-SHORT-NAMES": "Update short names"
+        "UPDATE-SHORT-NAMES": "Update short names",
+        "SERIAL-MISMATCH": "Serial mismatch",
+        "NUMBER-OF-DEVICES-IMPORTED": "Total number of meters: {{noOfDevicesImported}}, Added: {{noOfDevicesAdded}}, Updated: {{noOfDevicesUpdated}}, Failed: {{nrOfDevicesFailed}}",
+        "NO-NORMALIZED-DATA": "Normalized data not found",
+        "TIME-DEVIATION": "Time deviation"
     },
     "DAY": {
         "CURRENT-MONTH": "Trenutni mesec",
@@ -483,7 +487,9 @@
         "EXPORT-TYPE": "Export type",
         "LOCATION": "Location",
         "DATE": "Date",
-        "TIME-RANGE": "Time range"
+        "TIME-RANGE": "Time range",
+        "REPORT-TYPE": "Report type",
+        "OVERRIDE-FILL-LAST-BLOCK": "Override fill last block"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -596,7 +602,11 @@
         "EVENT-ID-RAW": "Event ID (raw)",
         "METER-ID": "Meter ID",
         "EXPORT-DATA-TO": "Export data to",
-        "ACTION-REMOVEFROMJOB": "Remove from job"
+        "ACTION-REMOVEFROMJOB": "Remove from job",
+        "SERIAL-MISMATCH": "Serial mismatch!",
+        "CSV-EXPORT": "Export in csv",
+        "SLA": "SLA-1",
+        "TIME-DEVIATION": "Time deviation!"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -886,7 +896,11 @@
         "IMPORT": {
             "EXCEL-TEMPLATE": "Import meters template",
             "DESCRIPTION": "Import device feature enables adding and updating devices via Excel (XSLT) file. Use provided Excel template as the starting point.",
-            "DOWNLOAD": "Download"
+            "DOWNLOAD": "Download",
+            "TASK_SUCCESS": "Success",
+            "TASK_PARTIAL_SUCCESS": "Partial success",
+            "TASK_FAILURE": "Failed",
+            "TASK_EXECUTING": "Executing"
         },
         "TRANSFORMER-RATIO": "Transformer ratio",
         "CURRENT-RATIO": "Current ratio",
@@ -907,11 +921,14 @@
             "DELETE-DATA-BEFORE-DATE-OPTION": "Before date",
             "DELETE-DATA-AFTER-DATE-OPTION": "After date",
             "DELETE-DATA-ALL-DATA-OPTION": "All time",
-            "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!"
+            "DELETE-DATA-WARNING-MESSAGE": "Meter data will permanently be deleted! Recovery is not possible!",
+            "ARE-YOU-SURE-MESSAGE": "Are you sure you would like to delete meter data?",
+            "ARE-YOU-SURE-WARNING-MESSAGE": "This action is irreversible and may result in a loss of data!"
         },
         "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
         "UPDATE-SHORT-NAMES": "Update short names",
-        "ASSIGN-CONFIGURATION": " Assign existing configuration"
+        "ASSIGN-CONFIGURATION": " Assign existing configuration",
+        "NO-RAW-DATA-FOUND": "Raw data not found"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1305,6 +1322,7 @@
         "LOCATION": "Location",
         "UPLOAD-TO": "Upload to SFTP",
         "UPLOAD-TEXT": "If enabled files will be uploaded to the SFTP as specified in the configuration",
-        "INVALID-RANGE": "Invalid date range"
+        "INVALID-RANGE": "Invalid date range",
+        "REPORT": "Report"
     }
 }
