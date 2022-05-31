@@ -391,6 +391,7 @@
     "MODE": "Mode",
     "NAME": "Name",
     "NONE": "None",
+    "OVERRIDE-FILL-LAST-BLOCK": "Override fill last block",
     "PASSWORD": "Password",
     "PASSWORD-TYPE": "Password type",
     "PHYSICAL-ADDRESS": "Physical address",
