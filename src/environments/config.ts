@@ -58,7 +58,7 @@ export const languages: Array<Language> = [
   { id: 'hr', acceptLanguage: 'hr_HR' },
   { id: 'fr', acceptLanguage: 'fr-FR' },
   { id: 'it', acceptLanguage: 'it-IT' },
-  { id: 'cz', acceptLanguage: 'cs-CZ' }
+  { id: 'cs', acceptLanguage: 'cs-CZ' }
 ];
 
 export interface Language {
