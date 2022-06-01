@@ -91,6 +91,16 @@ export class DataConcentratorUnitsGridService {
       type: GridColumnType.LINK
     },
     {
+      field: 'firmwareBase',
+      translationKey: 'GRID.FIRMWARE-BASE',
+      width: 140
+    },
+    {
+      field: 'firmwareApp',
+      translationKey: 'GRID.FIRMWARE-APP',
+      width: 140
+    },
+    {
       field: gridSysNameColumnsEnum.readStatusTimeStamp,
       translationKey: 'GRID.READ-STATUS',
       width: 80

@@ -19,6 +19,8 @@ export interface DataConcentratorUnit {
   password: string;
   latitude?: number;
   longitude?: number;
+  firmwareApp: string;
+  firmwareBase: string;
   plcStatus?: ConcentratorStatus;
   firstInstallDate?: string;
   timeZoneName?: string;
