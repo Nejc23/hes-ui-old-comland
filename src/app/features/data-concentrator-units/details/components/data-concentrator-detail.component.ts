@@ -238,6 +238,14 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.longitude);
   }
 
+  get firmwareAppProperty() {
+    return nameOf<DcuForm>((o) => o.firmwareApp);
+  }
+
+  get firmwareBaseProperty() {
+    return nameOf<DcuForm>((o) => o.firmwareBase);
+  }
+
   get externalIdProperty() {
     return nameOf<DcuForm>((o) => o.externalId);
   }
@@ -433,6 +441,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         ],
         [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
         [this.hostname]: [this.data ? this.data.hostname : null],
+        [this.firmwareBaseProperty]: [this.data ? this.data.firmwareBase : null],
+        [this.firmwareAppProperty]: [this.data ? this.data.firmwareApp : null],
         [this.installedDate]: [this.data ? this.data.firstInstallDate : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
         [this.externalIdProperty]: [this.data ? this.data.externalId : null],
@@ -474,7 +484,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       mac: this.form.get(this.macProperty).value,
       address: this.form.get(this.addressProperty).value,
       latitude: null, // this.form.get(this.latitudeProperty).value,
-      longitude: null // this.form.get(this.longitudeProperty).value,
+      longitude: null, // this.form.get(this.longitudeProperty).value,
+      firmwareApp: this.form.get(this.firmwareAppProperty).value,
+      firmwareBase: this.form.get(this.firmwareBaseProperty).value
     };
 
     if (this.credentialsVisible) {
