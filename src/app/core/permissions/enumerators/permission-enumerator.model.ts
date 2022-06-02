@@ -45,5 +45,6 @@ export enum PermissionEnumerator {
   Vault_Access_Grants = 'Vault_Access_Grants',
   Data_Export = 'Data_Export',
   Update_Short_Names = 'Meter_Study',
-  View_Audit_Logs = 'View_Audit_Logs'
+  View_Audit_Logs = 'View_Audit_Logs',
+  View_License = 'View_License'
 }

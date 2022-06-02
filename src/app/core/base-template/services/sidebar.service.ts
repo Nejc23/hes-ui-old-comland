@@ -121,6 +121,13 @@ export class SidebarService {
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.View_Audit_Logs
+          },
+          {
+            title: this.translate.instant('MENU.LICENCE'),
+            routeLink: `/${AdministrationRoute.administration}/licence`,
+            hasChildren: false,
+            children: [],
+            permission: PermissionEnumerator.View_License
           }
         ]
       }

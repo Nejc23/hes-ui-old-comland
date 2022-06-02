@@ -157,7 +157,6 @@ export class AuditLogsComponent implements OnInit {
       pageNumber: this.auditLogsPageNumber,
       pageSize: this.auditLogsPageSize
     };
-    console.log(this.payload);
   }
 
   setFilters() {

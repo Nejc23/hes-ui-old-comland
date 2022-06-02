@@ -739,7 +739,8 @@
     "IMPORT-DEVICES": "Import devices",
     "TOU-CONFIGURATION": "TOU configuration",
     "VAULT-ACCESS": "Vault access",
-    "AUDIT-LOGS": "Audit logs"
+    "AUDIT-LOGS": "Audit logs",
+    "LICENCE": "Licence"
   },
   "MODAL": {
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
@@ -1449,5 +1450,27 @@
     "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "Firmware upgrade was triggered for {{ vendorType }} concentrator with serial number {{ concentratorPushId }}",
     "IMPORT_KEYS": "Security material was imported from {{ fileName }}, filetype is {{ fileType }}",
     "TRIGGER_FIRMWARE_UPGRADE_METER": "{{ imageName }} was uploaded for meter {{ vendorType }} meter with serial number {{ serialNumber }}"
+  },
+  "LICENCE": {
+    "TYPE": "Licence type",
+    "ENTERPRISE": "Enterprise",
+    "YOUR-MODULES": "Your modules",
+    "EXPIRES": "Expires",
+    "UNLIMITED": "Unlimited",
+    "METERS": "Meters",
+    "MODULES": "Modules",
+    "ACTIVE-USERS": "Active users",
+    "METER_MANAGEMENT": "Meter management",
+    "SCHEDULER": "Scheduler",
+    "DATA_EXPORTS": "Data exports",
+    "ALARMS_EVENTS": "Alarms & Events",
+    "MANAGER": "Licence manager",
+    "DESCRIPTION": {
+      "METERS": "Meters overview",
+      "METER_MANAGEMENT": "Manage your meters",
+      "SCHEDULER": "Scheduled tasks",
+      "DATA_EXPORTS": "Export your data",
+      "ALARMS_EVENTS": "Overview of meter alarms and events"
+    }
   }
 }

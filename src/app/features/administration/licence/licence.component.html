@@ -1,0 +1,76 @@
+<div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
+  <div class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title
+      [title]="'LICENCE.MANAGER'"
+      class="tw-h-36 tw-mt-12 tw--m-5"
+    >
+      <div class="tw-pt-8">
+        <div class="tw-inline-flex tw-text-sm tw-text-darkGray">
+          <div class="tw-inline-flex tw-h-4">
+            <img [src]="'assets/images/icons/certificate-icon.svg'"
+                 class="tw-pr-2" />
+            {{'LICENCE.TYPE' | translate }}: {{'LICENCE.ENTERPRISE' | translate }}
+          </div>
+          <div class="tw-inline-flex tw-h-4">
+            <img [src]="'assets/images/icons/calendar-icon.svg'"
+                 class="tw-pr-2 tw-pl-8" /> {{'LICENCE.EXPIRES' | translate }}: {{'LICENCE.UNLIMITED' | translate }}
+          </div>
+        </div>
+      </div>
+    </app-page-title>
+  </div>
+</div>
+
+<div class="tw-pt-20">
+  <div class="tw-inline-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-4 tw-pt-7">
+
+    <div class="square small">
+      <kendo-arcgauge [value]="data.installedMeters / data.allowedMeters * 100"
+                      [color]="licenceColor()"></kendo-arcgauge>
+      <div class="tw-font-bold">
+        {{ data.installedMeters }} / {{data.allowedMeters}}
+        <div class="tiny-text">
+          {{'LICENCE.METERS' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="square small" *ngIf="data?.activeUsers">
+      <div class="tw-font-bold">
+        {{ data.activeUsers }}
+        <div class="tiny-text">
+          {{'LICENCE.ACTIVE-USERS' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="square small" *ngIf="data?.modules">
+      <div class="tw-font-bold">
+        {{ data.modules.length }}
+        <div class="tiny-text">
+          {{'LICENCE.MODULES' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="data?.modules?.length > 0">
+    <h4 class="tw-pb-6 tw-mt-12"> {{'LICENCE.YOUR-MODULES' | translate }}</h4>
+
+    <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-4 tw-gap-4">
+      <div class="square big" *ngFor="let module of data.modules">
+
+        <div class="tw-w-8 tw-h-8">
+          <img class="icon" [src]="'assets/images/icons/calendar-icon-blue.svg'" />
+        </div>
+        <div class="tw-font-medium">
+          {{ 'LICENCE.' + module.toUpperCase() | uppercase | translate }}
+          <div class="small-text">
+            {{ 'LICENCE.DESCRIPTION.' + module.toUpperCase() | uppercase | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+
