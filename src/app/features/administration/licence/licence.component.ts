@@ -1,0 +1,48 @@
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { LicensingService } from '../../../api/configuration/services/licensing.service';
+
+export interface LicencingData {
+  installedMeters: number;
+  allowedMeters: number;
+  activeUsers?: number;
+  modules?: string[];
+}
+
+@Component({
+  selector: 'app-licence',
+  templateUrl: './licence.component.html',
+  styleUrls: ['./licence.component.scss']
+})
+export class LicenceComponent implements OnInit {
+  data: LicencingData = {
+    installedMeters: 0,
+    allowedMeters: 0
+  };
+
+  constructor(private elRef: ElementRef, private licensingService: LicensingService) {}
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  addWidth() {
+    return this.elRef.nativeElement.parentElement.offsetWidth;
+  }
+
+  licenceColor() {
+    const percentage = (this.data.installedMeters / this.data.allowedMeters) * 100;
+    if (percentage > 90) {
+      return 'red';
+    }
+    if (percentage > 70) {
+      return 'yellow';
+    }
+    return 'green';
+  }
+
+  getData() {
+    this.licensingService.licensingGet().subscribe((res) => {
+      this.data = res;
+    });
+  }
+}

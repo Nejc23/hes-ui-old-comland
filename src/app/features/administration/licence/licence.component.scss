@@ -1,0 +1,61 @@
+.square {
+  @apply tw-rounded-lg;
+  @apply tw-border;
+  @apply tw-border-solid;
+  @apply tw-border-lightGray;
+
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+
+  &.small {
+    max-width: 98%;
+    width: 360px;
+    color: black;
+    height: 74px;
+    padding-left: 20px;
+    @apply tw-text-base;
+    @apply tw-font-medium;
+    @apply tw-py-4;
+  }
+
+  &.big {
+    color: black;
+    @apply tw-text-sm;
+    @apply tw-font-medium;
+    height: 127px;
+    max-width: 450px;
+  }
+}
+
+.tiny-text {
+  font-size: 10px;
+  padding-top: 4px;
+  @apply tw-text-darkGray;
+  @apply tw-font-normal;
+}
+
+.small-text {
+  font-size: 12px;
+  padding-top: 8px;
+  @apply tw-text-darkGray;
+  @apply tw-font-medium;
+}
+
+.icon {
+  display: flex;
+  padding: 8px;
+  background-color: #E1F0FE;
+  border-radius: 4px;
+}
+
+// kendo override
+
+::ng-deep.k-chart-surface {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+::ng-deep kendo-arcgauge {
+  top: -15px;
+}

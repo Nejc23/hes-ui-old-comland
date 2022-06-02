@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PermissionEnumerator } from '../../../core/permissions/enumerators/permission-enumerator.model';
 import { VaultAccessComponent } from '../vaultaccess/componentes/vault-access.component';
 import { AuditLogsComponent } from '../audit-logs/audit-logs.component';
+import { LicenceComponent } from '../licence/licence.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,14 @@ const routes: Routes = [
           permission: PermissionEnumerator.View_Audit_Logs
         },
         component: AuditLogsComponent
+      },
+      {
+        path: 'licence',
+        data: {
+          breadcrumb: '',
+          permission: PermissionEnumerator.View_License
+        },
+        component: LicenceComponent
       }
     ]
   }
