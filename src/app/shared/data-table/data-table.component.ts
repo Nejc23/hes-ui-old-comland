@@ -90,8 +90,11 @@ export interface ColoredValue {
 export interface GridFilter {
   label?: string;
   field: string;
-  values: any[];
+  values?: any[];
   isMultiselect?: boolean;
+  isStringValue?: boolean;
+  value?: string;
+  width?: string;
 }
 
 export interface CheckboxColumn {

@@ -114,6 +114,13 @@ export class SidebarService {
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Vault_Access_Grants
+          },
+          {
+            title: this.translate.instant('MENU.AUDIT-LOGS'),
+            routeLink: `/${AdministrationRoute.administration}/auditLogs`,
+            hasChildren: false,
+            children: [],
+            permission: PermissionEnumerator.View_Audit_Logs
           }
         ]
       }

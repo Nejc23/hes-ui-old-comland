@@ -21,6 +21,9 @@ export class DataTableToolbarComponent {
   @Input() gridDataLoading: boolean = false;
   @Input() exportOptions: Array<any> = [];
   @Input() wildCardsEnabled = false;
+  @Input() withSearch = true;
+  @Input() clearFilterClass = '';
+  @Input() refreshButtonClass = '';
 
   @Output() clearSearchClickedEvent = new EventEmitter<any>();
   @Output() reloadGridDataEvent = new EventEmitter<any>();
@@ -73,5 +76,9 @@ export class DataTableToolbarComponent {
       tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-ENABLED');
     }
     return tooltip;
+  }
+
+  refreshData(event: any) {
+    this.reloadGridData();
   }
 }

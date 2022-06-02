@@ -38,6 +38,7 @@ export class DateRangePickerComponent implements OnInit {
   format = environment.dateTimeFormat;
 
   @Output() valueChange = new EventEmitter<void>();
+  @Output() refreshButtonClicked = new EventEmitter<void>();
 
   show = false;
   focused = false;
@@ -220,5 +221,6 @@ export class DateRangePickerComponent implements OnInit {
     if (this.form.valid) {
       this.valueChange.emit();
     }
+    this.refreshButtonClicked.emit();
   }
 }

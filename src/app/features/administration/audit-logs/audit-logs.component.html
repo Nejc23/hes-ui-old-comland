@@ -1,0 +1,49 @@
+<div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
+  <div class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title
+      [title]="'MENU.AUDIT-LOGS'"
+      class="tw-h-36 tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+  </div>
+</div>
+
+<div class="tw-py-10">
+
+  <div class="tw-my-4 tw-pt-4">
+    <app-data-table-toolbar
+      (reloadGridDataEvent)="getData(true)"
+      [form]="auditLogsForm"
+      [clearFilterClass]="'tw-pb-3'"
+      [refreshButtonClass]="'tw-h-8 tw-mb-3'"
+      [withSearch]="false"
+      [filters]="filtersConfiguration"
+      [gridDataLoading]="auditLogsLoading">
+    </app-data-table-toolbar>
+  </div>
+
+  <app-data-table
+    class="audit-grid"
+    *ngIf="auditLogData && auditLogData.data"
+    (pageChangedEvent)="loadMoreData($event)"
+    [fetchData]="true"
+    [gridColumns]="auditLogsColumnsConfiguration"
+    [gridData]="auditLogData.data"
+    [loading]="auditLogsLoading"
+    [noDataText]="'COMMON.NO-DATA-FOUND'"
+    [pageNumber]="auditLogsPageNumber"
+    [pageSize]="auditLogsPageSize"
+    [pageable]="true"
+    [clientSideSearchAndFilters]="false"
+    [rowHeight]="null"
+    [excelFileName]="'audit_logs'"
+    [scrollable]="'scrollable'"
+    (refreshButtonClickEvent)="getData(true)"
+    [sortable]="true"
+    [tableHeight]="calculateHeight()"
+    [totalCount]="auditLogData.totalCount"
+    [withRefreshButton]="false"
+    [withSearch]="false"
+  >
+  </app-data-table>
+</div>

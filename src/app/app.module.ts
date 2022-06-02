@@ -33,6 +33,7 @@ import { ApiModule as TimeOfUseApiModule } from './api/time-of-use/api.module';
 import { ApiModule as CryptoLiteUIApiModule } from './api/crypto-lite-ui/api.module';
 import { ApiModule as ConcentratorInventory } from './api/concentrator-inventory/api.module';
 import { environment } from 'src/environments/environment';
+import { AuditLogsComponent } from './features/administration/audit-logs/audit-logs.component';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -58,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuditLogsComponent],
   providers: [
     AppConfigService,
     {
