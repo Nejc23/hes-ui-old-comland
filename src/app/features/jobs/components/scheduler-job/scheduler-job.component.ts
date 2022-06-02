@@ -493,6 +493,7 @@ export class SchedulerJobComponent {
 
     if (this.showAlarmNotification) {
       if (!this.notificationRules.validateForm()) {
+        this.loading = false;
         return;
       }
 

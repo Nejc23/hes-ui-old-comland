@@ -33,15 +33,17 @@
 
       <div *ngIf="form">
         <div
-          *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
-          [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
-          class="app-card-row last:tw-border-b-0 tw-border-b">
-          <div class="tw-text-darkGray">
-            {{ 'FORM.' + formData.name.toUpperCase() | translate }}:
-          </div>
-          <ng-container *ngIf="formData.name !== 'referencingType'">
-            <div *ngIf="formData.control.value || formData.control.value?.value"
-                 [ngClass]="addColoredTagBackground(formData.name)" class="tw-text-black">
+          *ngFor="let formData of controls | slice: 0:(paginationLimit ? paginationLimit : controls.length); let i = index"
+          [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : formData.name === 'template' ? 'app-card-row-tall' : ''"
+          class="app-card-row last:tw-border-b-0 tw-border-b"
+        >
+          <div class="tw-text-darkGray">{{ 'FORM.' + formData.name.toUpperCase() | translate }}:</div>
+          <ng-container *ngIf="formData.name !== 'referencingType' && formData.name !== 'template'">
+            <div
+              *ngIf="formData.control.value || formData.control.value?.value"
+              [ngClass]="addColoredTagBackground(formData.name)"
+              class="tw-text-black"
+            >
               <ng-container *ngIf="formData.control.value?.id; else notObject">
                 {{ formData.control.value.value }}
               </ng-container>
@@ -59,6 +61,20 @@
             <div *ngIf="formData.name === 'referencingType'">
               <kendo-switch [checked]="formData.control.value" [readonly]="true"
                             class="small-switch"></kendo-switch>
+            </div>
+            <div *ngIf="formData.name === 'template'">
+              <div *ngIf="formData.control.value[0]; else notDefined">
+                <div class="tw-text-black tw-text-sm tw-flex tw-justify-end">{{ formData.control.value[0] }}</div>
+                <div class="gray-text tw-text-xs tw-inline-flex tw-my-1">
+                 <img [src]="'assets/images/icons/calendar-icon-small.svg'" class="tw-pr-2" /> {{ 'COMMON.VALID-FROM' | translate }}:
+                  {{ formData.control.value[1] }}
+                </div>
+              </div>
+              <ng-template #notDefined>
+                <div class="tw-text-darkGray">
+                  {{ 'COMMON.NOT-DEFINED' | translate }}
+                </div>
+              </ng-template>
             </div>
           </ng-container>
         </div>

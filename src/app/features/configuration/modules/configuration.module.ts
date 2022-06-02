@@ -10,6 +10,8 @@ import { ImportDeviceKeysComponent } from '../components/import-device-keys/impo
 import { AutoTemplateComponent } from '../auto-template/components/auto-template.component';
 import { GridCellRemoveBtnComponent } from '../auto-template/components/grid-custom-components/grid-cell-remove-btn.component';
 import { GridCellNextRunNoEventComponent } from '../auto-template/components/grid-custom-components/grid-cell-next-run-no-event.component';
+import { ConfigurationsDetailComponent } from '../configurations-detail/configurations-detail.component';
+import { ConfigurationsListComponent } from '../configurations-list/configurations-list.component';
 
 @NgModule({
   entryComponents: [],
@@ -20,7 +22,9 @@ import { GridCellNextRunNoEventComponent } from '../auto-template/components/gri
     GridCellAddBtnComponent,
     GridRequiredCellEditorComponent,
     GridCellRemoveBtnComponent,
-    GridCellNextRunNoEventComponent
+    GridCellNextRunNoEventComponent,
+    ConfigurationsListComponent,
+    ConfigurationsDetailComponent
   ],
   imports: [
     SharedModule,

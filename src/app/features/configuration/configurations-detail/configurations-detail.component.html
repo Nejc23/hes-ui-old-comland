@@ -1,0 +1,14 @@
+<div *ngIf="templateDto" [style.width.px]="addWidth()" class="sticky-header">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center"></div>
+
+  <app-page-title
+    [backButton]="true"
+    [routerUrl]="routerLinkUrl"
+    [title]="templateDto.name"
+    [subtitle]="'CONFIGURATIONS.TYPE.' + templateDto.templateType?.toUpperCase()"
+    class="tw-h-36 tw-mt-10 tw--m-5"
+  >
+  </app-page-title>
+  
+  <app-json-viewer [objectToRender]="templateDto" [depth]="1"></app-json-viewer>
+</div>

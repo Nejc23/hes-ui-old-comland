@@ -13,7 +13,6 @@ import { DeviceState, MeterUnitDetails } from 'src/app/core/repository/interface
 import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
-import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
 import { DeviceMetaDataDto } from '../../../../api/concentrator-inventory/models/device-meta-data-dto';
 import { environment } from '../../../../../environments/environment';
 import * as moment from 'moment';
@@ -21,6 +20,8 @@ import { MeterPropertyService } from '../../../../api/concentrator-inventory/ser
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { process } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
+import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
+import { TemplateDto } from 'src/app/api/templating/template-dto';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -45,6 +46,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   deviceId;
   deviceMetadata: Array<DeviceMetaDataDto> = [];
   stateToolTipMessage = '';
+  templateDto: TemplateDto;
 
   private requestModel;
 
@@ -57,9 +59,9 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private permissionService: PermissionService,
-    private eventService: MeterUnitsTypeGridEventEmitterService,
     private meterPropertyService: MeterPropertyService,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private templatingService: TemplatingService
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.deviceId = params.deviceId;
@@ -250,6 +252,11 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
           changedBy: response.stateChangedBy
         });
       }
+      if (this.data.templateId) {
+        this.templatingService.getTemplateDetail(this.data.templateId).subscribe((templateDto) => {
+          this.templateDto = templateDto;
+        });
+      }
     });
   }
 
@@ -273,7 +280,14 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
         ' ' +
         moment(this.data.firstInstallDate).format(environment.timeFormat),
       serialNumber: this.data.serialNumber,
-      templateName: this.data.templateName,
+      template: [
+        [
+          this.data.templateName,
+          moment(this.data.templateActiveFrom).format(environment.dateDisplayFormat) +
+            ' ' +
+            moment(this.data.templateActiveFrom).format(environment.timeFormat)
+        ]
+      ],
       manufacturer: this.data.manufacturer,
       externalId: this.data.externalId,
       deviceId: this.data.deviceId
