@@ -1,5 +1,5 @@
 <div class="tw-flex tw-flex-wrap tw-mt-4 tw-gap-4">
-  <div>
+  <div *ngIf="withSearch">
     <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ 'COMMON.SEARCH' | translate }}:</div>
     <div [formGroup]="form" class="tw-inline-flex gray-border tw-w-56 search-input">
       <div
@@ -11,12 +11,14 @@
       >
         <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
       </div>
-      <input [formControlName]="'eventsSearchValue'" kendoTextBox placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}" />
+      <input [formControlName]="'eventsSearchValue'" kendoTextBox
+             placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}" />
     </div>
   </div>
 
   <app-date-range-picker
     #dateRangePicker
+    (refreshButtonClicked)="reloadGridData()"
     [endProperty]="endTimeProperty"
     [form]="form"
     [labelText]="'FORM.TIMERANGE'"
@@ -27,31 +29,46 @@
 
   <div [formGroup]="form" class="tw-flex tw-gap-4">
     <div *ngFor="let filter of filters; let i = index" class="">
-      <div *ngIf="filter.label" class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ filter.label | translate }}:</div>
 
-      <div class="gray-border">
-        <kendo-dropdownlist
-          *ngIf="!filter.isMultiselect"
-          [data]="filter.values"
-          [defaultItem]="'COMMON.ALL' | translate"
-          [id]="filter.field"
-          [formControlName]="filter.field"
-        >
-        </kendo-dropdownlist>
-        <kendo-multiselect
-          kendoMultiSelectSummaryTag
-          *ngIf="filter.isMultiselect"
-          [data]="filter.values"
-          [formControlName]="filter.field"
-          style="min-width: 220px"
-          textField="text"
-          valueField="value"
-        ></kendo-multiselect>
-      </div>
+      <app-input-text *ngIf="filter.isStringValue"
+                      [form]="form"
+                      [property]="filter.field"
+                      [label]="filter.label"></app-input-text>
+
+      <ng-container *ngIf="!filter.isStringValue">
+        <div *ngIf="filter.label"
+             [ngClass]="filter.width ? filter.width : ''"
+             class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{ filter.label | translate }}:
+        </div>
+
+        <div class="gray-border">
+          <kendo-dropdownlist
+            *ngIf="!filter.isMultiselect"
+            [data]="filter.values"
+            [ngClass]="filter.width ? filter.width : ''"
+            [defaultItem]="'COMMON.ALL' | translate"
+            [id]="filter.field"
+            [formControlName]="filter.field"
+          >
+          </kendo-dropdownlist>
+          <kendo-multiselect
+            [ngClass]="filter.width ? filter.width : ''"
+            kendoMultiSelectSummaryTag
+            *ngIf="filter.isMultiselect"
+            [data]="filter.values"
+            [formControlName]="filter.field"
+            style="min-width: 220px"
+            textField="text"
+            valueField="value"
+          ></kendo-multiselect>
+        </div>
+      </ng-container>
     </div>
 
-    <div class="tw-ml-4 tw-w-28 tw-place-self-center tw-mt-4">
-      <a (click)="resetSearchAndFilters()" class="tw-text-darkGray tw-cursor-pointer">{{ 'FILTER.CLEAR-FILTERS' | translate }}</a>
+    <div class="tw-ml-4 tw-w-28 tw-place-self-center tw-mt-4" [ngClass]="clearFilterClass">
+      <a (click)="resetSearchAndFilters()"
+         class="tw-text-darkGray tw-cursor-pointer"
+      >{{ 'FILTER.CLEAR-FILTERS' | translate }}</a>
     </div>
   </div>
   <div class="tw-flex tw-place-self-center tw-mt-4 tw-ml-auto">
@@ -68,8 +85,11 @@
         [popupSettings]="{ animate: true, align: 'right' }"
       ></kendo-dropdownbutton>
     </div>
-    <div *ngIf="withRefreshButton" [title]="'GRID.REFRESH-GRID' | translate" class="tw-ml-2" data-placement="top" data-toggle="tooltip">
-      <div (click)="reloadGridData()" class="tw-cursor-pointer refresh-button border-gray">
+    <div *ngIf="withRefreshButton" [title]="'GRID.REFRESH-GRID' | translate"
+         class="tw-ml-2" [ngClass]="refreshButtonClass" data-placement="top"
+         data-toggle="tooltip">
+      <div (click)="reloadGridData()"
+           class="tw-cursor-pointer refresh-button border-gray">
         <img [ngClass]="gridDataLoading ? 'tw-animate-spin' : ''" src="assets/images/icons/refresh-icon.svg" />
       </div>
     </div>
