@@ -56,6 +56,12 @@ export class SidebarService {
         hasChildren: true,
         children: [
           {
+            title: this.translate.instant('MENU.CONFIGURATIONS'),
+            routeLink: `/${ConfigurationRoute.configuration}/list`,
+            hasChildren: false,
+            children: []
+          },
+          {
             title: this.translate.instant('MENU.IMPORT-TEMPLATES'),
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,

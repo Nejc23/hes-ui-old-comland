@@ -14,6 +14,8 @@ import { TouConfigSpecialDaysComponent } from '../../meter-units/common/componen
 import { TouConfigSummaryComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-summary/tou-config-summary.component';
 import { TouConfigListComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-list/tou-config-list.component';
 import { CanDeactivateGuard } from '../../../shared/guards/can-deactivate.guard';
+import { ConfigurationsDetailComponent } from '../configurations-detail/configurations-detail.component';
+import { ConfigurationsListComponent } from '../configurations-list/configurations-list.component';
 
 const routes: Routes = [
   {
@@ -122,6 +124,20 @@ const routes: Routes = [
           permission: PermissionEnumerator.Import_Device_Keys
         },
         component: ImportDeviceKeysComponent
+      },
+      {
+        path: 'list',
+        data: {
+          breadcrumb: ''
+        },
+        component: ConfigurationsListComponent
+      },
+      {
+        path: 'details/:templateId',
+        data: {
+          breadcrumb: ''
+        },
+        component: ConfigurationsDetailComponent
       }
     ]
   }

@@ -46,6 +46,10 @@
   @apply tw-border-lightGray;
 }
 
+.app-card-row-tall {
+  @apply tw-h-16;
+}
+
 .app-card-show-more-button {
   @apply tw-w-full;
   @apply tw-h-14;
@@ -117,4 +121,8 @@
 
 .small-switch {
   transform: scale(0.75);
+}
+
+.gray-text {
+  color: #B3B7BF;
 }

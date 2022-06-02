@@ -121,6 +121,8 @@ import { MeterTimeSyncComponent } from '../features/jobs/components/scheduler-jo
 import { DataTableToolbarComponent } from './data-table-toolbar/data-table-toolbar/data-table-toolbar.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ActiveJobCardItemComponent } from './widgets/active-job-card-item/active-job-card-item.component';
+import { JsonViewerComponent } from './json-viewer/json-viewer.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -218,7 +220,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigListComponent,
     AddTimeUnitComponent,
     DataTableToolbarComponent,
-    ActiveJobCardItemComponent
+    ActiveJobCardItemComponent,
+    JsonViewerComponent
   ],
   imports: [
     CommonModule,
@@ -262,7 +265,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GridModule,
     ExcelModule,
     LabelModule,
-    ButtonsModule
+    ButtonsModule,
+    NgxJsonViewerModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -361,7 +365,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigListComponent,
     AddTimeUnitComponent,
     DataTableToolbarComponent,
-    ActiveJobCardItemComponent
+    ActiveJobCardItemComponent,
+    JsonViewerComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

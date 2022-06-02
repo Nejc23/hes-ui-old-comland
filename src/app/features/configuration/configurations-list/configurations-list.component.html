@@ -1,0 +1,40 @@
+<div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title [title]="'CONFIGURATIONS.OVERVIEW'" class="tw-h-28 tw-mt-10 tw--m-5"></app-page-title>
+  </div>
+</div>
+
+<div class="row tw-pt-20">
+  <app-data-table
+    (pageChangedEvent)="loadMoreData($event)"
+    (searchInputChangedEvent)="searchData($event)"
+    (sortChangeEvent)="sortChange($event)"
+    (wildCardsEnabledEvent)="toggleWildcards($event)"
+    *ngIf="gridData"
+    [clientSideSearchAndFilters]="false"
+    [fetchData]="true"
+    [gridColumns]="gridColumns"
+    [gridData]="gridData"
+    [loading]="loading"
+    [noDataText]="'COMMON.NO-DATA-FOUND'"
+    [pageable]="true"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    [rowHeight]="null"
+    [searchText]="searchText"
+    [scrollable]="'scrollable'"
+    [sort]="sort"
+    [sortable]="true"
+    [rowActions]="configurationRowActions"
+    (rowActionClickedEvent)="openDetailsPage($event)"
+    [tableHeight]="calculateHeight()"
+    [totalCount]="totalCount"
+    [wildCardsEnabled]="useWildcards"
+    [wildCardsSearch]="true"
+    [withSearch]="true"
+    [showGridBulkActions]="true"
+    [withRefreshButton]="true"
+    (refreshButtonClickEvent)="getData()"
+  >
+  </app-data-table>
+</div>

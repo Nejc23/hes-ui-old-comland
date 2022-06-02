@@ -725,6 +725,7 @@
     "ALARMS-EVENTS": "Alarms & Events",
     "ALL-RIGHTS RESERVED": "© 2020. All rights reserved",
     "AUTO-TEMPLATES": "Auto templates",
+    "CONFIGURATIONS": "Configurations",
     "DATA-VIEW": "Data view",
     "DCU": "Concentrators",
     "IMPORT-DEVICE-KEYS": "Import device keys",
@@ -1471,6 +1472,13 @@
       "SCHEDULER": "Scheduled tasks",
       "DATA_EXPORTS": "Export your data",
       "ALARMS_EVENTS": "Overview of meter alarms and events"
+    }
+  },
+  "CONFIGURATIONS": {
+    "OVERVIEW": "Configurations overview",
+    "TYPE": {
+      "CONCENTRATOR": "Concentrator",
+      "METER": "Meter"
     }
   }
 }

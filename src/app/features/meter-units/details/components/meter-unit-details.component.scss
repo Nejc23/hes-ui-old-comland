@@ -24,7 +24,7 @@
 .app-transformer-card-row {
   display: inline-flex;
   justify-content: space-between;
-  height: 68px;
+  @apply tw-h-16;
   padding: 10px 24px 10px 24px;
   width: 100%;
 }
