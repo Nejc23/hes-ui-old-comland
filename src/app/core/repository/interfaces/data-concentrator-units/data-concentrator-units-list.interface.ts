@@ -13,8 +13,6 @@ export interface DataConcentratorUnitsList {
   vendor: string;
   id: string;
   lastCommunication: string;
-  firmwareApp: string;
-  firmwareBase: string;
   tags: string[];
   jobStatus: string;
   discoveryJob?: string;

@@ -135,9 +135,7 @@ export class AddDcuFormComponent implements OnInit {
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
       manufacturer: this.form.get(this.vendorProperty).value,
-      externalId: this.form.get(this.externalIdProperty).value,
-      firmwareApp: this.form.get(this.firmwareAppProperty).value,
-      firmwareBase: this.form.get(this.firmwareBaseProperty).value
+      externalId: this.form.get(this.externalIdProperty).value
     };
 
     if (this.credentialsVisible) {
@@ -165,8 +163,6 @@ export class AddDcuFormComponent implements OnInit {
       readStatusColor: '',
       readStatusTimeStamp: '',
       status: 'INACTIVE',
-      firmwareApp: null,
-      firmwareBase: null,
       tags: null,
       hasActiveJob: true
     };

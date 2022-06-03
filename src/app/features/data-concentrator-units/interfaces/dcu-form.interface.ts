@@ -18,8 +18,8 @@ export interface DcuForm {
   mac?: string;
   latitude?: number;
   longitude?: number;
-  firmwareApp: string;
-  firmwareBase: string;
+  firmwareApp?: string;
+  firmwareBase?: string;
   plcStatus?: string;
   timeZoneName?: string;
   firstInstallDate?: string;
