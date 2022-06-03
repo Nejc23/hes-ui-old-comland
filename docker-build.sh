@@ -2,9 +2,9 @@
 
 tag=$1
 
-# cp /home/gitlab-runner/int.enerdat.ca.crt . &&
-# cp /home/gitlab-runner/int.semax.ca.crt . &&
-# cp /home/gitlab-runner/metricsx.ca.crt . &&
+cp /home/gitlab-runner/int.enerdat.ca.crt . &&
+cp /home/gitlab-runner/int.semax.ca.crt . &&
+cp /home/gitlab-runner/metricsx.ca.crt . &&
 
 echo "Step 1: Building Docker images" &&
 echo "Building started for e-Point.HES dist" &&
