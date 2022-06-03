@@ -103,6 +103,37 @@ ePointHES:
 myGrid:
   <<: *build
 
+docker-linux:
+  stage: build
+  variables:
+    DEPLOY_VARIABLE: "internal"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
+      variables:
+        DEPLOY_VARIABLE: "release"
+      allow_failure: true
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      variables:
+        DEPLOY_VARIABLE: "develop"
+      when: manual
+      allow_failure: true
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+      allow_failure: true
+  script:
+    - export VERSION=$(node -p "require('./package.json').version")
+    - export DOCKER_TAG=${DEPLOY_VARIABLE}_linux_${VERSION}_${CI_COMMIT_SHORT_SHA}
+    - echo "DOCKER_TAG=${DOCKER_TAG}" >> docker.env
+    - echo "Preparing Linux Docker images for version $VERSION with tag $DOCKER_TAG"
+    - ./docker-build.sh $DOCKER_TAG
+    - echo "Clean up unused Docker images"
+    - docker system prune -a -f
+  artifacts:
+    reports:
+      dotenv: docker.env
+  tags:
+    - linux-build
+
 DEV - Amera:
   <<: *deploy_amera
   environment:
