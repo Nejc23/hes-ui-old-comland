@@ -6,11 +6,6 @@
 
         <ng-template kendoTabContent>
           <fieldset class="tw-px-8 tw-mt-7">
-            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="meterUnitStatuses$ | async"
-                           [form]="form"
-                           [property]="statesProperty"
-                           label="State">
-            </app-input-tag>
 
             <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="protocolTypes"
                            [form]="form"
@@ -18,11 +13,6 @@
                            label="Protocol">
             </app-input-tag>
 
-            <div *ngIf="!form.valid" class="form-row text-danger">
-              <div class="col-6"></div>
-              <div class="col-6"><i class="far fa-info-circle"></i><span
-                class="small">{{errorValidatorReadStatusComponents()}}</span></div>
-            </div>
             <app-input-tag (valueChanged)="applyFilter()"
                            [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
                            [form]="form"
@@ -43,6 +33,51 @@
                            label="Firmware">
             </app-input-tag>
 
+
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="showOptionFilter$"
+                           [form]="form"
+                           [property]="showOptionFilterProperty"
+                           label="Show">
+            </app-input-tag>
+
+            <div>
+              <div>
+                <label>{{'FORM.SLA' | translate }}</label>
+              </div>
+              <div class="tw-inline-flex tw-w-full tw-gap-4">
+                <app-select-input
+                  class="tw-w-1/2"
+                  [form]="form"
+                  [disabled]="false"
+                  (selectedValueChanged)="applyFilter(true)"
+                  [selectOptions]="slaOperations"
+                  [property]="slaOperation"
+                >
+                </app-select-input>
+
+                <div class="tw-w-20 tw-w-1/2" *ngIf="form.controls.slaOperation.value !== null">
+                  <app-input-numeric [form]="form" [max]="100" [min]="1" [property]="slaValue"
+                                     (inputTextBlurValue)="applyFilter()"></app-input-numeric>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+        </ng-template>
+      </kendo-tabstrip-tab>
+
+
+      <kendo-tabstrip-tab [title]="'COMMON.STATES' | translate">
+
+        <ng-template kendoTabContent>
+          <fieldset class="tw-px-8 tw-mt-7">
+            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="meterUnitStatuses$ | async"
+                           [form]="form"
+                           [label]="'DEVICE-STATE'"
+                           [property]="statesProperty"
+            >
+            </app-input-tag>
+
             <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="disconnectorState$ | async"
                            [form]="form"
                            [property]="breakerStateProperty"
@@ -53,12 +88,6 @@
                            [form]="form"
                            [property]="ciiStateProperty"
                            label="CII state">
-            </app-input-tag>
-
-            <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="showOptionFilter$"
-                           [form]="form"
-                           [property]="showOptionFilterProperty"
-                           label="Show">
             </app-input-tag>
           </fieldset>
         </ng-template>

@@ -36,5 +36,7 @@ export const environment = {
   // clientAutoSilentRenew: true
 
   importIdsMaxLength: 800,
-  exportDataMaxRange: 3
+  exportDataMaxRange: 3,
+  slaMedLimit: 90,
+  slaHighLimit: 97
 };

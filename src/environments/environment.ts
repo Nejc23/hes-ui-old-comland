@@ -31,7 +31,9 @@ export const environment = {
   thresholdValue: 7, // preconfigured threshold value in days,
   mapBoxToken: 'pk.eyJ1IjoibWJ1bG92ZWMiLCJhIjoiY2tzb2tqenNsMG54YTJwbzZ3M3JmcW1xOCJ9.Yvtz-kegMWE4_uQuXjDxQA',
   importIdsMaxLength: 800,
-  exportDataMaxRange: 3 // 3 months
+  exportDataMaxRange: 3, // 3 months
+  slaMedLimit: 90, // SLA colors
+  slaHighLimit: 97
 };
 
 /*

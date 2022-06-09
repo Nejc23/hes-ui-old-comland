@@ -34,12 +34,10 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   dcuTags: Codelist<number>[];
   operatorsList$ = this.codelistHelperService.operationsList();
 
-  currentStatuses: Codelist<number>[];
-  currentTypes: Codelist<number>[];
-  currentVendorId: number;
-  currentTags: Codelist<number>[];
-  selectedRow = -1;
-  dontSelectFilter = false;
+  slaOperations: Codelist<number>[] = [
+    { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
+    { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
+  ];
 
   sessionFilter: DcuLayout;
 
@@ -93,6 +91,14 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     return 'value2';
   }
 
+  get slaOperation() {
+    return 'slaOperation';
+  }
+
+  get slaValue() {
+    return 'slaValue';
+  }
+
   // called on init
   ngOnInit(): void {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -135,7 +141,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
           typesFilter: this.sessionFilter.typesFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
           vendorsFilter: this.sessionFilter.vendorsFilter,
-          gridLayout: ''
+          gridLayout: '',
+          slaFilter: this.sessionFilter.slaFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -159,7 +166,9 @@ export class DcFilterComponent implements OnInit, OnDestroy {
             : { id: '', value: '' }
         ],
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0]
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -178,7 +187,10 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter() {
+  applyFilter(slaFilter = false) {
+    if (slaFilter && !this.form?.controls?.slaValue?.value) {
+      return;
+    }
     if (!this.form.valid) {
       return;
     }
@@ -206,7 +218,14 @@ export class DcFilterComponent implements OnInit, OnDestroy {
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorsFilter: this.form.get(this.vendorsProperty).value,
-      gridLayout: ''
+      gridLayout: '',
+      slaFilter:
+        this.form?.controls?.slaOperation?.value?.id && this.form?.controls?.slaValue?.value
+          ? {
+              id: this.form.controls.slaOperation.value.id,
+              value: this.form.controls.slaValue.value
+            }
+          : null
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
@@ -221,10 +240,6 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
       return this.translate.instant('FORM.ERROR.RANGE-INCORRECT');
     }
-  }
-
-  doToggleFilter() {
-    this.toggleFilter.emit();
   }
 
   ngOnDestroy() {

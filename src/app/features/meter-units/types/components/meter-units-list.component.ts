@@ -37,9 +37,7 @@ import { MeterUnitsLayout } from '../../../../core/repository/interfaces/meter-u
 import { FiltersInfo } from '../../../../shared/forms/interfaces/filters-info.interface';
 import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
-import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-meter-units',
@@ -252,12 +250,6 @@ export class MeterUnitsListComponent implements OnInit {
         }
         // get additional data job summary and threshold values
         this.getAdditionalData(this.gridData.data.map((rowItem) => rowItem.deviceId));
-        //get SLA data
-        const yesterday = moment().subtract(1, 'days').startOf('day').format(dateServerFormat);
-        this.getSlaData(
-          this.gridData.data.map((rowItem) => rowItem.deviceId),
-          yesterday
-        );
       });
   }
 
@@ -518,6 +510,7 @@ export class MeterUnitsListComponent implements OnInit {
     this.requestModel.filterModel.vendors = filter.vendorsFilter ?? [];
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
+    this.requestModel.filterModel.sla = filter.slaFilter ?? null;
     this.getFilterCount();
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
 
@@ -550,7 +543,8 @@ export class MeterUnitsListComponent implements OnInit {
       filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
       filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0,
       filterInfo.protocolFilter && filterInfo.protocolFilter.length > 0,
-      filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0
+      filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0,
+      filterInfo.slaFilter && true
     ).count;
     if (this.meterIdsFilterApplied) {
       count++;
@@ -632,18 +626,5 @@ export class MeterUnitsListComponent implements OnInit {
     sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-  }
-
-  getSlaData(deviceIds: any, dateFrom) {
-    this.concentratorService.getSlaData(deviceIds, dateFrom).subscribe((res) => {
-      res.forEach((item) => {
-        this.gridData.data.find((rowData) => rowData.deviceId === item.deviceId).sla = {
-          color: item.colour,
-          value: item.successPercentage
-        };
-      });
-    });
-    console.log(this.gridData.data);
-    this.gridData.data = [...this.gridData.data];
   }
 }

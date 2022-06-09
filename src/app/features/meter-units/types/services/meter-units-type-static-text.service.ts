@@ -47,7 +47,8 @@ export class MeterUnitsTypeStaticTextService {
     ciiState: boolean,
     showOptionFilter: boolean,
     protocol: boolean,
-    medium: boolean
+    medium: boolean,
+    slaFilter: boolean
     // showChildMBus: boolean,
     // showWithoutTemplate: boolean,
     // showOnlyReadyForActivation: boolean
@@ -144,6 +145,10 @@ export class MeterUnitsTypeStaticTextService {
 
     if (showOptionFilter) {
       result.text += this.translate.instant('COMMON.SHOW-OPTION').toLowerCase() + separator;
+      result.count++;
+    }
+
+    if (slaFilter) {
       result.count++;
     }
 

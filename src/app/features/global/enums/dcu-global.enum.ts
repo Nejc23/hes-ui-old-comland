@@ -3,5 +3,6 @@ export const gridSysNameColumnsEnum = {
   state: 'state',
   type: 'type',
   vendor: 'vendor',
-  tags: 'tags'
+  tags: 'tags',
+  sla: 'slaSuccessPercentage'
 };

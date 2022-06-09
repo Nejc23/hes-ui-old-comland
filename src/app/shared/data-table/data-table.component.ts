@@ -881,4 +881,14 @@ export class DataTableComponent implements OnInit, OnChanges {
       this.initGrid();
     }
   }
+
+  getSlaColor(value: number): string {
+    if (value >= environment.slaHighLimit) {
+      return 'green';
+    }
+    if (value >= environment.slaMedLimit) {
+      return 'orange';
+    }
+    return 'red';
+  }
 }
