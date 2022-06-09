@@ -208,7 +208,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
         <!--- no type defined is string -->
         <ng-container
-          *ngIf="(!column.type && dataItem[column.field]) || (dataItem[column.field] === 0 && column.type !== columnType.LINK)">
+          *ngIf="(!column.type && dataItem[column.field]) || (dataItem[column.field] === 0 && column.type !== columnType.LINK && column.type !== columnType.SLA)">
           <div [class]="column.class ?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
             <ng-container *ngIf="column.icon; else noIcon">
@@ -388,15 +388,9 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SLA">
-          <ng-container *ngIf="dataItem[column.field]; else noData">
-            <span
-              [ngClass]="'pill-' + dataItem[column.field].color"> {{ dataItem[column.field].value | number: '1.0-0' }}
-              % </span>
-          </ng-container>
-          <ng-template #noData>
-            <span [ngClass]="'pill-red'">0%</span>
-          </ng-template>
-
+          <span
+            [ngClass]="'pill-' + getSlaColor(dataItem[column.field])"> {{ dataItem[column.field] | number: '1.0-0' }}
+            % </span>
         </ng-container>
 
       </div>

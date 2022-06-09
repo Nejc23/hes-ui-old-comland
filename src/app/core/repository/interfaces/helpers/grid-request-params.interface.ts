@@ -32,6 +32,7 @@ export interface GridFilterParams {
   showOptionFilter?: Codelist<number>[];
   protocol?: Codelist<number>[];
   medium?: Codelist<number>[];
+  sla?: Codelist<number>;
 }
 
 export interface GridSortParams {

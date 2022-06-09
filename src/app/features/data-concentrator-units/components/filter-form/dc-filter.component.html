@@ -7,26 +7,6 @@
                      label="State">
       </app-input-tag>
 
-      <!--<div class="form-row">
-        <div class="col-6">
-          <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-          </app-select-input>
-        </div>
-        <div class="col-3">
-          <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value1Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-        </div>
-        <div class="col-3" *ngIf="form.get(operationProperty).value != null &&  form.get(operationProperty).value.id === 'In Range'">
-          <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-        </div>
-      </div>-->
-      <div *ngIf="!form.valid" class="form-row text-danger">
-        <div class="col-6"></div>
-        <div class="col-6"><i class="far fa-info-circle"></i><span
-          class="small">{{errorValidatorReadStatusComponents()}}</span></div>
-      </div>
-
       <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuTypes$ | async"
                      [form]="form"
                      [property]="typesProperty"
@@ -38,6 +18,28 @@
                      [property]="vendorsProperty"
                      label="Vendor">
       </app-input-tag>
+
+      <div>
+        <div>
+          <label>{{'FORM.SLA' | translate }}</label>
+        </div>
+        <div class="tw-inline-flex tw-w-full tw-gap-4">
+          <app-select-input
+            class="tw-w-1/2"
+            [form]="form"
+            (selectedValueChanged)="applyFilter(true)"
+            [disabled]="false"
+            [selectOptions]="slaOperations"
+            [property]="slaOperation"
+          >
+          </app-select-input>
+
+          <div class="tw-w-20 tw-w-1/2" *ngIf="form.controls.slaOperation.value !== null">
+            <app-input-numeric [form]="form" [max]="100" [min]="1" [property]="slaValue"
+                               (inputTextBlurValue)="applyFilter()"></app-input-numeric>
+          </div>
+        </div>
+      </div>
 
       <!--      <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuTags$ | async"-->
       <!--                     [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"-->

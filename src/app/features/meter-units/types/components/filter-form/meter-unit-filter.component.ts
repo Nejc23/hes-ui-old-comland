@@ -47,6 +47,11 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   operatorsList$ = this.codelistHelperService.operationsList();
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
 
+  slaOperations: Codelist<number>[] = [
+    { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
+    { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
+  ];
+
   deviceMediums$: Observable<Codelist<number>[]>;
   protocolTypes: Codelist<number>[];
 
@@ -176,6 +181,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'fileSelect';
   }
 
+  get slaOperation() {
+    return 'slaOperation';
+  }
+
+  get slaValue() {
+    return 'slaValue';
+  }
+
   // called on init
   ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
@@ -252,7 +265,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
           gridLayout: '',
           mediumFilter: this.sessionFilter.mediumFilter,
-          protocolFilter: this.sessionFilter.protocolFilter
+          protocolFilter: this.sessionFilter.protocolFilter,
+          slaFilter: this.sessionFilter.slaFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -286,7 +300,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
         [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []],
         [this.importDevicesField]: [this.filterFromFiles[0]],
-        [this.fileProperty]: null
+        [this.fileProperty]: null,
+        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter.id) : null],
+        [this.slaValue]: [filters && selected ? selected.slaFilter.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -299,6 +315,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
     this.form.get(this.importDevicesField).setValue(this.filterFromFiles[0]);
     this.form.get(this.fileProperty).setValue(null);
+    this.form.get(this.slaValue).setValue(null);
     this.eventsService.emitCustom('ClearMeterIdsFilter', this.meterIdsFilterEvent);
     this.clearFile = true;
     this.meterIds = [];
@@ -309,7 +326,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter() {
+  applyFilter(slaFilter = false) {
+    if (slaFilter && !this.form?.controls?.slaOperation?.value) {
+      return;
+    }
     if (!this.form.valid) {
       return;
     }
@@ -354,7 +374,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: '',
       mediumFilter: this.form.get(this.mediumProperty).value,
-      protocolFilter: this.form.get(this.protocolProperty).value
+      protocolFilter: this.form.get(this.protocolProperty).value,
+      slaFilter:
+        this.form?.controls?.slaOperation?.value?.id && this.form?.controls?.slaValue?.value
+          ? {
+              id: this.form.controls.slaOperation.value.id,
+              value: this.form.controls.slaValue.value
+            }
+          : null
     };
     this.outputFormEvent.emit(currentFilter);
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
@@ -362,18 +389,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     // close tool-panel
     // this.params.api.closeToolPanel();
     this.filterChange.emit();
-  }
-
-  errorValidatorReadStatusComponents() {
-    if (this.form.errors != null && this.form.errors.outOfRange) {
-      return this.translate.instant('COMMON.0-100-RANGE');
-    } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return this.translate.instant('COMMON.INCORRECT-RANGE');
-    }
-  }
-
-  getFilterTitle(): string {
-    return this.translate.instant('FILTER.FILTERS');
   }
 
   selected(event: any) {

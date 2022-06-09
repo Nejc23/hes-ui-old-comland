@@ -65,7 +65,12 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     requestId: null,
     startRow: 0,
     endRow: 0,
-    sortModel: [],
+    sortModel: [
+      {
+        colId: 'name',
+        sort: 'asc'
+      }
+    ],
     searchModel: [],
     filterModel: {}
   };
@@ -286,6 +291,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.types = filterDCU.typesFilter?.map((t) => t.id);
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
+      this.requestModel.filterModel.sla = filterDCU.slaFilter;
     } else {
       this.setFilterInfo();
     }
@@ -308,7 +314,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorsFilter && filter.vendorsFilter.length > 0,
-      filter.tagsFilter && filter.tagsFilter.length > 0
+      filter.tagsFilter && filter.tagsFilter.length > 0,
+      filter.slaFilter && true
     );
   }
 
@@ -320,7 +327,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0,
       filterInfo.typesFilter && filterInfo.typesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0,
-      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0
+      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
+      filterInfo.slaFilter && true
     ).count;
   }
 
@@ -486,11 +494,18 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: DcuUnitsGridLayoutStore = {
-      currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
-      dcuLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout,
-      sortModel: sortModel ? sortModel : this.dcuUnitsGridLayoutStore.sortModel,
-      searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
-      searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards(),
+      currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex() ?? 0,
+      dcuLayout: (this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout) ?? null,
+      sortModel: sortModel
+        ? sortModel
+        : this.dcuUnitsGridLayoutStore?.sortModel ?? [
+            {
+              colId: 'name',
+              sort: 'asc'
+            }
+          ],
+      searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText() ?? '',
+      searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards() ?? false,
       visibleColumns: this.getAllDisplayedColumnsNames(),
       pageSize: this.pageSizes.find((pageSize) => pageSize.id === this.pageSize),
       hideFilter: true

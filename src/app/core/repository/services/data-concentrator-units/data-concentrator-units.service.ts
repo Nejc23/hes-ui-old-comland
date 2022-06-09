@@ -191,7 +191,6 @@ export class DataConcentratorUnitsService {
       sort: []
     };
     requestParam.filter = [];
-
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;
       requestParam.textSearch.propNames = allVisibleColumns;
@@ -233,6 +232,15 @@ export class DataConcentratorUnitsService {
             filterOperation: filterOperationEnum.equal
           })
         );
+      }
+
+      // sla filter
+      if (param.filterModel?.sla) {
+        requestParam.filter.push({
+          propName: gridSysNameColumnsEnum.sla,
+          propValue: param.filterModel.sla.value,
+          filterOperation: param.filterModel.sla.id === 3 ? filterOperationEnum.graterThenOrEqual : filterOperationEnum.lessThenOrEqual
+        });
       }
 
       if (param.sortModel && param.sortModel.length > 0) {

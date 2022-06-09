@@ -10,4 +10,5 @@ export interface DcuLayout {
   typesFilter: Codelist<number>[];
   tagsFilter: Codelist<number>[];
   gridLayout: string;
+  slaFilter: Codelist<number>;
 }
