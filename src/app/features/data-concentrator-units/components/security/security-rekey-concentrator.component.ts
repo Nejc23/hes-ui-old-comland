@@ -23,6 +23,7 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
   public alertHmacText: string;
   public isHmacOnly = false;
   actionRequest: IActionRequestParams;
+  loading = false;
 
   form: FormGroup;
   keyTypes: Codelist<string>[];
@@ -47,6 +48,7 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
     private translate: TranslateService,
     private modalService: ModalService
   ) {}
+
   ngOnInit() {
     if (this.isHmacOnly) {
       this.keyTypesArray = [{ id: 'HMAC', value: this.translate.instant('DCU.SECURITY-HMAC'), apiId: 'HMAC' }];
@@ -56,6 +58,7 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
       keyType: [this.keyTypesArray[0], Validators.required]
     });
   }
+
   onDismiss() {
     this.modal.dismiss();
   }
@@ -80,10 +83,11 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
     } else {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityConcentratorRekey(values);
+      this.loading = true;
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.modal.close();
-
+          this.loading = false;
           const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
           modalRef.componentInstance.requestId = result.requestId;
           modalRef.componentInstance.deviceCount = this.selectedRowsCount;
@@ -91,7 +95,9 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
             selectedRowsCount: this.selectedRowsCount
           });
         },
-        () => {}
+        () => {
+          this.loading = false;
+        }
       );
     }
   }

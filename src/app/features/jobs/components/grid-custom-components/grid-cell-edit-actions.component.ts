@@ -3,7 +3,7 @@ import { JobTypeEnumeration } from '../../enums/job-type.enum';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -57,12 +57,15 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
 
     modalRef.result.then(
       (data) => {
+        component.loading = true;
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
+            component.loading = false;
             this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );

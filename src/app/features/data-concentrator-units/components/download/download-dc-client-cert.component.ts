@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CryptoService } from '../../../meter-units/common/services/crypto.service';
@@ -10,9 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   templateUrl: './download-dc-client-cert.component.html'
 })
-export class DownloadDataConcentratorClientCertComponent implements OnInit {
+export class DownloadDataConcentratorClientCertComponent {
   public alertText: string;
   form: FormGroup;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,10 +27,6 @@ export class DownloadDataConcentratorClientCertComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log();
-  }
-
   onDismiss() {
     this.modal.dismiss();
   }
@@ -38,8 +35,10 @@ export class DownloadDataConcentratorClientCertComponent implements OnInit {
     const request: CryptoCredentialDto = {
       password: this.form.get('password').value
     };
+    this.loading = true;
     this.cryptoService.downloadDataConcentratorClientCert({ body: request }).subscribe(
       (res) => {
+        this.loading = false;
         const filename: string = 'DCClientCert.p12';
         const binaryData = [];
         binaryData.push(res.body);
@@ -55,7 +54,7 @@ export class DownloadDataConcentratorClientCertComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         this.toast.errorToast(this.translate.instant('DCU.CLIENT-CERTS-ERROR'));
-
+        this.loading = false;
         this.modal.close();
       }
     );

@@ -44,7 +44,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" [disabled]=!this.form.valid class="btn btn-primary" type="submit">
+        <button (click)="onConfirm()" [disabled]="!this.form.valid  || loading" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

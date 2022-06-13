@@ -68,7 +68,8 @@
                     ></app-input-text>
                   </div>
                   <div class="col-3">
-                    <app-input-numeric (inputTextBlurValue)="validateHostname()" [allowShowError]="isHostnameValid()" [decimals]="0" [form]="form"
+                    <app-input-numeric (inputTextBlurValue)="validateHostname()" [allowShowError]="isHostnameValid()"
+                                       [decimals]="0" [form]="form"
                                        [format]="'#'" [isReadOnly]="false" [max]="65535"
                                        [min]="0"
                                        [noFlex]="true" [property]="portProperty" [showSpinners]="false" [step]="1"
@@ -449,7 +450,8 @@
     <div class="d-flex justify-content-end">
       <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div class="btn-group dropdown" dropdown>
-        <button (click)="add()" class="btn btn-primary" type="submit">{{ 'BUTTON.ADD' | translate }}</button>
+        <button (click)="add()" [disabled]="loading" class="btn btn-primary"
+                type="submit">{{ 'BUTTON.ADD' | translate }}</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button> -->

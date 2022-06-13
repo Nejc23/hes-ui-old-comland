@@ -23,6 +23,7 @@
               class="btn btn-link"
               type="submit">{{ secondaryButtonText | translate }}</button>
       <button (click)="confirm()"
+              [disabled]="loading"
               class="btn btn-primary"
               type="submit">{{ primaryButtonText | translate }}</button>
     </div>

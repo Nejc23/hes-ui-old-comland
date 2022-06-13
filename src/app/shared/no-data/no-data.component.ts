@@ -11,6 +11,7 @@ export class NoDataComponent {
   @Input() message = 'COMMON.NO-DATA-FOUND';
   @Input() secondaryMessage = '';
   @Input() iconName = '';
+  @Input() loadingDataText = true;
 
   @Input() alert = false; // red alert
 

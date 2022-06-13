@@ -26,6 +26,7 @@ export class TouConfigBasicComponent implements OnInit, AfterViewInit {
 
   unSaved = true;
   editMode = false;
+  loading = false;
 
   constructor(
     private wizardService: TouWizardService,
@@ -105,15 +106,17 @@ export class TouConfigBasicComponent implements OnInit, AfterViewInit {
   updateBasic() {
     const basicData = this.getBasicDataFromForm();
     const updateDto = this.touConfigHelper.castTouConfigClientBasicToConfigUpdateDto(basicData);
-
+    this.loading = true;
     this.touService.updateBasicConfiguration(this.touService.touConfigurationClient.basic.id, updateDto).subscribe(
       () => {
+        this.loading = false;
         this.touService.touConfigurationClient.basic = basicData;
         this.form.markAsPristine();
         this.datePickerForm.markAsPristine();
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );

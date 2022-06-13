@@ -6,45 +6,49 @@
     <ng-container>
       <div class="form-row">
         <div class="col-12 expand-dropzone modal-dropzone">
-            <app-file-upload label="IMAGE" [form]="form" [property]="imageProperty"
-                [uploadSaveUrl]="uploadSaveUrl"
-                [saveField]="'imageFile'"
-                [uploadRemoveUrl]=""
-                [multiple]="false"
-                [responseType]="'text'"
-                [allowedExtensions]="allowedExt"
-                [textExplanation]="allowedExtExplainText"
-                [acceptExtensions]="acceptExtensions"
-                (uploadEvent)="uploadEvent($event)"
-                (successEvent)="successUploaded($event)"
-                [isDropZoneCustom]="true"
-                [dropUploadSubtitle]="uploadDropSubtitle"></app-file-upload>
+          <app-file-upload label="IMAGE" [form]="form" [property]="imageProperty"
+                           [uploadSaveUrl]="uploadSaveUrl"
+                           [saveField]="'imageFile'"
+                           [uploadRemoveUrl]=""
+                           [multiple]="false"
+                           [responseType]="'text'"
+                           [allowedExtensions]="allowedExt"
+                           [textExplanation]="allowedExtExplainText"
+                           [acceptExtensions]="acceptExtensions"
+                           (uploadEvent)="uploadEvent($event)"
+                           (successEvent)="successUploaded($event)"
+                           [isDropZoneCustom]="true"
+                           [dropUploadSubtitle]="uploadDropSubtitle"></app-file-upload>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-text [form]="form" [property]="imageIdenifyerProperty" label="IMAGE-IDENTIFIER"></app-input-text>
+          <app-input-text [form]="form" [property]="imageIdenifyerProperty" label="IMAGE-IDENTIFIER"></app-input-text>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-          <app-input-numeric label="IMAGE-SIZE" [form]="form" [property]="imageSizeProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="20971520"
-          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+          <app-input-numeric label="IMAGE-SIZE" [form]="form" [property]="imageSizeProperty" [showSpinners]="false"
+                             [decimals]="0" [min]="0" [max]="20971520"
+                             [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true"
+                             [noFlex]="true"></app-input-numeric>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-text [form]="form" [property]="imageSignatureProperty" label="IMAGE-SIGNATURE"></app-input-text>
+          <app-input-text [form]="form" [property]="imageSignatureProperty" label="IMAGE-SIGNATURE"></app-input-text>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-switch [form]="form" [property]="imageFillLastBlockProperty" label="OVERRIDE-FILL-LAST-BLOCK"></app-input-switch>
+          <app-input-switch [form]="form" [property]="imageFillLastBlockProperty"
+                            label="OVERRIDE-FILL-LAST-BLOCK"></app-input-switch>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-switch [form]="form" [property]="imageActivateProperty" label="ACTIVATE-IMMEDIATELY"></app-input-switch>
+          <app-input-switch [form]="form" [property]="imageActivateProperty"
+                            label="ACTIVATE-IMMEDIATELY"></app-input-switch>
         </div>
       </div>
     </ng-container>
@@ -55,11 +59,11 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown" *ngIf="!activate">
-        <button type="submit" class="btn btn-primary" (click)="upgrade()" [disabled]="!isFormValid()">
+        <button type="submit" class="btn btn-primary" (click)="upgrade()" [disabled]="!isFormValid() || loading">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
-      <div class="btn-group dropdown"*ngIf="activate">
-        <button type="submit" class="btn btn-primary" (click)="activateMU()">
+      <div class="btn-group dropdown" *ngIf="activate">
+        <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="activateMU()">
           <span>{{ 'BUTTON.ACTIVATE' | translate }}</span></button>
       </div>
     </div>

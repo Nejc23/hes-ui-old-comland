@@ -19,6 +19,7 @@ export class TouConfigurationImportComponent {
   acceptExtensions = ['.xml'];
   data = '';
   uploadDropSubtitle = this.translate.instant('COMMON.IMPORT-SUBTITLE-XML');
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,12 +66,15 @@ export class TouConfigurationImportComponent {
     const values = this.fillData();
     const request = this.meterService.importConfigTou(values);
     const successMessage = this.translate.instant('PLC-METER.IMPORT-SUCCESSFULLY');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       () => {
         this.resetForm();
+        this.loading = false;
         this.eventsService.emitCustom('RefreshTouConfigList', true);
       },
       (x) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(x);
       }
     );

@@ -334,8 +334,10 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
+        component.loading = true;
         response.subscribe(
           (value) => {
+            component.loading = false;
             this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
@@ -345,6 +347,7 @@ export class MeterUnitsPlcActionsService {
             }
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
@@ -526,6 +529,7 @@ export class MeterUnitsPlcActionsService {
 
     modalRef.result.then(
       (data) => {
+        component.loading = true;
         // if checkbox value is true
         if (data) {
           params[component.checkboxField] = component.checkboxValue; // field must be defined inIActionRequestParams
@@ -534,6 +538,8 @@ export class MeterUnitsPlcActionsService {
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
+            component.loading = false;
+
             if (operation === MeterUnitsTypeEnum.disableMeter || MeterUnitsTypeEnum.enableMeter) {
               // refresh data
               this.eventService.emitCustom('RefreshMeterUnitsListEvent', { refresh: true, deselectRows: false });
@@ -557,6 +563,7 @@ export class MeterUnitsPlcActionsService {
             }
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );

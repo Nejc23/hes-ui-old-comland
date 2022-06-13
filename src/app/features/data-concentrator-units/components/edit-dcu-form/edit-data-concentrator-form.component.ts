@@ -83,14 +83,9 @@ export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-
     this.dcuVendors$.subscribe((values) => {
       this.dcuVendors = values;
     });
-
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
   }
 
   ngOnChanges() {

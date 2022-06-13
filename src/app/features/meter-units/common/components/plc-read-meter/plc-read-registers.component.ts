@@ -61,6 +61,7 @@ export class PlcReadRegistersComponent implements OnInit {
   isDataFound = false;
   searchTextEmpty = true;
   templateError = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -152,7 +153,6 @@ export class PlcReadRegistersComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.loadData();
   }
 
   loadData() {
@@ -192,7 +192,7 @@ export class PlcReadRegistersComponent implements OnInit {
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
     const successMessage = this.translate.instant('MODAL.READ-METER-OBJECTS-SUCCEEDED');
-
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
@@ -203,8 +203,11 @@ export class PlcReadRegistersComponent implements OnInit {
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
+        this.loading = false;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

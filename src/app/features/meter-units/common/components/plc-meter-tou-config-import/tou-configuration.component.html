@@ -31,7 +31,7 @@
         <button
           (click)="saveTouConfig()"
           *ngIf="isSummary() && isCreateMode()"
-          [disabled]="!isValid()"
+          [disabled]="!isValid()  || loading"
           class="btn btn-primary"
           type="button"
         >

@@ -19,7 +19,7 @@ export class PlcMeterJobsAssignExistingComponent {
   noJobsSelected = false;
 
   selectedRowsCount: number;
-
+  loading = false;
   selectionRequiredText = this.translate.instant('JOB.AT-LEAST-ONE-JOB');
 
   constructor(
@@ -60,6 +60,7 @@ export class PlcMeterJobsAssignExistingComponent {
   get jobsSelectedProperty() {
     return 'jobsSelected';
   }
+
   // properties - END
 
   onDismiss() {
@@ -78,15 +79,17 @@ export class PlcMeterJobsAssignExistingComponent {
 
     const request = this.myGridService.postJobsAssignExisting(values);
     const successMessage = this.translate.instant('JOB.EXISTING-JOBS-ASSIGNED');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
+        this.loading = false;
         console.log(result);
         this.modal.close();
+      },
+      (err) => {
+        // error
+        this.loading = false;
       }
-      // (err) => {
-      //   // error
-      //   this.errMsg = err.error.errors.breakerMode[0];
-      // }
     );
   }
 

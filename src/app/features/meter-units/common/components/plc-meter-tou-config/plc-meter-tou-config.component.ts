@@ -21,6 +21,7 @@ export class PlcMeterTouConfigComponent {
   configRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   actionRequest: IActionRequestParams;
+  loading = false;
 
   public selectedRowsCount: number;
 
@@ -68,12 +69,15 @@ export class PlcMeterTouConfigComponent {
         excludeIds: this.actionRequest.excludeIds
       };
       response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
+      this.loading = true;
       response.subscribe(
         (value) => {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
           this.cancel(value.requestId);
+          this.loading = false;
         },
         (e) => {
+          this.loading = false;
           this.toast.errorToast(this.messageServerError);
         }
       );
@@ -103,6 +107,7 @@ export class PlcMeterTouConfigComponent {
   get touConfigProperty() {
     return 'touConfig';
   }
+
   // properties - END
 
   onDismiss() {

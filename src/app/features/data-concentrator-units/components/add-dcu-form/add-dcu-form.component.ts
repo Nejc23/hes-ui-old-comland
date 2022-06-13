@@ -6,7 +6,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
-import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
@@ -25,11 +24,11 @@ import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data
 export class AddDcuFormComponent implements OnInit {
   form: FormGroup;
 
-  dcuTypes$: Observable<Codelist<number>[]>;
-  dcuVendors$: Observable<Codelist<number>[]>;
+  dcuTypes: Codelist<number>[];
   dcuVendors: Codelist<number>[];
-  dcuTags$: Observable<Codelist<number>[]>;
+  dcuTags: Codelist<number>[];
   saveError: string;
+  loading = false;
 
   public credentialsVisible = false;
 
@@ -102,14 +101,17 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
+    this.codelistService.dcuTypeCodelist().subscribe((res) => {
+      this.dcuTypes = res;
+      // due to token issues call api synchronous
+      this.codelistService.dcuVendorCodelist().subscribe((res) => {
+        this.dcuVendors = res;
+      });
 
-    this.dcuVendors$.subscribe((values) => {
-      this.dcuVendors = values;
+      this.codelistService.dcuTagCodelist().subscribe((res) => {
+        this.dcuTags = res;
+      });
     });
-
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
     this.setCredentialsControls(this.credentialsVisible);
   }
 
@@ -171,6 +173,10 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   save(addNew: boolean) {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
     const dcuFormData = this.fillData();
     const request = this.dcuService.createDcu(dcuFormData);
     const successMessage = this.translate.instant('DCU.DCU-ADDED-SUCCESSFULLY');
@@ -181,7 +187,7 @@ export class AddDcuFormComponent implements OnInit {
         (result) => {
           if (result) {
             this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
-
+            this.loading = false;
             if (selectedRows && selectedRows.length > 0) {
               this.jobsService.createDeviceJobs(result, selectedRows).subscribe(
                 () => {
@@ -190,7 +196,7 @@ export class AddDcuFormComponent implements OnInit {
                 (errResult) => {
                   const resultErrMessage = errResult.error ? errResult.error : null;
                   const errMessage = this.translate.instant('DCU.ERROR-SCHEDULER', { errorMessage: resultErrMessage });
-
+                  this.loading = false;
                   this.toast.successToast(successMessage);
                   this.toast.errorToast(errMessage);
 
@@ -208,9 +214,11 @@ export class AddDcuFormComponent implements OnInit {
           console.log('this.tabstrip', this.tabstrip);
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
           this.tabstrip.selectTab(0);
+          this.loading = false;
         } // error
       );
     } catch (error) {
+      this.loading = false;
       this.tabstrip.selectTab(0);
     }
   }

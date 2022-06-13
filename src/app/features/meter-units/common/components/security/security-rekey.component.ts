@@ -25,6 +25,7 @@ export class SecurityRekeyComponent {
   form: FormGroup;
   keyTypes: Codelist<string>[];
   selectedKeyType: Codelist<string>;
+  loading = false;
 
   showSecondConfirm = false;
 
@@ -95,10 +96,11 @@ export class SecurityRekeyComponent {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityRekey(values);
       const successMessage = this.translate.instant('PLC-METER.METER-UNITS-RE-KEYING');
+      this.loading = true;
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {
           this.modal.close();
-
+          this.loading = false;
           const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
           modalRef.componentInstance.requestId = result.requestId;
           modalRef.componentInstance.deviceCount = this.selectedRowsCount;
@@ -106,7 +108,9 @@ export class SecurityRekeyComponent {
             selectedRowsCount: this.selectedRowsCount
           });
         },
-        () => {} // error
+        () => {
+          this.loading = false;
+        } // error
       );
     }
   }

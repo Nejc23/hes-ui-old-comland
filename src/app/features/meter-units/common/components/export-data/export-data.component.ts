@@ -73,6 +73,7 @@ export class ExportDataComponent implements OnInit {
   }
 
   onConfirm() {
+    this.loading = true;
     const startDate = moment(this.form.controls.startDate.value, environment.dateDisplayFormat)
       .set('seconds', 0)
       .set('milliseconds', 0)
@@ -102,9 +103,11 @@ export class ExportDataComponent implements OnInit {
       (value) => {
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         this.modal.dismiss();
+        this.loading = false;
       },
       (e) => {
         this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+        this.loading = false;
       }
     );
 
@@ -122,37 +125,49 @@ export class ExportDataComponent implements OnInit {
   }
 
   getDataExportJobs() {
-    this.myGridService.getDataExportJobs().subscribe((jobs) => {
-      this.exportTypes = jobs
-        .map((j) => {
-          return { id: j.description, value: j.value, apiId: j.jobId };
-        })
-        .sort((a, b) => {
-          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-        });
+    this.myGridService.getDataExportJobs().subscribe(
+      (jobs) => {
+        this.exportTypes = jobs
+          .map((j) => {
+            return { id: j.description, value: j.value, apiId: j.jobId };
+          })
+          .sort((a, b) => {
+            return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+          });
 
-      if (this.exportTypes && this.exportTypes[0]) {
-        this.form.controls['exportType'].setValue(this.exportTypes[0]);
+        if (this.exportTypes && this.exportTypes[0]) {
+          this.form.controls['exportType'].setValue(this.exportTypes[0]);
+        }
+        this.getDataReportJobs();
+        this.loading = false;
+      },
+      (e) => {
+        this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+        this.loading = false;
       }
-      this.getDataReportJobs();
-      this.loading = false;
-    });
+    );
   }
 
   getDataReportJobs() {
-    this.myGridService.getDataExportJobs(false).subscribe((jobs) => {
-      this.reportTypes = jobs
-        .map((j) => {
-          return { id: j.description, value: j.value, apiId: j.jobId };
-        })
-        .sort((a, b) => {
-          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-        });
+    this.myGridService.getDataExportJobs(false).subscribe(
+      (jobs) => {
+        this.reportTypes = jobs
+          .map((j) => {
+            return { id: j.description, value: j.value, apiId: j.jobId };
+          })
+          .sort((a, b) => {
+            return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+          });
 
-      if (this.reportTypes && this.reportTypes[0]) {
-        this.form.controls['reportType'].setValue(this.reportTypes[0]);
+        if (this.reportTypes && this.reportTypes[0]) {
+          this.form.controls['reportType'].setValue(this.reportTypes[0]);
+        }
+        this.loading = false;
+      },
+      (e) => {
+        this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+        this.loading = false;
       }
-      this.loading = false;
-    });
+    );
   }
 }

@@ -46,7 +46,7 @@
             <span>{{'BUTTON.ACTIVATE' | translate }}</span></button>
         </div>
         <div class="btn-group dropdown">
-          <button (click)="upgrade()" [disabled]="!imgGuid" class="btn btn-primary" type="submit">
+          <button (click)="upgrade()" [disabled]="!imgGuid || loading" class="btn btn-primary" type="submit">
             <span>{{'BUTTON.CONFIRM' | translate }}</span></button>
         </div>
       </ng-container>
