@@ -12,7 +12,8 @@
         <div class="form-row">
           <div class="col-12">
             <div>
-              <ag-grid-angular #agGrid (firstDataRendered)="onFirstDataRendered($event)" (gridReady)="onGridReady($event)"
+              <ag-grid-angular #agGrid (firstDataRendered)="onFirstDataRendered($event)"
+                               (gridReady)="onGridReady($event)"
                                (selectionChanged)="selectionChanged()"
                                [columnDefs]="columnDefs"
                                [modules]="modules"
@@ -38,7 +39,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" class="btn btn-primary" type="submit">
+        <button (click)="onConfirm()" [disabled]="loading" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

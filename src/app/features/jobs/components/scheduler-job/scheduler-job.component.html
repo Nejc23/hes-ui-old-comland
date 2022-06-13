@@ -5,106 +5,111 @@
 
   <div modal-body>
     <ng-container>
-    <div id="step0" *ngIf="step === 0">
-      <div class="form-row">
-        <div class="col-12 tw-mb-4 tw-text-mediumGray">
-          <span>{{ 'JOB.SCHEDULER-JOB.SELECT-JOB' | translate }}</span>
+      <div id="step0" *ngIf="step === 0">
+        <div class="form-row">
+          <div class="col-12 tw-mb-4 tw-text-mediumGray">
+            <span>{{ 'JOB.SCHEDULER-JOB.SELECT-JOB' | translate }}</span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="tw-flex tw-flex-col tw-container tw-mt-10 tw-w-full tw-items-center tw-justify-center" *ngFor="let addJobForUser of addJobsForUser">
-          <div class="tw-flex tw-flex-col tw-w-full">
-          <app-add-job
-            [jobParams]="addJobForUser"
-            (addJob)="addJob($event)"
-          ></app-add-job>
+        <div class="row">
+          <div class="tw-flex tw-flex-col tw-container tw-mt-10 tw-w-full tw-items-center tw-justify-center"
+               *ngFor="let addJobForUser of addJobsForUser">
+            <div class="tw-flex tw-flex-col tw-w-full">
+              <app-add-job
+                [jobParams]="addJobForUser"
+                (addJob)="addJob($event)"
+              ></app-add-job>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="step1" *ngIf="step === 1 && form">
-      <div class="form-row">
-        <div class="col-12">
-          <app-input-switch [form]="form" [property]="activeProperty" label="Active">
-          </app-input-switch>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-12">
-          <app-input-text [form]="form" [property]="descriptionProperty" label="Description">
-          </app-input-text>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-4">
-          <app-datetime-picker [form]="form" [property]="startAtProperty" label="Start-at">
-          </app-datetime-picker>
-        </div>
-        <div class="col-4">
-          <app-datetime-picker [form]="form" [property]="endAtProperty" label="End-at">
-          </app-datetime-picker>
-        </div>
-      </div>
-
-      <div class="form-row" *ngIf="showForLast()">
-        <div class="col-2">
-          <app-input-text [form]="form" [property]="intervalRangeProperty" label="For-last">
-          </app-input-text>
-        </div>
-        <div class="col-3">
-          <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits" [disabled]="false">
-          </app-select-input>
-        </div>
-      </div>
-
-      <app-cron-schedule [cronExpression]="cronExpression" #cronSchedule></app-cron-schedule>
-
-      <div *ngIf="showIecPush()">
-        <div class="form-row pt-3">
+      <div id="step1" *ngIf="step === 1 && form">
+        <div class="form-row">
           <div class="col-12">
-            <app-input-switch [form]="form" [property]="iecPushEnabledProperty"  label="Push-to-IEC">
+            <app-input-switch [form]="form" [property]="activeProperty" label="Active">
             </app-input-switch>
           </div>
         </div>
-      </div>
-      <div *ngIf="showPointer()">
-        <div class="form-row pt-3">
+        <div class="form-row">
           <div class="col-12">
-            <app-input-switch [form]="form" [property]="usePointerProperty" label="Read-from-last-value">
-            </app-input-switch>
+            <app-input-text [form]="form" [property]="descriptionProperty" label="Description">
+            </app-input-text>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-4">
+            <app-datetime-picker [form]="form" [property]="startAtProperty" label="Start-at">
+            </app-datetime-picker>
+          </div>
+          <div class="col-4">
+            <app-datetime-picker [form]="form" [property]="endAtProperty" label="End-at">
+            </app-datetime-picker>
+          </div>
+        </div>
+
+        <div class="form-row" *ngIf="showForLast()">
+          <div class="col-2">
+            <app-input-text [form]="form" [property]="intervalRangeProperty" label="For-last">
+            </app-input-text>
+          </div>
+          <div class="col-3">
+            <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits"
+                              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+
+        <app-cron-schedule [cronExpression]="cronExpression" #cronSchedule></app-cron-schedule>
+
+        <div *ngIf="showIecPush()">
+          <div class="form-row pt-3">
+            <div class="col-12">
+              <app-input-switch [form]="form" [property]="iecPushEnabledProperty" label="Push-to-IEC">
+              </app-input-switch>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="showPointer()">
+          <div class="form-row pt-3">
+            <div class="col-12">
+              <app-input-switch [form]="form" [property]="usePointerProperty" label="Read-from-last-value">
+              </app-input-switch>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="step2" *ngIf="step === 2 && showRegisters">
-      <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-registers-select>
-      <div class="help-block" *ngIf="noRegisters">
-        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+      <div id="step2" *ngIf="step === 2 && showRegisters">
+        <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)" [selectedJobId]="selectedJobId"
+                              [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-registers-select>
+        <div class="help-block" *ngIf="noRegisters">
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+        </div>
       </div>
-    </div>
 
-    <div id="step2" *ngIf="step === 2 && showConcentrators">
-      <app-data-concentrator-units-select (onSelectionChanged)="dcuSelectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
-      <div class="help-block" *ngIf="noDCUs">
-        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+      <div id="step2" *ngIf="step === 2 && showConcentrators">
+        <app-data-concentrator-units-select (onSelectionChanged)="dcuSelectionChanged($event)"
+                                            [selectedJobId]="selectedJobId"
+                                            [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
+        <div class="help-block" *ngIf="noDCUs">
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+        </div>
       </div>
-    </div>
 
-    <div id="step2" *ngIf="step === 2 && showAlarmNotification">
-      <app-alarm-notification-rules #notificationRules [filter]="filter" [addresses]="addresses"
-        [protocols]="protocols"
-        [manufacturers]="manufacturers"
-        [severities]="severities"
-        [sources]="sources">
-      </app-alarm-notification-rules>
-    </div>
+      <div id="step2" *ngIf="step === 2 && showAlarmNotification">
+        <app-alarm-notification-rules #notificationRules [filter]="filter" [addresses]="addresses"
+                                      [protocols]="protocols"
+                                      [manufacturers]="manufacturers"
+                                      [severities]="severities"
+                                      [sources]="sources">
+        </app-alarm-notification-rules>
+      </div>
 
-    <div id="step2" *ngIf="step === 2 && showMeterTimeSync">
-      <app-meter-time-sync
-        [form] = "formMeterTimeSync"
+      <div id="step2" *ngIf="step === 2 && showMeterTimeSync">
+        <app-meter-time-sync
+          [form]="formMeterTimeSync"
         >
-      </app-meter-time-sync>
-    </div>
+        </app-meter-time-sync>
+      </div>
 
     </ng-container>
   </div>
@@ -115,9 +120,11 @@
         <span>{{ 'BUTTON.PREVIOUS' | translate }}</span></button>
 
       <div dropdown class="btn-group dropdown" *ngIf="step === 2">
-        <button type="submit" class="btn btn-primary" (click)="save(false)">{{ 'BUTTON.SAVE' | translate }}</button>
-        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+        <button type="submit" class="btn btn-primary" [disabled]="loading"
+                (click)="save(false)">{{ 'BUTTON.SAVE' | translate }}</button>
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
           <a class="dropdown-item" (click)="save(true)">{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>

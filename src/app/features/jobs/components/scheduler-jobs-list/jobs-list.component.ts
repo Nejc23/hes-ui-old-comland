@@ -397,12 +397,15 @@ export class JobsListComponent implements OnInit, OnDestroy {
 
     modalRef.result.then(
       (data) => {
+        component.loading = true;
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
+            component.loading = false;
             this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
@@ -447,16 +450,18 @@ export class JobsListComponent implements OnInit, OnDestroy {
     component.btnConfirmText = operation;
     component.modalTitle = this.translate.instant('COMMON.CONFIRM-DELETE');
     component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.DELETE');
-
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
+        component.loading = true;
         response.subscribe(
           (value) => {
+            component.loading = false;
             this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-DELETED'));
             this.getData(true);
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );

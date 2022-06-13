@@ -77,7 +77,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" [disabled]="!dataLoaded || !groupList$ || groupList$.length === 0"
+        <button (click)="onConfirm()" [disabled]="!dataLoaded || !groupList$ || groupList$.length === 0 || loading"
                 class="btn btn-primary"
                 type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>

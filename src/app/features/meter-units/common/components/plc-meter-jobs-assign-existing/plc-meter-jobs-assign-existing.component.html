@@ -1,6 +1,7 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.JOBS.ASSIGN-EXISTING-JOBS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div modal-header
+       [innerHTML]="'PLC-METER.JOBS.ASSIGN-EXISTING-JOBS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
@@ -23,7 +24,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onAssignExisting()">
+        <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="onAssignExisting()">
           <span>{{ 'BUTTON.ASSIGN' | translate }}</span></button>
       </div>
     </div>

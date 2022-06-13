@@ -72,6 +72,7 @@ export class AddMeterUnitFormComponent implements OnInit {
 
   templateDefaultValues: GetDefaultInformationResponse;
   opened = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -451,14 +452,16 @@ export class AddMeterUnitFormComponent implements OnInit {
     const muFormData = this.fillData();
     const request = this.muService.createMuForm(muFormData);
     const successMessage = this.translate.instant('PLC-METER.METER-UNIT-ADDED');
-
+    this.loading = true;
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.toast.successToast(successMessage);
           this.modal.close();
+          this.loading = false;
         },
         (errResult) => {
+          this.loading = false;
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
             for (const error of errResult.error) {
               this.toast.errorToast(error);
@@ -473,6 +476,7 @@ export class AddMeterUnitFormComponent implements OnInit {
         } // error
       );
     } catch (error) {
+      this.loading = false;
       this.selectTabWithErrors();
     }
   }
@@ -495,14 +499,16 @@ export class AddMeterUnitFormComponent implements OnInit {
     }
 
     const successMessage = this.translate.instant('PLC-METER.METER-UNIT-UPDATED');
-
+    this.loading = true;
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
+          this.loading = false;
           this.toast.successToast(successMessage);
           this.modal.close(result);
         },
         (errResult) => {
+          this.loading = false;
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
             for (const error of errResult.error) {
               this.toast.errorToast(error);
@@ -512,6 +518,7 @@ export class AddMeterUnitFormComponent implements OnInit {
         } // error
       );
     } catch (error) {
+      this.loading = false;
       this.selectTabWithErrors();
     }
   }

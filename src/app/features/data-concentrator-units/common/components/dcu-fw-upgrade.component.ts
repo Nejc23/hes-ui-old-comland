@@ -37,7 +37,7 @@ export class DcuFwUpgradeComponent implements OnInit {
   public selectedRowsCount: number;
   public alertText: string;
   uploadDropSubtitle = '';
-
+  loading = false;
   apiUrl = environment.apiUrl;
   uploadSaveUrl = this.apiUrl + fwUploadFile;
   imgGuid: FileGuid = null;
@@ -127,10 +127,12 @@ export class DcuFwUpgradeComponent implements OnInit {
   }
 
   successUploaded(event) {
+    this.loading = false;
     this.imgGuid = JSON.parse(event.response.body);
   }
 
   uploadEvent(event) {
+    this.loading = true;
     const bearer = `bearer ${this.authService.user.id_token}`;
     event.headers = new HttpHeaders({ Authorization: bearer });
     if (this.authService.isRefreshNeeded2()) {
@@ -141,6 +143,7 @@ export class DcuFwUpgradeComponent implements OnInit {
           this.authService.saveTokenAndSetUserRights2(value, '');
         })
         .catch((err) => {
+          this.loading = false;
           if (err.message === 'login_required') {
             this.authService.login().catch((err2) => console.log(err2));
           }
@@ -153,9 +156,10 @@ export class DcuFwUpgradeComponent implements OnInit {
     const request = this.myGridService.createConcFwUpgrade(values);
 
     const successMessage = this.translate.instant('PLC-METER.UPLOAD-METER-IMAGE');
-
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
+        this.loading = false;
         if (result && result.requestId.length > 0) {
         }
         this.modal.close(result.requestId);
@@ -165,7 +169,9 @@ export class DcuFwUpgradeComponent implements OnInit {
           }
         }*/
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

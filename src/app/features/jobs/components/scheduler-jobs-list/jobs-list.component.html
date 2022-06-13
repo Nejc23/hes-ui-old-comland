@@ -11,7 +11,7 @@
     <div class="tw-mt-10 tw-pt-10 tw-pr-5">
       <div class="tw-inline-flex tw-justify-end">
         <div *ngIf="hasUserAddPermissions()" class="dropdown mr-3">
-          <button (click)="addJob()" class="btn btn-primary"> <!--btn-round-->
+          <button (click)="addJob()" [disabled]="loading" class="btn btn-primary"> <!--btn-round-->
             <span>{{'COMMON.ADD' | translate }}</span>
           </button>
         </div>

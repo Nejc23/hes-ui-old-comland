@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SortDescriptor } from '@progress/kendo-data-query';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { ConfigurationBasicDto } from 'src/app/api/time-of-use/models';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { TouWizardMode } from 'src/app/enums/tou-configuration/TouWizardModeEnum';
@@ -27,7 +27,7 @@ import { TouConfigErrorHandler } from '../tou-config-error-handler/tou-config-er
   templateUrl: './tou-config-list.component.html',
   styleUrls: ['./tou-config-list.component.scss']
 })
-export class TouConfigListComponent implements OnInit {
+export class TouConfigListComponent implements OnInit, OnDestroy {
   touConfigListData: ConfigurationBasicDto[] = [];
   touListColumnsConfiguration: Array<GridColumn> = [
     {
@@ -91,6 +91,7 @@ export class TouConfigListComponent implements OnInit {
   createdByData = [];
   touListFiltersConfiguration: GridFilter[] = [];
   selectedKeys: string[] = [];
+  subscriptions: Array<Subscription> = [];
 
   constructor(
     private touService: TouConfigService,
@@ -105,9 +106,11 @@ export class TouConfigListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    this.eventsService.getCustom('RefreshTouConfigList').subscribe(() => {
-      this.getData();
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('RefreshTouConfigList').subscribe(() => {
+        this.getData();
+      })
+    );
   }
 
   getData() {
@@ -233,5 +236,9 @@ export class TouConfigListComponent implements OnInit {
           });
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

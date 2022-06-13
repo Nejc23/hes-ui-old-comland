@@ -32,7 +32,8 @@
 
             <div class="form-row">
               <div class="col-6">
-                <app-input-text [form]="form" [property]="hostname" label="hostname" (inputTextBlurValue)="validateHostname()"></app-input-text>
+                <app-input-text [form]="form" [property]="hostname" label="hostname"
+                                (inputTextBlurValue)="validateHostname()"></app-input-text>
               </div>
             </div>
 
@@ -45,7 +46,7 @@
               <div class="col-4">
                 <app-select-input (selectedValueChanged)="onTypeChanged($event)" [disabled]="false" [form]="form"
                                   [property]="typeProperty"
-                                  [selectOptions]="dcuTypes$ | async" label="Type">
+                                  [selectOptions]="dcuTypes" label="Type">
                 </app-select-input>
               </div>
             </div>
@@ -58,7 +59,7 @@
               </div>
             </div>
 
-            <app-input-tag [allowCustomValues]="true" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="false"
+            <app-input-tag [allowCustomValues]="true" [autocompleteItemsAsObjects]="dcuTags" [disabled]="false"
                            [form]="form"
                            [property]="tagsProperty" label="Tag">
             </app-input-tag>
@@ -83,7 +84,8 @@
     <div class="d-flex justify-content-end">
       <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div class="btn-group dropdown" dropdown>
-        <button (click)="save(false)" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
+        <button (click)="save(false)" [disabled]="loading" class="btn btn-primary"
+                type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
         <button [ngbTooltip]="tipMoreSave" aria-expanded="false" aria-haspopup="true"
                 class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                 data-bs-toggle="dropdown" dropdownToggle type="button">

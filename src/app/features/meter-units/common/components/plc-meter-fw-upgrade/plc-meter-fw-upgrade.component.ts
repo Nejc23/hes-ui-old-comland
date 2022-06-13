@@ -37,6 +37,7 @@ export class PlcMeterFwUpgradeComponent {
   acceptExtensions = ['.img', '.bin', '.dat'];
   public files: Array<any>;
   activate = false;
+  loading = false;
 
   public selectedRowsCount: number;
 
@@ -134,8 +135,10 @@ export class PlcMeterFwUpgradeComponent {
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
     const successMessage = this.translate.instant('PLC-METER.UPLOAD-METER-IMAGE');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
+        this.loading = false;
         if (result && result.requestId.length > 0) {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(result.requestId);
         }
@@ -146,7 +149,9 @@ export class PlcMeterFwUpgradeComponent {
           }
         }*/
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 
@@ -159,10 +164,12 @@ export class PlcMeterFwUpgradeComponent {
   }
 
   successUploaded(event) {
+    this.loading = false;
     this.imgGuid = JSON.parse(event.response.body);
   }
 
   uploadEvent(event) {
+    this.loading = false;
     const bearer = `bearer ${this.authService.user.id_token}`;
     event.headers = new HttpHeaders({ Authorization: bearer });
     if (this.authService.isRefreshNeeded2()) {
@@ -173,6 +180,7 @@ export class PlcMeterFwUpgradeComponent {
           this.authService.saveTokenAndSetUserRights2(value, '');
         })
         .catch((err) => {
+          this.loading = false;
           if (err.message === 'login_required') {
             this.authService.login().catch((err2) => console.log(err2));
           }

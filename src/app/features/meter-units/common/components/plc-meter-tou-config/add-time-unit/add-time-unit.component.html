@@ -64,7 +64,7 @@
         <button
           (click)="saveOrUpdateUnit()"
           *ngIf="isEditMode()"
-          [disabled]="isSaveOrUpdateDisabled()"
+          [disabled]="isSaveOrUpdateDisabled() || loading"
           class="btn btn-link text-primary tw-inline-flex tw-items-center tw-w-28 save-update-btn"
           title="{{ saveOrUpdateUnitTitle() | translate }}"
         >

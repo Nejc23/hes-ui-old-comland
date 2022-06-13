@@ -19,6 +19,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
   form: FormGroup;
   actionRequest: IActionRequestParams;
   relays$: Codelist<string>[];
+  loading = false;
 
   public selectedRowsCount;
   actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
@@ -90,6 +91,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.postRelaysConnectDevice(values);
     const successMessage = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close(result.requestId);
@@ -100,8 +102,11 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.actionName = this.actionName;
+        this.loading = false;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 }

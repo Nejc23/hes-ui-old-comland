@@ -326,6 +326,7 @@
 
   <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()"
                            (confirmButtonClickedEvent)="update()"
+                           [loading]="loadingMetadata || loading"
                            [title]="basicDetails ? 'COMMON.BASIC-DETAILS' : 'COMMON.COMMUNICATION-DETAILS'"
                            [visible]="openEdit">
 
@@ -440,14 +441,14 @@
                 </div>
               </div>
             </app-card-item>
-            <app-active-job-card-item [deviceId]="deviceId"> </app-active-job-card-item>
+            <app-active-job-card-item [deviceId]="deviceId"></app-active-job-card-item>
 
           </div>
 
         </div>
       </ng-template>
     </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab  *ngIf="templateDto" title="{{ 'COMMON.CONFIGURATION' | translate }}">
+    <kendo-tabstrip-tab *ngIf="templateDto" title="{{ 'COMMON.CONFIGURATION' | translate }}">
       <ng-template kendoTabContent>
         <div class="tw-py-10">
           <app-json-viewer [objectToRender]="templateDto" [depth]="1"></app-json-viewer>

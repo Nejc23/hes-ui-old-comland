@@ -25,6 +25,7 @@ export class PlcMeterMonitorComponent implements OnInit {
   form: FormGroup;
   formTemplate: ResponseCommonRegisterGroup[];
   showError = true;
+  loading = false;
 
   public selectedRowsCount: number;
 
@@ -82,8 +83,10 @@ export class PlcMeterMonitorComponent implements OnInit {
 
     const request = this.myGridService.setMonitor(formData);
     const successMessage = this.translate.instant('PLC-METER.SET-MONITOR-SUCCESSFUL');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
+        this.loading = false;
         this.modal.close();
         const options: NgbModalOptions = {
           size: 'md'
@@ -93,7 +96,9 @@ export class PlcMeterMonitorComponent implements OnInit {
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 }

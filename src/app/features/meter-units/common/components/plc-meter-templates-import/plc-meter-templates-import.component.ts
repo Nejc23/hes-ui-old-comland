@@ -1,6 +1,6 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -25,6 +25,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   acceptExtensions = ['.json'];
   jsonString = '';
   fileValid = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,12 +74,15 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   save() {
     let response: Observable<any> = new Observable();
     response = this.gridLinkService.postMyGridTemplatesImport(this.jsonString);
+    this.loading = true;
     response.subscribe(
       (value) => {
+        this.loading = false;
         this.toast.successToast(this.successMessage);
         this.resetForm();
       },
       (e) => {
+        this.loading = false;
         this.toast.errorToast(this.messageServerError);
       }
     );

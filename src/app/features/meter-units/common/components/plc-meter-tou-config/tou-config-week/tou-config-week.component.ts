@@ -26,6 +26,7 @@ export class TouConfigWeekComponent implements OnInit {
   invalidForm = false;
   childForm: FormGroup[] = [];
   private hasUnsavedChanges = false;
+  loading = false;
 
   constructor(
     private wizardService: TouWizardService,

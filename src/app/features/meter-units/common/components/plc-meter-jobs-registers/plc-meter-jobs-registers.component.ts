@@ -1,6 +1,5 @@
-import { Module, AllModules } from '@ag-grid-enterprise/all-modules';
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -21,7 +20,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
   noRegisters = false;
   registersRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
-
+  loading = false;
   form: FormGroup;
 
   rowData$: Observable<TemplatesList[]>;
@@ -87,11 +86,15 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.postMyGridAddDeviceTemplate(values);
     const successMessage = this.translate.instant('COMMON.ADDING-TEMPLATE');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+        this.loading = false;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

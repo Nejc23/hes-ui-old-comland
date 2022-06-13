@@ -22,7 +22,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
   relays$: Codelist<string>[];
   modes: Codelist<number>[];
   actionName = this.translate.instant('PLC-METER.RELAY-MODE');
-
+  loading = false;
   public selectedRowsCount: number;
 
   constructor(
@@ -111,9 +111,11 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.setRelaysMode(values);
     const successMessage = this.translate.instant('PLC-METER.SETTING-OF-RELAY-MODE');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+        this.loading = false;
 
         const options: NgbModalOptions = {
           size: 'md'
@@ -123,7 +125,9 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

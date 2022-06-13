@@ -18,7 +18,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="save()">
+        <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="save()">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

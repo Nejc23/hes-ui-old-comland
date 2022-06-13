@@ -20,6 +20,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
   actionRequest: IActionRequestParams;
   relays$: Codelist<string>[];
   actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT-SELECTED');
+  loading = false;
 
   public selectedRowsCount: number;
 
@@ -89,6 +90,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.postRelaysDisconnectDevice(values);
     const successMessage = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
@@ -100,8 +102,11 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
+        this.loading = false;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 }

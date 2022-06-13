@@ -72,6 +72,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
 
   templateDefaultValues: GetDefaultInformationResponse;
   opened = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -484,14 +485,16 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       request = this.muService.updateMuForm(muFormData);
     }
     const successMessage = this.translate.instant('PLC-METER.METER-UNIT-UPDATED');
-
+    this.loading = true;
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
+          this.loading = false;
           this.toast.successToast(successMessage);
           this.eventsService.emitCustom('RefreshMeterDetailsPage', this.data.deviceId);
         },
         (errResult) => {
+          this.loading = false;
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
             for (const error of errResult.error) {
               this.toast.errorToast(error);
@@ -506,6 +509,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
         } // error
       );
     } catch (error) {
+      this.loading = false;
       this.selectTabWithErrors();
     }
   }

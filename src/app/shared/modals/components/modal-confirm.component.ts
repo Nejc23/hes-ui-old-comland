@@ -38,6 +38,7 @@ export class ModalConfirmComponent {
   @Input() alertText = '';
   @Input() dangerText = ''; // alert with exclamation icon
   showSecondConfirm = false;
+  @Input() loading = false;
 
   constructor(public activeModal: NgbActiveModal) {}
 
