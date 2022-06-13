@@ -24,6 +24,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   params: IActionRequestParams;
   registers$: Codelist<string>[];
   public selectedRowsCount: number;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -124,8 +125,10 @@ export class PlcMeterLimiterComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
     const successMessage = this.translate.instant('PLC-METER.METER-UNITS-SET-LIMITER');
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
+        this.loading = false;
         this.modal.close();
         const options: NgbModalOptions = {
           size: 'md'
@@ -137,7 +140,9 @@ export class PlcMeterLimiterComponent implements OnInit {
         });
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

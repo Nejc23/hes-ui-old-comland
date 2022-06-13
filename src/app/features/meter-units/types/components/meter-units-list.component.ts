@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -40,12 +40,13 @@ import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selecti
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-meter-units',
   templateUrl: './meter-units-list.component.html'
 })
-export class MeterUnitsListComponent implements OnInit {
+export class MeterUnitsListComponent implements OnInit, OnDestroy {
   // new grid
   gridData: GridResponse<MeterUnitsList>;
   pageNumber = 1;
@@ -108,6 +109,7 @@ export class MeterUnitsListComponent implements OnInit {
   };
 
   filtersInfo: FiltersInfo;
+  subscriptions: Array<Subscription> = [];
 
   constructor(
     public fb: FormBuilder,
@@ -141,38 +143,44 @@ export class MeterUnitsListComponent implements OnInit {
       }
     });
     this.breadcrumbService.setPageName('');
-    this.eventManager.getCustom('RefreshMeterUnitsListEvent').subscribe((event) => {
-      if (event.deselectRows) {
-        this.clearSessionStorage();
-      }
-      if (event.refresh) {
-        this.getMetersListData(true);
-      }
-    });
-
-    this.eventManager.getCustom('ApplyMeterIdsFilter').subscribe((event) => {
-      const ids = event.ids;
-      // convert ids from excel array<number>
-      if (!ids.some(isNaN)) {
-        ids.toString();
-      }
-      this.requestModel.searchModel = [
-        {
-          colId: event.field,
-          type: enumSearchFilterOperators.like,
-          value: ids.join().toString().replace(/,/gi, '&'),
-          useWildcards: true
+    this.subscriptions.push(
+      this.eventManager.getCustom('RefreshMeterUnitsListEvent').subscribe((event) => {
+        if (event.deselectRows) {
+          this.clearSessionStorage();
         }
-      ];
-      this.meterIdsFilterApplied = true;
-      this.selectedRowsIds = [];
-      this.getMetersListData(true);
-    });
+        if (event.refresh) {
+          this.getMetersListData(true);
+        }
+      })
+    );
 
-    this.eventManager.getCustom('ClearMeterIdsFilter').subscribe(() => {
-      this.clearMeterIdsFilter();
-      this.getMetersListData(true);
-    });
+    this.subscriptions.push(
+      this.eventManager.getCustom('ApplyMeterIdsFilter').subscribe((event) => {
+        const ids = event.ids;
+        // convert ids from excel array<number>
+        if (!ids.some(isNaN)) {
+          ids.toString();
+        }
+        this.requestModel.searchModel = [
+          {
+            colId: event.field,
+            type: enumSearchFilterOperators.like,
+            value: ids.join().toString().replace(/,/gi, '&'),
+            useWildcards: true
+          }
+        ];
+        this.meterIdsFilterApplied = true;
+        this.selectedRowsIds = [];
+        this.getMetersListData(true);
+      })
+    );
+
+    this.subscriptions.push(
+      this.eventManager.getCustom('ClearMeterIdsFilter').subscribe(() => {
+        this.clearMeterIdsFilter();
+        this.getMetersListData(true);
+      })
+    );
   }
 
   get permissionMuManage() {
@@ -645,5 +653,11 @@ export class MeterUnitsListComponent implements OnInit {
     });
     console.log(this.gridData.data);
     this.gridData.data = [...this.gridData.data];
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 }

@@ -1,6 +1,7 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.RELAY-DISCONNECT-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div modal-header
+       [innerHTML]="'PLC-METER.RELAY-DISCONNECT-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
@@ -20,7 +21,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()">
+        <button type="submit" [disabled]="loading" class="btn btn-primary" (click)="onSet()">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

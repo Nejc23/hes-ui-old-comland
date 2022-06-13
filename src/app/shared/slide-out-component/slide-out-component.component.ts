@@ -19,6 +19,8 @@ export class SlideOutComponentComponent {
   @Output() closeButtonClickedEvent = new EventEmitter<boolean>();
   @Output() confirmButtonClickedEvent = new EventEmitter<boolean>();
 
+  @Input() loading = false;
+
   constructor(private translate: TranslateService) {}
 
   close() {

@@ -18,6 +18,7 @@ export class PlcMeterRelaysStateComponent {
   form: FormGroup;
   actionRequest: IActionRequestParams;
   actionName = this.translate.instant('PLC-METER.RELAY-STATE-TITLE');
+  loading = false;
 
   public selectedRowsCount: number;
 
@@ -56,7 +57,7 @@ export class PlcMeterRelaysStateComponent {
     const request = this.myGridService.getRelaysState(values);
     const successMessage = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
     const errorMessage = this.translate.instant('COMMON.ACTION-FAILED') + '!';
-
+    this.loading = true;
     request.subscribe(
       (result) => {
         this.toastService.successToast(successMessage);
@@ -69,9 +70,11 @@ export class PlcMeterRelaysStateComponent {
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
+        this.loading = false;
       },
       (error) => {
         this.toastService.errorToast(errorMessage);
+        this.loading = false;
       }
     );
   }

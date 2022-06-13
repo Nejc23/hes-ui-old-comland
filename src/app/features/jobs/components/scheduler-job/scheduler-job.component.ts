@@ -456,6 +456,9 @@ export class SchedulerJobComponent {
   }
 
   save(addNew: boolean) {
+    if (this.loading) {
+      return;
+    }
     this.loading = true;
     // times and selected registers
     if (this.showRegisters) {
@@ -530,6 +533,7 @@ export class SchedulerJobComponent {
       (error) => {
         console.log('Error saving job ', error);
         this.toast.errorToast(this.translate.instant('JOB.SCHEDULER-JOB.ERROR-SAVING') + ' ' + error);
+        this.loading = false;
       },
       () => {
         this.loading = false;

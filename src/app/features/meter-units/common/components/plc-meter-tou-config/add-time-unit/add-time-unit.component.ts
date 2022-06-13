@@ -72,7 +72,7 @@ export class AddTimeUnitComponent implements OnInit {
       dir: 'asc'
     }
   ];
-  initialData: any;
+  loading = false;
   @Output() private hasUnsavedChanges: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
@@ -737,8 +737,10 @@ export class AddTimeUnitComponent implements OnInit {
   }
 
   updateDayFromApi() {
+    this.loading = true;
     this.touService.updateDay(this.selectedUnit.id, this.selectedUnit.description, Number(this.selectedUnit.externalId)).subscribe(
       () => {
+        this.loading = false;
         this.markFormAsPristine();
         if (this.isEditMode()) {
           this.selectedUnitOrigin = _.cloneDeep(this.selectedUnit);
@@ -746,6 +748,7 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
@@ -761,8 +764,10 @@ export class AddTimeUnitComponent implements OnInit {
       });
     });
     // create new day on BE
+    this.loading = true;
     this.touService.addDay(this.form.get('externalId').value, this.form.get('description').value, dayActions).subscribe(
       (res) => {
+        this.loading = false;
         this.selectedUnit.id = res;
         // Patch form with id.
         this.form.get('id').patchValue(res);
@@ -774,16 +779,19 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
   }
 
   updateWeekFromApi() {
+    this.loading = true;
     const updateWeekData = this.getWeekDataFromForm();
     const weekCreateDto = this.touConfigHelper.castTouConfigClientWeekToWeekUpdateDto(updateWeekData);
     this.touService.updateWeek(this.touService.touConfigurationClient.basic.id, this.selectedUnit.id, weekCreateDto).subscribe(
       () => {
+        this.loading = false;
         this.markFormAsPristine();
         if (this.isEditMode()) {
           this.selectedUnitOrigin = _.cloneDeep(this.selectedUnit);
@@ -791,6 +799,7 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
@@ -799,8 +808,10 @@ export class AddTimeUnitComponent implements OnInit {
   createNewWeekFromApi() {
     const newWeekData = this.getWeekDataFromForm();
     const weekCreateDto = this.touConfigHelper.castTouConfigClientWeekToWeekCreateDto(newWeekData);
+    this.loading = true;
     this.touService.addWeek(this.touService.touConfigurationClient.basic.id, weekCreateDto).subscribe(
       (res) => {
+        this.loading = false;
         this.selectedUnit.id = res;
         // Patch form with id.
         this.form.get('id').patchValue(res);
@@ -812,14 +823,17 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
   }
 
   updateSeasonFromApi() {
+    this.loading = true;
     this.touService.updateSeason(this.selectedUnit.id, this.setSeasonData()).subscribe(
       (res) => {
+        this.loading = false;
         this.markFormAsPristine();
         if (this.isEditMode()) {
           this.selectedUnitOrigin = _.cloneDeep(this.selectedUnit);
@@ -827,14 +841,17 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
   }
 
   createNewSeasonFromApi() {
+    this.loading = true;
     this.touService.createSeason(this.setSeasonData()).subscribe(
       (res) => {
+        this.loading = false;
         this.selectedUnit.id = res;
         // Patch form with id.
         this.form.get('id').patchValue(res);
@@ -846,6 +863,7 @@ export class AddTimeUnitComponent implements OnInit {
         this.toast.successToast(this.translate.instant('TOU-CONFIG.CONFIGURATION-UPDATED'));
       },
       (err: HttpErrorResponse) => {
+        this.loading = false;
         this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );

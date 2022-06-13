@@ -37,6 +37,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   public gridApiRight;
 
   noRegisterSelected = false;
+  loading = false;
 
   public modules: Module[] = AllModules;
   requiredText = this.translate.instant('PLC-METER.AT-LEAST-ONE-REGISTER');
@@ -147,11 +148,11 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.setDisplaySettings(values);
     const successMessage = this.translate.instant('PLC-METER.METER-UNITS-DISPLAY-SETTINGS');
-
+    this.loading = true;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
-
+        this.loading = false;
         const options: NgbModalOptions = {
           size: 'md'
         };
@@ -160,7 +161,9 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
         modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
-      () => {} // error
+      () => {
+        this.loading = false;
+      } // error
     );
   }
 

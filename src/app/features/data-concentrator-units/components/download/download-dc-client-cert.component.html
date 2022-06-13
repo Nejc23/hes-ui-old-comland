@@ -10,8 +10,9 @@
         <div class="col-12">
           <span>{{ 'DCU.ENTER-CLIENT-PASSWORD' | translate }}</span>
         </div>
-        <div  class="col-12 pt-2">
-          <app-input-text [form]="form" [property]="'password'" [inputType]="'password'" label="password"></app-input-text>
+        <div class="col-12 pt-2">
+          <app-input-text [form]="form" [property]="'password'" [inputType]="'password'"
+                          label="password"></app-input-text>
         </div>
         <div *ngIf="alertText" class="col-12 pt-2">
           <div class="alert alert-danger" role="alert">
@@ -29,7 +30,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" class="btn btn-primary" type="submit"  [disabled]=!this.form.valid>
+        <button (click)="onConfirm()" class="btn btn-primary" type="submit" [disabled]="!this.form.valid || loading">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

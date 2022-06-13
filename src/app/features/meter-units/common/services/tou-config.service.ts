@@ -103,7 +103,7 @@ export class TouConfigService {
     this.storeTOUConfigurationToSession();
   }
 
-  saveTouConfiguration() {
+  saveTouConfiguration(loading: boolean) {
     if (this.touWizardMode == TouWizardMode.CREATE) {
       const configCreateDto: ConfigurationCreateDto = this.touConfigHelper.castTouConfigurationClientToConfigurationCreateDto(
         this.touConfigurationClient
@@ -111,12 +111,14 @@ export class TouConfigService {
 
       this.addTouConfiguration(configCreateDto).subscribe(
         (res) => {
+          loading = false;
           this.removeTOUConfigurationFromSession();
           this.createNewTouConfigurationClient();
           this.toast.successToast(this.translate.instant('TOU-CONFIG.SAVE-TOU-SUCCESSFUL'));
           this.router.navigate(['/configuration/importTouConfiguration/list']);
         },
         (err: HttpErrorResponse) => {
+          loading = false;
           this.toast.errorToast(this.translate.instant('TOU-CONFIG.SAVE-ERROR'));
           this.touConfigErrorHelper.showErrorsAsToasts(err);
         }

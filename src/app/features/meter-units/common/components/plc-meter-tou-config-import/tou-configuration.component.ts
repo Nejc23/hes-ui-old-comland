@@ -18,6 +18,7 @@ import { TouConfigurationImportComponent } from './tou-configuration-import.comp
 export class TouConfigurationComponent implements OnInit {
   DeviceStateEnum = DeviceState;
   wizard = false;
+  loading = false;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -116,7 +117,8 @@ export class TouConfigurationComponent implements OnInit {
   }
 
   saveTouConfig() {
-    this.touService.saveTouConfiguration();
+    this.loading = true;
+    this.touService.saveTouConfiguration(this.loading);
   }
 
   isValid() {

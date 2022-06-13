@@ -11,12 +11,10 @@
       <ng-content select="[modal-body]"></ng-content>
     </div>
     <div class="modal-footer">
-      <ng-content select="[modal-footer]"> </ng-content>
+      <ng-content select="[modal-footer]"></ng-content>
     </div>
   </div>
   <div *ngIf="loading" class="tw-flex tw-justify-center tw-items-center tw-h-40">
-    <div class="spinner-border text-secondary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
+    <app-no-data [loading]="loading" [loadingDataText]="false"></app-no-data>
   </div>
 </div>

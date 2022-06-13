@@ -100,6 +100,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   private dcuAddedSubscription: Subscription;
   private dcuConcentratorDeleted: Subscription;
   private subscription: Subscription;
+  private listSubscription: Subscription;
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
@@ -130,7 +131,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.concentratorsColumns = this.dataConcentratorUnitsGridService.concentratorsColumns;
     this.concentratorsRowActionConfiguration = this.dataConcentratorUnitsGridService.concentratorsRowActionConfiguration;
 
-    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe(() => {
+    this.listSubscription = this.eventsService.getCustom('RefreshConcentratorEvent').subscribe(() => {
       this.getData();
     });
 
@@ -223,6 +224,9 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.listSubscription) {
+      this.listSubscription.unsubscribe();
     }
   }
 
@@ -366,11 +370,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       size: 'lg'
     };
     const modalRef = this.modalService.open(AddDcuFormComponent, options);
-    modalRef.result
-      .then(() => {
-        this.getData();
-      })
-      .catch(() => {});
+    modalRef.result.then(() => {}).catch(() => {});
   }
 
   // ******************************************************************************** */

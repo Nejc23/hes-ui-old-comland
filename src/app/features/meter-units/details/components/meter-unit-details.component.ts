@@ -33,7 +33,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   public detailsForm: FormGroup;
   public routerLinkUrl = '/meterUnits';
   communicationForm: FormGroup;
-  subscription: Subscription;
+  subscriptions: Array<Subscription> = [];
 
   plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
   isPlcDevice = false;
@@ -47,6 +47,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   deviceMetadata: Array<DeviceMetaDataDto> = [];
   stateToolTipMessage = '';
   templateDto: TemplateDto;
+  loading = false;
 
   private requestModel;
 
@@ -223,21 +224,27 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
-      this.getMetadata();
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
+        this.getMetadata();
+      })
+    );
 
-    this.subscription = this.eventsService.getCustom('RefreshMeterDetailsPage').subscribe((id) => {
-      this.getData(id);
-      this.closeSlideOut();
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('RefreshMeterDetailsPage').subscribe((id) => {
+        this.getData(id);
+        this.closeSlideOut();
+      })
+    );
     // get MeterUnit
     this.getData(this.deviceId);
   }
 
   getData(deviceId: string) {
+    this.loading = true;
     this.meterUnitsService.getMeterUnitFromConcentrator(deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
+      this.loading = false;
       this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
       if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
         this.isPlcDevice = true;
@@ -507,6 +514,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   }
 
   update() {
+    this.loading = true;
     console.log('SaveButtonClicked on modal');
     this.eventsService.emitCustom('SaveButtonClicked', true);
   }
@@ -521,6 +529,6 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

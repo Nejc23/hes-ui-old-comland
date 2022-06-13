@@ -104,9 +104,11 @@ export class DcOperationsService {
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
+        component.loading = true;
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
+            component.loading = false;
             if (operation === DcOperationTypeEnum.enable || DcOperationTypeEnum.disable) {
               this.eventManager.emitCustom('RefreshConcentratorEvent', true);
             }
@@ -118,6 +120,7 @@ export class DcOperationsService {
             }*/
           },
           (e) => {
+            component.loading = false;
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );

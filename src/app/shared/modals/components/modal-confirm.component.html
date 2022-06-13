@@ -10,7 +10,6 @@
 </div>
 
 <div class="modal-body small-title">
-
   <div *ngIf="showSecondConfirm" class="form-row pt-2 text-center">
     <div class="col-12">
       <div class="card-body">
@@ -47,5 +46,6 @@
   <button (click)="dismiss()" *ngIf="!withoutCancelButton" class="btn text-secondary mr-auto" type="button"> {{
     btnCancelText | translate }}
   </button>
-  <button (click)="confirm()" class="btn btn-primary" type="button">{{ btnConfirmText | translate }}</button>
+  <button (click)="confirm()" [disabled]="loading" class="btn btn-primary"
+          type="button">{{ btnConfirmText | translate }}</button>
 </div>

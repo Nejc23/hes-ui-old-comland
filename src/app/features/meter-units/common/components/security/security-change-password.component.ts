@@ -27,6 +27,7 @@ export class SecurityChangePasswordComponent {
   selectedPasswordType: Codelist<string>;
 
   showSecondConfirm = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -92,16 +93,22 @@ export class SecurityChangePasswordComponent {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityChangePassword(values);
       const successMessage = this.translate.instant('PLC-METER.SECURITY.METER-UNITS-PASSWORD');
-      this.formUtils.saveForm(this.form, request, successMessage).subscribe((result) => {
-        this.modal.close();
-
-        const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
-        modalRef.componentInstance.requestId = result.requestId;
-        modalRef.componentInstance.deviceCount = this.selectedRowsCount;
-        modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.CHANGE-PASSWORD', {
-          selectedRowsCount: this.selectedRowsCount
-        });
-      });
+      this.loading = true;
+      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+        (result) => {
+          this.modal.close();
+          this.loading = false;
+          const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
+          modalRef.componentInstance.requestId = result.requestId;
+          modalRef.componentInstance.deviceCount = this.selectedRowsCount;
+          modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.CHANGE-PASSWORD', {
+            selectedRowsCount: this.selectedRowsCount
+          });
+        },
+        (error) => {
+          this.loading = false;
+        }
+      );
     }
   }
 }

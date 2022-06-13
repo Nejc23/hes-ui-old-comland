@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
@@ -13,7 +13,6 @@ import { DcuUpdateRequest } from 'src/app/core/repository/interfaces/data-concen
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDataConcentratorFormComponent } from '../../components/edit-dcu-form/edit-data-concentrator-form.component';
@@ -56,9 +55,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   public routerLinkUrl = '/dataConcentratorUnits';
   concentratorId = '';
   data: DataConcentratorUnit;
-  dcuStatuses$: Observable<Codelist<number>[]>;
-  dcuTypes$: Observable<Codelist<number>[]>;
-  dcuVendors$: Observable<Codelist<number>[]>;
   meterStatusData = [];
   tags = [];
   alarms = [];
@@ -90,6 +86,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 
   DeviceStateEnum = DeviceState;
+  subscriptions: Array<Subscription> = [];
 
   eventsColumnsConfiguration: Array<GridColumn> = [
     {
@@ -153,7 +150,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   componentType = OperationType;
 
   eventsFiltersConfiguration: Array<GridFilter> = [];
-  private dcuConcentratorDeleted: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -172,9 +168,11 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private dataProcessingService: DataProcessingService,
     private eventsService: EventManagerService
   ) {
-    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
-      this.getData();
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
+        this.getData();
+      })
+    );
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
       zoom: 13,
@@ -281,22 +279,19 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.eventsForm = this.createEventsForm();
     this.concentratorId = this.route.snapshot.paramMap.get('id');
-    this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
 
     // get DCU
     this.getData();
 
-    this.dcuConcentratorDeleted = this.dcuEventsService.eventEmitterConcentratorDeleted.subscribe((x) => {
-      this.router.navigate([dataConcentratorUnits]);
-    });
+    this.subscriptions.push(
+      this.dcuEventsService.eventEmitterConcentratorDeleted.subscribe((x) => {
+        this.router.navigate([dataConcentratorUnits]);
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.dcuConcentratorDeleted) {
-      this.dcuConcentratorDeleted.unsubscribe();
-    }
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   getData() {
