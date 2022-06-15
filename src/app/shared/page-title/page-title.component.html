@@ -13,10 +13,8 @@
   <div
     *ngIf="state"
     [ngClass]="addStateClass()"
-    class="tw-inline-flex tw-ml-4 tw-bg-opacity-20 tw-rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-capitalize tw-font-bold"
-    container="body"
-    placement="top"
-    [openDelay]="500"
+    class="text-truncate tw-z-50 tw-inline-flex tw-ml-4 tw-bg-opacity-20 tw-rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-capitalize tw-font-bold"
+    placement="bottom"
     [ngbTooltip]="stateToolTipMessage"
   >
     <!-- create classes by enum -->
