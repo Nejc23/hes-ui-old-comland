@@ -61,10 +61,16 @@ export class JobsSelectGridService {
         suppressMovable: true,
         headerName: this.translate.instant('GRID.JOB-TYPE'),
         headerTooltip: this.translate.instant('GRID.JOB-TYPE'),
-        resizable: false
+        resizable: false,
+        width: 140,
+        minWidth: 140,
+        maxWidth: 140
       },
       {
         field: 'nextRun',
+        width: 140,
+        minWidth: 140,
+        maxWidth: 140,
         suppressMenu: true,
         sortable: false,
         suppressMovable: true,
