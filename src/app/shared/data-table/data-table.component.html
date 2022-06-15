@@ -403,17 +403,16 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
       <!-- row actions with separated column -->
       <ng-container *ngIf="rowActions && rowActions.length > 0 && i + 1 === gridColumns.length" class="no-padding">
-        <div class="grid-row-button rows-{{ rowActions.length }} tw-inline-flex">
+        <div class="grid-row-button tw-z-50 rows-{{ rowActions.length }} tw-inline-flex">
           <img
             (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
             *ngFor="let action of rowActions"
             [ngbTooltip]="'GRID.ACTION-' + action.actionName.toUpperCase() | translate"
-            [openDelay]="500"
             [src]="'assets/images/icons/' + action.iconName + '.svg'"
-            class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded"
+            class="tw-h-6 tw-z-50  tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded"
+            tooltipClass="row-actions-tooltip"
             container="body"
-            placement="top"
-            triggers="hover"
+            placement="bottom"
           />
         </div>
       </ng-container>

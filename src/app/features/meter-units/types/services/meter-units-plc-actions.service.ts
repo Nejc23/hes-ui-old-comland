@@ -91,7 +91,11 @@ export class MeterUnitsPlcActionsService {
   onJobsAssignExisting(params: IActionRequestParams, selectedRowsCount: number) {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
 
-    const modalRef = this.modalService.open(PlcMeterJobsAssignExistingComponent);
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    const modalRef = this.modalService.open(PlcMeterJobsAssignExistingComponent, options);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 

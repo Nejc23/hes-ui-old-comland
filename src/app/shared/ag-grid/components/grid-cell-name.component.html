@@ -1,4 +1,7 @@
-<a class="text-truncate" container="body" placement="bottom" [openDelay]="500"
-  [ngbTooltip]="params.value" *ngIf="params.value">{{params.value}}</a>
+<a class="text-truncate" tooltipClass="row-actions-tooltip" placement="bottom" data-bs-toggle="tooltip"
+   [triggers]="'click hover'"
+   [openDelay]="300"
+   container="body"
+   [ngbTooltip]="params.value" *ngIf="params.value">{{params.value}}</a>
 
-  <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
+<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
