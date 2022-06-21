@@ -89,6 +89,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   public files: Array<any> = [];
 
   private eventSettingsStoreLoadedSubscription: Subscription;
+  private clearFilterSubscription: Subscription;
 
   constructor(
     private codelistService: CodelistMeterUnitsRepositoryService,
@@ -116,7 +117,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     });
 
     // this.applyFilter = _.debounce(this.applyFilter, 1000);
-    this.eventsService.getCustom('ClearFilter').subscribe((res) => {
+    this.clearFilterSubscription = this.eventsService.getCustom('ClearFilter').subscribe((res) => {
       this.clearButtonClicked();
     });
   }
@@ -234,6 +235,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
+
+    if (this.clearFilterSubscription) {
+      this.clearFilterSubscription.unsubscribe();
     }
   }
 

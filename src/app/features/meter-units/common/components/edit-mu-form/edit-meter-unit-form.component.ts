@@ -46,7 +46,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
   connectionTypes: Codelist<number>[] = [{ id: 1, value: this.translate.instant('FORM.IP') }];
   defaultConnectionType = this.connectionTypes[0];
   shortNameSelected = false;
-  subscription: Subscription;
 
   communicationTypes: RadioOption[] = [
     { value: '1' as string, label: this.translate.instant('FORM.WRAPPER') },
@@ -74,6 +73,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
   opened = false;
   loading = false;
 
+  subscriptions: Array<Subscription> = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
@@ -86,17 +87,21 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
     private translate: TranslateService,
     private eventsService: EventManagerService
   ) {
-    this.subscription = this.eventsService.getCustom('SaveButtonClicked').subscribe(() => {
-      this.update();
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('SaveButtonClicked').subscribe(() => {
+        this.update();
+      })
+    );
 
-    this.eventsService.getCustom('CloseSlideOut').subscribe(() => {
-      // re init form data
-      this.form = this.setFormEdit();
-      this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
-      const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
-      this.form.get(this.manufacturerProperty).setValue(manufacturer);
-    });
+    this.subscriptions.push(
+      this.eventsService.getCustom('CloseSlideOut').subscribe(() => {
+        // re init form data
+        this.form = this.setFormEdit();
+        this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
+        const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
+        this.form.get(this.manufacturerProperty).setValue(manufacturer);
+      })
+    );
   }
 
   get nameProperty() {
@@ -749,6 +754,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
   ngOnDestroy(): void {
     this.data = null;
     this.form.reset();
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 }
