@@ -5,6 +5,7 @@ stages:
   - lint
   - test
   - build
+  - docker
   - deploy
 
 .build: &build
@@ -104,7 +105,7 @@ myGrid:
   <<: *build
 
 docker-linux:
-  stage: build
+  stage: docker
   variables:
     DEPLOY_VARIABLE: "internal"
   rules:

@@ -38,6 +38,7 @@ import { FiltersInfo } from '../../../../shared/forms/interfaces/filters-info.in
 import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -634,6 +635,12 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 
   ngOnDestroy() {
