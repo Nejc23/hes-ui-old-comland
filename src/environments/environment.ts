@@ -17,9 +17,10 @@ export const environment = {
   timeFormat: 'HH:mm',
   timeFormatLong: 'HH:mm:ss',
   decimalsFormat: 4,
+  // https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting#default-date-formats
   kendoChartCategoryDateFormats: {
     minutes: 't',
-    hours: 't', // h:mm tt for en-US
+    hours: 't', // h:mm tt for en-US; HH:mm - for 24h format
     days: 'dd.MM',
     years: 'yyyy'
   },
