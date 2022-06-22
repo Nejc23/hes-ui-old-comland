@@ -641,10 +641,4 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       sub.unsubscribe();
     });
   }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((sub) => {
-      sub.unsubscribe();
-    });
-  }
 }
