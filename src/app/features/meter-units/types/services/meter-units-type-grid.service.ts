@@ -35,11 +35,6 @@ export class MeterUnitsTypeGridService {
           popoverTextErrorField: 'errorList'
         },
         {
-          field: gridSysNameColumnsEnum.serialMismatch,
-          iconName: 'warning-red-icon',
-          popoverText: 'GRID.SERIAL-MISMATCH'
-        },
-        {
           field: gridSysNameColumnsEnum.readyForActivation,
           iconName: 'hourglass-icon',
           popoverText: 'GRID.READY-FOR-ACTIVATION'
