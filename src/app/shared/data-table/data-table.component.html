@@ -480,14 +480,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <ng-template *ngIf="pageable" kendoPagerTemplate let-currentPage="currentPage" let-totalPages="totalPages">
     <div class="tw-flex tw-w-full tw-justify-between tw-items-center">
       <div class="tw-inline-flex tw-items-center">
-        <div class="tw-text-darkGray tw-text-sm">{{ 'GRID.ROWS-PER-PAGE' | translate }}:</div>
 
+        <!-- <div class="tw-text-darkGray tw-text-sm">{{ 'GRID.ROWS-PER-PAGE' | translate }}:</div>-->
         <!-- page sizer 20/50/100 -->
-        <kendo-pager-page-sizes [pageSizes]="pageSizes" class="tw-h-8"></kendo-pager-page-sizes>
+        <!--        <kendo-pager-page-sizes [pageSizes]="pageSizes" class="tw-h-8"></kendo-pager-page-sizes>-->
 
         <div
           *ngIf="(selectAllEnabled && totalCount - excludedIdsFromSelection?.length > 0) || selectedKeys.length > 0"
-          class="text-secondary tw-font-medium tw-ml-5"
+          class="text-secondary tw-font-medium tw-mr-5"
         >
           <ng-container
             *ngIf="!selectAllEnabled"> {{ selectedKeys?.length }} {{ 'GRID.OF' | translate }} {{ totalCount }} </ng-container>
@@ -498,7 +498,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
 
         <div (click)="selectAll()" *ngIf="withRowSelection"
-             class="text-primary tw-cursor-pointer tw-font-medium tw-ml-5">
+             class="text-primary tw-cursor-pointer tw-font-medium">
           <span class="tw-mr-1">{{ 'GRID.SELECT-ALL' | translate }}</span>
         </div>
 
