@@ -149,6 +149,7 @@ export class PlcReadRegistersComponent implements OnInit {
         sort: 'asc'
       }
     ];
+    this.loadData();
   }
 
   onGridReady(params) {
