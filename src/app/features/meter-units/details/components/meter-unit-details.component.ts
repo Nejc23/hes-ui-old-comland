@@ -514,7 +514,6 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    this.loading = true;
     console.log('SaveButtonClicked on modal');
     this.eventsService.emitCustom('SaveButtonClicked', true);
   }
