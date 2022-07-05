@@ -76,7 +76,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   hours = false;
 
   chartVisible = true;
-  saveData = false;
 
   selectedStartDate;
   selectedEndDate;
@@ -295,7 +294,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.saveData = false;
     if (this.concentratorId.length > 0) {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
@@ -732,7 +730,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    this.saveData = true;
+    this.eventsService.emitCustom('EditConcentratorButtonClicked', true);
   }
 
   isEditVisible(): boolean {
