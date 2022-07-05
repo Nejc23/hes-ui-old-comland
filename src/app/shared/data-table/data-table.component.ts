@@ -232,7 +232,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     { id: 100, value: '100' }
   ];
 
-  pageSizes: number[] = [20, 50, 100];
+  pageSizes: number[] = [20];
 
   // inline edit
   @Input() form: FormGroup;
