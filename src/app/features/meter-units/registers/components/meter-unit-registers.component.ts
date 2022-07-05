@@ -156,6 +156,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
 
   basicUnits = ['w', 'wh', 'va', 'var', 'varh', 'vah'];
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -208,27 +209,30 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   changeRegisterOptionId() {
-    this.gridData = [];
-    this.rowData = [];
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
-    this.isRegisterSelected = true;
-    this.showNormalizedValues = false;
-    // show switch
-    this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
-    if (this.normalizedValues) {
-      this.showNormalizedValues = true;
+
+    if (this.selectedRegister !== selectedRegister) {
+      this.gridData = [];
+      this.rowData = [];
+      this.isRegisterSelected = true;
+      this.showNormalizedValues = false;
+      // show switch
+      this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
+      if (this.normalizedValues) {
+        this.showNormalizedValues = true;
+      }
+      this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
+      this.isEvent = selectedRegister.categorization === 'EVENT';
+
+      this.categorization = selectedRegister.categorization;
+
+      this.showData(selectedRegister);
     }
-    this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
-    this.isEvent = selectedRegister.categorization === 'EVENT';
-
-    this.categorization = selectedRegister.categorization;
-
-    this.showData(selectedRegister);
   }
 
   setDate() {
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   clickShowHideFilter() {
@@ -316,15 +320,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     });
   }
 
-  showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
+  showData(register: AutoTemplateRegister) {
     const startDate = moment(this.form.get('startDate').value).toDate();
     const endDate = moment(this.form.get('endDate').value).toDate();
     if (!register || !startDate || !endDate) {
       this.isDataFound = false;
-      return;
-    }
-
-    if (!forceRefresh && register === this.selectedRegister) {
       return;
     }
 
@@ -344,9 +344,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.normalizedDataEmpty = false;
     this.registerStatisticsData = null;
     try {
+      this.loading = true;
       this.dataProcessingService.getChartData(this.registersFilter).subscribe((values) => {
         if (!values || values.length === 0) {
           this.isDataFound = false;
+          this.loading = false;
         } else {
           this.isDataFound = true;
           this.rowData = values;
@@ -376,6 +378,7 @@ export class MeterUnitRegistersComponent implements OnInit {
             this.unit = findUnit[dataField].unit ?? '';
           }
           this.calculatedValues = true;
+          this.loading = false;
         }
       });
     } catch (error) {
@@ -527,7 +530,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   onRefresh() {
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   insertedSearchValue(searchValue) {
@@ -542,7 +545,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   onValueChanged(event: boolean) {
     this.showNormalizedValues = !event;
     this.toGridData(this.rowData);
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   getPopoverText() {

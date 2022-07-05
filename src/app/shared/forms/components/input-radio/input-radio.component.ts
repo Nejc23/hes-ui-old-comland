@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as _ from 'lodash';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { RadioOption } from '../../interfaces/radio-option.interface';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+
 @Component({
   selector: 'app-input-radio',
   templateUrl: './input-radio.component.html'
@@ -18,7 +19,7 @@ export class InputRadioComponent implements OnInit {
   @Input() showTooltip = false;
   @Input() hideLabelSmall = false;
   @Input() hideCheckbox = false;
-
+  @Input() loading = false;
   @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
   @Output() selectionChanged: EventEmitter<RadioOption> = new EventEmitter();
 
@@ -70,7 +71,9 @@ export class InputRadioComponent implements OnInit {
   }
 
   doSelectionChange(value: RadioOption) {
-    this.formControl.setValue(value.value);
-    this.selectionChanged.emit(value);
+    if (!this.loading) {
+      this.formControl.setValue(value.value);
+      this.selectionChanged.emit(value);
+    }
   }
 }
