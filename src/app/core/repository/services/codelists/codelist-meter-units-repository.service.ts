@@ -1,4 +1,5 @@
 import {
+  meterUnitsAlarmNotificationType,
   meterUnitsAlarmSeverityType,
   meterUnitsAlarmSourceType,
   meterUnitsDeviceMedium,
@@ -104,5 +105,13 @@ export class CodelistMeterUnitsRepositoryService {
 
   meterUnitAlarmSourceTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsAlarmSourceType}`);
+  }
+
+  meterUnitAlarmNotificationTypeCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitAlarmNotificationTypeCodelistRequest());
+  }
+
+  meterUnitAlarmNotificationTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitsAlarmNotificationType}`);
   }
 }

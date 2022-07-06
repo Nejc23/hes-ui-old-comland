@@ -1,11 +1,11 @@
-import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NotificationFilter } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { Setting } from 'src/app/core/repository/interfaces/settings/setting';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
 
 @Component({
   selector: 'app-alarm-notification-rules',
@@ -22,14 +22,12 @@ export class AlarmNotificationRulesComponent implements OnInit {
   @Input() manufacturers: Codelist<number>[];
   @Input() severities: Codelist<number>[];
   @Input() sources: Codelist<number>[];
+  @Input() notificationTypes: Codelist<number>[];
+  @Input() defaultJobAddress: Setting;
 
   rules: AlarmNotificationRules;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private codelistService: CodelistMeterUnitsRepositoryService,
-    private formUtils: FormsUtilsService
-  ) {
+  constructor(private formBuilder: FormBuilder, private formUtils: FormsUtilsService) {
     // this.updateInputFields();
   }
 
@@ -64,7 +62,12 @@ export class AlarmNotificationRulesComponent implements OnInit {
       [this.protocolsProperty]: [{ value: rules.protocols, disabled: !rules.isProtocolActive }, Validators.required],
       [this.manufacturersProperty]: [{ value: rules.manufacturers, disabled: !rules.isManufacturerActive }, Validators.required],
       [this.sourcesProperty]: [{ value: rules.sources, disabled: !rules.isSourceActive }, Validators.required],
-      [this.addressesProperty]: [rules.addresses, [Validators.required, customRegexValidator(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailError')]]
+      [this.addressesProperty]: [
+        { value: rules.addresses, disabled: rules.notificationType.id !== 1 },
+        [Validators.required, customRegexValidator(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailError')]
+      ],
+      [this.notificationTypeProperty]: [rules.notificationType, Validators.required],
+      [this.webhookAddressProperty]: [{ value: rules.webhookAddress, disabled: rules.notificationType.id === 1 }, Validators.required]
     });
   }
 
@@ -80,7 +83,9 @@ export class AlarmNotificationRulesComponent implements OnInit {
       protocols: [],
       manufacturers: [],
       sources: [],
-      addresses: []
+      addresses: [],
+      notificationType: { id: 1, value: '' },
+      webhookAddress: this.defaultJobAddress?.value
     };
     if (!this.filter || !this.addresses) {
       return rules;
@@ -96,6 +101,7 @@ export class AlarmNotificationRulesComponent implements OnInit {
     rules.protocols = this.getCodelistValues(this.protocols, this.filter.protocols);
     rules.manufacturers = this.getCodelistValues(this.manufacturers, this.filter.manufacturers);
     rules.sources = this.getCodelistValues(this.sources, this.filter.sources);
+    rules.notificationType = this.getCodelistValues(this.notificationTypes, [this.filter.notificationAddressType])[0];
 
     rules.alarmIds = rules.isAlarmIdActive
       ? this.filter.alarmIds.map((a) => {
@@ -104,11 +110,15 @@ export class AlarmNotificationRulesComponent implements OnInit {
       : [];
 
     let aIndex = 0;
-    rules.addresses = this.addresses
-      ? this.addresses.map((a) => {
-          return { id: aIndex++, value: a.toString() };
-        })
-      : [];
+    if (rules.notificationType?.id == 1) {
+      rules.addresses = this.addresses
+        ? this.addresses.map((a) => {
+            return { id: aIndex++, value: a.toString() };
+          })
+        : [];
+    } else {
+      rules.webhookAddress = this.addresses[0];
+    }
 
     return rules;
   }
@@ -169,6 +179,14 @@ export class AlarmNotificationRulesComponent implements OnInit {
     return nameOf<AlarmNotificationRules>((o) => o.addresses);
   }
 
+  get notificationTypeProperty(): string {
+    return nameOf<AlarmNotificationRules>((o) => o.notificationType);
+  }
+
+  get webhookAddressProperty(): string {
+    return nameOf<AlarmNotificationRules>((o) => o.webhookAddress);
+  }
+
   inputSwitchChange(switchValue: boolean, fieldProperty: any) {
     const field = this.form.get(fieldProperty);
     if (switchValue) {
@@ -189,6 +207,10 @@ export class AlarmNotificationRulesComponent implements OnInit {
       !this.form.get(this.isManufacturerActiveProperty).value &&
       !this.form.get(this.isSourceActiveProperty).value;
 
+    if (this.form.get(this.notificationTypeProperty).value.value == 2) {
+      this.enableField(this.addressesProperty, false);
+    }
+
     return this.form.valid && !this.noRuleActive;
   }
 
@@ -204,7 +226,9 @@ export class AlarmNotificationRulesComponent implements OnInit {
       protocols: this.form.get(this.protocolsProperty).value,
       manufacturers: this.form.get(this.manufacturersProperty).value,
       sources: this.form.get(this.sourcesProperty).value,
-      addresses: this.form.get(this.addressesProperty).value
+      addresses: this.form.get(this.addressesProperty).value,
+      notificationType: this.form.get(this.notificationTypeProperty).value,
+      webhookAddress: this.form.get(this.webhookAddressProperty).value
     };
     return formData;
   }
@@ -216,13 +240,28 @@ export class AlarmNotificationRulesComponent implements OnInit {
       severities: formData.isSeverityActive ? formData.severities.map((s) => s.id) : [],
       protocols: formData.isProtocolActive ? formData.protocols.map((p) => p.id) : [],
       manufacturers: formData.isManufacturerActive ? formData.manufacturers.map((m) => m.id) : [],
-      sources: formData.isSourceActive ? formData.sources.map((s) => s.id) : []
+      sources: formData.isSourceActive ? formData.sources.map((s) => s.id) : [],
+      notificationAddressType: formData.notificationType.id
     };
   }
 
   getAddresses(): string[] {
     const formData = this.fillData();
-    return formData.addresses.map((a) => a.value);
+    if (formData.notificationType.id == 1) {
+      return formData.addresses.map((a) => a.value);
+    } else {
+      return [formData.webhookAddress];
+    }
+  }
+
+  public onNotificationTypeChanged(value) {
+    if (value?.id == 1) {
+      this.enableField(this.addressesProperty, true);
+      this.enableField(this.webhookAddressProperty, false);
+    } else if (value?.id == 2) {
+      this.enableField(this.addressesProperty, false);
+      this.enableField(this.webhookAddressProperty, true);
+    }
   }
 }
 

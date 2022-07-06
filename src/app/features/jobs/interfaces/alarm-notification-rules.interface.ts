@@ -11,4 +11,6 @@ export interface AlarmNotificationRules {
   isSourceActive: boolean;
   sources: Codelist<number>[];
   addresses: Codelist<number>[];
+  notificationType: Codelist<number>;
+  webhookAddress: string;
 }

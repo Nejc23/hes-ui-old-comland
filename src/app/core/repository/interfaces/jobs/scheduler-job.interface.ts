@@ -27,6 +27,7 @@ export interface NotificationFilter {
   protocols?: any[];
   manufacturers?: any[];
   sources?: any[];
+  notificationAddressType?: any;
 }
 
 export interface SchedulerJobForm extends SchedulerJob {

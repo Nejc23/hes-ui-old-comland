@@ -51,6 +51,15 @@
       <app-input-tag [property]="sourcesProperty" [form]="form" [autocompleteItemsAsObjects]="sources" [selected]="rules?.sources">
         </app-input-tag>
     </div>
+  </div>
+  <div class="form-row">
+    <div class="col-3">
+      {{'JOB.ALARM-NOTIFICATION.NOTIFICATION-TYPE' | translate }}
+    </div>
+    <div class="col-9">
+      <app-select-input [property]="notificationTypeProperty" [form]="form" [selectOptions]="notificationTypes" (selectedValueChanged)="onNotificationTypeChanged($event)">
+        </app-select-input>
+    </div>
     <div class="help-block pb-2" *ngIf="noRuleActive">
       <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{'JOB.ALARM-NOTIFICATION.ONE-RULE' | translate }}</small>
     </div>
@@ -58,9 +67,11 @@
 
   <div class="form-row">
     <div class="col-12">
-      <app-input-tag [property]="addressesProperty" [form]="form" [allowCustomValues]="true" [translationKey]="'JOB.ALARM-NOTIFICATION.SEND-NOTIFICATIONS-TO'"
+      <app-input-tag *ngIf="form?.controls?.notificationType?.value?.id == 1" [property]="addressesProperty" [form]="form" [allowCustomValues]="true" [translationKey]="'JOB.ALARM-NOTIFICATION.SEND-NOTIFICATIONS-TO'"
           [disabled]="false" [selected]="rules?.addresses">
       </app-input-tag>
+      <app-input-text *ngIf="form?.controls?.notificationType?.value?.id == 2" [form]="form" [property]="webhookAddressProperty" label="Address">
+      </app-input-text>
     </div>
   </div>
 </div>
