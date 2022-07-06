@@ -60,6 +60,10 @@ stages:
   script:
     - .\upgrade.ps1 'C:\Program Files\Enerdat\ePointHES_UI' 'dist\myGrid'
 
+.get_version: &get_version
+  - "export WEB_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')"
+  - "Current version is: $WEB_VERSION"
+
 Dependencies:
   stage: install
   script:
@@ -122,10 +126,10 @@ docker-linux:
       when: manual
       allow_failure: true
   script:
-    - export VERSION=$(node -p "require('./package.json').version")
-    - export DOCKER_TAG=${DEPLOY_VARIABLE}_linux_${VERSION}_${CI_COMMIT_SHORT_SHA}
+    - *get_version
+    - export DOCKER_TAG=${DEPLOY_VARIABLE}_linux_${WEB_VERSION}_${CI_COMMIT_SHORT_SHA}
     - echo "DOCKER_TAG=${DOCKER_TAG}" >> docker.env
-    - echo "Preparing Linux Docker images for version $VERSION with tag $DOCKER_TAG"
+    - echo "Preparing Linux Docker images for version $WEB_VERSION with tag $DOCKER_TAG"
     - ./docker-build.sh $DOCKER_TAG $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - echo "Clean up unused Docker images"
     - docker system prune -a -f
