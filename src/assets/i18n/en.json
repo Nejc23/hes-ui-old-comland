@@ -635,7 +635,8 @@
       "SEND-NOTIFICATIONS-TO": "Send notifications to",
       "SUBTITLE": "Send notification message when alarm events matches one or more criteria bellow.",
       "TEXT": "At least one of the rules below should be active",
-      "TITLE": "Alarm notification"
+      "TITLE": "Alarm notification",
+      "NOTIFICATION-TYPE": "Notification type"
     },
     "AT-LEAST-ONE-JOB": "At least one job must be selected",
     "CONFIRM-BULK": "Confirm bulk operation",

@@ -4,9 +4,11 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
 import { JobTypeEnumeration } from 'src/app/features/jobs/enums/job-type.enum';
@@ -64,6 +66,7 @@ export class ActiveJobCardItemComponent implements OnInit {
     private translate: TranslateService,
     private toast: ToastNotificationService,
     private codelistService: CodelistRepositoryService,
+    private settingsService: SettingsService,
     private schedulerJobsEventService: SchedulerJobsEventEmitterService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
   ) {}
@@ -301,12 +304,23 @@ export class ActiveJobCardItemComponent implements OnInit {
       protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
       manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
       severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist(),
+      notificationTypes: this.codelistMeterUnitsRepositoryService.meterUnitAlarmNotificationTypeCodelist(),
+      defaultJobAddress: this.settingsService.getSetting(userSettingNotificationJobDefaultAddress)
+    }).subscribe(({ protocols, manufacturers, severities, sources, notificationTypes, defaultJobAddress }) => {
       this.activeJobsService.getNotificationJob(selectedJobId).subscribe((job) => {
         const modalRef = this.modalService.open(SchedulerJobComponent, options);
         const component: SchedulerJobComponent = modalRef.componentInstance;
-        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
+        component.setFormNotificationJobEdit(
+          protocols,
+          manufacturers,
+          severities,
+          sources,
+          selectedJobId,
+          job,
+          notificationTypes,
+          defaultJobAddress
+        );
 
         modalRef.result.then(
           () => {
