@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
-import { Observable, Subscription } from 'rxjs';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { Subscription } from 'rxjs';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,16 +15,12 @@ import { EventManagerService } from '../../../../core/services/event-manager.ser
   selector: 'app-edit-data-concentrator-form',
   templateUrl: './edit-data-concentrator-form.component.html'
 })
-export class EditDataConcentratorFormComponent implements OnInit, OnDestroy {
+export class EditDataConcentratorFormComponent implements OnDestroy {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
   @Output() savedDataEvent = new EventEmitter<boolean>();
   @Input() saveData = false;
 
-  dcuTypes$: Observable<Codelist<number>[]>;
-  dcuVendors$: Observable<Codelist<number>[]>;
-  dcuVendors: Codelist<number>[];
-  dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
   subscription: Subscription;
 
@@ -87,12 +82,6 @@ export class EditDataConcentratorFormComponent implements OnInit, OnDestroy {
 
   get tagsProperty() {
     return nameOf<DcuForm>((o) => o.tags);
-  }
-
-  ngOnInit() {
-    this.dcuVendors$.subscribe((values) => {
-      this.dcuVendors = values;
-    });
   }
 
   fillData(): EditDcuForm {
