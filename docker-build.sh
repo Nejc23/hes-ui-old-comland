@@ -22,13 +22,13 @@ echo "Building started for myGrid dist" &&
 docker build -q -t mygridwebui:$tag -f ./linux-nb.mygrid.Dockerfile . || true;
 
 echo "Step 3: Tagging newly created Docker images" &&
-docker tag epointwebui:$tag registry.gitlab.enerdat.com/enerdat/epoint.hes/epointwebui:$tag || true;
-docker tag amerawebui:$tag registry.gitlab.enerdat.com/enerdat/epoint.hes/amerawebui:$tag || true;
-docker tag mygridwebui:$tag registry.gitlab.enerdat.com/enerdat/epoint.hes/mygridwebui:$tag || true;
+docker tag epointwebui:$tag $CI_REGISTRY_IMAGE/epointwebui:$tag || true;
+docker tag amerawebui:$tag $CI_REGISTRY_IMAGE/amerawebui:$tag || true;
+docker tag mygridwebui:$tag $CI_REGISTRY_IMAGE/mygridwebui:$tag || true;
 
 echo "Step 4: Pushing UI Docker images to GitLab" &&
-docker push -q registry.gitlab.enerdat.com/enerdat/epoint.hes/epointwebui:$tag || true;
-docker push -q registry.gitlab.enerdat.com/enerdat/epoint.hes/amerawebui:$tag || true;
-docker push -q registry.gitlab.enerdat.com/enerdat/epoint.hes/mygridwebui:$tag || true;
+docker push -q $CI_REGISTRY_IMAGE/epointwebui:$tag || true;
+docker push -q $CI_REGISTRY_IMAGE/amerawebui:$tag || true;
+docker push -q $CI_REGISTRY_IMAGE/mygridwebui:$tag || true;
 
 echo "Finished"
