@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
@@ -281,12 +280,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     // get DCU
     this.getData();
-
-    this.subscriptions.push(
-      this.dcuEventsService.eventEmitterConcentratorDeleted.subscribe((x) => {
-        this.router.navigate([dataConcentratorUnits]);
-      })
-    );
   }
 
   ngOnDestroy(): void {

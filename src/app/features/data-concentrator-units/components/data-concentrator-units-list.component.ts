@@ -25,7 +25,6 @@ import { SettingsStoreEmitterService } from '../../../core/repository/services/s
 import { SidebarToggleService } from '../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
-import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { DcuUnitsGridLayoutStore } from '../interfaces/dcu-units-grid-layout.store';
 import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
@@ -166,6 +165,11 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
+      this.deSelectAll(true);
+      this.getData();
+    });
   }
 
   get permissionAdd() {
@@ -184,11 +188,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       .map((columns) => (columns.hidden = false));
 
     this.getDcuUnitsGridLayoutStore();
-
-    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
-      this.selectedRowsIds = [];
-      this.getData();
-    });
   }
 
   getData() {
@@ -223,9 +222,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.dcuAddedSubscription) {
       this.dcuAddedSubscription.unsubscribe();
-    }
-    if (this.dcuConcentratorDeleted) {
-      this.dcuConcentratorDeleted.unsubscribe();
     }
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -336,11 +332,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     ).count;
   }
 
-  clearFilter() {
-    this.gridFilterSessionStoreService.clearGridLayout();
-    this.getData();
-  }
-
   onDelete(selectedGuid?: string) {
     const params = this.dcOperationsService.getOperationRequestParam(
       selectedGuid,
@@ -379,54 +370,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     };
     const modalRef = this.modalService.open(AddDcuFormComponent, options);
     modalRef.result.then(() => {}).catch(() => {});
-  }
-
-  // ******************************************************************************** */
-  onSynchronizeTime(selectedGuid?: string) {
-    this.requestModel.filterModel = this.setFilter();
-    this.requestModel.searchModel = this.setSearch();
-
-    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
-    const params = this.dcOperationsService.getOperationRequestParam(
-      selectedGuid,
-      this.requestModel,
-      this.getSelectedCount(),
-      this.getAllDisplayedColumnsNames()
-    );
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
-  }
-
-  // functions for operations called from grid
-
-  onFwUpgrade(selectedGuid?: string) {
-    this.requestModel.filterModel = this.setFilter();
-    this.requestModel.searchModel = this.setSearch();
-
-    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
-    const params = this.dcOperationsService.getOperationRequestParam(
-      selectedGuid,
-      this.requestModel,
-      this.getSelectedCount(),
-      this.getAllDisplayedColumnsNames()
-    );
-    this.dcOperationsService.fwUpgrade(params, 1);
-  }
-
-  onDeviceDiscovery(selectedGuid?: string) {
-    this.requestModel.filterModel = this.setFilter();
-    this.requestModel.searchModel = this.setSearch();
-
-    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
-    const params = this.dcOperationsService.getOperationRequestParam(
-      selectedGuid,
-      this.requestModel,
-      this.getSelectedCount(),
-      this.getAllDisplayedColumnsNames()
-    );
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, 1);
   }
 
   getAllDisplayedColumnsNames(): string[] {
@@ -561,36 +504,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       );
       this.getData();
     }
-  }
-
-  onEnableDC(selectedGuid?: string) {
-    this.requestModel.filterModel = this.setFilter();
-    this.requestModel.searchModel = this.setSearch();
-
-    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
-    const params = this.dcOperationsService.getOperationRequestParam(
-      selectedGuid,
-      this.requestModel,
-      this.getSelectedCount(),
-      this.getAllDisplayedColumnsNames()
-    );
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.enable, params, 1);
-  }
-
-  onDisableDC(selectedGuid?: string) {
-    this.requestModel.filterModel = this.setFilter();
-    this.requestModel.searchModel = this.setSearch();
-
-    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
-    const params = this.dcOperationsService.getOperationRequestParam(
-      selectedGuid,
-      this.requestModel,
-      this.getSelectedCount(),
-      this.getAllDisplayedColumnsNames()
-    );
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.disable, params, 1);
   }
 
   addWidth() {

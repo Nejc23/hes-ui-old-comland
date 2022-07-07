@@ -174,76 +174,77 @@ export class DcOperationsService {
     } else if (requestModel) {
       requestParam.concentratorIds = requestModel.deviceIds;
       requestParam.excludeIds = requestModel.excludeIds;
-    }
-    if (this.dcGridService.getSessionSettingsSelectedAll()) {
-      requestParam.excludeIds = this.dcGridService.getSessionSettingsExcludedRows().map((rowData) => rowData.concentratorId);
-      requestParam.concentratorIds = [];
-      requestParam.pageSize = allItems;
-      requestParam.pageNumber = 1;
-      // create filter object
-      if (requestModel) {
-        if (requestModel.searchModel[0]?.value?.length > 0) {
-          requestParam.textSearch.value = requestModel.searchModel[0].value;
-          requestParam.textSearch.propNames = allVisibleColumns;
-          requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
-        }
-        if (requestModel.filterModel) {
-          requestParam.filter = [];
-          if (requestModel.filterModel?.states && requestModel.filterModel?.states?.length > 0) {
-            requestModel.filterModel.states.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.state),
-                propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel?.types?.length > 0) {
-            requestModel.filterModel.types.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.type),
-                propValue: row.toString(),
-                filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel?.tags?.length > 0) {
-            requestModel.filterModel.tags.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.tags),
-                propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains
-              })
-            );
-          }
-          if (requestModel.filterModel?.vendors?.length > 0) {
-            requestModel.filterModel.vendors.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.vendor),
-                propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.sortModel?.length > 0) {
-            requestModel.sortModel.map((row) =>
-              requestParam.sort.push({
-                propName: capitalize(row.colId),
-                index: 0,
-                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
-              })
-            );
-          }
-        }
-      }
-    } else {
-      const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        requestParam.excludeIds = [];
-        requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
-        requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
+
+      if (this.dcGridService.getSessionSettingsSelectedAll()) {
+        requestParam.excludeIds = this.dcGridService.getSessionSettingsExcludedRows().map((rowData) => rowData.concentratorId);
         requestParam.concentratorIds = [];
-        selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
+        requestParam.pageSize = allItems;
+        requestParam.pageNumber = 1;
+        // create filter object
+        if (requestModel) {
+          if (requestModel.searchModel[0]?.value?.length > 0) {
+            requestParam.textSearch.value = requestModel.searchModel[0].value;
+            requestParam.textSearch.propNames = allVisibleColumns;
+            requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
+          }
+          if (requestModel.filterModel) {
+            requestParam.filter = [];
+            if (requestModel.filterModel?.states && requestModel.filterModel?.states?.length > 0) {
+              requestModel.filterModel.states.map((row) =>
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.state),
+                  propValue: row.id.toString(),
+                  filterOperation: filterOperationEnum.equal
+                })
+              );
+            }
+            if (requestModel.filterModel?.types?.length > 0) {
+              requestModel.filterModel.types.map((row) =>
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.type),
+                  propValue: row.toString(),
+                  filterOperation: filterOperationEnum.equal
+                })
+              );
+            }
+            if (requestModel.filterModel?.tags?.length > 0) {
+              requestModel.filterModel.tags.map((row) =>
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.tags),
+                  propValue: row.id.toString(),
+                  filterOperation: filterOperationEnum.contains
+                })
+              );
+            }
+            if (requestModel.filterModel?.vendors?.length > 0) {
+              requestModel.filterModel.vendors.map((row) =>
+                requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.vendor),
+                  propValue: row.id.toString(),
+                  filterOperation: filterOperationEnum.equal
+                })
+              );
+            }
+            if (requestModel.sortModel?.length > 0) {
+              requestModel.sortModel.map((row) =>
+                requestParam.sort.push({
+                  propName: capitalize(row.colId),
+                  index: 0,
+                  sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+                })
+              );
+            }
+          }
+        }
+      } else {
+        const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
+        if (selectedRows && selectedRows.length > 0) {
+          requestParam.excludeIds = [];
+          requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
+          requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
+          requestParam.concentratorIds = [];
+          selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
+        }
       }
     }
     return requestParam;

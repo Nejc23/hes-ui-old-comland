@@ -306,8 +306,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []],
         [this.importDevicesField]: [this.filterFromFiles[0]],
         [this.fileProperty]: null,
-        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter.id) : null],
-        [this.slaValue]: [filters && selected ? selected.slaFilter.value : 1]
+        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );

@@ -5,6 +5,8 @@ import { IActionRequestDeleteDevice, IActionRequestParams } from 'src/app/core/r
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
+import { Router } from '@angular/router';
+import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 
 @Component({
   selector: 'app-delete-dcu-form',
@@ -20,7 +22,8 @@ export class DeleteDcuFormComponent implements OnInit {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class DeleteDcuFormComponent implements OnInit {
         (value) => {
           this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
           this.eventService.concentratorDeleted(true);
+          this.router.navigate([dataConcentratorUnits]);
           this.onDismiss();
         },
         (e) => {
