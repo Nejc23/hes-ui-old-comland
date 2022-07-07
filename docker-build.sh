@@ -1,13 +1,14 @@
 #!/bin/bash
 
 tag=$1
-CI_REGISTRY_USER=$2
-CI_REGISTRY_PASSWORD=$3
-CI_REGISTRY=$4
+DOCKER_USER=$2
+DOCKER_PASSWORD=$3
+DOCKER_REGISTRY=$4
+DOCKER_REGISTRY_PATH=$5
 
 echo "Step 1: Login to GitLab" &&
-echo "CI_REGISTRY: ${CI_REGISTRY} - CI_REGISTRY_IMAGE: ${CI_REGISTRY_IMAGE}" &&
-echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY &&
+echo "DOCKER_REGISTRY: ${DOCKER_REGISTRY} - DOCKER_REGISTRY_PATH: ${DOCKER_REGISTRY_PATH}" &&
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin $DOCKER_REGISTRY &&
 
 cp /home/gitlab-runner/int.enerdat.ca.crt . &&
 cp /home/gitlab-runner/int.semax.ca.crt . &&
@@ -22,13 +23,13 @@ echo "Building started for myGrid dist" &&
 docker build -q -t mygridwebui:$tag -f ./linux-nb.mygrid.Dockerfile . || true;
 
 echo "Step 3: Tagging newly created Docker images" &&
-docker tag epointwebui:$tag $CI_REGISTRY_IMAGE/epointwebui:$tag || true;
-docker tag amerawebui:$tag $CI_REGISTRY_IMAGE/amerawebui:$tag || true;
-docker tag mygridwebui:$tag $CI_REGISTRY_IMAGE/mygridwebui:$tag || true;
+docker tag epointwebui:$tag $DOCKER_REGISTRY_PATH/epointwebui:$tag || true;
+docker tag amerawebui:$tag $DOCKER_REGISTRY_PATH/amerawebui:$tag || true;
+docker tag mygridwebui:$tag $DOCKER_REGISTRY_PATH/mygridwebui:$tag || true;
 
 echo "Step 4: Pushing UI Docker images to GitLab" &&
-docker push -q $CI_REGISTRY_IMAGE/epointwebui:$tag || true;
-docker push -q $CI_REGISTRY_IMAGE/amerawebui:$tag || true;
-docker push -q $CI_REGISTRY_IMAGE/mygridwebui:$tag || true;
+docker push -q $DOCKER_REGISTRY_PATH/epointwebui:$tag || true;
+docker push -q $DOCKER_REGISTRY_PATH/amerawebui:$tag || true;
+docker push -q $DOCKER_REGISTRY_PATH/mygridwebui:$tag || true;
 
 echo "Finished"
