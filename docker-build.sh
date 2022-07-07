@@ -7,7 +7,7 @@ CI_REGISTRY=$4
 
 echo "Step 1: Login to GitLab" &&
 echo "CI_REGISTRY: ${CI_REGISTRY} - CI_REGISTRY_IMAGE: ${CI_REGISTRY_IMAGE}" &&
-docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY &&
+echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY &&
 
 cp /home/gitlab-runner/int.enerdat.ca.crt . &&
 cp /home/gitlab-runner/int.semax.ca.crt . &&
