@@ -88,6 +88,7 @@ ESLint:
   before_script:
     - npm ci
   script:
+    - echo "CI_REGISTRY ${CI_REGISTRY} - CI_REGISTRY_IMAGE ${CI_REGISTRY_IMAGE}"
     - npx eslint --format gitlab src
   artifacts:
     reports:
