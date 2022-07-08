@@ -441,9 +441,15 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
         if (settings) {
           this.setGridSettingsAndFilters(settings);
         } else {
-          // no user settings
+          // no user settings in DB
+          if (this.searchFromQueryParams) {
+            this.searchText = this.searchFromQueryParams;
+            this.wildCardsSearch = true;
+            this.applyFilters(true);
+          } else {
+            this.getMetersListData();
+          }
           this.appliedFiltersFromUser = true;
-          this.getMetersListData();
         }
       });
     }
