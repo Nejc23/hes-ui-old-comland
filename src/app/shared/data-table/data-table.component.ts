@@ -325,6 +325,12 @@ export class DataTableComponent implements OnInit, OnChanges {
           translationKey: '',
           hidden: false
         });
+      } else {
+        // row actions and icons are always visible
+        this.gridColumns.find((column) => column.field === 'rowActions').hidden = false;
+      }
+      if (this.gridColumns.find((column) => column.field === 'icons')) {
+        this.gridColumns.find((column) => column.field === 'icons').hidden = false;
       }
     }
     this.initGrid();

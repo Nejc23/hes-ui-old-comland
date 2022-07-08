@@ -194,7 +194,10 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     if (this.selectedRowsIds.length > 0) {
       this.requestModel.deviceIds = this.selectedRowsIds;
     }
-    this.metersColumns.map((columns) => (columns.hidden = false));
+    this.metersColumns
+      .filter((column) => column.field !== 'icons')
+      .filter((column) => column.field !== 'rowActions')
+      .map((columns) => (columns.hidden = false));
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
     // currently, we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
     // get layout and load data
@@ -315,6 +318,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     // set visible columns
     this.meterUnitsTypeGridLayoutStore.visibleColumns = this.metersColumns
       .filter((column) => column.hidden != true)
+      .filter((column) => column.field !== 'icons')
+      .filter((column) => column.field !== 'rowActions')
       .map((item) => item.field);
 
     console.log(this.meterUnitsTypeGridLayoutStore);
