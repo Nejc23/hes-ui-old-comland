@@ -162,7 +162,7 @@ docker:publish-azure:
       allow_failure: true
   script:
     - *get-linux-docker-production-script
-    - ./publish-to-production.sh ${DOCKER_TAG} ${$CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_JOB_TOKEN} ${AZURE_REGISTRY_URL} ${AZURE_USERNAME} ${AZURE_PASSWORD} frontend
+    - ./publish-to-production.sh ${DOCKER_TAG} ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_JOB_TOKEN} ${AZURE_REGISTRY_URL} ${AZURE_USERNAME} ${AZURE_PASSWORD} frontend
 
 DEV - Amera:
   <<: *deploy_amera
