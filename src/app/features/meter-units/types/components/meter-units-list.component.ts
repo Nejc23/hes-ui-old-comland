@@ -445,6 +445,14 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
           if (this.searchFromQueryParams) {
             this.searchText = this.searchFromQueryParams;
             this.wildCardsSearch = true;
+            this.requestModel.searchModel = [
+              {
+                colId: 'all',
+                type: enumSearchFilterOperators.like,
+                value: this.searchText,
+                useWildcards: this.wildCardsSearch
+              }
+            ];
             this.applyFilters(true);
           } else {
             this.getMetersListData();
