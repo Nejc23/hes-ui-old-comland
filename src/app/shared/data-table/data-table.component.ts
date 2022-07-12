@@ -619,7 +619,7 @@ export class DataTableComponent implements OnInit, OnChanges {
       data = this.filteredData;
     }
     this.sort = sort;
-    this.loadItems(data, this.totalCount ? this.totalCount : data.length, this.sort);
+    this.loadItems(data, this.totalCount ? this.totalCount : data.length);
     this.sortChangeEvent.emit(sort);
   }
 
@@ -869,10 +869,10 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   // load grid items:
-  private loadItems(data: any, count: number, sort?: any): void {
+  private loadItems(data: any, count: number): void {
     if (data) {
       this.gridView = {
-        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
+        data: orderBy(data, this.sort).slice(this.skip, this.skip + this.pageSize),
         total: count
       };
       console.log('GRID DATA: ');

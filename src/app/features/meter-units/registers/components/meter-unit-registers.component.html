@@ -102,7 +102,7 @@
               data-toggle="tooltip"
             ></kendo-switch>
           </div>
-          <div *ngIf="gridData?.length > 0">
+          <div *ngIf="gridData?.length > 0" class="tw-cursor-pointer">
             <div (click)="exportToCSV()"
                  *ngIf="(showNormalizedValues && !normalizedDataEmpty) || !showNormalizedValues"
                  [ngbTooltip]="tipContentExportToCsv">
@@ -113,7 +113,7 @@
 
         <!-- raw data only -->
         <div *ngIf="gridData.length > 0 && !normalizedValues"
-             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end tw-cursor-pointer">
           <div (click)="exportToCSV()" [ngbTooltip]="tipContentExportToCsv">
             <img class="tw-h-7 tw-mx-4" src="assets/images/icons/export-csv-icon.svg" />
           </div>
@@ -194,7 +194,7 @@
                   [gridColumns]="isEvent ? eventDataColumns : showNormalizedValues ? registerNormalizedDataColumns : registerColumnsRowData"
                   [gridData]="gridData"
                   [noDataText]="'NO-DATA-FOUND'"
-                  [pageable]="true"
+                  [pageSize]="pageSize"
                   [rowHeight]="44"
                   [scrollable]="'virtual'"
                   [skip]="0"

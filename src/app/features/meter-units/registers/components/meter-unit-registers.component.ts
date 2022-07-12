@@ -5,9 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@progress/kendo-angular-intl';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import * as moment from 'moment';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { ExportHelper } from 'src/app/features/helpers/export.helper';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
@@ -19,8 +17,7 @@ import { AutoTemplateRegister } from '../../../../core/repository/interfaces/aut
 import {
   EventRegisterValue,
   GridRegisterValue,
-  RegisterValue,
-  ValueWithUnit
+  RegisterValue
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
@@ -158,6 +155,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   basicUnits = ['w', 'wh', 'va', 'var', 'varh', 'vah'];
   loading = false;
 
+  public pageSize = 100;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: ActivatedRoute,
@@ -166,8 +165,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private muService: MeterUnitsService,
     private registerStatisticsService: RegisterStatisticsService,
-    private formUtils: FormsUtilsService,
-    private codeList: CodelistMeterUnitsRepositoryService,
     private translate: TranslateService,
     private exportHelper: ExportHelper
   ) {}
@@ -352,14 +349,6 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          this.rowData.map((value) => {
-            if (value.valueWithUnit?.value && value.valueWithUnit?.unit) {
-              value.valueWithUnit = this.transformValue(value.valueWithUnit);
-            }
-            if (value.normValueWithUnit?.value && value.normValueWithUnit?.unit) {
-              value.normValueWithUnit = this.transformValue(value.normValueWithUnit);
-            }
-          });
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
             this.setEventData();
@@ -553,14 +542,6 @@ export class MeterUnitRegistersComponent implements OnInit {
       return this.translate.instant('PLC-METER.NORMALIZED-DATA');
     }
     return this.translate.instant('PLC-METER.RAW-DATA');
-  }
-
-  transformValue(value: ValueWithUnit) {
-    if (this.basicUnits.includes(value.unit.toLowerCase())) {
-      value.value = (parseInt(value.value) / 1000).toString();
-      value.unit = 'k' + value.unit;
-    }
-    return value;
   }
 
   checkIfDataExist() {
