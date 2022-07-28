@@ -496,7 +496,8 @@
     "FIRMWAREBASE": "Firmware (base)",
     "EVENT": "Event",
     "DEVICE-STATE": "Device state",
-    "SLA": "Sla percentage"
+    "SLA": "Sla percentage",
+    "USER": "User"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -616,7 +617,8 @@
     "TIME-DEVIATION": "Time deviation!",
     "FIRMWARE-APP": "Firmware (app)",
     "FIRMWARE-BASE": "Firmware (base)",
-    "EVENT": "Event"
+    "EVENT": "Event",
+    "USER": "User"
   },
   "JOB": {
     "ACTIVE-JOB": {

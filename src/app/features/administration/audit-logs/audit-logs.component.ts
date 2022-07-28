@@ -55,7 +55,7 @@ export class AuditLogsComponent implements OnInit {
     },
     {
       field: 'createdBy',
-      translationKey: 'GRID.NAME',
+      translationKey: 'GRID.USER',
       width: 160
     },
     {
@@ -179,7 +179,7 @@ export class AuditLogsComponent implements OnInit {
       field: 'createdBy',
       isStringValue: true,
       value: '',
-      label: 'NAME'
+      label: 'USER'
     });
   }
 
