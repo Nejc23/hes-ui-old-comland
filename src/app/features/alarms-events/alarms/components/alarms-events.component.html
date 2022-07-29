@@ -1,6 +1,6 @@
 <div [style.width.px]="addWidth()" class="sticky-header bottom-line">
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
-    <app-page-title [title]="'ALARM.ALARMS-OVERVIEW'" class="tw-h-36 tw-mt-10 tw--m-5"> </app-page-title>
+    <app-page-title [title]="'ALARM.ALARMS-OVERVIEW'" class="tw-h-36 tw-mt-10 tw--m-5"></app-page-title>
   </div>
 </div>
 
@@ -10,6 +10,7 @@
       <ng-template kendoTabContent>
         <div class="tw-mt-4">
           <app-date-range-picker
+            (refreshButtonClicked)="getAlarmsDataList()"
             (valueChange)="getAlarmsDataList()"
             [endProperty]="endTimeAlarmsProperty"
             [form]="alarmsForm"

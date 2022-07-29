@@ -218,9 +218,6 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   refreshButtonClickedEvent() {
-    if (this.form.valid) {
-      this.valueChange.emit();
-    }
     this.refreshButtonClicked.emit();
   }
 }
