@@ -179,7 +179,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        const currentPageIndex = that.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex();
+        const currentPageIndex = that.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex() + 1;
         const allDisplayedColumns = that.getAllDisplayedColumnsNames();
 
         that.repositoryService.getGridDcuForm(that.requestModel, currentPageIndex, allDisplayedColumns).subscribe((data) => {

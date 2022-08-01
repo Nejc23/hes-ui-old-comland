@@ -42,14 +42,7 @@ export class RegistersSelectComponent implements OnInit {
   ) {}
 
   get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
+    return this.gridApi?.getSelectedRows()?.length > 0;
   }
 
   get searchProperty() {
@@ -118,16 +111,6 @@ export class RegistersSelectComponent implements OnInit {
     return req;
   }
 
-  deselectAllRows() {
-    this.gridApi.deselectAll();
-    this.selectedAll = false;
-  }
-
-  selectAllRows() {
-    this.gridApi.selectAll();
-    this.selectedAll = true;
-  }
-
   searchChange(search: string = '') {
     const searchToLower = search.toLowerCase();
     const rowsFiltered: SchedulableRegistersType[] = _.filter(this.allRowData, (data) => data.name.toLowerCase().includes(searchToLower));
@@ -150,7 +133,7 @@ export class RegistersSelectComponent implements OnInit {
 
   selectionChanged($event: any) {
     this.selectedAll = this.getSelectedRowNames().length === this.totalCount;
-    this.onSelectionChanged.emit(this.getSelectedRowNames().length > 0 ? true : false);
+    this.onSelectionChanged.emit(this.getSelectedRowNames().length > 0);
   }
 
   isRowSelectable(rowNode) {
