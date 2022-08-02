@@ -139,7 +139,7 @@ export class DcOperationsComponent {
   }
 
   onDelete() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, null);
 
     const modalRef = this.modalService.open(DeleteDcuFormComponent);
     const component: DeleteDcuFormComponent = modalRef.componentInstance;
@@ -147,7 +147,7 @@ export class DcOperationsComponent {
   }
 
   downloadClientCert() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, null);
 
     if (this.type) {
       params.types = [this.type];
@@ -165,7 +165,7 @@ export class DcOperationsComponent {
   }
 
   onReKeyConcentrator() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, null);
 
     if (this.type) {
       params.types = [this.type];
