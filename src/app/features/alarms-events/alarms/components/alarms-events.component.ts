@@ -79,7 +79,7 @@ export class AlarmsEventsComponent implements OnInit {
     },
     {
       field: 'sourceId',
-      translationKey: 'GRID.SERIAL-NUMBER',
+      translationKey: 'GRID.DEVICE-ID',
       width: 100,
       class: 'text-uppercase'
     },
@@ -134,7 +134,7 @@ export class AlarmsEventsComponent implements OnInit {
     },
     {
       field: 'serialNumber',
-      translationKey: 'GRID.METER-ID',
+      translationKey: 'GRID.DEVICE-ID',
       width: 150
     },
     {

@@ -618,7 +618,8 @@
         "FIRMWARE-APP": "Firmware (app)",
         "FIRMWARE-BASE": "Firmware (base)",
         "EVENT": "Event",
-        "USER": "User"
+        "USER": "User",
+        "DEVICE-ID": "Device ID"
     },
     "JOB": {
         "ACTIVE-JOB": {
