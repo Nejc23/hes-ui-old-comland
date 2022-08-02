@@ -84,6 +84,12 @@ export class AlarmsEventsComponent implements OnInit {
       class: 'text-uppercase'
     },
     {
+      field: 'sourceId',
+      translationKey: 'GRID.SERIAL-NUMBER',
+      width: 100,
+      class: 'text-uppercase'
+    },
+    {
       field: 'sourceType',
       translationKey: 'GRID.SOURCE-TYPE',
       width: 100
