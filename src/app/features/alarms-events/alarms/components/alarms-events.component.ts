@@ -78,14 +78,14 @@ export class AlarmsEventsComponent implements OnInit {
       width: 200
     },
     {
-      field: 'manufacturer',
-      translationKey: 'GRID.VENDOR',
+      field: 'sourceId',
+      translationKey: 'GRID.SERIAL-NUMBER',
       width: 100,
       class: 'text-uppercase'
     },
     {
-      field: 'sourceId',
-      translationKey: 'GRID.SERIAL-NUMBER',
+      field: 'manufacturer',
+      translationKey: 'GRID.VENDOR',
       width: 100,
       class: 'text-uppercase'
     },
