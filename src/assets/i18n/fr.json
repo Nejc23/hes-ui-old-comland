@@ -618,7 +618,8 @@
         "FIRMWARE-APP": "Firmware (app)",
         "FIRMWARE-BASE": "Firmware (base)",
         "EVENT": "Événement",
-        "USER": "User"
+        "USER": "User",
+        "DEVICE-ID": "ID de l'appareil"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -638,7 +639,7 @@
             "SUBTITLE": "Envoyer un message de notification lorsque les événements d'alarme correspondent à un ou plusieurs critères ci-dessous.",
             "TEXT": "Au moins une des règles suivantes doit être active",
             "TITLE": "Notification d'alarme",
-            "NOTIFICATION-TYPE": "Notification type"
+            "NOTIFICATION-TYPE": "Type de notification"
         },
         "AT-LEAST-ONE-JOB": "Au moins un job doit être sélectionné",
         "CONFIRM-BULK": "Confirmer l'opération bulk",
@@ -1405,7 +1406,8 @@
             "CREATE_USER_ROLE": "Créer un rôle d'utilisateur",
             "DELETE_USER_ROLE": "Annuler le rôle d'utilisateur",
             "USER_ROLE_REMOVED": "Mettre à jour le rôle d'utilisateur (enlevé)",
-            "USER_ROLE_ADDED": "Mettre à jour le rôle d'utilisateur (ajouté)"
+            "USER_ROLE_ADDED": "Mettre à jour le rôle d'utilisateur (ajouté)",
+            "DELETE_METER_DATA": "Annuler les données du compteur"
         },
         "CREATE_JOB": "Nouveau job du type a été créé",
         "UPDATE_JOB": "Le job a été mis à jour",
@@ -1457,7 +1459,8 @@
         "EXPORT_DATA": "L'exportation des données a été déclenchée pour les compteurs pour .... - ....",
         "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "La mise à jour du firmware a été déclenchée pour ... concentrateur avec numéro de série",
         "IMPORT_KEYS": "Le matériel de sécurity a été importé de ... le type de fichier est ...",
-        "TRIGGER_FIRMWARE_UPGRADE_METER": "a été téléchargé pour le compteur ... compteur avec numéro de série"
+        "TRIGGER_FIRMWARE_UPGRADE_METER": "a été téléchargé pour le compteur ... compteur avec numéro de série",
+        "DELETE_METER_DATA": "Les données pour compteur avec numéro d'appareil ont été annulées"
     },
     "LICENCE": {
         "TYPE": "Type de licence",
