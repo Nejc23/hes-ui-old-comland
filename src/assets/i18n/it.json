@@ -618,7 +618,8 @@
         "FIRMWARE-APP": "Firmware (app)",
         "FIRMWARE-BASE": "Firmware (base)",
         "EVENT": "Evento",
-        "USER": "User"
+        "USER": "User",
+        "DEVICE-ID": "Id del contatore"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -638,7 +639,7 @@
             "SUBTITLE": "Invia un messaggio di notifica quando gli eventi di allarme corrispondono a uno o più criteri qui sotto.",
             "TEXT": "Almeno una delle regole sottostanti deve essera attiva",
             "TITLE": "Notifica di allarme",
-            "NOTIFICATION-TYPE": "Notification type"
+            "NOTIFICATION-TYPE": "Tipo di notifica"
         },
         "AT-LEAST-ONE-JOB": "Minimo un Job deve essere selezionato",
         "CONFIRM-BULK": "Confermare l'operazione bulk",
@@ -1405,7 +1406,8 @@
             "CREATE_USER_ROLE": "Creare un ruolo dell'utente",
             "DELETE_USER_ROLE": "Cancellare il ruolo dell'utente",
             "USER_ROLE_REMOVED": "Aggiornare il ruolo dell'utente (tolto)",
-            "USER_ROLE_ADDED": "Aggiornare il ruolo dell'utente (aggiunto)"
+            "USER_ROLE_ADDED": "Aggiornare il ruolo dell'utente (aggiunto)",
+            "DELETE_METER_DATA": "Cancellare i dati dei contatori "
         },
         "CREATE_JOB": "Un nuovo Job di tipo è stato creato",
         "UPDATE_JOB": "Il Job è stato aggiornato",
@@ -1457,7 +1459,8 @@
         "EXPORT_DATA": "L'esportazione dei dati è stata attivata per i contatori per il periodo",
         "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "L'aggiornamento del firmware è stato attivato per ... concentratore col numero di serie ",
         "IMPORT_KEYS": "Il materiale di sicurezza è stato importato da , il tipo di file è",
-        "TRIGGER_FIRMWARE_UPGRADE_METER": "è stato caricato per il contatore ...  contatore col numero di serie"
+        "TRIGGER_FIRMWARE_UPGRADE_METER": "è stato caricato per il contatore ...  contatore col numero di serie",
+        "DELETE_METER_DATA": "I dati del contatore col numero di serie sono stati cancellati"
     },
     "LICENCE": {
         "TYPE": "Tipo di licenza",
