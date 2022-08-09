@@ -497,7 +497,7 @@
         "EVENT": "Ereignis",
         "DEVICE-STATE": "Zählerstand",
         "SLA": "Sla Prozent",
-        "USER": "User"
+        "USER": "Benutzer"
     },
     "GRID": {
         "ACTIVE": "Aktiv",
@@ -618,7 +618,8 @@
         "FIRMWARE-APP": "Firmware (App)",
         "FIRMWARE-BASE": "Firmware (Basis)",
         "EVENT": "Ereignis",
-        "USER": "User"
+        "USER": "Benutzer",
+        "DEVICE-ID": "Apparat-ID"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -638,7 +639,7 @@
             "SUBTITLE": "Senden Sie eine Benachrichtigung, wenn Alarm-Ereignisse einem oder mehreren der unten aufgeführten Kriterien entspricht.",
             "TEXT": "Mindestens eine von den untenstehenden Regeln muss aktiv sein",
             "TITLE": "Alarm-Benachrichtigung",
-            "NOTIFICATION-TYPE": "Notification type"
+            "NOTIFICATION-TYPE": "Benachrichtigungstyp"
         },
         "AT-LEAST-ONE-JOB": "Mindestens einen Job muss ausgewählt sein.",
         "CONFIRM-BULK": "Massenbefehl bestätigen",
@@ -1405,7 +1406,8 @@
             "CREATE_USER_ROLE": "Benutzer-Rolle erstellen",
             "DELETE_USER_ROLE": "Benutzer-Rolle löschen",
             "USER_ROLE_REMOVED": "Benutzer-Rolle aktualisieren (entfernt)",
-            "USER_ROLE_ADDED": "Benutzer-Rolle aktualisieren (zugefügt)"
+            "USER_ROLE_ADDED": "Benutzer-Rolle aktualisieren (zugefügt)",
+            "DELETE_METER_DATA": "Zählerdaten löschen"
         },
         "CREATE_JOB": "Neuer Job ... vom Typ ... wurde erstellt ",
         "UPDATE_JOB": "Job ... wurde aktualisiert",
@@ -1457,7 +1459,8 @@
         "EXPORT_DATA": "Daten-Export wurde für Zähler für ... ausgelöst",
         "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "Firmware-Upgrade wurde für ... Konzentrator mit Seriennummer ... ausgelöst",
         "IMPORT_KEYS": "Sicherheitsmaterial wurde vom ... importiert, Datei-Typ ist ",
-        "TRIGGER_FIRMWARE_UPGRADE_METER": "wurde für Zähler .. hochgeladen - Zähler mit Seriennummer ..."
+        "TRIGGER_FIRMWARE_UPGRADE_METER": "wurde für Zähler .. hochgeladen - Zähler mit Seriennummer ...",
+        "DELETE_METER_DATA": "Daten für Zähler mit Apparate-Nummer wurden gelöscht"
     },
     "LICENCE": {
         "TYPE": "Lizenz-Typ",
