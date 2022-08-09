@@ -618,7 +618,8 @@
         "FIRMWARE-APP": "Firmware (app)",
         "FIRMWARE-BASE": "Firmware (base)",
         "EVENT": "Event",
-        "USER": "User"
+        "USER": "User",
+        "DEVICE-ID": "Device ID"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -1405,7 +1406,8 @@
             "CREATE_USER_ROLE": "Create user role",
             "DELETE_USER_ROLE": "Delete user role",
             "USER_ROLE_REMOVED": "Update user role (removed)",
-            "USER_ROLE_ADDED": "Update user role (added)"
+            "USER_ROLE_ADDED": "Update user role (added)",
+            "DELETE_METER_DATA": "Delete meter data"
         },
         "CREATE_JOB": "New job {{ description }} of type {{ type }} was created",
         "UPDATE_JOB": "Job {{ description }} was updated",
@@ -1457,7 +1459,8 @@
         "EXPORT_DATA": "Data export {{ exportType }} was triggered for meters for {{ startDate }} - {{ endDate }}",
         "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "Firmware upgrade was triggered for {{ vendorType }} concentrator with serial number {{ concentratorPushId }}",
         "IMPORT_KEYS": "Security material was imported from {{ fileName }}, filetype is {{ fileType }}",
-        "TRIGGER_FIRMWARE_UPGRADE_METER": "{{ imageName }} was uploaded for meter {{ vendorType }} meter with serial number {{ serialNumber }}"
+        "TRIGGER_FIRMWARE_UPGRADE_METER": "{{ imageName }} was uploaded for meter {{ vendorType }} meter with serial number {{ serialNumber }}",
+        "DELETE_METER_DATA": "Data for {{ vendor }} meter with serial number {{ serialNumber }} was deleted {{ description }}"
     },
     "LICENCE": {
         "TYPE": "Licence type",
