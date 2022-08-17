@@ -101,8 +101,9 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
-        modalRef.componentInstance.actionName = this.actionName;
+        modalRef.componentInstance.jobName = this.actionName;
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
+
         this.loading = false;
       },
       () => {
