@@ -348,6 +348,8 @@ export class MeterUnitRegistersComponent implements OnInit {
           this.loading = false;
         } else {
           this.isDataFound = true;
+          // If values have set extendedTimestamp, then switch timestamps (so that PMax timestamps are correctly shown)
+          values.map((x) => (x.timestamp = x.extendedTimestamp ?? x.timestamp));
           this.rowData = values;
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {

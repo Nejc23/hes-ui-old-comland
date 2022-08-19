@@ -50,6 +50,7 @@ export interface RegisterValue {
   status?: number;
   timestamp: string;
   description?: string;
+  extendedTimestamp?: string;
 }
 
 export interface GridRegisterValue {
