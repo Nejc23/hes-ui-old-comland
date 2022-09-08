@@ -39,11 +39,13 @@ import {
   GridColumn,
   GridRowAction,
   LinkClickedEvent,
-  PageChangedEvent
+  PageChangedEvent,
+  SlaWidgetData
 } from '../../../shared/data-table/data-table.component';
 import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-response.interface';
 import { Router } from '@angular/router';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
+import { GetDataV2Service } from '../../../api/data-processing/services/get-data-v-2.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -99,7 +101,9 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   selectAllEnabled = false;
   concentratorsColumns: Array<GridColumn> = [];
   concentratorsRowActionConfiguration: Array<GridRowAction> = [];
-
+  // sla widget data
+  slaWidgetData: SlaWidgetData;
+  slaLoaded = false;
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
   private dcuConcentratorDeleted: Subscription;
@@ -129,7 +133,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private eventsService: EventManagerService,
     private elRef: ElementRef,
-    private router: Router
+    private router: Router,
+    private getDataV2Service: GetDataV2Service
   ) {
     // grid columns and row actions configuration
     this.concentratorsColumns = this.dataConcentratorUnitsGridService.concentratorsColumns;

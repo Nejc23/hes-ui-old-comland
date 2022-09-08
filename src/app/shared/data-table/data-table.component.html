@@ -196,7 +196,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
     [width]="column.width ? column.width : 200"
     field="{{ column.field }}"
   >
-    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
+    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
       <div
         [ngClass]="{ 'grid-cell-text': rowActions.length > 0 && gridColumns.length !== i + 1 && column.type !== columnType.ICONS }">
         <ng-container
@@ -392,8 +392,20 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
         <ng-container *ngIf="column.type === columnType.SLA">
           <span
+            class="tw-cursor-pointer"
+            [ngbPopover]="slaWidget"
+            [placement]="setSlaToolTipPlacement(rowIndex)"
+            container="body"
+            popoverClass="sla-popover"
             [ngClass]="'pill-' + getSlaColor(dataItem[column.field])"> {{ dataItem[column.field] | number: '1.0-0' }}
             % </span>
+          <ng-template #slaWidget>
+            <app-sla-quality-widget
+              [title]="(dataItem.deviceId ? dataItem.name ?? dataItem.logicalDeviceName : dataItem.name + ' - ' + dataItem.id) ?? ''"
+              [deviceId]="dataItem.deviceId ?? dataItem.concentratorId"
+              [selectBy]="kendoGridSelectByColumn"
+            ></app-sla-quality-widget>
+          </ng-template>
         </ng-container>
 
       </div>
@@ -452,7 +464,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   </kendo-grid-command-column>
 
   <kendo-grid-excel *ngIf="excelExport" [fetchData]="allData" [fileName]="this.excelFileName">
-    <ng-container *ngFor="let column of gridColumns">
+    <ng-container *ngFor="let column of gridColumns ; let i = index">
       <kendo-excelexport-column
         *ngIf="
           !(column.field === 'icons' || column.field === 'rowActions' || column.field === 'active') && column.type !== columnType.DATE_TIME

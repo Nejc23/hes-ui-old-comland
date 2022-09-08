@@ -39,6 +39,7 @@ import { PermissionEnumerator } from '../../../../core/permissions/enumerators/p
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { Subscription } from 'rxjs';
+import { GetDataV2Service } from '../../../../api/data-processing/services/get-data-v-2.service';
 
 @Component({
   selector: 'app-meter-units',
@@ -132,7 +133,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private codelistService: CodelistMeterUnitsRepositoryService,
-    private eventManager: EventManagerService
+    private eventManager: EventManagerService,
+    private getDataV2Service: GetDataV2Service
   ) {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
