@@ -55,13 +55,38 @@
                 >
                 </app-select-input>
 
-                <div class="tw-w-20 tw-w-1/2" *ngIf="form.controls.slaOperation.value !== null">
+                <div class="tw-w-24 tw-w-1/2" *ngIf="form.controls.slaOperation.value !== null">
                   <app-input-numeric [form]="form" [max]="100" [min]="1" [property]="slaValue"
                                      (inputTextBlurValue)="applyFilter()"></app-input-numeric>
                 </div>
               </div>
             </div>
 
+            <div>
+              <div>
+                <label>{{'FORM.LASTCOMMUNICATION' | translate }}</label>
+              </div>
+              <div class="tw-inline-flex tw-w-full tw-gap-4">
+                <app-select-input
+                  class="tw-w-1/2"
+                  [form]="form"
+                  (selectedValueChanged)="applyFilter(false, true)"
+                  [disabled]="false"
+                  [selectOptions]="lastCommunicationOptions"
+                  [property]="lastCommunicationOption"
+                >
+                </app-select-input>
+
+                <div class="tw-w-24 tw-inline-flex tw-items-center tw-w-1/2"
+                     *ngIf="form.controls.lastCommunicationOption.value !== null">
+                  <app-input-numeric [form]="form" [min]="1" [max]="120"
+                                     [property]="lastCommunicationValue"
+                                     (inputTextBlurValue)="applyFilter(false, true)"></app-input-numeric>
+                </div>
+                <label *ngIf="form.controls.lastCommunicationOption.value !== null"
+                       class="tw-ml-2 tw-pt-[9px]">{{'FORM.DAYS' | translate }}</label>
+              </div>
+            </div>
           </fieldset>
         </ng-template>
       </kendo-tabstrip-tab>

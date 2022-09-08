@@ -1,4 +1,5 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { LastCommunicationFilter } from '../data-concentrator-units/dcu-layout.interface';
 
 export interface GridRequestParams {
   requestId: string;
@@ -33,6 +34,7 @@ export interface GridFilterParams {
   protocol?: Codelist<number>[];
   medium?: Codelist<number>[];
   sla?: Codelist<number>;
+  lastCommunicationFilter?: LastCommunicationFilter;
 }
 
 export interface GridSortParams {

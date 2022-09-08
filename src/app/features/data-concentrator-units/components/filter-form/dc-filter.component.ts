@@ -12,6 +12,8 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import * as _ from 'lodash';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
   selector: 'app-dc-filter',
@@ -38,6 +40,12 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
     { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
   ];
+
+  lastCommunicationOptions: Codelist<number>[] = [
+    { id: 5, value: this.translate.instant('FORM.OLDER-THAN') }, // less than x days
+    { id: 3, value: this.translate.instant('FORM.NEWER-THAN') } // grater than x days
+  ];
+  lastCommunicationFormattedDateValue = '';
 
   sessionFilter: DcuLayout;
 
@@ -95,6 +103,14 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     return 'slaOperation';
   }
 
+  get lastCommunicationValue() {
+    return 'lastCommunicationValue';
+  }
+
+  get lastCommunicationOption() {
+    return 'lastCommunicationOption';
+  }
+
   get slaValue() {
     return 'slaValue';
   }
@@ -142,7 +158,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
           tagsFilter: this.sessionFilter.tagsFilter,
           vendorsFilter: this.sessionFilter.vendorsFilter,
           gridLayout: '',
-          slaFilter: this.sessionFilter.slaFilter
+          slaFilter: this.sessionFilter.slaFilter,
+          lastCommunicationFilter: this.sessionFilter.lastCommunicationFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -168,7 +185,11 @@ export class DcFilterComponent implements OnInit, OnDestroy {
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
         [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
-        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1]
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1],
+        [this.lastCommunicationOption]: [
+          filters && selected ? this.lastCommunicationOptions.find((item) => item.id === selected.lastCommunicationFilter?.id) : null
+        ],
+        [this.lastCommunicationValue]: [filters && selected ? selected.lastCommunicationFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -187,9 +208,20 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter(slaFilter = false) {
+  applyFilter(slaFilter = false, lastCommunication = false) {
     if (slaFilter && !this.form?.controls?.slaValue?.value) {
       return;
+    }
+    if (lastCommunication && !this.form?.controls?.lastCommunicationValue?.value) {
+      return;
+    } else {
+      this.lastCommunicationFormattedDateValue = moment()
+        .set('minute', 0)
+        .set('hours', 0)
+        .set('second', 0)
+        .set('millisecond', 0)
+        .subtract(this.form?.controls?.lastCommunicationValue?.value, 'days')
+        .format(dateServerFormat);
     }
     if (!this.form.valid) {
       return;
@@ -224,6 +256,14 @@ export class DcFilterComponent implements OnInit, OnDestroy {
           ? {
               id: this.form.controls.slaOperation.value.id,
               value: this.form.controls.slaValue.value
+            }
+          : null,
+      lastCommunicationFilter:
+        this.form?.controls?.lastCommunicationOption?.value?.id && this.form?.controls?.lastCommunicationValue?.value
+          ? {
+              id: this.form.controls.lastCommunicationOption.value.id,
+              value: this.form?.controls?.lastCommunicationValue?.value,
+              date: this.lastCommunicationFormattedDateValue
             }
           : null
     };

@@ -11,4 +11,11 @@ export interface DcuLayout {
   tagsFilter: Codelist<number>[];
   gridLayout: string;
   slaFilter: Codelist<number>;
+  lastCommunicationFilter: LastCommunicationFilter;
+}
+
+export interface LastCommunicationFilter {
+  id: number;
+  value: number;
+  date: string;
 }

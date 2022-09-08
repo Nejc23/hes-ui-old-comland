@@ -58,6 +58,12 @@ export class MeterUnitsTypeGridService {
       type: GridColumnType.SLA
     },
     {
+      field: 'lastCommunication',
+      translationKey: 'GRID.LAST-COMMUNICATION',
+      width: 160,
+      type: GridColumnType.DATE_TIME
+    },
+    {
       field: gridSysNameColumnsEnum.jobStatus,
       translationKey: 'GRID.JOB-STATUS',
       width: 100,

@@ -27,7 +27,8 @@ export class DataConcentratorUnitsStaticTextService {
     type: boolean,
     vendor: boolean,
     tag: boolean,
-    sla: boolean
+    sla: boolean,
+    lastCommunication: boolean
   ): FiltersInfo {
     const result: FiltersInfo = {
       isSet: false,
@@ -78,6 +79,10 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if (sla) {
+      result.count++;
+    }
+
+    if (lastCommunication) {
       result.count++;
     }
 

@@ -121,6 +121,10 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     return nameOf<MeterUnitDetailsForm>((o) => o.address);
   }
 
+  get lastCommunication() {
+    return nameOf<MeterUnitDetailsForm>((o) => o.lastCommunication);
+  }
+
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
@@ -296,6 +300,11 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
         ]
       ],
       manufacturer: this.data.manufacturer,
+      lastCommunication: this.data.lastCommunication
+        ? moment(this.data.lastCommunication).format(environment.dateDisplayFormat) +
+          ' ' +
+          moment(this.data.lastCommunication).format(environment.timeFormat)
+        : null,
       externalId: this.data.externalId,
       deviceId: this.data.deviceId
     });

@@ -17,6 +17,8 @@ import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { EventManagerService } from '../../../../../core/services/event-manager.service';
 import readXlsxFile from 'read-excel-file';
 import { environment } from '../../../../../../environments/environment';
+import * as moment from 'moment';
+import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 
 interface MetersIdsFilterData {
   ids: number[];
@@ -51,6 +53,12 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
     { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
   ];
+
+  lastCommunicationOptions: Codelist<number>[] = [
+    { id: 5, value: this.translate.instant('FORM.OLDER-THAN') }, // less than x days
+    { id: 3, value: this.translate.instant('FORM.NEWER-THAN') } // grater than x days
+  ];
+  lastCommunicationFormattedDateValue = '';
 
   deviceMediums$: Observable<Codelist<number>[]>;
   protocolTypes: Codelist<number>[];
@@ -190,6 +198,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'slaValue';
   }
 
+  get lastCommunicationValue() {
+    return 'lastCommunicationValue';
+  }
+
+  get lastCommunicationOption() {
+    return 'lastCommunicationOption';
+  }
+
   // called on init
   ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
@@ -271,7 +287,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           gridLayout: '',
           mediumFilter: this.sessionFilter.mediumFilter,
           protocolFilter: this.sessionFilter.protocolFilter,
-          slaFilter: this.sessionFilter.slaFilter
+          slaFilter: this.sessionFilter.slaFilter,
+          lastCommunicationFilter: this.sessionFilter.lastCommunicationFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -307,7 +324,11 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         [this.importDevicesField]: [this.filterFromFiles[0]],
         [this.fileProperty]: null,
         [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
-        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1]
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1],
+        [this.lastCommunicationOption]: [
+          filters && selected ? this.lastCommunicationOptions.find((item) => item.id === selected.lastCommunicationFilter?.id) : null
+        ],
+        [this.lastCommunicationValue]: [filters && selected ? selected.lastCommunicationFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -331,9 +352,20 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter(slaFilter = false) {
+  applyFilter(slaFilter = false, lastCommunication = false) {
     if (slaFilter && !this.form?.controls?.slaOperation?.value) {
       return;
+    }
+    if (lastCommunication && !this.form?.controls?.lastCommunicationValue?.value) {
+      return;
+    } else {
+      this.lastCommunicationFormattedDateValue = moment()
+        .set('minute', 0)
+        .set('hours', 0)
+        .set('second', 0)
+        .set('millisecond', 0)
+        .subtract(this.form?.controls?.lastCommunicationValue?.value, 'days')
+        .format(dateServerFormat);
     }
     if (!this.form.valid) {
       return;
@@ -385,6 +417,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           ? {
               id: this.form.controls.slaOperation.value.id,
               value: this.form.controls.slaValue.value
+            }
+          : null,
+      lastCommunicationFilter:
+        this.form?.controls?.lastCommunicationOption?.value?.id && this.form?.controls?.lastCommunicationValue?.value
+          ? {
+              id: this.form.controls.lastCommunicationOption.value.id,
+              value: this.form?.controls?.lastCommunicationValue?.value,
+              date: this.lastCommunicationFormattedDateValue
             }
           : null
     };

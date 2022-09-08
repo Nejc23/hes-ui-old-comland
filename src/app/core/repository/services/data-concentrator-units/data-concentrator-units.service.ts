@@ -242,6 +242,15 @@ export class DataConcentratorUnitsService {
           filterOperation: param.filterModel.sla.id === 3 ? filterOperationEnum.graterThenOrEqual : filterOperationEnum.lessThenOrEqual
         });
       }
+      // last communication filter
+      if (param.filterModel?.lastCommunicationFilter) {
+        requestParam.filter.push({
+          propName: gridSysNameColumnsEnum.lastCommunication,
+          propValue: param.filterModel.lastCommunicationFilter.date,
+          filterOperation:
+            param.filterModel.lastCommunicationFilter.id === 3 ? filterOperationEnum.graterThenOrEqual : filterOperationEnum.lessThenOrEqual
+        });
+      }
 
       if (param.sortModel && param.sortModel.length > 0) {
         param.sortModel.map((row) =>
