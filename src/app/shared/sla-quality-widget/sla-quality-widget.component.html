@@ -1,0 +1,53 @@
+<div class="sla-quality-widget">
+  <div class="header">
+    <div>
+      <div class="title">{{ title }}</div>
+      <p class="text tw-pt-1">{{ 'SLA-WIDGET.DATA-QUALITY' | translate }}
+        • {{ 'SLA-WIDGET.LAST-30-DAYS' | translate }}</p>
+    </div>
+    <img (click)="close()" class="close-icon" src="assets/images/icons/close-icon.svg" />
+  </div>
+  <div *ngIf="noData" class="no-data tw-mb-4 tw-mt-3">
+    {{ 'SLA-WIDGET.NO-DATA' | translate }}
+  </div>
+  <div class="content tw-mt-6" *ngIf="!noData">
+    <div class="tw-w-full tw-h-full tw-inline-flex tw-items-end">
+      <ng-container *ngFor="let item of slaWidgetData.graphData">
+        <div
+          [style.height.px]="item.value === 0 ? 33 : null"
+          [ngbTooltip]="item.value !== null ? item.value.toString() + '%' : 'COMMON.NA' | translate"
+        >
+          <div
+            *ngIf="item.value >= 0"
+            [ngClass]="getSlaColor(item.value)"
+            [style.height.px]="calculateBarHeight(item.value)"
+            class="bar-item"
+          >
+          </div>
+          <div
+            [style.height.px]="33"
+            class="bar-item tw-bg-darkGray tw-bg-opacity-10"
+            *ngIf="item.value === null">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="days tw-mb-4" *ngIf="!noData">
+    <div *ngFor="let item of slaWidgetData.graphData" class="bar-text text-content-secondary">
+      <div class="days-text" [ngClass]="item.value === null ? 'red-text' : ''">{{ item.day }}</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-text">
+      <ng-container *ngIf="this.selectBy !== 'concentratorId'">
+        {{ 'SLA-WIDGET.NEXT-READ' | translate }}:
+        {{ nextReadDate ? (nextReadDate | formatDateTime) : 'COMMON.NA' | translate }}
+      </ng-container>
+    </div>
+    <div class="footer-text">
+      {{ 'SLA-WIDGET.LAST-COMM' | translate }}:
+      {{ lastCommunicationDate ? (lastCommunicationDate | formatDateTime) : 'COMMON.NA' | translate }}
+    </div>
+  </div>
+</div>

@@ -123,6 +123,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ActiveJobCardItemComponent } from './widgets/active-job-card-item/active-job-card-item.component';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { PopoverComponent } from './popover/popover.component';
+import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widget.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -221,7 +223,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddTimeUnitComponent,
     DataTableToolbarComponent,
     ActiveJobCardItemComponent,
-    JsonViewerComponent
+    JsonViewerComponent,
+    PopoverComponent,
+    SlaQualityWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -366,7 +370,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddTimeUnitComponent,
     DataTableToolbarComponent,
     ActiveJobCardItemComponent,
-    JsonViewerComponent
+    JsonViewerComponent,
+    PopoverComponent,
+    SlaQualityWidgetComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

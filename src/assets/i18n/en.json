@@ -1493,5 +1493,12 @@
       "CONCENTRATOR": "Concentrator",
       "METER": "Meter"
     }
+  },
+  "SLA-WIDGET": {
+    "DATA-QUALITY": "Data quality",
+    "LAST-30-DAYS": "Last 30 days",
+    "NEXT-READ": "Next read",
+    "LAST-COMM": "Last comm.",
+    "NO-DATA": "This device SLA values have not yet been calculated."
   }
 }
