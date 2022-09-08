@@ -538,6 +538,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
     this.requestModel.filterModel.sla = filter.slaFilter ?? null;
+    this.requestModel.filterModel.lastCommunicationFilter = filter.lastCommunicationFilter ?? null;
+
     this.getFilterCount();
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
 

@@ -58,6 +58,12 @@ export class DataConcentratorUnitsGridService {
       type: GridColumnType.SLA
     },
     {
+      field: 'lastCommunication',
+      translationKey: 'GRID.LAST-COMMUNICATION',
+      width: 160,
+      type: GridColumnType.DATE_TIME
+    },
+    {
       field: gridSysNameColumnsEnum.state,
       translationKey: 'GRID.STATE',
       width: 120,
@@ -110,12 +116,6 @@ export class DataConcentratorUnitsGridService {
       field: gridSysNameColumnsEnum.readStatusTimeStamp,
       translationKey: 'GRID.READ-STATUS',
       width: 80
-    },
-    {
-      field: 'lastCommunication',
-      translationKey: 'GRID.LAST-COMMUNICATION',
-      width: 160,
-      type: GridColumnType.DATE_TIME
     }
   ];
 
@@ -409,7 +409,8 @@ export class DataConcentratorUnitsGridService {
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
       JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
-      JSON.stringify(sessionFilter.slaFilter) === JSON.stringify(requestModel.sla)
+      JSON.stringify(sessionFilter.slaFilter) === JSON.stringify(requestModel.sla) &&
+      JSON.stringify(sessionFilter.lastCommunicationFilter) === JSON.stringify(requestModel.lastCommunicationFilter)
     );
   }
 

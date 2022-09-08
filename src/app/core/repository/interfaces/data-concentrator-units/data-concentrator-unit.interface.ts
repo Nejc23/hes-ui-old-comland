@@ -24,6 +24,7 @@ export interface DataConcentratorUnit {
   plcStatus?: ConcentratorStatus;
   firstInstallDate?: string;
   timeZoneName?: string;
+  lastCommunication?: string;
 }
 
 export enum ConcentratorStatus {

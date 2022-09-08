@@ -292,6 +292,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
       this.requestModel.filterModel.sla = filterDCU.slaFilter;
+      this.requestModel.filterModel.lastCommunicationFilter = filterDCU.lastCommunicationFilter;
     } else {
       this.setFilterInfo();
     }
@@ -315,7 +316,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorsFilter && filter.vendorsFilter.length > 0,
       filter.tagsFilter && filter.tagsFilter.length > 0,
-      filter.slaFilter && true
+      filter.slaFilter && true,
+      filter.lastCommunicationFilter && true
     );
   }
 
@@ -328,7 +330,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       filterInfo.typesFilter && filterInfo.typesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
-      filterInfo.slaFilter && true
+      filterInfo.slaFilter && true,
+      filterInfo.lastCommunicationFilter && true
     ).count;
   }
 

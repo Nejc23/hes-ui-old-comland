@@ -198,6 +198,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.firstInstallDate);
   }
 
+  get lastCommunication() {
+    return nameOf<DcuForm>((o) => o.lastCommunication);
+  }
+
   get userNameProperty() {
     return nameOf<DcuForm>((o) => o.userName);
   }
@@ -300,6 +304,13 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
             moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
             ' ' +
             moment(this.data.firstInstallDate).format(environment.timeFormatLong);
+        }
+        if (this.data.lastCommunication) {
+          // format date
+          this.data.lastCommunication =
+            moment(this.data.lastCommunication).format(environment.dateDisplayFormat) +
+            ' ' +
+            moment(this.data.lastCommunication).format(environment.timeFormatLong);
         }
         this.form = this.createForm();
         this.editForm = this.createEditForm();
@@ -430,6 +441,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         [this.firmwareBaseProperty]: [this.data ? this.data.firmwareBase : null],
         [this.firmwareAppProperty]: [this.data ? this.data.firmwareApp : null],
         [this.installedDate]: [this.data ? this.data.firstInstallDate : null],
+        [this.lastCommunication]: [this.data ? this.data.lastCommunication : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
         [this.externalIdProperty]: [this.data ? this.data.externalId : null],
         [this.macProperty]: [this.data ? this.data.mac : null],

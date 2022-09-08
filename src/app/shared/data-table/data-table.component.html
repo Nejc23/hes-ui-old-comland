@@ -39,7 +39,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   class="kendo-grid"
 >
   <ng-template *ngIf="withSearch || excelExport || withAddButton" class="kendo-toolbar" kendoGridToolbarTemplate>
-    <div class="tw-inline-flex tw-w-full">
+    <div class="tw-inline-flex tw-w-full tw-mt-1.5">
       <div *ngIf="withAddButton" class="tw-inline-flex tw-w-full tw-justify-between">
         <div class="tw-w-3/4 tw-inline-flex tw-place-self-end">
           <div *ngIf="checkFormErrors() && this.form.touched && this.inlineAddOrEdit">
@@ -81,9 +81,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
       </div>
 
-      <div *ngIf="withFiltersIcon" class="tw-place-self-end tw-flex tw-ml-4">
-        <button (click)="onFilterIconClick()" [ngbTooltip]="hideShowFilter" class="icon-filter-button border-gray"
-                container="body">
+      <div *ngIf="withFiltersIcon"
+           class="tw-place-self-end tw-flex tw-ml-4">
+        <button (click)="onFilterIconClick()"
+                [ngbTooltip]="'GRID.SHOW-HIDE-FILTERS' | translate" data-toggle="tooltip"
+                class="icon-filter-button border-gray"
+        >
           <img class="tw-ml-4" src="assets/images/icons/filter-icon.svg" />
           <span [ngClass]="filtersCount > 0 ? 'tw-visible' : 'tw-invisible'" class="badge badge-primary corner-badge">{{
             filtersCount
@@ -553,7 +556,3 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <span>{{ 'GRID.CSV-EXPORT' | translate }}</span>
 </ng-template>
 
-<ng-template #hideShowFilter
-><span>{{ 'GRID.SHOW-HIDE-FILTERS' | translate }}</span
-><span><br /></span>
-</ng-template>

@@ -58,7 +58,8 @@ export class SaveViewFormComponent implements OnInit {
             vendorsFilter: this.sessionLayout.vendorsFilter,
             readStatusFilter: this.sessionLayout.readStatusFilter,
             gridLayout: this.sessionLayout.gridLayout,
-            slaFilter: this.sessionLayout.slaFilter
+            slaFilter: this.sessionLayout.slaFilter,
+            lastCommunicationFilter: this.sessionLayout.lastCommunicationFilter
           };
           x.push(currentLayout);
           this.form = this.createForm(x, currentLayout);
