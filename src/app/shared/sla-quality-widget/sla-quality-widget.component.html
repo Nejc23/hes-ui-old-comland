@@ -15,10 +15,10 @@
       <ng-container *ngFor="let item of slaWidgetData.graphData">
         <div
           [style.height.px]="item.value === 0 ? 33 : null"
-          [ngbTooltip]="item.value !== null ? item.value.toString() + '%' : 'COMMON.NA' | translate"
+          [ngbTooltip]="item.value ? item.value.toString() + '%' : 'COMMON.NA' | translate"
         >
           <div
-            *ngIf="item.value >= 0"
+            *ngIf="item.value"
             [ngClass]="getSlaColor(item.value)"
             [style.height.px]="calculateBarHeight(item.value)"
             class="bar-item"
@@ -27,7 +27,7 @@
           <div
             [style.height.px]="33"
             class="bar-item tw-bg-darkGray tw-bg-opacity-10"
-            *ngIf="item.value === null">
+            *ngIf="!item.value">
           </div>
         </div>
       </ng-container>
@@ -35,7 +35,7 @@
   </div>
   <div class="days tw-mb-4" *ngIf="!noData">
     <div *ngFor="let item of slaWidgetData.graphData" class="bar-text text-content-secondary">
-      <div class="days-text" [ngClass]="item.value === null ? 'red-text' : ''">{{ item.day }}</div>
+      <div class="days-text" [ngClass]="!item.value ? 'red-text' : ''">{{ item.day }}</div>
     </div>
   </div>
   <div class="footer">
