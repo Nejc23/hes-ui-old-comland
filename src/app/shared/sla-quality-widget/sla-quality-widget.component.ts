@@ -48,14 +48,18 @@ export class SlaQualityWidgetComponent implements OnInit, OnDestroy {
     return item * 0.01 * 33 ?? 0;
   }
 
-  getSlaColor(value: number): string {
+  getSlaClasses(value: number): string {
+    let slaClasses = 'red';
     if (value >= environment.slaHighLimit) {
-      return 'green';
+      slaClasses = 'green';
     }
     // if (value >= environment.slaMedLimit) {
     //   return 'orange';
     // }
-    return 'red';
+    if (value >= 5) {
+      slaClasses += ' tw-rounded-t';
+    }
+    return slaClasses;
   }
 
   getSlaData() {

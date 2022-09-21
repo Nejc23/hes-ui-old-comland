@@ -401,7 +401,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
             % </span>
           <ng-template #slaWidget>
             <app-sla-quality-widget
-              [title]="(dataItem.deviceId ? dataItem.name ?? dataItem.logicalDeviceName : dataItem.name + ' - ' + dataItem.id) ?? ''"
+              [title]="(dataItem.deviceId ? dataItem.name ?? (dataItem.logicalDeviceName ?? dataItem.serialNumber) : dataItem.name + ' - ' + dataItem.id) ?? ''"
               [deviceId]="dataItem.deviceId ?? dataItem.concentratorId"
               [selectBy]="kendoGridSelectByColumn"
             ></app-sla-quality-widget>

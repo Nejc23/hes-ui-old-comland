@@ -19,14 +19,14 @@
         >
           <div
             *ngIf="item.value"
-            [ngClass]="getSlaColor(item.value)"
+            [ngClass]="getSlaClasses(item.value)"
             [style.height.px]="calculateBarHeight(item.value)"
             class="bar-item"
           >
           </div>
           <div
             [style.height.px]="33"
-            class="bar-item tw-bg-darkGray tw-bg-opacity-10"
+            class="bar-item tw-rounded-t tw-bg-darkGray tw-bg-opacity-10"
             *ngIf="!item.value">
           </div>
         </div>
