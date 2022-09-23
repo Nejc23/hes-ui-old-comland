@@ -2,20 +2,6 @@
 
   <div class="tw-inline-flex tw-justify-items-center tw-items-center">
     <div class="btn-group dropstart">
-      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"
-         id="dropdownMenuLang">
-        <img class="me-4 tw-pb-4" src="assets/images/icons/languages.svg" />
-      </a>
-      <ul class="dropdown-menu">
-        <li *ngFor="let lang of languages$">
-          <a (click)="selectLang(lang.id)" [ngClass]="addSelectedClass(lang.id)"
-             class="dropdown-item"
-             href="javascript:void(0);"> {{ 'LANGUAGE.' + lang.id.toUpperCase() | translate }}</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="btn-group dropstart">
       <li class="nav-item"
           data-bs-toggle="dropdown"
           aria-expanded="false"
