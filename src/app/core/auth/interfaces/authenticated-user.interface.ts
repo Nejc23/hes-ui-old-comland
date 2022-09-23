@@ -10,4 +10,5 @@ export interface AuthenticatedUser {
   email: string;
   accessType: string;
   userRights: UserRight[];
+  profile: any;
 }

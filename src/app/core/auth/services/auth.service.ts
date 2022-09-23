@@ -38,7 +38,6 @@ export class AuthService {
     private configStoreService: AppConfigStoreService
   ) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
-      this.locale = localStorage.getItem('lang') || 'en';
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
         client_id: appConfig.identityServer.clientId,
@@ -140,7 +139,7 @@ export class AuthService {
     if (isDevelop === this.user.id_token) {
       localStorage.setItem('is_develop', this.user.id_token);
     }
-    localStorage.setItem('lang', this.locale);
+    localStorage.setItem('lang', authenticatedUser.profile.default_language);
     this.setUserRights(authenticatedUser);
   }
 
@@ -152,6 +151,7 @@ export class AuthService {
     };
     return this.usersRepositoryService.refreshUserToken(expiredToken);
   }
+
   /*
   logout() {
     this.removeAuthTokenData();
@@ -191,6 +191,7 @@ export class AuthService {
     }
     return false;
   }
+
   /**
    * Save token to cookie service
    */
@@ -203,6 +204,7 @@ export class AuthService {
     localStorage.setItem('user_fullName', authenticatedUser.firstName + ' ' + authenticatedUser.lastName);
     // localStorage.setItem('user_company', authenticatedUser.company);
     localStorage.setItem('user_email', authenticatedUser.email);
+    localStorage.setItem('lang', authenticatedUser.profile.default_language);
     this.cookieService.set(config.authCookie, authenticatedUser.accessToken, null, environment.cookiePath);
     this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.cookieService.set(config.authType, authenticatedUser.tokenType, null, environment.cookiePath);
@@ -249,6 +251,7 @@ export class AuthService {
    * Refresh Token if needed
    * If user is inactive more than 110 minutes, return to LOGIN
    */
+
   /*setRefreshTokenInterval() {
     if (this.isIntervalTokenSet()) {
       return;
@@ -307,6 +310,7 @@ export class AuthService {
     this.cookieService.delete(config.authType);
     // this.cookieService.deleteAll('/');
   }
+
   /*
   refreshTokenAndSetUserRights() {
     this.refresh().subscribe(

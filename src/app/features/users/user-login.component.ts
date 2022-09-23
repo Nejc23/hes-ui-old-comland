@@ -209,8 +209,4 @@ export class UserLoginComponent implements OnInit {
   setLogin() {
     this.forgotPassword = false;
   }
-
-  selectLang(id: string) {
-    this.languageService.selectLang(id);
-  }
 }
