@@ -394,7 +394,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <span
             class="tw-cursor-pointer"
             [ngbPopover]="slaWidget"
-            [placement]="setSlaToolTipPlacement(rowIndex)"
+            [placement]="'right'"
             container="body"
             popoverClass="sla-popover"
             [ngClass]="'pill-' + getSlaColor(dataItem[column.field])"> {{ dataItem[column.field] | number: '1.0-0' }}

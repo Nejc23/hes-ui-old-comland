@@ -29,7 +29,6 @@ import { ActiveJobsListComponent } from '../../features/jobs/components/active-j
 import { FormData } from '../card-item/card-item.component';
 import { dateServerFormat } from '../forms/consts/date-format';
 import { Codelist } from '../repository/interfaces/codelists/codelist.interface';
-import { Placement } from '@ng-bootstrap/ng-bootstrap/util/positioning';
 
 export interface GridColumn {
   translationKey: string;
@@ -909,12 +908,5 @@ export class DataTableComponent implements OnInit, OnChanges {
       return 'orange';
     }
     return 'red';
-  }
-
-  setSlaToolTipPlacement(rowIndex: number): Placement {
-    if (rowIndex >= 10) {
-      return 'right';
-    }
-    return 'right-top';
   }
 }
