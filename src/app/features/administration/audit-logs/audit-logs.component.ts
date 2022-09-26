@@ -8,6 +8,7 @@ import { debounceTime } from 'rxjs/operators';
 import { filterOperationEnum } from '../../global/enums/filter-operation-global.enum';
 import { IActionFilterParams } from '../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-response.interface';
+import { BreadcrumbService } from '../../../shared/breadcrumbs/services/breadcrumb.service';
 
 export interface AuditLog {
   createdBy: string;
@@ -78,7 +79,8 @@ export class AuditLogsComponent implements OnInit {
     private fb: FormBuilder,
     private translate: TranslateService,
     private auditService: AuditService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +99,11 @@ export class AuditLogsComponent implements OnInit {
     });
     // get data from BE
     this.setFilters();
+    this.setBreadcrumbs();
+  }
+
+  setBreadcrumbs() {
+    this.breadcrumbService.setPageName(this.translate.instant('MENU.AUDIT-LOGS'));
   }
 
   calculateHeight() {
