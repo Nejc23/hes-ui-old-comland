@@ -645,7 +645,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     }
     // clear and apply filters
     this.gridFilterSessionStoreService.clearGridLayout();
-    this.applyFilters();
     this.eventManager.emitCustom('ClearFilter', true);
   }
 

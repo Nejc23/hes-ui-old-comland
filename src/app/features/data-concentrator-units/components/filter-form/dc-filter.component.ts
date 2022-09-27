@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
 
 @Component({
   selector: 'app-dc-filter',
@@ -52,6 +53,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   @Output() toggleFilter = new EventEmitter();
 
   private eventSettingsStoreLoadedSubscription: Subscription;
+  private clearFilterSubscription: Subscription;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -61,7 +63,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private codelistHelperService: CodelistHelperService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventsService: EventManagerService
   ) {
     this.form = this.createForm(null, null);
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -135,6 +138,10 @@ export class DcFilterComponent implements OnInit, OnDestroy {
 
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       this.doFillData();
+    });
+
+    this.clearFilterSubscription = this.eventsService.getCustom('ClearDcFilter').subscribe((res) => {
+      this.clearButtonClicked();
     });
   }
 
@@ -285,6 +292,9 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
+    if (this.clearFilterSubscription) {
+      this.clearFilterSubscription.unsubscribe();
     }
   }
 }
