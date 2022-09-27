@@ -33,6 +33,20 @@
   color: $primary;
 }
 
+.dropdown-content a:active {
+  background-color: $dropdown-link-hover-bg;
+  color: $primary;
+}
+
+.dropdown-content a:hover {
+  background-color: $dropdown-link-hover-bg;
+  color: $primary;
+}
+
+.dropdown-item:active {
+  background-color: $dropdown-link-hover-bg;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
