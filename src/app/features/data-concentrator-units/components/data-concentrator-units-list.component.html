@@ -72,6 +72,7 @@
   </app-slide-out-component>
 
   <app-data-table
+    (clearFilerTextClickEvent)="clearFilters($event)"
     (columnVisibilityChangedEvent)="columnVisibilityChanged($event)"
     (deSelectAllClickEvent)="deSelectAll($event)"
     (filterIconClickEvent)="filterIconClicked($event)"
@@ -113,6 +114,7 @@
     [totalCount]="totalCount"
     [wildCardsEnabled]="wildCardsSearch"
     [wildCardsSearch]="true"
+    [withClearFilerText]="true"
     [withFiltersIcon]="true"
     [withRefreshButton]="true"
     [withRowSelection]="true"

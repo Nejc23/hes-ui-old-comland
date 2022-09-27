@@ -15,7 +15,6 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -39,13 +38,11 @@ import {
   GridColumn,
   GridRowAction,
   LinkClickedEvent,
-  PageChangedEvent,
-  SlaWidgetData
+  PageChangedEvent
 } from '../../../shared/data-table/data-table.component';
 import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-response.interface';
 import { Router } from '@angular/router';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
-import { GetDataV2Service } from '../../../api/data-processing/services/get-data-v-2.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -101,19 +98,14 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   selectAllEnabled = false;
   concentratorsColumns: Array<GridColumn> = [];
   concentratorsRowActionConfiguration: Array<GridRowAction> = [];
-  // sla widget data
-  slaWidgetData: SlaWidgetData;
-  slaLoaded = false;
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
-  private dcuConcentratorDeleted: Subscription;
   private subscription: Subscription;
   private listSubscription: Subscription;
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private staticTextService: DataConcentratorUnitsStaticTextService,
-    public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
@@ -133,8 +125,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private eventsService: EventManagerService,
     private elRef: ElementRef,
-    private router: Router,
-    private getDataV2Service: GetDataV2Service
+    private router: Router
   ) {
     // grid columns and row actions configuration
     this.concentratorsColumns = this.dataConcentratorUnitsGridService.concentratorsColumns;
@@ -618,5 +609,11 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
     this.getData();
     this.saveSettingsStore();
+  }
+
+  clearFilters(event: boolean) {
+    // clear and apply filters
+    this.gridFilterSessionStoreService.clearGridLayout();
+    this.eventsService.emitCustom('ClearDcFilter', true);
   }
 }
