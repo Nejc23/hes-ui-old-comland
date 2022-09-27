@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { LicensingService } from '../../../api/configuration/services/licensing.service';
+import { BreadcrumbService } from '../../../shared/breadcrumbs/services/breadcrumb.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface LicencingData {
   installedMeters: number;
@@ -19,10 +21,16 @@ export class LicenceComponent implements OnInit {
     allowedMeters: 0
   };
 
-  constructor(private elRef: ElementRef, private licensingService: LicensingService) {}
+  constructor(
+    private elRef: ElementRef,
+    private licensingService: LicensingService,
+    private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
+    this.breadcrumbService.setPageName(this.translate.instant('MENU.LICENCE'));
   }
 
   addWidth() {
