@@ -349,7 +349,7 @@ export class AutoTemplateComponent implements OnInit {
       if (!alreadyNewRow) {
         const rule = this.rowData.find((x) => x.autoTemplateRuleId === 'new');
         if (rule != null) {
-          this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.ALREADY-ADDED"'));
+          this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.ALREADY-ADDED'));
           alreadyNewRow = true;
         }
       }
@@ -411,7 +411,7 @@ export class AutoTemplateComponent implements OnInit {
       propertyName: this.form.get('propertyName').value,
       propertyValue: this.form.get('propertyValue').value,
       templateId: this.form.get('templateId').value,
-      jobIds: this.getJobIds()
+      jobIds: [...new Set(this.getJobIds())]
     };
 
     return formData;
@@ -422,7 +422,7 @@ export class AutoTemplateComponent implements OnInit {
       propertyName: this.form.get('propertyName').value,
       propertyValue: this.form.get('propertyValue').value,
       autoTemplateRuleId: this.form.get('ruleId').value,
-      jobIds: this.getJobIds()
+      jobIds: [...new Set(this.getJobIds())]
     };
 
     return formData;
@@ -433,7 +433,7 @@ export class AutoTemplateComponent implements OnInit {
       return [];
     }
 
-    return [...new Set(this.rowData[0].jobIds)];
+    return this.rowData.map((item) => item.jobIds).flat();
   }
 
   editForm(id: string, rowIndex: number) {
