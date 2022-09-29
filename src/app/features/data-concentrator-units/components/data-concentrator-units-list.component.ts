@@ -267,7 +267,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // set filter in request model
-  setFilter() {
+  setFilter(saveUserDataToApi = true) {
     this.pageNumber = 1;
     if (
       !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
@@ -292,7 +292,9 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     } else {
       this.setFilterInfo();
     }
-    this.saveSettingsStore();
+    if (saveUserDataToApi) {
+      this.saveSettingsStore();
+    }
     return this.requestModel.filterModel;
   }
 
@@ -381,7 +383,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
         if (settings) {
           this.addSettingsToSession(settings);
-          this.setFilter();
+          this.searchText = settings.searchText;
+          this.setFilter(false);
         }
         this.areSettingsLoaded = true;
         this.getData();
@@ -402,6 +405,10 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
       if (settings.dcuLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
+      }
+
+      if (settings.searchText) {
+        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
       if (settings.visibleColumns) {
@@ -434,7 +441,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveSettingsStore(sortModel?: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[], saveData = true) {
     const store: DcuUnitsGridLayoutStore = {
       currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex() ?? 0,
       dcuLayout: (this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout) ?? null,
@@ -464,7 +471,9 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize) ||
       store.hideFilter !== this.dcuUnitsGridLayoutStore.hideFilter
     ) {
-      this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
+      if (saveData) {
+        this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
+      }
       this.dcuUnitsGridLayoutStore = store;
     }
   }
