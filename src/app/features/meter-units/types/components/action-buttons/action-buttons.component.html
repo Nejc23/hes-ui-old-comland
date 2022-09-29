@@ -383,7 +383,12 @@
           ><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a
           >
         </div>
-        <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized class="dropdown-divider">
+        <div class="dropdown-divider"
+             [permissionsAbove]="[permissionClearAlarms]"
+             [permissionsBelow]="[permissionMuManage]"
+             appHideDividerIfPermissionsUnauthorized>
+        </div>
+        <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
           <a (click)="onEnableMeter()" class="dropdown-item custom-hover-display item-padding "
              href="javascript:void(0)"
           ><span>{{ 'COMMON.ENABLE-METER' | translate }}</span></a
