@@ -219,7 +219,7 @@ export class SchedulerJobComponent {
 
     return this.formBuilder.group({
       [this.registersProperty]: [formData ? formData.registers : null, Validators.required],
-      [this.devicesProperty]: [formData ? formData.devices : null, Validators.required],
+      [this.devicesProperty]: [formData ? formData.devices : null],
       [this.activeProperty]: [formData ? formData.active : true],
       [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.usePointerProperty]: [formData && formData.readingProperties ? formData.readingProperties.usePointer : true],
@@ -389,12 +389,10 @@ export class SchedulerJobComponent {
   fillData(): SchedulerJobForm {
     if (this.showConcentrators) {
       const deviceIds = this.form.get(this.devicesProperty).value;
-      if (deviceIds != null) {
-        const concentrList: string[] = deviceIds;
-        this.deviceFiltersAndSearch = {
-          id: concentrList
-        };
-      }
+      const concentrList: string[] = deviceIds ?? [];
+      this.deviceFiltersAndSearch = {
+        id: concentrList
+      };
     }
 
     let formData: SchedulerJobForm = null;
@@ -489,7 +487,6 @@ export class SchedulerJobComponent {
     } else if (this.showConcentrators) {
       const selectedData = this.listOfDCUs.getSelectedRowIds();
       this.form.get(this.devicesProperty).setValue(selectedData);
-      this.noDCUs = selectedData.length === 0;
     }
 
     const values = this.fillData();

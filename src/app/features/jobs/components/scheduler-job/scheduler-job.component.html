@@ -90,9 +90,6 @@
         <app-data-concentrator-units-select (onSelectionChanged)="dcuSelectionChanged($event)"
                                             [selectedJobId]="selectedJobId"
                                             [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
-        <div class="help-block" *ngIf="noDCUs">
-          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
-        </div>
       </div>
 
       <div id="step2" *ngIf="step === 2 && showAlarmNotification">
@@ -102,7 +99,7 @@
                                       [severities]="severities"
                                       [sources]="sources"
                                       [notificationTypes]="notificationTypes"
-                                        [defaultJobAddress]="defaultJobAddress">
+                                      [defaultJobAddress]="defaultJobAddress">
         </app-alarm-notification-rules>
       </div>
 
