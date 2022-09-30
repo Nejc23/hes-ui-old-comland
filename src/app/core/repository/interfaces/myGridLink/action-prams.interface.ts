@@ -25,6 +25,7 @@ export interface IActionRequestParams {
 
 export interface IActionSearchParam {
   value: string;
+  valuesFromFile?: string[];
   propNames: string[];
   useWildcards: boolean;
 }

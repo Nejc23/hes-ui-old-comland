@@ -47,6 +47,7 @@ export interface GridSearchParams {
   type: string;
   value: string;
   useWildcards: boolean;
+  valuesFromFile?: string[];
 }
 
 export interface ReadStatus {

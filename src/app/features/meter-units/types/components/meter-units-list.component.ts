@@ -165,8 +165,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
           {
             colId: event.field,
             type: enumSearchFilterOperators.like,
-            value: ids.join().toString().replace(/,/gi, '&'),
-            useWildcards: true
+            value: null,
+            valuesFromFile: ids.flat(),
+            useWildcards: false
           }
         ];
         this.meterIdsFilterApplied = true;
