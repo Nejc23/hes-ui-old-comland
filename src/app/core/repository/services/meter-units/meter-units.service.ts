@@ -299,10 +299,11 @@ export class MeterUnitsService {
     requestParam.pageSize = pageSize;
     requestParam.pageNumber = pageIndex;
 
-    if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
-      requestParam.textSearch.value = param.searchModel[0].value;
+    if (param.searchModel && param.searchModel.length) {
+      requestParam.textSearch.value = param.searchModel[0].value ?? null;
       requestParam.textSearch.propNames = visibleColumnNames;
       requestParam.textSearch.useWildcards = param.searchModel[0].useWildcards;
+      requestParam.textSearch.valuesFromFile = param.searchModel[0].valuesFromFile ?? null;
     }
 
     // create filter object
