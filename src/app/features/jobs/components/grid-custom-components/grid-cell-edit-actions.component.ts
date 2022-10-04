@@ -15,6 +15,8 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
+import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -30,6 +32,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private eventService: SchedulerJobsEventEmitterService,
     private codelistService: CodelistRepositoryService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private settingsService: SettingsService,
     private permissionService: PermissionService,
     private translate: TranslateService
   ) {}
@@ -256,12 +259,23 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
       protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
       manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
       severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist(),
+      notificationTypes: this.codelistMeterUnitsRepositoryService.meterUnitAlarmNotificationTypeCodelist(),
+      defaultJobAddress: this.settingsService.getSetting(userSettingNotificationJobDefaultAddress)
+    }).subscribe(({ protocols, manufacturers, severities, sources, notificationTypes, defaultJobAddress }) => {
       this.service.getNotificationJob(selectedJobId).subscribe((job) => {
         const modalRef = this.modalService.open(SchedulerJobComponent, options);
         const component: SchedulerJobComponent = modalRef.componentInstance;
-        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
+        component.setFormNotificationJobEdit(
+          protocols,
+          manufacturers,
+          severities,
+          sources,
+          selectedJobId,
+          job,
+          notificationTypes,
+          defaultJobAddress
+        );
 
         modalRef.result.then(
           (data) => {

@@ -12,6 +12,9 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import * as _ from 'lodash';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
 
 @Component({
   selector: 'app-dc-filter',
@@ -34,18 +37,23 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   dcuTags: Codelist<number>[];
   operatorsList$ = this.codelistHelperService.operationsList();
 
-  currentStatuses: Codelist<number>[];
-  currentTypes: Codelist<number>[];
-  currentVendorId: number;
-  currentTags: Codelist<number>[];
-  selectedRow = -1;
-  dontSelectFilter = false;
+  slaOperations: Codelist<number>[] = [
+    { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
+    { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
+  ];
+
+  lastCommunicationOptions: Codelist<number>[] = [
+    { id: 5, value: this.translate.instant('FORM.OLDER-THAN') }, // less than x days
+    { id: 3, value: this.translate.instant('FORM.NEWER-THAN') } // grater than x days
+  ];
+  lastCommunicationFormattedDateValue = '';
 
   sessionFilter: DcuLayout;
 
   @Output() toggleFilter = new EventEmitter();
 
   private eventSettingsStoreLoadedSubscription: Subscription;
+  private clearFilterSubscription: Subscription;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -55,7 +63,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private codelistHelperService: CodelistHelperService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventsService: EventManagerService
   ) {
     this.form = this.createForm(null, null);
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -93,6 +102,22 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     return 'value2';
   }
 
+  get slaOperation() {
+    return 'slaOperation';
+  }
+
+  get lastCommunicationValue() {
+    return 'lastCommunicationValue';
+  }
+
+  get lastCommunicationOption() {
+    return 'lastCommunicationOption';
+  }
+
+  get slaValue() {
+    return 'slaValue';
+  }
+
   // called on init
   ngOnInit(): void {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -113,6 +138,10 @@ export class DcFilterComponent implements OnInit, OnDestroy {
 
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       this.doFillData();
+    });
+
+    this.clearFilterSubscription = this.eventsService.getCustom('ClearDcFilter').subscribe((res) => {
+      this.clearButtonClicked();
     });
   }
 
@@ -135,7 +164,9 @@ export class DcFilterComponent implements OnInit, OnDestroy {
           typesFilter: this.sessionFilter.typesFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
           vendorsFilter: this.sessionFilter.vendorsFilter,
-          gridLayout: ''
+          gridLayout: '',
+          slaFilter: this.sessionFilter.slaFilter,
+          lastCommunicationFilter: this.sessionFilter.lastCommunicationFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -159,7 +190,13 @@ export class DcFilterComponent implements OnInit, OnDestroy {
             : { id: '', value: '' }
         ],
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0]
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1],
+        [this.lastCommunicationOption]: [
+          filters && selected ? this.lastCommunicationOptions.find((item) => item.id === selected.lastCommunicationFilter?.id) : null
+        ],
+        [this.lastCommunicationValue]: [filters && selected ? selected.lastCommunicationFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -178,7 +215,21 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter() {
+  applyFilter(slaFilter = false, lastCommunication = false) {
+    if (slaFilter && !this.form?.controls?.slaValue?.value) {
+      return;
+    }
+    if (lastCommunication && !this.form?.controls?.lastCommunicationValue?.value) {
+      return;
+    } else {
+      this.lastCommunicationFormattedDateValue = moment()
+        .set('minute', 0)
+        .set('hours', 0)
+        .set('second', 0)
+        .set('millisecond', 0)
+        .subtract(this.form?.controls?.lastCommunicationValue?.value, 'days')
+        .format(dateServerFormat);
+    }
     if (!this.form.valid) {
       return;
     }
@@ -206,7 +257,22 @@ export class DcFilterComponent implements OnInit, OnDestroy {
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorsFilter: this.form.get(this.vendorsProperty).value,
-      gridLayout: ''
+      gridLayout: '',
+      slaFilter:
+        this.form?.controls?.slaOperation?.value?.id && this.form?.controls?.slaValue?.value
+          ? {
+              id: this.form.controls.slaOperation.value.id,
+              value: this.form.controls.slaValue.value
+            }
+          : null,
+      lastCommunicationFilter:
+        this.form?.controls?.lastCommunicationOption?.value?.id && this.form?.controls?.lastCommunicationValue?.value
+          ? {
+              id: this.form.controls.lastCommunicationOption.value.id,
+              value: this.form?.controls?.lastCommunicationValue?.value,
+              date: this.lastCommunicationFormattedDateValue
+            }
+          : null
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
@@ -223,13 +289,12 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  doToggleFilter() {
-    this.toggleFilter.emit();
-  }
-
   ngOnDestroy() {
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
+    if (this.clearFilterSubscription) {
+      this.clearFilterSubscription.unsubscribe();
     }
   }
 }

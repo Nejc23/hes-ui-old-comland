@@ -131,6 +131,18 @@ export interface LinkClickedEvent {
   rowData?: any;
 }
 
+export interface SlaWidgetData {
+  graphData?: SlaGraphData[];
+  nextRead?: string;
+  title: string;
+  lastCommunication?: string;
+}
+
+export interface SlaGraphData {
+  value: number;
+  day: number;
+}
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -232,7 +244,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     { id: 100, value: '100' }
   ];
 
-  pageSizes: number[] = [20, 50, 100];
+  pageSizes: number[] = [20];
 
   // inline edit
   @Input() form: FormGroup;
@@ -325,6 +337,12 @@ export class DataTableComponent implements OnInit, OnChanges {
           translationKey: '',
           hidden: false
         });
+      } else {
+        // row actions and icons are always visible
+        this.gridColumns.find((column) => column.field === 'rowActions').hidden = false;
+      }
+      if (this.gridColumns.find((column) => column.field === 'icons')) {
+        this.gridColumns.find((column) => column.field === 'icons').hidden = false;
       }
     }
     this.initGrid();
@@ -619,7 +637,7 @@ export class DataTableComponent implements OnInit, OnChanges {
       data = this.filteredData;
     }
     this.sort = sort;
-    this.loadItems(data, this.totalCount ? this.totalCount : data.length, this.sort);
+    this.loadItems(data, this.totalCount ? this.totalCount : data.length);
     this.sortChangeEvent.emit(sort);
   }
 
@@ -869,10 +887,10 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   // load grid items:
-  private loadItems(data: any, count: number, sort?: any): void {
+  private loadItems(data: any, count: number): void {
     if (data) {
       this.gridView = {
-        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
+        data: orderBy(data, this.sort).slice(this.skip, this.skip + this.pageSize),
         total: count
       };
       console.log('GRID DATA: ');
@@ -880,5 +898,15 @@ export class DataTableComponent implements OnInit, OnChanges {
     } else {
       this.initGrid();
     }
+  }
+
+  getSlaColor(value: number): string {
+    if (value >= environment.slaHighLimit) {
+      return 'green';
+    }
+    if (value >= environment.slaMedLimit) {
+      return 'orange';
+    }
+    return 'red';
   }
 }

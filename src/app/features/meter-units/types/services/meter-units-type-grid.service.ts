@@ -35,11 +35,6 @@ export class MeterUnitsTypeGridService {
           popoverTextErrorField: 'errorList'
         },
         {
-          field: gridSysNameColumnsEnum.serialMismatch,
-          iconName: 'warning-red-icon',
-          popoverText: 'GRID.SERIAL-MISMATCH'
-        },
-        {
           field: gridSysNameColumnsEnum.readyForActivation,
           iconName: 'hourglass-icon',
           popoverText: 'GRID.READY-FOR-ACTIVATION'
@@ -61,6 +56,12 @@ export class MeterUnitsTypeGridService {
       translationKey: 'GRID.SLA',
       width: 80,
       type: GridColumnType.SLA
+    },
+    {
+      field: 'lastCommunication',
+      translationKey: 'GRID.LAST-COMMUNICATION',
+      width: 160,
+      type: GridColumnType.DATE_TIME
     },
     {
       field: gridSysNameColumnsEnum.jobStatus,

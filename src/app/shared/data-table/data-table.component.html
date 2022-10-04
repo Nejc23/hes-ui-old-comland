@@ -39,7 +39,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   class="kendo-grid"
 >
   <ng-template *ngIf="withSearch || excelExport || withAddButton" class="kendo-toolbar" kendoGridToolbarTemplate>
-    <div class="tw-inline-flex tw-w-full">
+    <div class="tw-inline-flex tw-w-full tw-mt-1.5">
       <div *ngIf="withAddButton" class="tw-inline-flex tw-w-full tw-justify-between">
         <div class="tw-w-3/4 tw-inline-flex tw-place-self-end">
           <div *ngIf="checkFormErrors() && this.form.touched && this.inlineAddOrEdit">
@@ -81,9 +81,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
       </div>
 
-      <div *ngIf="withFiltersIcon" class="tw-place-self-end tw-flex tw-ml-4">
-        <button (click)="onFilterIconClick()" [ngbTooltip]="hideShowFilter" class="icon-filter-button border-gray"
-                container="body">
+      <div *ngIf="withFiltersIcon"
+           class="tw-place-self-end tw-flex tw-ml-4">
+        <button (click)="onFilterIconClick()"
+                [ngbTooltip]="'GRID.SHOW-HIDE-FILTERS' | translate" data-toggle="tooltip"
+                class="icon-filter-button border-gray"
+        >
           <img class="tw-ml-4" src="assets/images/icons/filter-icon.svg" />
           <span [ngClass]="filtersCount > 0 ? 'tw-visible' : 'tw-invisible'" class="badge badge-primary corner-badge">{{
             filtersCount
@@ -193,7 +196,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
     [width]="column.width ? column.width : 200"
     field="{{ column.field }}"
   >
-    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
+    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
       <div
         [ngClass]="{ 'grid-cell-text': rowActions.length > 0 && gridColumns.length !== i + 1 && column.type !== columnType.ICONS }">
         <ng-container
@@ -208,7 +211,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
         <!--- no type defined is string -->
         <ng-container
-          *ngIf="(!column.type && dataItem[column.field]) || (dataItem[column.field] === 0 && column.type !== columnType.LINK)">
+          *ngIf="(!column.type && dataItem[column.field]) || (dataItem[column.field] === 0 && column.type !== columnType.LINK && column.type !== columnType.SLA)">
           <div [class]="column.class ?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
             <ng-container *ngIf="column.icon; else noIcon">
@@ -388,15 +391,21 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SLA">
-          <ng-container *ngIf="dataItem[column.field]; else noData">
-            <span
-              [ngClass]="'pill-' + dataItem[column.field].color"> {{ dataItem[column.field].value | number: '1.0-0' }}
-              % </span>
-          </ng-container>
-          <ng-template #noData>
-            <span [ngClass]="'pill-red'">0%</span>
+          <span
+            class="tw-cursor-pointer"
+            [ngbPopover]="slaWidget"
+            [placement]="'right'"
+            container="body"
+            popoverClass="sla-popover"
+            [ngClass]="'pill-' + getSlaColor(dataItem[column.field])"> {{ dataItem[column.field] | number: '1.0-0' }}
+            % </span>
+          <ng-template #slaWidget>
+            <app-sla-quality-widget
+              [title]="(dataItem.deviceId ? dataItem.name ?? (dataItem.logicalDeviceName ?? dataItem.serialNumber) : dataItem.name + ' - ' + dataItem.id) ?? ''"
+              [deviceId]="dataItem.deviceId ?? dataItem.concentratorId"
+              [selectBy]="kendoGridSelectByColumn"
+            ></app-sla-quality-widget>
           </ng-template>
-
         </ng-container>
 
       </div>
@@ -455,7 +464,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   </kendo-grid-command-column>
 
   <kendo-grid-excel *ngIf="excelExport" [fetchData]="allData" [fileName]="this.excelFileName">
-    <ng-container *ngFor="let column of gridColumns">
+    <ng-container *ngFor="let column of gridColumns ; let i = index">
       <kendo-excelexport-column
         *ngIf="
           !(column.field === 'icons' || column.field === 'rowActions' || column.field === 'active') && column.type !== columnType.DATE_TIME
@@ -486,14 +495,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <ng-template *ngIf="pageable" kendoPagerTemplate let-currentPage="currentPage" let-totalPages="totalPages">
     <div class="tw-flex tw-w-full tw-justify-between tw-items-center">
       <div class="tw-inline-flex tw-items-center">
-        <div class="tw-text-darkGray tw-text-sm">{{ 'GRID.ROWS-PER-PAGE' | translate }}:</div>
 
+        <!-- <div class="tw-text-darkGray tw-text-sm">{{ 'GRID.ROWS-PER-PAGE' | translate }}:</div>-->
         <!-- page sizer 20/50/100 -->
-        <kendo-pager-page-sizes [pageSizes]="pageSizes" class="tw-h-8"></kendo-pager-page-sizes>
+        <!--        <kendo-pager-page-sizes [pageSizes]="pageSizes" class="tw-h-8"></kendo-pager-page-sizes>-->
 
         <div
           *ngIf="(selectAllEnabled && totalCount - excludedIdsFromSelection?.length > 0) || selectedKeys.length > 0"
-          class="text-secondary tw-font-medium tw-ml-5"
+          class="text-secondary tw-font-medium tw-mr-5"
         >
           <ng-container
             *ngIf="!selectAllEnabled"> {{ selectedKeys?.length }} {{ 'GRID.OF' | translate }} {{ totalCount }} </ng-container>
@@ -504,7 +513,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
 
         <div (click)="selectAll()" *ngIf="withRowSelection"
-             class="text-primary tw-cursor-pointer tw-font-medium tw-ml-5">
+             class="text-primary tw-cursor-pointer tw-font-medium">
           <span class="tw-mr-1">{{ 'GRID.SELECT-ALL' | translate }}</span>
         </div>
 
@@ -559,7 +568,3 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <span>{{ 'GRID.CSV-EXPORT' | translate }}</span>
 </ng-template>
 
-<ng-template #hideShowFilter
-><span>{{ 'GRID.SHOW-HIDE-FILTERS' | translate }}</span
-><span><br /></span>
-</ng-template>

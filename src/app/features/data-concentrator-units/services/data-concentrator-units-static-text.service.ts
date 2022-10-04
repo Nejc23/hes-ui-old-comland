@@ -20,7 +20,16 @@ export class DataConcentratorUnitsStaticTextService {
     return this.translate.instant('JOB.NEXT-READ') + ' ';
   }
 
-  getFiltersInfo(filterName: string, status: boolean, readStatuses: boolean, type: boolean, vendor: boolean, tag: boolean): FiltersInfo {
+  getFiltersInfo(
+    filterName: string,
+    status: boolean,
+    readStatuses: boolean,
+    type: boolean,
+    vendor: boolean,
+    tag: boolean,
+    sla: boolean,
+    lastCommunication: boolean
+  ): FiltersInfo {
     const result: FiltersInfo = {
       isSet: false,
       count: 0,
@@ -66,6 +75,14 @@ export class DataConcentratorUnitsStaticTextService {
 
     if (tag) {
       result.text += this.translate.instant('COMMON.TAG');
+      result.count++;
+    }
+
+    if (sla) {
+      result.count++;
+    }
+
+    if (lastCommunication) {
       result.count++;
     }
 

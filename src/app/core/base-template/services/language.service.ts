@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 import { Language, languages } from 'src/environments/config';
@@ -10,26 +9,20 @@ import { Language, languages } from 'src/environments/config';
 export class LanguageService {
   public selectedLang: Language;
 
-  constructor(private translate: TranslateService, public intlService: IntlService, private router: Router) {}
+  constructor(private translate: TranslateService, public intlService: IntlService) {}
 
-  selectLang(lang: string) {
-    if (lang !== this.selectedLang?.id) {
-      const language = this.findLanguage(lang);
-      localStorage.setItem('lang', language.id);
-      this.translate.use(language.id);
-      this.selectedLang = language;
-      (this.intlService as CldrIntlService).localeId = language.id;
-    }
-  }
-
-  getLang(): Language {
-    return this.selectedLang;
+  setLanguage(lang: string) {
+    const language = this.findLanguage(lang);
+    localStorage.setItem('lang', language.id);
+    this.translate.use(language.id);
+    this.selectedLang = language;
+    (this.intlService as CldrIntlService).localeId = language.id;
   }
 
   findLanguage(lang: string) {
-    if (!languages.find((lng) => lng.id == lang)) {
-      return languages.find((lng) => lng.id == 'en');
+    if (!languages.find((lng) => lng.id === lang)) {
+      return languages.find((lng) => lng.id === 'en');
     }
-    return languages.find((lng) => lng.id == lang);
+    return languages.find((lng) => lng.id === lang);
   }
 }

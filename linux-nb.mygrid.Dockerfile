@@ -1,4 +1,4 @@
-FROM nginx:1.21
+FROM registry.gitlab.enerdat.com/enerdat/tooling/nginx:1.21
 
 COPY  ./dist/myGrid/ /usr/share/nginx/html/
 RUN chmod -R 775 /usr/share/nginx/html

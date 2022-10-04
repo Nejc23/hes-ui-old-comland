@@ -3,7 +3,6 @@ import { themeColors } from './shared/base-template/consts/theme-colors.const';
 import { Title } from '@angular/platform-browser';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from './core/auth/services/auth.service';
-import { IntlService } from '@progress/kendo-angular-intl';
 import { SidebarService } from './core/base-template/services/sidebar.service';
 import { SidebarItem } from './shared/base-template/interfaces/sidebar-item.interface';
 import { Router } from '@angular/router';
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor(
     private titleService: Title,
     public authService: AuthService,
-    public intlService: IntlService,
     private router: Router,
     private permissionService: PermissionService,
     public sidebarService: SidebarService,
@@ -26,8 +24,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.languageService.selectLang(localStorage.getItem('lang') || 'en');
-    console.log('Selected language: ' + this.languageService.selectedLang.id);
     // TODO: complete this
     // this.authService.setRefreshTokenInterval();
     this.titleService.setTitle(brand.appBrowserTitle);
@@ -37,7 +33,7 @@ export class AppComponent implements OnInit {
         this.authService.user = user;
         if (user) {
           this.authService.saveTokenAndSetUserRights2(user, '');
-
+          this.languageService.setLanguage(localStorage.getItem('lang') ?? 'en');
           this.redirectToDefaultPage();
         } else {
           console.log('User Not Logged In');

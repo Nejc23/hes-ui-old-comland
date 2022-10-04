@@ -1,34 +1,36 @@
-import { PermissionService } from '../../../../core/permissions/services/permission.service';
-import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
-import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { forkJoin, Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
-import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { JobsStaticTextService } from '../../services/jobs-static-text.service';
-import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
-import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
-import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
-import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SortDescriptor } from '@progress/kendo-data-query';
+import { forkJoin, Observable, Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
+import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { enumSearchFilterOperators } from 'src/environments/config';
+import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
 import { GridColumn, GridRowAction, PageChangedEvent } from '../../../../shared/data-table/data-table.component';
 import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
-import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { JobTypeEnumeration } from '../../enums/job-type.enum';
-import { Router } from '@angular/router';
-import { SortDescriptor } from '@progress/kendo-data-query';
+import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
+import { JobsStaticTextService } from '../../services/jobs-static-text.service';
+import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
+import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
+import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 
 @Component({
   selector: 'app-jobs-list',
@@ -118,6 +120,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private toast: ToastNotificationService,
+    private settingsService: SettingsService,
     private router: Router
   ) {
     this.refreshSubscription = this.eventService.eventEmitterRefresh.subscribe({
@@ -620,12 +623,23 @@ export class JobsListComponent implements OnInit, OnDestroy {
       protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
       manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
       severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist(),
+      notificationTypes: this.codelistMeterUnitsRepositoryService.meterUnitAlarmNotificationTypeCodelist(),
+      defaultJobAddress: this.settingsService.getSetting(userSettingNotificationJobDefaultAddress)
+    }).subscribe(({ protocols, manufacturers, severities, sources, notificationTypes, defaultJobAddress }) => {
       this.schedulerJobsService.getNotificationJob(selectedJobId).subscribe((job) => {
         const modalRef = this.modalService.open(SchedulerJobComponent, options);
         const component: SchedulerJobComponent = modalRef.componentInstance;
-        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
+        component.setFormNotificationJobEdit(
+          protocols,
+          manufacturers,
+          severities,
+          sources,
+          selectedJobId,
+          job,
+          notificationTypes,
+          defaultJobAddress
+        );
 
         modalRef.result.then(
           (data) => {

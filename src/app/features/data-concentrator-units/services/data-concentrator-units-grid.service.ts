@@ -52,6 +52,18 @@ export class DataConcentratorUnitsGridService {
       ]
     },
     {
+      field: gridSysNameColumnsEnum.sla,
+      translationKey: 'GRID.SLA',
+      width: 80,
+      type: GridColumnType.SLA
+    },
+    {
+      field: 'lastCommunication',
+      translationKey: 'GRID.LAST-COMMUNICATION',
+      width: 160,
+      type: GridColumnType.DATE_TIME
+    },
+    {
       field: gridSysNameColumnsEnum.state,
       translationKey: 'GRID.STATE',
       width: 120,
@@ -104,12 +116,6 @@ export class DataConcentratorUnitsGridService {
       field: gridSysNameColumnsEnum.readStatusTimeStamp,
       translationKey: 'GRID.READ-STATUS',
       width: 80
-    },
-    {
-      field: 'lastCommunication',
-      translationKey: 'GRID.LAST-COMMUNICATION',
-      width: 160,
-      type: GridColumnType.DATE_TIME
     }
   ];
 
@@ -397,16 +403,15 @@ export class DataConcentratorUnitsGridService {
   }
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
-    if (
+    return (
       JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors)
-    ) {
-      return true;
-    }
-    return false;
+      JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
+      JSON.stringify(sessionFilter.slaFilter) === JSON.stringify(requestModel.sla) &&
+      JSON.stringify(sessionFilter.lastCommunicationFilter) === JSON.stringify(requestModel.lastCommunicationFilter)
+    );
   }
 
   public getCurrentRowIndex(pageSize: number): GridPagination {

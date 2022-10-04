@@ -25,6 +25,7 @@ export interface MeterUnitDetails {
   firstInstallDate: Date;
   stateChanged?: Date;
   stateChangedBy?: string;
+  lastCommunication?: string;
 }
 
 export enum DeviceState {

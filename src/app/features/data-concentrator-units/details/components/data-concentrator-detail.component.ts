@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
@@ -76,7 +75,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   hours = false;
 
   chartVisible = true;
-  saveData = false;
 
   selectedStartDate;
   selectedEndDate;
@@ -200,6 +198,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.firstInstallDate);
   }
 
+  get lastCommunication() {
+    return nameOf<DcuForm>((o) => o.lastCommunication);
+  }
+
   get userNameProperty() {
     return nameOf<DcuForm>((o) => o.userName);
   }
@@ -282,12 +284,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     // get DCU
     this.getData();
-
-    this.subscriptions.push(
-      this.dcuEventsService.eventEmitterConcentratorDeleted.subscribe((x) => {
-        this.router.navigate([dataConcentratorUnits]);
-      })
-    );
   }
 
   ngOnDestroy(): void {
@@ -295,7 +291,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.saveData = false;
     if (this.concentratorId.length > 0) {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
@@ -309,6 +304,13 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
             moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
             ' ' +
             moment(this.data.firstInstallDate).format(environment.timeFormatLong);
+        }
+        if (this.data.lastCommunication) {
+          // format date
+          this.data.lastCommunication =
+            moment(this.data.lastCommunication).format(environment.dateDisplayFormat) +
+            ' ' +
+            moment(this.data.lastCommunication).format(environment.timeFormatLong);
         }
         this.form = this.createForm();
         this.editForm = this.createEditForm();
@@ -436,9 +438,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         ],
         [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
         [this.hostname]: [this.data ? this.data.hostname : null],
+        [this.installedDate]: [this.data ? this.data.firstInstallDate : null],
+        [this.lastCommunication]: [this.data ? this.data.lastCommunication : null],
         [this.firmwareBaseProperty]: [this.data ? this.data.firmwareBase : null],
         [this.firmwareAppProperty]: [this.data ? this.data.firmwareApp : null],
-        [this.installedDate]: [this.data ? this.data.firstInstallDate : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
         [this.externalIdProperty]: [this.data ? this.data.externalId : null],
         [this.macProperty]: [this.data ? this.data.mac : null],
@@ -732,7 +735,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    this.saveData = true;
+    this.eventsService.emitCustom('EditConcentratorButtonClicked', true);
   }
 
   isEditVisible(): boolean {

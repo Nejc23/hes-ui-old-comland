@@ -9,7 +9,6 @@ import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/cr
 import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { MeterUnitsTypeGridService } from 'src/app/features/meter-units/types/services/meter-units-type-grid.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { gridRefreshInterval } from 'src/environments/config';
@@ -53,11 +52,11 @@ export class ImportDeviceKeysComponent implements OnInit {
   refreshInterval = gridRefreshInterval;
   allResultTexts = [];
   allErrorTexts = [];
+  allWarningText = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private staticextService: ImportDeviceKeysStaticTextService,
-    public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private authService: AuthService,
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
@@ -149,6 +148,15 @@ export class ImportDeviceKeysComponent implements OnInit {
               })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
+          } else if (o.status === 'PARTIAL') {
+            this.allWarningText.push(
+              this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.PARTIAL-IMPORT-SUCCESSFUL', {
+                value1: o.fileName,
+                value2: o.meterCount,
+                value3: o.keyCount
+              })
+            );
+            this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
             this.allErrorTexts.push(
@@ -174,7 +182,7 @@ export class ImportDeviceKeysComponent implements OnInit {
         .slideUp(500, function () {
           $(this).remove();
         });
-    }, 5000);
+    }, 7000);
     return id;
   }
 }

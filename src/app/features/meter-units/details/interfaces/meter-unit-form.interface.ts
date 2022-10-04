@@ -14,4 +14,5 @@ export interface MeterUnitDetailsForm {
   id: string;
   mac: string;
   address: string;
+  lastCommunication: string;
 }

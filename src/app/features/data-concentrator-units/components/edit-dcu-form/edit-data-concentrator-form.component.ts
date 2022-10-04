@@ -1,31 +1,28 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
-import { Observable } from 'rxjs';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { Subscription } from 'rxjs';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
 
 @Component({
   selector: 'app-edit-data-concentrator-form',
   templateUrl: './edit-data-concentrator-form.component.html'
 })
-export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
+export class EditDataConcentratorFormComponent implements OnDestroy {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
   @Output() savedDataEvent = new EventEmitter<boolean>();
   @Input() saveData = false;
 
-  dcuTypes$: Observable<Codelist<number>[]>;
-  dcuVendors$: Observable<Codelist<number>[]>;
-  dcuVendors: Codelist<number>[];
-  dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
+  subscription: Subscription;
 
   @Input() credentialsVisible = false;
   opened = false;
@@ -35,8 +32,13 @@ export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
     private dcuService: DataConcentratorUnitsService,
     private formUtils: FormsUtilsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private eventsService: EventManagerService
+  ) {
+    this.subscription = this.eventsService.getCustom('EditConcentratorButtonClicked').subscribe(() => {
+      this.saveDcu();
+    });
+  }
 
   get nameProperty() {
     return nameOf<DcuForm>((o) => o.name);
@@ -80,19 +82,6 @@ export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
 
   get tagsProperty() {
     return nameOf<DcuForm>((o) => o.tags);
-  }
-
-  ngOnInit() {
-    this.dcuVendors$.subscribe((values) => {
-      this.dcuVendors = values;
-    });
-  }
-
-  ngOnChanges() {
-    if (this.saveData) {
-      this.saveDcu();
-      this.saveData = false;
-    }
   }
 
   fillData(): EditDcuForm {
@@ -147,6 +136,12 @@ export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
           this.form.get(this.hostname).setErrors({ invalidHostname: true });
         }
       });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

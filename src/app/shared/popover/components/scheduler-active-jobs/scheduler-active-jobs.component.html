@@ -1,4 +1,4 @@
-<div class="form tw-py-2">
+<div class="form">
   <div *ngIf="isContentLoaded">
     <div *ngFor="let activeJob of allActiveJobs" class="form-row">
       <div #divDescription [ngbTooltip]="activeJob.description" [openDelay]="500" class="col-8 text-truncate"

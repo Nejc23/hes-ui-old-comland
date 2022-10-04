@@ -17,6 +17,8 @@ import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { EventManagerService } from '../../../../../core/services/event-manager.service';
 import readXlsxFile from 'read-excel-file';
 import { environment } from '../../../../../../environments/environment';
+import * as moment from 'moment';
+import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 
 interface MetersIdsFilterData {
   ids: number[];
@@ -46,6 +48,17 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   firmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
+
+  slaOperations: Codelist<number>[] = [
+    { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
+    { id: 5, value: this.translate.instant('COMMON.LESS-THAN') }
+  ];
+
+  lastCommunicationOptions: Codelist<number>[] = [
+    { id: 5, value: this.translate.instant('FORM.OLDER-THAN') }, // less than x days
+    { id: 3, value: this.translate.instant('FORM.NEWER-THAN') } // grater than x days
+  ];
+  lastCommunicationFormattedDateValue = '';
 
   deviceMediums$: Observable<Codelist<number>[]>;
   protocolTypes: Codelist<number>[];
@@ -84,6 +97,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   public files: Array<any> = [];
 
   private eventSettingsStoreLoadedSubscription: Subscription;
+  private clearFilterSubscription: Subscription;
 
   constructor(
     private codelistService: CodelistMeterUnitsRepositoryService,
@@ -111,7 +125,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     });
 
     // this.applyFilter = _.debounce(this.applyFilter, 1000);
-    this.eventsService.getCustom('ClearFilter').subscribe((res) => {
+    this.clearFilterSubscription = this.eventsService.getCustom('ClearFilter').subscribe((res) => {
       this.clearButtonClicked();
     });
   }
@@ -176,6 +190,22 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'fileSelect';
   }
 
+  get slaOperation() {
+    return 'slaOperation';
+  }
+
+  get slaValue() {
+    return 'slaValue';
+  }
+
+  get lastCommunicationValue() {
+    return 'lastCommunicationValue';
+  }
+
+  get lastCommunicationOption() {
+    return 'lastCommunicationOption';
+  }
+
   // called on init
   ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
@@ -222,6 +252,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();
     }
+
+    if (this.clearFilterSubscription) {
+      this.clearFilterSubscription.unsubscribe();
+    }
   }
 
   doFillData() {
@@ -252,7 +286,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
           gridLayout: '',
           mediumFilter: this.sessionFilter.mediumFilter,
-          protocolFilter: this.sessionFilter.protocolFilter
+          protocolFilter: this.sessionFilter.protocolFilter,
+          slaFilter: this.sessionFilter.slaFilter,
+          lastCommunicationFilter: this.sessionFilter.lastCommunicationFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -286,7 +322,13 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
         [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []],
         [this.importDevicesField]: [this.filterFromFiles[0]],
-        [this.fileProperty]: null
+        [this.fileProperty]: null,
+        [this.slaOperation]: [filters && selected ? this.slaOperations.find((item) => item.id === selected.slaFilter?.id) : null],
+        [this.slaValue]: [filters && selected ? selected.slaFilter?.value : 1],
+        [this.lastCommunicationOption]: [
+          filters && selected ? this.lastCommunicationOptions.find((item) => item.id === selected.lastCommunicationFilter?.id) : null
+        ],
+        [this.lastCommunicationValue]: [filters && selected ? selected.lastCommunicationFilter?.value : 1]
       },
       { validators: [rangeFilterValidator] }
     );
@@ -299,6 +341,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
     this.form.get(this.importDevicesField).setValue(this.filterFromFiles[0]);
     this.form.get(this.fileProperty).setValue(null);
+    this.form.get(this.slaValue).setValue(null);
     this.eventsService.emitCustom('ClearMeterIdsFilter', this.meterIdsFilterEvent);
     this.clearFile = true;
     this.meterIds = [];
@@ -309,7 +352,21 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyFilter() {
+  applyFilter(slaFilter = false, lastCommunication = false) {
+    if (slaFilter && !this.form?.controls?.slaOperation?.value) {
+      return;
+    }
+    if (lastCommunication && !this.form?.controls?.lastCommunicationValue?.value) {
+      return;
+    } else {
+      this.lastCommunicationFormattedDateValue = moment()
+        .set('minute', 0)
+        .set('hours', 0)
+        .set('second', 0)
+        .set('millisecond', 0)
+        .subtract(this.form?.controls?.lastCommunicationValue?.value, 'days')
+        .format(dateServerFormat);
+    }
     if (!this.form.valid) {
       return;
     }
@@ -354,7 +411,22 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: '',
       mediumFilter: this.form.get(this.mediumProperty).value,
-      protocolFilter: this.form.get(this.protocolProperty).value
+      protocolFilter: this.form.get(this.protocolProperty).value,
+      slaFilter:
+        this.form?.controls?.slaOperation?.value?.id && this.form?.controls?.slaValue?.value
+          ? {
+              id: this.form.controls.slaOperation.value.id,
+              value: this.form.controls.slaValue.value
+            }
+          : null,
+      lastCommunicationFilter:
+        this.form?.controls?.lastCommunicationOption?.value?.id && this.form?.controls?.lastCommunicationValue?.value
+          ? {
+              id: this.form.controls.lastCommunicationOption.value.id,
+              value: this.form?.controls?.lastCommunicationValue?.value,
+              date: this.lastCommunicationFormattedDateValue
+            }
+          : null
     };
     this.outputFormEvent.emit(currentFilter);
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
@@ -362,18 +434,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     // close tool-panel
     // this.params.api.closeToolPanel();
     this.filterChange.emit();
-  }
-
-  errorValidatorReadStatusComponents() {
-    if (this.form.errors != null && this.form.errors.outOfRange) {
-      return this.translate.instant('COMMON.0-100-RANGE');
-    } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return this.translate.instant('COMMON.INCORRECT-RANGE');
-    }
-  }
-
-  getFilterTitle(): string {
-    return this.translate.instant('FILTER.FILTERS');
   }
 
   selected(event: any) {

@@ -6,15 +6,19 @@ import * as moment from 'moment';
 import { forkJoin, Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { Setting } from 'src/app/core/repository/interfaces/settings/setting';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { IActionRequestParams } from '../../../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
 import { NotificationFilter, ReadingProperties } from '../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectRequest } from '../../../../core/repository/interfaces/registers-select/registers-select-request.interface';
@@ -24,7 +28,6 @@ import { CronScheduleComponent } from '../../cron-schedule/components/cron-sched
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
-import { IActionRequestParams } from '../../../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -43,6 +46,8 @@ export class SchedulerJobComponent {
   manufacturers: Codelist<number>[];
   severities: Codelist<number>[];
   sources: Codelist<number>[];
+  notificationTypes: Codelist<number>[];
+  defaultJobAddress: Setting;
 
   selectedRowsCount = 0;
 
@@ -144,6 +149,7 @@ export class SchedulerJobComponent {
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
     private permissionService: PermissionService,
+    private settingsService: SettingsService,
     private translate: TranslateService
   ) {
     this.initAddJobsForUser();
@@ -213,7 +219,7 @@ export class SchedulerJobComponent {
 
     return this.formBuilder.group({
       [this.registersProperty]: [formData ? formData.registers : null, Validators.required],
-      [this.devicesProperty]: [formData ? formData.devices : null, Validators.required],
+      [this.devicesProperty]: [formData ? formData.devices : null],
       [this.activeProperty]: [formData ? formData.active : true],
       [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.usePointerProperty]: [formData && formData.readingProperties ? formData.readingProperties.usePointer : true],
@@ -278,12 +284,16 @@ export class SchedulerJobComponent {
     protocols: Codelist<number>[],
     manufacturers: Codelist<number>[],
     severities: Codelist<number>[],
-    sources: Codelist<number>[]
+    sources: Codelist<number>[],
+    notificationTypes: Codelist<number>[],
+    defaultJobAddress: Setting
   ) {
     this.protocols = protocols;
     this.manufacturers = manufacturers;
     this.severities = severities;
     this.sources = sources;
+    this.notificationTypes = notificationTypes;
+    this.defaultJobAddress = defaultJobAddress;
 
     this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
   }
@@ -294,12 +304,16 @@ export class SchedulerJobComponent {
     severities: Codelist<number>[],
     sources: Codelist<number>[],
     selectedJobId: string,
-    job: SchedulerJob
+    job: SchedulerJob,
+    notificationTypes: Codelist<number>[],
+    defaultJobAddress: Setting
   ) {
     this.protocols = protocols;
     this.manufacturers = manufacturers;
     this.severities = severities;
     this.sources = sources;
+    this.notificationTypes = notificationTypes;
+    this.defaultJobAddress = defaultJobAddress;
 
     this.initForm(JobTypeEnumeration.alarmNotification, null, selectedJobId, job);
   }
@@ -375,12 +389,10 @@ export class SchedulerJobComponent {
   fillData(): SchedulerJobForm {
     if (this.showConcentrators) {
       const deviceIds = this.form.get(this.devicesProperty).value;
-      if (deviceIds != null) {
-        const concentrList: string[] = deviceIds;
-        this.deviceFiltersAndSearch = {
-          id: concentrList
-        };
-      }
+      const concentrList: string[] = deviceIds ?? [];
+      this.deviceFiltersAndSearch = {
+        id: concentrList
+      };
     }
 
     let formData: SchedulerJobForm = null;
@@ -475,7 +487,6 @@ export class SchedulerJobComponent {
     } else if (this.showConcentrators) {
       const selectedData = this.listOfDCUs.getSelectedRowIds();
       this.form.get(this.devicesProperty).setValue(selectedData);
-      this.noDCUs = selectedData.length === 0;
     }
 
     const values = this.fillData();
@@ -621,9 +632,11 @@ export class SchedulerJobComponent {
         protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
         manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
         severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-        sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-      }).subscribe(({ protocols, manufacturers, severities, sources }) => {
-        this.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources);
+        sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist(),
+        notificationTypes: this.codelistMeterUnitsRepositoryService.meterUnitAlarmNotificationTypeCodelist(),
+        defaultJobAddress: this.settingsService.getSetting(userSettingNotificationJobDefaultAddress)
+      }).subscribe(({ protocols, manufacturers, severities, sources, notificationTypes, defaultJobAddress }) => {
+        this.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources, notificationTypes, defaultJobAddress);
       });
     } else if (jobType === JobTypeEnumeration.reading || jobType === JobTypeEnumeration.readEvents) {
       this.codelistService.timeUnitCodeslist().subscribe((units) => {

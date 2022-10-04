@@ -3,10 +3,10 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { Injectable } from '@angular/core';
 import { ActiveJob } from '../../../../features/jobs/interfaces/active-job-progress.interface';
 import {
+  basePathConcentratorInventory,
   basePathDcOperations,
   getActiveJobs,
-  jobStateSummary,
-  slaMeterData
+  jobStateSummary
 } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { Observable } from 'rxjs';
 import { StatusJobProgress } from '../../../../features/jobs/interfaces/status-job-progress.interface';
@@ -62,11 +62,19 @@ export class ConcentratorService {
     return new HttpRequest('POST', getPropertyData, body);
   }
 
-  getSlaData(deviceIds: string[], dateFrom: string): Observable<any> {
-    return this.repository.makeRequest(this.getSlaDataRequest(deviceIds, dateFrom));
+  getConcentratorLastCommunication(concentratorId: string): Observable<any> {
+    return this.repository.makeRequest(this.getConcentratorLastCommunicationRequest(concentratorId));
   }
 
-  getSlaDataRequest(deviceIds: string[], dateFrom: string): HttpRequest<any> {
-    return new HttpRequest('POST', slaMeterData, { deviceIds: deviceIds, from: dateFrom });
+  getConcentratorLastCommunicationRequest(concentratorId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${basePathConcentratorInventory}/concentrator/${concentratorId}/last-communication`);
+  }
+
+  getDeviceLastCommunication(deviceId: string): Observable<any> {
+    return this.repository.makeRequest(this.getDeviceLastCommunicationRequest(deviceId));
+  }
+
+  getDeviceLastCommunicationRequest(deviceId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${basePathConcentratorInventory}/device/${deviceId}/last-communication`);
   }
 }

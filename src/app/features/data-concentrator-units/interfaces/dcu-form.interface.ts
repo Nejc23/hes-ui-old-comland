@@ -23,6 +23,7 @@ export interface DcuForm {
   plcStatus?: string;
   timeZoneName?: string;
   firstInstallDate?: string;
+  lastCommunication?: string;
 }
 
 export interface EditDcuForm {
@@ -35,4 +36,5 @@ export interface EditDcuForm {
   mac?: string;
   manufacturer?: Codelist<number>;
   userName?: string;
+  lastCommunication?: string;
 }

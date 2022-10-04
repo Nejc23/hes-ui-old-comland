@@ -1,5 +1,6 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { ReadStatus } from '../helpers/grid-request-params.interface';
+import { LastCommunicationFilter } from '../data-concentrator-units/dcu-layout.interface';
 
 export interface MeterUnitsLayout {
   id: number;
@@ -18,5 +19,7 @@ export interface MeterUnitsLayout {
   gridLayout: string;
   mediumFilter?: Codelist<number>[];
   protocolFilter?: Codelist<number>[];
+  slaFilter?: Codelist<number>;
   importDevicesField?: Codelist<number>[];
+  lastCommunicationFilter: LastCommunicationFilter;
 }

@@ -5,9 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@progress/kendo-angular-intl';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import * as moment from 'moment';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { ExportHelper } from 'src/app/features/helpers/export.helper';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
@@ -19,8 +17,7 @@ import { AutoTemplateRegister } from '../../../../core/repository/interfaces/aut
 import {
   EventRegisterValue,
   GridRegisterValue,
-  RegisterValue,
-  ValueWithUnit
+  RegisterValue
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
@@ -156,6 +153,9 @@ export class MeterUnitRegistersComponent implements OnInit {
   normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
 
   basicUnits = ['w', 'wh', 'va', 'var', 'varh', 'vah'];
+  loading = false;
+
+  public pageSize = 100;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -165,8 +165,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private muService: MeterUnitsService,
     private registerStatisticsService: RegisterStatisticsService,
-    private formUtils: FormsUtilsService,
-    private codeList: CodelistMeterUnitsRepositoryService,
     private translate: TranslateService,
     private exportHelper: ExportHelper
   ) {}
@@ -208,27 +206,30 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   changeRegisterOptionId() {
-    this.gridData = [];
-    this.rowData = [];
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
-    this.isRegisterSelected = true;
-    this.showNormalizedValues = false;
-    // show switch
-    this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
-    if (this.normalizedValues) {
-      this.showNormalizedValues = true;
+
+    if (this.selectedRegister !== selectedRegister) {
+      this.gridData = [];
+      this.rowData = [];
+      this.isRegisterSelected = true;
+      this.showNormalizedValues = false;
+      // show switch
+      this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
+      if (this.normalizedValues) {
+        this.showNormalizedValues = true;
+      }
+      this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
+      this.isEvent = selectedRegister.categorization === 'EVENT';
+
+      this.categorization = selectedRegister.categorization;
+
+      this.showData(selectedRegister);
     }
-    this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
-    this.isEvent = selectedRegister.categorization === 'EVENT';
-
-    this.categorization = selectedRegister.categorization;
-
-    this.showData(selectedRegister);
   }
 
   setDate() {
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   clickShowHideFilter() {
@@ -316,15 +317,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     });
   }
 
-  showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
+  showData(register: AutoTemplateRegister) {
     const startDate = moment(this.form.get('startDate').value).toDate();
     const endDate = moment(this.form.get('endDate').value).toDate();
     if (!register || !startDate || !endDate) {
       this.isDataFound = false;
-      return;
-    }
-
-    if (!forceRefresh && register === this.selectedRegister) {
       return;
     }
 
@@ -344,20 +341,16 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.normalizedDataEmpty = false;
     this.registerStatisticsData = null;
     try {
+      this.loading = true;
       this.dataProcessingService.getChartData(this.registersFilter).subscribe((values) => {
         if (!values || values.length === 0) {
           this.isDataFound = false;
+          this.loading = false;
         } else {
           this.isDataFound = true;
+          // If values have set extendedTimestamp, then switch timestamps (so that PMax timestamps are correctly shown)
+          values.map((x) => (x.timestamp = x.extendedTimestamp ?? x.timestamp));
           this.rowData = values;
-          this.rowData.map((value) => {
-            if (value.valueWithUnit?.value && value.valueWithUnit?.unit) {
-              value.valueWithUnit = this.transformValue(value.valueWithUnit);
-            }
-            if (value.normValueWithUnit?.value && value.normValueWithUnit?.unit) {
-              value.normValueWithUnit = this.transformValue(value.normValueWithUnit);
-            }
-          });
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
             this.setEventData();
@@ -376,6 +369,7 @@ export class MeterUnitRegistersComponent implements OnInit {
             this.unit = findUnit[dataField].unit ?? '';
           }
           this.calculatedValues = true;
+          this.loading = false;
         }
       });
     } catch (error) {
@@ -527,7 +521,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   onRefresh() {
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   insertedSearchValue(searchValue) {
@@ -542,7 +536,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   onValueChanged(event: boolean) {
     this.showNormalizedValues = !event;
     this.toGridData(this.rowData);
-    this.showData(this.selectedRegister, true);
+    this.showData(this.selectedRegister);
   }
 
   getPopoverText() {
@@ -550,14 +544,6 @@ export class MeterUnitRegistersComponent implements OnInit {
       return this.translate.instant('PLC-METER.NORMALIZED-DATA');
     }
     return this.translate.instant('PLC-METER.RAW-DATA');
-  }
-
-  transformValue(value: ValueWithUnit) {
-    if (this.basicUnits.includes(value.unit.toLowerCase())) {
-      value.value = (parseInt(value.value) / 1000).toString();
-      value.unit = 'k' + value.unit;
-    }
-    return value;
   }
 
   checkIfDataExist() {

@@ -60,6 +60,13 @@ stages:
   script:
     - .\upgrade.ps1 'C:\Program Files\Enerdat\ePointHES_UI' 'dist\myGrid'
 
+.get_version: &get_version |
+  export WEB_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
+
+.get-linux-docker-production-script: &get-linux-docker-production-script
+  - curl --header "PRIVATE-TOKEN:${GITLAB_TOOLING_TOKEN}" ${CI_API_V4_URL}/projects/${GITLAB_TOOLING_ID}/repository/files/build-tools%2Fpublish-to-production.sh/raw?ref=master -o publish-to-production.sh
+  - chmod +x ./publish-to-production.sh
+
 Dependencies:
   stage: install
   script:
@@ -122,11 +129,12 @@ docker-linux:
       when: manual
       allow_failure: true
   script:
-    - export VERSION=$(node -p "require('./package.json').version")
-    - export DOCKER_TAG=${DEPLOY_VARIABLE}_linux_${VERSION}_${CI_COMMIT_SHORT_SHA}
+    - *get_version
+    - echo "Current version ${WEB_VERSION}"
+    - export DOCKER_TAG=${DEPLOY_VARIABLE}_linux_${WEB_VERSION}_${CI_COMMIT_SHORT_SHA}
     - echo "DOCKER_TAG=${DOCKER_TAG}" >> docker.env
-    - echo "Preparing Linux Docker images for version $VERSION with tag $DOCKER_TAG"
-    - ./docker-build.sh $DOCKER_TAG
+    - echo "Preparing Linux Docker images for version $WEB_VERSION with tag $DOCKER_TAG"
+    - ./docker-build.sh $DOCKER_TAG $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD $CI_REGISTRY $CI_REGISTRY_IMAGE
     - echo "Clean up unused Docker images"
     - docker system prune -a -f
   artifacts:
@@ -134,6 +142,27 @@ docker-linux:
       dotenv: docker.env
   tags:
     - linux-build
+
+docker:publish-azure:
+  stage: deploy
+  image: $CI_REGISTRY/enerdat/tooling/build:0.6.2
+  needs: 
+    - job: docker-linux
+      artifacts: true
+  variables:
+    GIT_STRATEGY: none
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
+      allow_failure: true
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: manual
+      allow_failure: true
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+      allow_failure: true
+  script:
+    - *get-linux-docker-production-script
+    - ./publish-to-production.sh ${DOCKER_TAG} ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_JOB_TOKEN} ${AZURE_REGISTRY_URL} ${AZURE_USERNAME} ${AZURE_PASSWORD} frontend
 
 DEV - Amera:
   <<: *deploy_amera

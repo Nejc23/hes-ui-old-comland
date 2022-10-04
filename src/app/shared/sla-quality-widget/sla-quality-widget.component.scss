@@ -1,0 +1,120 @@
+.sla-quality-widget {
+  @apply tw-w-full;
+  @apply tw-p-4;
+  width: 510px;
+}
+
+.header {
+  @apply tw-inline-flex;
+  @apply tw-w-full;
+  @apply tw-justify-between;
+  height: 44px;
+}
+
+.content {
+  flex-direction: row-reverse;
+  border-top: 1px dashed #E3E3E3;
+  border-bottom: 1px solid #EDEDED;
+  @apply tw-w-full;
+  height: 35px;
+}
+
+.footer {
+  @apply tw-inline-flex;
+  @apply tw-w-full;
+  @apply tw-justify-between;
+  @apply tw-items-center;
+}
+
+.close-icon {
+  margin-top: 4px;
+  margin-right: 4px;
+  height: 11px;
+
+  @apply tw-cursor-pointer;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 500;
+  color: black;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  height: 18px;
+  /* Content/Secondary */
+  color: #737373;
+}
+
+.footer-text {
+  height: 22px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #737373;
+}
+
+.bar-item {
+  width: 14px;
+  height: 33px;
+  margin-left: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.bar-text {
+  font-size: 10px;
+  color: #B2B2B2;
+  width: 16px;
+  height: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.orange {
+  background: #F07A05;
+}
+
+.green {
+  background: #36BF36;
+}
+
+.red {
+  background: #E60F0F;
+}
+
+.days {
+  @apply tw-flex;
+  @apply tw-w-full;
+  height: 20px;
+}
+
+.days-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 100%;
+}
+
+.no-data {
+  display: flex;
+  background: #E3E3E3;
+  color: #737373;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  border-radius: 3px;
+  height: 67px;
+  justify-content: center;
+  align-items: center;
+}
+
+.red-text {
+  color: #E60F0F;
+}

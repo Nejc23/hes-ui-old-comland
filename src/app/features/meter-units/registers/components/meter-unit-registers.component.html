@@ -33,6 +33,7 @@
             [label]="g.groupName"
             [options]="g.registerOptions"
             [property]="registerProperty"
+            [loading]="loading"
             [showTooltip]="true"
             [translateLabel]="false"
             style="white-space: nowrap"
@@ -101,7 +102,7 @@
               data-toggle="tooltip"
             ></kendo-switch>
           </div>
-          <div *ngIf="gridData?.length > 0">
+          <div *ngIf="gridData?.length > 0" class="tw-cursor-pointer">
             <div (click)="exportToCSV()"
                  *ngIf="(showNormalizedValues && !normalizedDataEmpty) || !showNormalizedValues"
                  [ngbTooltip]="tipContentExportToCsv">
@@ -112,7 +113,7 @@
 
         <!-- raw data only -->
         <div *ngIf="gridData.length > 0 && !normalizedValues"
-             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+             class="tw-w-1/2 tw-flex tw-self-center tw-justify-end tw-cursor-pointer">
           <div (click)="exportToCSV()" [ngbTooltip]="tipContentExportToCsv">
             <img class="tw-h-7 tw-mx-4" src="assets/images/icons/export-csv-icon.svg" />
           </div>
@@ -121,26 +122,33 @@
 
 
       <div class="mu-registers-body-scroll">
-        <div *ngIf="!isRegisterSelected" class="card text-center border-0 mt-5">
-          <div class="card-header border-0 bg-transparent">
-            <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
-          </div>
-          <div class="card-body">
-            <div
-              class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
-            <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
-          </div>
+
+        <div *ngIf="loading" class="tw-flex tw-justify-center tw-items-center">
+          <app-no-data [loading]="loading" [loadingDataText]="false"></app-no-data>
         </div>
-        <div *ngIf="isRegisterSelected && !isDataFound" class="card text-center border-0 mt-5">
-          <div class="card-header border-0 bg-transparent">
-            <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+
+        <ng-container *ngIf="!loading">
+          <div *ngIf="!isRegisterSelected" class="card text-center border-0 tw-mt-20">
+            <div class="card-header border-0 bg-transparent">
+              <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+            </div>
+            <div class="card-body">
+              <div
+                class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+              <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="small-title pb-2">{{ 'PLC-METER.NO-RAW-DATA-FOUND' | translate }}</div>
-            <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
-            <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
+          <div *ngIf="isRegisterSelected && !isDataFound" class="card text-center border-0 tw-mt-20">
+            <div class="card-header border-0 bg-transparent">
+              <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+            </div>
+            <div class="card-body">
+              <div class="small-title pb-2">{{ 'PLC-METER.NO-RAW-DATA-FOUND' | translate }}</div>
+              <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
+              <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
+            </div>
           </div>
-        </div>
+        </ng-container>
 
         <div
           *ngIf="isRegisterSelected && showNormalizedValues && isDataFound && normalizedDataEmpty && !isEvent"
@@ -186,7 +194,7 @@
                   [gridColumns]="isEvent ? eventDataColumns : showNormalizedValues ? registerNormalizedDataColumns : registerColumnsRowData"
                   [gridData]="gridData"
                   [noDataText]="'NO-DATA-FOUND'"
-                  [pageable]="true"
+                  [pageSize]="pageSize"
                   [rowHeight]="44"
                   [scrollable]="'virtual'"
                   [skip]="0"

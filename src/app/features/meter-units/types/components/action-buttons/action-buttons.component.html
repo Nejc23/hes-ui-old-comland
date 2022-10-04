@@ -379,12 +379,18 @@
           >
         </div>
         <div [permission]="permissionClearAlarms" appHideIfPermissionUnauthorized>
-          <a (click)="onClearAlarms()" class="dropdown-item custom-hover-display gray-line" href="javascript:void(0)"
+          <a (click)="onClearAlarms()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
           ><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a
           >
         </div>
+        <div class="dropdown-divider"
+             [permissionsAbove]="[permissionClearAlarms]"
+             [permissionsBelow]="[permissionMuManage]"
+             appHideDividerIfPermissionsUnauthorized>
+        </div>
         <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
-          <a (click)="onEnableMeter()" class="dropdown-item custom-hover-display item-padding" href="javascript:void(0)"
+          <a (click)="onEnableMeter()" class="dropdown-item custom-hover-display item-padding "
+             href="javascript:void(0)"
           ><span>{{ 'COMMON.ENABLE-METER' | translate }}</span></a
           >
         </div>

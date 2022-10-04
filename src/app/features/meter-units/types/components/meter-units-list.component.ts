@@ -37,10 +37,9 @@ import { MeterUnitsLayout } from '../../../../core/repository/interfaces/meter-u
 import { FiltersInfo } from '../../../../shared/forms/interfaces/filters-info.interface';
 import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
-import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { GetDataV2Service } from '../../../../api/data-processing/services/get-data-v-2.service';
 
 @Component({
   selector: 'app-meter-units',
@@ -134,7 +133,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private codelistService: CodelistMeterUnitsRepositoryService,
-    private eventManager: EventManagerService
+    private eventManager: EventManagerService,
+    private getDataV2Service: GetDataV2Service
   ) {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
@@ -165,8 +165,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
           {
             colId: event.field,
             type: enumSearchFilterOperators.like,
-            value: ids.join().toString().replace(/,/gi, '&'),
-            useWildcards: true
+            value: null,
+            valuesFromFile: ids.flat(),
+            useWildcards: false
           }
         ];
         this.meterIdsFilterApplied = true;
@@ -196,7 +197,10 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     if (this.selectedRowsIds.length > 0) {
       this.requestModel.deviceIds = this.selectedRowsIds;
     }
-    this.metersColumns.map((columns) => (columns.hidden = false));
+    this.metersColumns
+      .filter((column) => column.field !== 'icons')
+      .filter((column) => column.field !== 'rowActions')
+      .map((columns) => (columns.hidden = false));
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
     // currently, we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
     // get layout and load data
@@ -260,12 +264,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
         }
         // get additional data job summary and threshold values
         this.getAdditionalData(this.gridData.data.map((rowItem) => rowItem.deviceId));
-        //get SLA data
-        const yesterday = moment().subtract(1, 'days').startOf('day').format(dateServerFormat);
-        this.getSlaData(
-          this.gridData.data.map((rowItem) => rowItem.deviceId),
-          yesterday
-        );
       });
   }
 
@@ -323,6 +321,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     // set visible columns
     this.meterUnitsTypeGridLayoutStore.visibleColumns = this.metersColumns
       .filter((column) => column.hidden != true)
+      .filter((column) => column.field !== 'icons')
+      .filter((column) => column.field !== 'rowActions')
       .map((item) => item.field);
 
     console.log(this.meterUnitsTypeGridLayoutStore);
@@ -444,9 +444,23 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
         if (settings) {
           this.setGridSettingsAndFilters(settings);
         } else {
-          // no user settings
+          // no user settings in DB
+          if (this.searchFromQueryParams) {
+            this.searchText = this.searchFromQueryParams;
+            this.wildCardsSearch = true;
+            this.requestModel.searchModel = [
+              {
+                colId: 'all',
+                type: enumSearchFilterOperators.like,
+                value: this.searchText,
+                useWildcards: this.wildCardsSearch
+              }
+            ];
+            this.applyFilters(true);
+          } else {
+            this.getMetersListData();
+          }
           this.appliedFiltersFromUser = true;
-          this.getMetersListData();
         }
       });
     }
@@ -480,11 +494,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, this.meterUnitsTypeGridLayoutStore.meterUnitsLayout);
     if (this.meterUnitsTypeGridLayoutStore.visibleColumns.length > 0) {
       this.metersColumns.map((column) => (column.hidden = true));
-      // set visible columns icons and rowActions are always visible
-      this.metersColumns
-        .filter((item) => item.field !== 'icons')
-        .filter((item) => item.field !== '"rowActions"')
-        .map((column) => (column.hidden = false));
       // apply visible columns from
       this.meterUnitsTypeGridLayoutStore.visibleColumns.forEach((columnName) => {
         const existingColumn: GridColumn = this.metersColumns.find((column) => column.field.toLowerCase() === columnName.toLowerCase());
@@ -492,6 +501,11 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
           existingColumn.hidden = false;
         }
       });
+      // set visible columns icons and rowActions are always visible
+      this.metersColumns
+        .filter((item) => item.field === 'icons')
+        .filter((item) => item.field === '"rowActions"')
+        .map((column) => (column.hidden = false));
     }
     this.applyFilters(false);
   }
@@ -526,6 +540,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.requestModel.filterModel.vendors = filter.vendorsFilter ?? [];
     this.requestModel.filterModel.protocol = filter.protocolFilter ?? [];
     this.requestModel.filterModel.medium = filter.mediumFilter ?? [];
+    this.requestModel.filterModel.sla = filter.slaFilter ?? null;
+    this.requestModel.filterModel.lastCommunicationFilter = filter.lastCommunicationFilter ?? null;
+
     this.getFilterCount();
     this.selectAllEnabled = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
 
@@ -558,7 +575,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
       filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0,
       filterInfo.protocolFilter && filterInfo.protocolFilter.length > 0,
-      filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0
+      filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0,
+      filterInfo.slaFilter && true
     ).count;
     if (this.meterIdsFilterApplied) {
       count++;
@@ -628,7 +646,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     }
     // clear and apply filters
     this.gridFilterSessionStoreService.clearGridLayout();
-    this.applyFilters();
     this.eventManager.emitCustom('ClearFilter', true);
   }
 
@@ -640,19 +657,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-  }
-
-  getSlaData(deviceIds: any, dateFrom) {
-    this.concentratorService.getSlaData(deviceIds, dateFrom).subscribe((res) => {
-      res.forEach((item) => {
-        this.gridData.data.find((rowData) => rowData.deviceId === item.deviceId).sla = {
-          color: item.colour,
-          value: item.successPercentage
-        };
-      });
-    });
-    console.log(this.gridData.data);
-    this.gridData.data = [...this.gridData.data];
   }
 
   ngOnDestroy() {

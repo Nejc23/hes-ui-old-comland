@@ -1,7 +1,7 @@
 <app-auto-refresh
-      (timerExpired)="checkImportResults()"
-      [elapseTime]="refreshInterval"
-      [hidden]="true">
+  (timerExpired)="checkImportResults()"
+  [elapseTime]="refreshInterval"
+  [hidden]="true">
 </app-auto-refresh>
 
 <!--<div class="d-flex align-items-center mb-3">
@@ -13,33 +13,38 @@
 <div class="form-row mb-2">
   <div class="col-12">
     <label class="text-truncate" container="body" placement="bottom" [openDelay]="500"
-    [ngbTooltip]="subtitle">{{ subtitle | translate }}</label>
+           [ngbTooltip]="subtitle">{{ subtitle | translate }}</label>
   </div>
 </div>
 <div class="form-row">
   <div class="col-4">
     <app-select-input label="file-type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
-      [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
+                      [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
     </app-select-input>
   </div>
 </div>
 
 <div class="form-row">
   <div class="col-12 expand-dropzone">
-      <app-file-upload #fileUpload label="GULF" [form]="form" [property]="gulfProperty"
-          [uploadSaveUrl]="uploadSaveUrl"
-          [uploadRemoveUrl]=""
-          [multiple]="false"
-          [responseType]="'text'"
-          [acceptExtensions]="acceptExtensions"
-          [allowedExtensions]="allowedExt"
-          [textExplanation]="allowedExtExplainText"
-          [isDropZoneCustom]="true"
-          (successEvent)="successUploaded($event)"
-          (uploadEvent)="uploadEvent($event)"
-          [dropUploadSubtitle]="uploadDropSubtitle">
-      </app-file-upload>
+    <app-file-upload #fileUpload label="GULF" [form]="form" [property]="gulfProperty"
+                     [uploadSaveUrl]="uploadSaveUrl"
+                     [uploadRemoveUrl]=""
+                     [multiple]="false"
+                     [responseType]="'text'"
+                     [acceptExtensions]="acceptExtensions"
+                     [allowedExtensions]="allowedExt"
+                     [textExplanation]="allowedExtExplainText"
+                     [isDropZoneCustom]="true"
+                     (successEvent)="successUploaded($event)"
+                     (uploadEvent)="uploadEvent($event)"
+                     [dropUploadSubtitle]="uploadDropSubtitle">
+    </app-file-upload>
   </div>
 </div>
-<ngb-alert class="alert alert-danger form-row dismissible" [ngClass]="closeAlert('danger',i)" role="alert" *ngFor="let item of allErrorTexts; let i = index ">{{item}}</ngb-alert>
-<ngb-alert class="alert alert-success form-row dismissible" [ngClass]="closeAlert('success',i)"  type="success" role="alert" *ngFor="let item of allResultTexts; let i = index ">{{item}}</ngb-alert>
+<ngb-alert class="alert alert-danger form-row dismissible" [ngClass]="closeAlert('danger',i)" role="alert"
+           *ngFor="let item of allErrorTexts; let i = index ">{{item}}</ngb-alert>
+<ngb-alert class="alert alert-success form-row dismissible" [ngClass]="closeAlert('success',i)" type="success"
+           role="alert" *ngFor="let item of allResultTexts; let i = index ">{{item}}</ngb-alert>
+<ngb-alert class="alert alert-warning form-row dismissible" [ngClass]="closeAlert('success',i)" type="success"
+           role="alert" *ngFor="let item of allWarningText; let i = index ">{{item}}</ngb-alert>
+
