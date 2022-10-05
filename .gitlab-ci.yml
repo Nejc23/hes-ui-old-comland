@@ -5,6 +5,7 @@ stages:
   - lint
   - test
   - build
+  - upload
   - docker
   - deploy
 
@@ -110,6 +111,29 @@ ePointHES:
 
 myGrid:
   <<: *build
+
+upload-artifacts:
+  stage: upload
+  variables:
+    RELEASE_VARIABLE: "alpha"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
+      variables:
+        RELEASE_VARIABLE: "official"
+      allow_failure: true
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      variables:
+        RELEASE_VARIABLE: "beta"
+      when: manual
+      allow_failure: true
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+      allow_failure: true
+  script:
+    - *get_version
+    - echo "File name would be ePointHes.UI_myGrid-v${WEB_VERSION}-${RELEASE_VARIABLE}"
+    - ls -l
+
 
 docker-linux:
   stage: docker
