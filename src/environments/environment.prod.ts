@@ -34,9 +34,8 @@ export const environment = {
   // clientRoot: 'http://advance-hes.azurewebsites.net/npm run start',
   // clientScope: 'openid profile roles offline_access company',
   // clientAutoSilentRenew: true
-
-  importIdsMaxLength: 800,
-  exportDataMaxRange: 3,
+  importIdsMaxLength: 1500000,
+  exportDataMaxRange: 60, // 60 months
   slaMedLimit: 90,
   slaHighLimit: 97
 };
