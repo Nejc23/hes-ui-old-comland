@@ -648,7 +648,8 @@ export class MeterUnitsPlcActionsService {
       textSearch: {
         value: '',
         propNames: null,
-        useWildcards: false
+        useWildcards: false,
+        valuesFromFile: null
       },
       sort: [],
       initiateReading: false, // TODO get data from BE when BE,
@@ -671,9 +672,10 @@ export class MeterUnitsPlcActionsService {
 
         requestParam.textSearch.value = '';
 
-        if (requestModel.searchModel?.length > 0 && requestModel.searchModel[0].value?.length > 0) {
+        if (requestModel.searchModel?.length > 0) {
+          requestParam.textSearch.valuesFromFile = requestModel.searchModel[0].valuesFromFile;
           requestParam.textSearch.value = requestModel.searchModel[0].value;
-          requestParam.textSearch.propNames = visibleColumnsNames;
+          requestParam.textSearch.propNames = visibleColumnsNames ?? [requestModel.searchModel[0]?.colId];
           requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
         }
 
