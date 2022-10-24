@@ -3,8 +3,8 @@ image: $CI_REGISTRY/enerdat/tooling/node:latest
 stages:
   - install
   - lint
-  - test
   - build
+  - upload
   - docker
   - deploy
 
@@ -29,7 +29,7 @@ stages:
       - node_modules
     policy: pull
   artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    name: "ePointHes.UI_$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - dist/${CI_JOB_NAME}/
     expire_in: 3 days
@@ -67,6 +67,39 @@ stages:
   - curl --header "PRIVATE-TOKEN:${GITLAB_TOOLING_TOKEN}" ${CI_API_V4_URL}/projects/${GITLAB_TOOLING_ID}/repository/files/build-tools%2Fpublish-to-production.sh/raw?ref=master -o publish-to-production.sh
   - chmod +x ./publish-to-production.sh
 
+.upload-artifacts: &upload-artifacts
+  stage: upload
+  variables:
+    RELEASE_VARIABLE: "alpha"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
+      variables:
+        RELEASE_VARIABLE: "official"
+      allow_failure: true
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      variables:
+        RELEASE_VARIABLE: "beta"
+      when: manual
+      allow_failure: true
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+      allow_failure: true
+  script:
+    - echo -e "\e[0Ksection_start:`date +%s`:variables\r\e[0KPreparing variables"
+    - *get_version
+    - export FILENAME=${CI_JOB_NAME%_*}.UI-v${WEB_VERSION}-${RELEASE_VARIABLE}-${CI_COMMIT_SHORT_SHA}.zip
+    - export FOLDER=/media/releases/ePointHES_UI/${WEB_VERSION%%.*}.x
+    - if [ "$RELEASE_VARIABLE" != "release" ]; then export FOLDER=${FOLDER}/${RELEASE_VARIABLE}; fi
+    - echo -e "\e[0Ksection_end:`date +%s`:variables\r\e[0K"
+    - echo "Uploading ${FILENAME} to Releases shared drive to map ${FOLDER}"
+    - echo -e "\e[0Ksection_start:`date +%s`:zip\r\e[0KCompressing web project into ZIP file"
+    - zip -r ${FILENAME} ./dist/${CI_JOB_NAME%_*}
+    - echo -e "\e[0Ksection_end:`date +%s`:zip\r\e[0K"
+    - mkdir -p ${FOLDER}
+    - mv ${FILENAME} ${FOLDER}
+  tags:
+    - linux-build
+
 Dependencies:
   stage: install
   script:
@@ -97,10 +130,10 @@ ESLint:
     reports:
       codequality: gl-codequality.json
 
-Unit tests:
-  stage: test
-  script:
-    - echo "I am just a placeholder for now :)"
+# Unit tests:
+#   stage: test
+#   script:
+#     - echo "I am just a placeholder for now :)"
 
 amera:
   <<: *build
@@ -110,6 +143,18 @@ ePointHES:
 
 myGrid:
   <<: *build
+
+amera_upload:
+  needs: ["amera"]
+  <<: *upload-artifacts
+
+ePointHES_upload:
+  needs: ["ePointHES"]
+  <<: *upload-artifacts
+
+myGrid_upload:
+  needs: ["myGrid"]
+  <<: *upload-artifacts
 
 docker-linux:
   stage: docker

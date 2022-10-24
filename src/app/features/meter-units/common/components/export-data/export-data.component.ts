@@ -16,6 +16,7 @@ export interface ExportDataPayload extends IActionRequestParams {
   location?: string;
   upload: boolean;
   jobId: string;
+  valuesFromFile?: string[];
 }
 
 @Component({
@@ -25,7 +26,7 @@ export interface ExportDataPayload extends IActionRequestParams {
 })
 export class ExportDataComponent implements OnInit {
   form: FormGroup;
-  @Input() params;
+  @Input() params: IActionRequestParams;
   payload: ExportDataPayload;
   exportTypes: Array<any> = [];
   reportTypes: Array<any> = []; // todo
