@@ -10,9 +10,9 @@ echo "Step 1: Login to GitLab" &&
 echo "DOCKER_REGISTRY: ${DOCKER_REGISTRY} - DOCKER_REGISTRY_PATH: ${DOCKER_REGISTRY_PATH}" &&
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin $DOCKER_REGISTRY &&
 
-cp /home/gitlab-runner/int.enerdat.ca.crt . &&
-cp /home/gitlab-runner/int.semax.ca.crt . &&
-cp /home/gitlab-runner/metricsx.ca.crt . &&
+cp /usr/local/share/ca-certificates/int.enerdat.ca.crt . &&
+cp /usr/local/share/ca-certificates/int.semax.ca.crt . &&
+cp /usr/local/share/ca-certificates/metricsx.ca.crt . &&
 
 echo "Step 2: Building Docker images" &&
 echo "Building started for e-Point.HES dist" &&
