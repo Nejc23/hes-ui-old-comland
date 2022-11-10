@@ -37,5 +37,6 @@ export const environment = {
   importIdsMaxLength: 1500000,
   exportDataMaxRange: 60, // 60 months
   slaMedLimit: 90,
-  slaHighLimit: 97
+  slaHighLimit: 97,
+  reKeyAfterDays: 3
 };

@@ -43,5 +43,6 @@ export const gridSysNameColumnsEnum = {
   sla: 'slaSuccessPercentage',
   serialMismatch: 'serialMismatch',
   timeDeviation: 'timeDeviation',
-  lastCommunication: 'lastCommunication'
+  lastCommunication: 'lastCommunication',
+  lifecycleActions: 'lifecycleActions'
 };

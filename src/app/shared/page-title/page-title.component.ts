@@ -29,8 +29,8 @@ export class PageTitleComponent {
         return 'operational-state';
       case DeviceState.INSTALLING.toLowerCase(): // yellow
         return 'installing-state';
-      case DeviceState.DRAFT.toLowerCase():
-        return 'disabled-state';
+      case DeviceState.REKEYING.toLowerCase():
+        return 'rekeying-state';
       default:
         return 'inactive-status'; // black for not defined status
     }

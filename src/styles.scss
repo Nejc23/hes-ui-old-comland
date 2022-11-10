@@ -516,3 +516,20 @@ ngb-tooltip-window.row-actions-tooltip {
   opacity: 1 !important;
 }
 
+.primary-icon {
+  path {
+    @apply tw-fill-primary;
+  }
+}
+
+.red-icon {
+  path {
+    @apply tw-fill-red;
+  }
+}
+
+.warning-icon {
+  path {
+    @apply tw-fill-yellow;
+  }
+}

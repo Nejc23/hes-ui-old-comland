@@ -175,6 +175,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
   searchData($event: string) {
     if (this.areSettingsLoaded) {
       if ($event !== this.schedulerJobsListGridService.getSessionSettingsSearchedText()) {
+        this.pageNumber = 1;
         this.schedulerJobsListGridService.setSessionSettingsSearchedText($event);
         this.searchText = $event;
         this.useWildcards = this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards();
@@ -439,6 +440,8 @@ export class JobsListComponent implements OnInit, OnDestroy {
       this.editTopologyJob(params, options);
     } else if (params.jobType === JobTypeEnumeration.alarmNotification) {
       this.editAlarmNotificationJob(params, options);
+    } else if (params.jobType === JobTypeEnumeration.initialReKeying) {
+      this.editInitialReKeyJob(params, options);
     } else {
       this.editReadingJob(params, options);
     }
@@ -640,6 +643,31 @@ export class JobsListComponent implements OnInit, OnDestroy {
           notificationTypes,
           defaultJobAddress
         );
+
+        modalRef.result.then(
+          (data) => {
+            // on close (CONFIRM)
+            this.eventService.eventEmitterRefresh.emit(true);
+          },
+          (reason) => {
+            // on dismiss (CLOSE)
+          }
+        );
+      });
+    });
+  }
+
+  private editInitialReKeyJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.id;
+
+    forkJoin({
+      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0)
+    }).subscribe(({ protocols, manufacturers }) => {
+      this.schedulerJobsService.getReKeyJob(selectedJobId).subscribe((job) => {
+        const modalRef = this.modalService.open(SchedulerJobComponent, options);
+        const component: SchedulerJobComponent = modalRef.componentInstance;
+        component.setFormInitialReKeyJobEdit(protocols, manufacturers, selectedJobId, job);
 
         modalRef.result.then(
           (data) => {

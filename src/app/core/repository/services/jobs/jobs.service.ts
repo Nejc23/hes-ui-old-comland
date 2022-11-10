@@ -16,11 +16,12 @@ import {
   enableJob,
   executeJob,
   notificationJobs,
+  reKeyScheduleJobs,
+  removeDeviceFromScheduler,
   schedulerActiveJobs,
   schedulerJobs,
   schedulerJobsList,
-  schedulerJobsListByJobId,
-  removeDeviceFromScheduler
+  schedulerJobsListByJobId
 } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
@@ -273,5 +274,29 @@ export class JobsService {
 
   removeDeviceFromSchedulerJobRequest(scheduleJobId: string, deviceId: string): HttpRequest<any> {
     return new HttpRequest('DELETE', `${removeDeviceFromScheduler}/${scheduleJobId}/${deviceId}`, null);
+  }
+
+  getReKeyJob(id: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.getReKeyJobRequest(id));
+  }
+
+  getReKeyJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${reKeyScheduleJobs}/${id}`);
+  }
+
+  createReKeyJob(schedule: SchedulerJob): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.createReKeyJobRequest(schedule));
+  }
+
+  createReKeyJobRequest(param: SchedulerJob): HttpRequest<any> {
+    return new HttpRequest('POST', `${reKeyScheduleJobs}`, param);
+  }
+
+  updateReKeyJob(schedule: SchedulerJob, id: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.updateReKeyJobRequest(schedule, id));
+  }
+
+  updateReKeyJobRequest(param: SchedulerJob, id: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${reKeyScheduleJobs}/${id}`, param);
   }
 }

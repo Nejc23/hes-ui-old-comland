@@ -1,12 +1,14 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { PermissionService } from '../../../permissions/services/permission.service';
+import { PermissionEnumerator } from '../../../permissions/enumerators/permission-enumerator.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodelistHelperService {
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService, private authorizationService: PermissionService) {}
 
   public operationsList() {
     const result: Codelist<string>[] = [
@@ -30,7 +32,13 @@ export class CodelistHelperService {
       { id: 6, value: this.translate.instant('COMMON.SERIAL-MISMATCH') },
       { id: 7, value: this.translate.instant('COMMON.TIME-DEVIATION') }
     ];
-
+    if (this.authorizationService.hasAccess(PermissionEnumerator.Initial_Re_Keying)) {
+      showOptions.push(
+        { id: 8, value: this.translate.instant('COMMON.INITIAL-SECURITY') },
+        { id: 9, value: this.translate.instant('COMMON.RE-KEYED') },
+        { id: 10, value: this.translate.instant('COMMON.RE-KEY-FAILED') }
+      );
+    }
     return showOptions;
   }
 }

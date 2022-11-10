@@ -524,6 +524,10 @@ export class MeterUnitsPlcActionsService {
         response = this.service.updateShortNames(params);
         operationName = this.translate.instant('COMMON.UPDATE-SHORT-NAMES');
         break;
+      case MeterUnitsTypeEnum.initailRekey:
+        response = this.service.postInitailRekey(params);
+        operationName = this.translate.instant('COMMON.INITIAL-REKEY');
+        break;
     }
     // component.btnConfirmText = operationName;
 

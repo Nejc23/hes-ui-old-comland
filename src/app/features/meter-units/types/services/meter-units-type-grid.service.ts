@@ -24,7 +24,7 @@ export class MeterUnitsTypeGridService {
     {
       field: 'icons',
       translationKey: '',
-      width: 120,
+      width: 130,
       sortingDisabled: true,
       class: 'no-padding',
       type: GridColumnType.ICONS,
@@ -43,6 +43,11 @@ export class MeterUnitsTypeGridService {
           field: gridSysNameColumnsEnum.isHls,
           iconName: 'lock-icon',
           popoverText: 'GRID.HIGH-LEVEL-SECURITY'
+        },
+        {
+          field: 'hasLifecycleErrors',
+          iconName: 'lock-icon-red',
+          popoverTextErrorField: 'lifecycleError'
         },
         {
           field: gridSysNameColumnsEnum.hasActiveJobs,

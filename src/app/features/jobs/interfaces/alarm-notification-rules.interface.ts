@@ -1,4 +1,5 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+
 export interface AlarmNotificationRules {
   isAlarmIdActive: boolean;
   alarmIds: Codelist<number>[];

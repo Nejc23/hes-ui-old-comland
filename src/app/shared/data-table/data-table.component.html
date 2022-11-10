@@ -308,17 +308,25 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
               <ng-container *ngIf="dataItem[iconData.field] === true || dataItem[iconData.field] === undefined">
                 <!-- true or data/templateId -->
                 <img
-                  *ngIf="iconData.field !== 'hasActiveJobs' && iconData.field !== 'hasConfigurationErrors'"
+                  *ngIf="iconData.field !== 'hasActiveJobs' && iconData.field !== 'hasConfigurationErrors' && iconData.field !== 'hasLifecycleErrors'"
                   [src]="'assets/images/icons/' + iconData.iconName + '.svg'"
                   [title]="iconData.popoverText | translate" class="tw-mr-2 tw-w-4 tw-h-4" data-placement="top"
                   data-toggle="tooltip" />
 
-                <img
-                  *ngIf="iconData.field === 'hasConfigurationErrors'"
-                  [src]="'assets/images/icons/' + iconData.iconName + '.svg'"
-                  [title]="dataItem[iconData.popoverTextErrorField]" class="tw-mr-2 tw-w-4 tw-h-4"
-                  data-placement="top" data-toggle="tooltip"
-                />
+                <!-- re key -->
+                <div [permissions]="[permissionSecurityReKey]" appHideIfAllPermissionsUnauthorized
+                     *ngIf="iconData.field === 'hasLifecycleErrors'" data-placement="top" data-toggle="tooltip"
+                     [title]="dataItem[iconData.popoverTextErrorField]">
+                  <svg
+                    class="tw-mr-2 tw-w-4 tw-h-4"
+                    [ngClass]="dataItem['lifecycleActions']?.toString().toLowerCase().indexOf('rekeyed_failed') !== -1  ? 'red-icon' : 'warning-icon'"
+                    fill="currentColor" height="24" viewBox="0 0 22 24" width="22"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11 19.3121C10.2734 19.3121 9.6875 18.7261 9.6875 17.9996V14.9996C9.6875 14.273 10.2734 13.6871 11 13.6871C11.7266 13.6871 12.3125 14.273 12.3125 14.9996V17.9996C12.3125 18.7261 11.7266 19.3121 11 19.3121ZM21.5 11.2496V21.7496C21.5 22.9918 20.4922 23.9996 19.25 23.9996H2.75C1.50781 23.9996 0.5 22.9918 0.5 21.7496V11.2496C0.5 10.0074 1.50781 8.99956 2.75 8.99956H4.25V6.74956C4.25 3.023 7.2875 -0.0098149 11.0187 -0.000439902C14.75 0.0089351 17.75 3.08394 17.75 6.81519V8.99956H19.25C20.4922 8.99956 21.5 10.0074 21.5 11.2496ZM6.5 8.99956H15.5V6.74956C15.5 4.26987 13.4797 2.24956 11 2.24956C8.52031 2.24956 6.5 4.26987 6.5 6.74956V8.99956ZM19.25 11.2496H2.75V21.7496H19.25V11.2496Z"
+                      fill="currentColor" />
+                  </svg>
+                </div>
 
                 <!-- active jobs special case popover with active-jobs on meters and DC grid -->
                 <div
@@ -330,7 +338,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   data-placement="top"
                   popoverClass="scheduler-active-job-popover"
                 >
-                  <img [src]="'assets/images/icons/' + iconData.iconName + '.svg'" class="tw-w-4 tw-h-4" />
+                  <img [src]="'assets/images/icons/' + iconData.iconName + '.svg'" class="tw-mr-2 tw-w-4 tw-h-4" />
 
                   <ng-template #tipContentNextRead id="tipContentNextRead">
                     <app-scheduler-active-jobs

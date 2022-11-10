@@ -28,6 +28,8 @@ import { CronScheduleComponent } from '../../cron-schedule/components/cron-sched
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
+import { InitialReKeying } from '../../interfaces/initial-rey-keying-interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -53,12 +55,16 @@ export class SchedulerJobComponent {
 
   form: FormGroup;
   formMeterTimeSync: FormGroup;
+  formReKey: FormGroup;
+
+  manufacturersValues = [];
+  protocolsValues = [];
+
   loading = false;
 
   noRegisters = false;
   requiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
 
-  jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
   step = 0;
@@ -70,7 +76,7 @@ export class SchedulerJobComponent {
   showConcentrators = false;
   showAlarmNotification = false;
   showMeterTimeSync = false;
-
+  initialReKeying = false;
   jobType: JobTypeEnumeration = JobTypeEnumeration.reading;
   public title = '';
 
@@ -89,6 +95,13 @@ export class SchedulerJobComponent {
       deviceType: this.translate.instant('JOB.METER').toUpperCase(),
       icon: 'line_weight',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
+    },
+    {
+      jobType: JobTypeEnumeration.initialReKeying,
+      jobName: this.translate.instant('JOB.INITIAL-RE-KEYING.TITLE'),
+      deviceType: this.translate.instant('JOB.METER').toUpperCase(),
+      icon: 'lock',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Jobs)
     },
     {
       jobType: JobTypeEnumeration.meterTimeSync,
@@ -196,6 +209,26 @@ export class SchedulerJobComponent {
     return nameOf<ReadingProperties>((o) => o.iecPushEnabled);
   }
 
+  get isProtocolActiveProperty(): string {
+    return nameOf<InitialReKeying>((o) => o.isProtocolActive);
+  }
+
+  get protocolsProperty(): string {
+    return nameOf<InitialReKeying>((o) => o.protocols);
+  }
+
+  get isManufacturerActiveProperty(): string {
+    return nameOf<InitialReKeying>((o) => o.isManufacturerActive);
+  }
+
+  get manufacturersProperty(): string {
+    return nameOf<InitialReKeying>((o) => o.manufacturers);
+  }
+
+  get numberOfDaysProperty(): string {
+    return nameOf<InitialReKeying>((o) => o.rekeyAfterDays);
+  }
+
   initAddJobsForUser() {
     this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
   }
@@ -205,7 +238,7 @@ export class SchedulerJobComponent {
       formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
         ? moment(formData.schedules[0].startAt).toDate()
         : null;
-    if (this.showAlarmNotification) {
+    if (this.showAlarmNotification || this.initialReKeying) {
       startAt = formData && formData.startAt ? moment(formData.startAt).toDate() : null;
     }
 
@@ -213,7 +246,7 @@ export class SchedulerJobComponent {
       formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
         ? moment(formData.schedules[0].endAt).toDate()
         : null;
-    if (this.showAlarmNotification) {
+    if (this.showAlarmNotification || this.initialReKeying) {
       endAt = formData && formData.endAt ? moment(formData.endAt).toDate() : null;
     }
 
@@ -260,6 +293,9 @@ export class SchedulerJobComponent {
       }
       case JobTypeEnumeration.alarmNotification: {
         return this.translate.instant('JOB.ALARM-NOTIFICATION.TITLE');
+      }
+      case JobTypeEnumeration.initialReKeying: {
+        return this.translate.instant('JOB.INITIAL-RE-KEYING.TITLE');
       }
       default: {
         return this.translate.instant('JOB.READING-JOBS');
@@ -318,6 +354,15 @@ export class SchedulerJobComponent {
     this.initForm(JobTypeEnumeration.alarmNotification, null, selectedJobId, job);
   }
 
+  setFormInitialReKeyJobEdit(protocols: Codelist<number>[], manufacturers: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
+    this.protocols = protocols;
+    this.manufacturers = manufacturers;
+    this.manufacturersValues = job.manufacturers;
+    this.protocolsValues = job.protocols;
+
+    this.initForm(JobTypeEnumeration.initialReKeying, null, selectedJobId, job);
+  }
+
   initForm(selectedJobType: JobTypeEnumeration, jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
     if (jobsTimeUnits && jobsTimeUnits.length > 0) {
       this.jobsTimeUnits = jobsTimeUnits;
@@ -340,6 +385,11 @@ export class SchedulerJobComponent {
         this.formMeterTimeSync = this.createFormMeterTimeSync(job);
         break;
       }
+      case JobTypeEnumeration.initialReKeying: {
+        this.initialReKeying = true;
+        this.formReKey = this.createReKeyForm(job);
+        break;
+      }
       default: {
         this.showConcentrators = true;
         break;
@@ -358,7 +408,7 @@ export class SchedulerJobComponent {
     this.form.get(this.registersProperty).clearValidators();
 
     this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
-    if (job && this.jobType === JobTypeEnumeration.alarmNotification) {
+    if (job && (this.jobType === JobTypeEnumeration.alarmNotification || JobTypeEnumeration.initialReKeying)) {
       this.cronExpression = job.cronExpression;
     }
 
@@ -374,6 +424,16 @@ export class SchedulerJobComponent {
         Validators.required
       ],
       syncWindowMinInMs: [formData && formData.readingProperties ? formData.readingProperties.syncWindowMinInMs : null, Validators.required]
+    });
+  }
+
+  createReKeyForm(formData: SchedulerJob): FormGroup {
+    return this.formBuilder.group({
+      [this.isProtocolActiveProperty]: [formData?.protocols?.length > 0 ?? false],
+      [this.isManufacturerActiveProperty]: [formData?.manufacturers?.length > 0 ?? false],
+      [this.numberOfDaysProperty]: [formData?.rekeyAfterDays ?? environment.reKeyAfterDays, Validators.required],
+      [this.protocolsProperty]: [formData?.protocols ?? null],
+      [this.manufacturersProperty]: [formData?.manufacturers ?? null]
     });
   }
 
@@ -424,7 +484,11 @@ export class SchedulerJobComponent {
         cronExpression: this.cronExpression,
         startAtDate: this.form.get(this.startAtProperty).value,
         endAtDate: this.form.get(this.endAtProperty).value,
-
+        rekeyAfterDays: this.formReKey?.get('rekeyAfterDays')?.value,
+        protocols: this.formReKey?.get('protocols')?.value ? this.formReKey?.get('protocols')?.value.map((item) => item.id) : [],
+        manufacturers: this.formReKey?.get('manufacturers')?.value
+          ? this.formReKey?.get('manufacturers')?.value.map((item) => item.id)
+          : [],
         //TODO: what are the correct values for these?
         pageSize: 0,
         pageNumber: 0,
@@ -472,6 +536,12 @@ export class SchedulerJobComponent {
       return;
     }
     this.loading = true;
+    if (this.initialReKeying) {
+      if (!this.formReKey.valid) {
+        this.loading = false;
+        return;
+      }
+    }
     // times and selected registers
     if (this.showRegisters) {
       const selectedRegisters = this.registers.getSelectedRowNames();
@@ -525,11 +595,18 @@ export class SchedulerJobComponent {
       if (this.showAlarmNotification) {
         request = this.meterService.updateNotificationJob(values, this.selectedJobId);
       }
+      if (this.jobType === JobTypeEnumeration.initialReKeying) {
+        request = this.meterService.updateReKeyingJob(values, this.selectedJobId);
+      }
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
 
       if (this.showAlarmNotification) {
         request = this.meterService.createNotificationJob(values);
+      }
+
+      if (this.jobType === JobTypeEnumeration.initialReKeying) {
+        request = this.meterService.createReKeyingJob(values);
       }
     }
     const successMessage = this.translate.instant('JOB.SCHEDULER-JOB.JOB-SUCCESSFULLY', { operation: operation });
@@ -641,6 +718,15 @@ export class SchedulerJobComponent {
     } else if (jobType === JobTypeEnumeration.reading || jobType === JobTypeEnumeration.readEvents) {
       this.codelistService.timeUnitCodeslist().subscribe((units) => {
         this.setFormAddNew(jobType, units);
+      });
+    } else if (jobType === JobTypeEnumeration.initialReKeying) {
+      forkJoin({
+        protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+        manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0)
+      }).subscribe(({ protocols, manufacturers }) => {
+        this.protocols = protocols;
+        this.manufacturers = manufacturers;
+        this.setFormAddNew(jobType, null);
       });
     } else {
       this.setFormAddNew(jobType, null);

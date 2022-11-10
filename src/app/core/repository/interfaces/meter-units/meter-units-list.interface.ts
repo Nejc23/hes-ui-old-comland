@@ -35,6 +35,9 @@ export interface MeterUnitsList {
   sla: SlaValue;
   hasConfigurationErrors?: boolean;
   errorList?: string;
+  lifecycleError?: string;
+  hasLifecycleErrors?: boolean;
+  lifecycleActions: string;
 }
 
 export interface SlaValue {

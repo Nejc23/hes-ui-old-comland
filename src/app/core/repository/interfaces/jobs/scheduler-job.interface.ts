@@ -19,6 +19,11 @@ export interface SchedulerJob extends IActionRequestParams {
   addresses?: string[];
   tryFillDevices?: boolean;
   notificationFilter?: NotificationFilter;
+
+  // initialReKey
+  rekeyAfterDays?: number;
+  protocols?: any[];
+  manufacturers?: any[];
 }
 
 export interface NotificationFilter {

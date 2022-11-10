@@ -425,7 +425,7 @@
     </div>
 
     <div
-      [permissions]="[permissionSecurityActivateHls, permissionSecurityRekey, permissionSecurityChangePassword]"
+      [permissions]="[permissionSecurityActivateHls, permissionSecurityReKey, permissionSecurityChangePassword]"
       appHideIfAllPermissionsUnauthorized
       class="btn-group ps-2"
       dropdown
@@ -441,13 +441,18 @@
         </div>
         <div
           [permissionsAbove]="[permissionSecurityActivateHls]"
-          [permissionsBelow]="[permissionSecurityRekey, permissionSecurityChangePassword]"
+          [permissionsBelow]="[permissionSecurityReKey, permissionSecurityChangePassword]"
           appHideDividerIfPermissionsUnauthorized
           class="dropdown-divider"
         ></div>
-        <div [permission]="permissionSecurityRekey" appHideIfPermissionUnauthorized>
+        <div [permission]="permissionSecurityReKey" appHideIfPermissionUnauthorized>
           <a (click)="onSecurityRekey()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
           ><span>{{ 'PLC-METER.SECURITY.REKEY' | translate }}</span></a
+          >
+        </div>
+        <div [permission]="permissionSecurityReKey" appHideIfPermissionUnauthorized>
+          <a (click)="onSecurityInitalRekey()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+          ><span>{{ 'PLC-METER.SECURITY.INITIAL-REKEY' | translate }}</span></a
           >
         </div>
         <div [permission]="permissionSecurityChangePassword" appHideIfPermissionUnauthorized>

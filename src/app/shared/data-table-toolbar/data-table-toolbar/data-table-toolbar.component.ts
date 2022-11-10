@@ -46,7 +46,7 @@ export class DataTableToolbarComponent {
   resetSearchAndFilters() {
     this.form.reset();
     // resets the date range picker from date to yesterday, end date to today
-    this.dateRangePicker.setRange(2);
+    this.dateRangePicker.setRange(1);
 
     this.clearSearchClickedEvent.emit();
   }

@@ -240,7 +240,14 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
         );
         this.gridData.data.map((meterUnit) => {
           const errorList = [];
-
+          let lifecycleError = [];
+          if (meterUnit[gridSysNameColumnsEnum.lifecycleActions]?.find((item) => item.toLowerCase() !== 'rekeyed')) {
+            lifecycleError.push(this.translate.instant('GRID.RE-KEY-METER'));
+          }
+          if (meterUnit[gridSysNameColumnsEnum.lifecycleActions]?.find((item) => item.toLowerCase() === 'rekeyed_failed')) {
+            lifecycleError = [];
+            lifecycleError.push(this.translate.instant('GRID.RE-KEY-METER-FAILED'));
+          }
           if (!meterUnit[gridSysNameColumnsEnum.templateId]) {
             errorList.push(this.translate.instant('GRID.MISSING-TEMPLATE'));
           }
@@ -253,6 +260,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
 
           meterUnit.hasConfigurationErrors = errorList.length > 0;
           meterUnit.errorList = errorList.join(' | ');
+
+          meterUnit.hasLifecycleErrors = lifecycleError.length > 0;
+          meterUnit.lifecycleError = lifecycleError.join(' | ');
         });
         this.totalCount = data.totalCount;
         if (this.totalCount === 0) {

@@ -160,8 +160,8 @@ export class ActionButtonsComponent {
     return PermissionEnumerator.Activate_HLS;
   }
 
-  get permissionSecurityRekey() {
-    return PermissionEnumerator.Rekey_Meter;
+  get permissionSecurityReKey() {
+    return PermissionEnumerator.Initial_Re_Keying;
   }
 
   get permissionSecurityChangePassword() {
@@ -618,6 +618,21 @@ export class ActionButtonsComponent {
     );
 
     this.plcActionsService.onSecurityRekey(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount);
+  }
+
+  onSecurityInitalRekey(selectedGuid?: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.initailRekey,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount
+    );
   }
 
   // --> start Security action click (bulk or selected row)

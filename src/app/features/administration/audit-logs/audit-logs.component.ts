@@ -114,8 +114,8 @@ export class AuditLogsComponent implements OnInit {
     return this.fb.group({
       createdBy: '',
       event: '',
-      startDate: [moment().subtract(1, 'days'), Validators.required],
-      endDate: [moment(), Validators.required],
+      startDate: [moment().set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate(), Validators.required],
+      endDate: [moment().add(1, 'hour').set('minute', 0).toDate()],
       startTime: ['00:00'],
       endTime: ['00:00']
     });

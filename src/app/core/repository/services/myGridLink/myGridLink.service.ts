@@ -93,7 +93,7 @@ import {
   IActionResponseSecurityRekey,
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
-import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
+import { basePathConcentratorInventory, securityInitalRekey } from '../../consts/data-concentrator-units.const';
 import { DataExportJobs } from './data-export-jobs.interface';
 import { ExportDataPayload } from '../../../../features/meter-units/common/components/export-data/export-data.component';
 
@@ -473,6 +473,14 @@ export class MyGridLinkService {
 
   updateShortNamesRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${readShortNames}`, param);
+  }
+
+  postInitailRekey(params: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.postInitailRekeyRequest(params));
+  }
+
+  postInitailRekeyRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityInitalRekey}`, params);
   }
 
   postMeterParametrizationParse(body: MeterParametrizationRequest): Observable<MeterParametrizationResponse> {

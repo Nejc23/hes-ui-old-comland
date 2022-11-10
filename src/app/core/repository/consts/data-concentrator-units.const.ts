@@ -47,7 +47,5 @@ export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/ch
 
 // Validations
 export const validateHostname = `${dataConcentrator}/validations/hostname`;
-// SLA data for meters
-export const slaMeterData = `/api/data-processing/v2/devices-sla`;
-// SLA data for concentrators
-export const slaConcentratorData = `/api/data-processing/v2/concentrators-sla`;
+
+export const securityInitalRekey = `${enumMyGridLink.inventory}/remove-rekey-failed`;
