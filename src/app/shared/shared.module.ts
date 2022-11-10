@@ -125,6 +125,7 @@ import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { PopoverComponent } from './popover/popover.component';
 import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widget.component';
+import { InitialReKeyingComponent } from '../features/jobs/components/scheduler-job/initial-re-keying.component';
 import { MeterParametrizationComponent } from './meter-parametrization/meter-parametrization.component';
 
 // required for AOT compilation
@@ -226,7 +227,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobCardItemComponent,
     JsonViewerComponent,
     PopoverComponent,
-    SlaQualityWidgetComponent
+    SlaQualityWidgetComponent,
+    InitialReKeyingComponent
   ],
   imports: [
     CommonModule,
@@ -374,6 +376,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     JsonViewerComponent,
     PopoverComponent,
     SlaQualityWidgetComponent,
+    InitialReKeyingComponent,
     MeterParametrizationComponent
   ],
   entryComponents: [
@@ -412,7 +415,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcDeleteMeterDataComponent,
     SecurityRekeyConcentratorComponent,
     DownloadDataConcentratorClientCertComponent,
-    ImportDevicesComponent
+    ImportDevicesComponent,
+    InitialReKeyingComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

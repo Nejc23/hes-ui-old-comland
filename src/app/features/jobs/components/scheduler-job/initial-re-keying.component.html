@@ -1,0 +1,53 @@
+<div *ngIf="form">
+
+  <div class="alert alert-danger tw-mb-7">
+    {{ "JOB.INITIAL-RE-KEYING.ALERT-TEXT" | translate }}
+  </div>
+
+  <div>
+    <div class="tw-mb-1">
+      <label>
+        {{ 'FORM.NO-OF-DAYS' | translate}}:
+        <span> *</span>
+      </label>
+    </div>
+
+    <div class="tw-w-56">
+      <app-input-numeric
+        [min]="1"
+        [max]="120"
+        [form]="form"
+        [property]="numberOfDaysProperty"
+      ></app-input-numeric>
+    </div>
+
+    <div class="tw-my-6 tw-text-black tw-font-medium">
+      {{ 'JOB.INITIAL-RE-KEYING.TEXT' | translate : { param: this.form.get(numberOfDaysProperty).value ?? 0 } }}
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isProtocolActiveProperty" label="Protocol"
+                        (valueChanged)="inputSwitchChange($event, protocolsProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="protocolsProperty" [form]="form" [autocompleteItemsAsObjects]="protocols"
+                     [selected]="selectedProtocol">
+      </app-input-tag>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" label="Manufacturer"
+                        (valueChanged)="inputSwitchChange($event, manufacturersProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="manufacturersProperty" [form]="form" [autocompleteItemsAsObjects]="manufacturers"
+                     [selected]="selectedManufacturer">
+      </app-input-tag>
+    </div>
+  </div>
+</div>

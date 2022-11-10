@@ -29,6 +29,7 @@ import { ActiveJobsListComponent } from '../../features/jobs/components/active-j
 import { FormData } from '../card-item/card-item.component';
 import { dateServerFormat } from '../forms/consts/date-format';
 import { Codelist } from '../repository/interfaces/codelists/codelist.interface';
+import { PermissionEnumerator } from '../../core/permissions/enumerators/permission-enumerator.model';
 
 export interface GridColumn {
   translationKey: string;
@@ -55,6 +56,7 @@ export interface IconData {
   iconName: string;
   popoverText?: string;
   popoverTextErrorField?: string;
+  permission?: string;
 }
 
 export enum GridColumnType {
@@ -73,7 +75,8 @@ export enum GridColumnType {
   UNIT_WITH_VALUE = 'unit-with-value',
   INSTANT_VALUES = 'instant-values',
   SLA = 'sla',
-  WITH_DECIMAL = 'with-decimal'
+  WITH_DECIMAL = 'with-decimal',
+  REKEY = 'rekey'
 }
 
 export interface GridRowAction {
@@ -908,5 +911,9 @@ export class DataTableComponent implements OnInit, OnChanges {
       return 'orange';
     }
     return 'red';
+  }
+
+  get permissionSecurityReKey() {
+    return PermissionEnumerator.Initial_Re_Keying;
   }
 }

@@ -32,6 +32,7 @@ export enum DeviceState {
   OPERATIONAL = 'operational',
   INSTALLING = 'installing',
   DISABLED = 'disabled',
+  REKEYING = 'rekeying',
   DRAFT = 'draft', // for TOU
   EDIT = 'edit' // for TOU
 }

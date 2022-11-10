@@ -32,7 +32,11 @@ export class PlcMeterReadScheduleService {
       sort: values.sort,
       textSearch: values.textSearch,
       tryFillDevices: values.tryFillDevices,
-      notificationFilter: values.notificationFilter
+      notificationFilter: values.notificationFilter,
+
+      manufacturers: values.manufacturers,
+      protocols: values.protocols,
+      rekeyAfterDays: values.rekeyAfterDays
     };
     return serviceData;
   }
@@ -51,5 +55,13 @@ export class PlcMeterReadScheduleService {
 
   updateNotificationJob(values: SchedulerJobForm, id: string): Observable<SchedulerJob> {
     return this.jobsService.updateNotificationJob(this.transformData(values), id);
+  }
+
+  createReKeyingJob(values: SchedulerJobForm): Observable<SchedulerJob> {
+    return this.jobsService.createReKeyJob(this.transformData(values));
+  }
+
+  updateReKeyingJob(values: SchedulerJobForm, id: string): Observable<SchedulerJob> {
+    return this.jobsService.updateReKeyJob(this.transformData(values), id);
   }
 }

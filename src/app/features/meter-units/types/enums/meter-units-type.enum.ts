@@ -20,5 +20,6 @@ export enum MeterUnitsTypeEnum {
   readMeter = 'readMeter',
   enableMeter = 'enableMeter',
   disableMeter = 'disableMeter',
-  updateShortNames = 'updateShortNames'
+  updateShortNames = 'updateShortNames',
+  initailRekey = 'initalRekey'
 }

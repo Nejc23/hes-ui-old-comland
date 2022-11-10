@@ -434,6 +434,32 @@ export class MeterUnitsService {
               filterOperation: filterOperationEnum.equal
             });
           }
+          // initial set of security
+          if (row.id === 8) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.lifecycleActions),
+              propValue: 'rekeyed',
+              filterOperation: filterOperationEnum.notEqual
+            });
+          }
+
+          // rekeyed
+          if (row.id === 9) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.lifecycleActions),
+              propValue: 'rekeyed',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+
+          // rekey failed
+          if (row.id === 10) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.lifecycleActions),
+              propValue: 'rekeyed_failed',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
         });
       }
 

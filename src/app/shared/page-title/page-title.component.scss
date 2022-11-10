@@ -16,6 +16,12 @@
   @apply tw-bg-opacity-20;
 }
 
+.rekeying-state {
+  @apply tw-text-other;
+  @apply tw-bg-other;
+  @apply tw-bg-opacity-20;
+}
+
 .small-back-button {
   width: 32px;
   height: 32px;

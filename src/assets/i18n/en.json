@@ -215,7 +215,8 @@
       "INSTALLING": "installing",
       "DISABLED": "disabled",
       "DRAFT": "draft",
-      "EDIT": "edit"
+      "EDIT": "edit",
+      "REKEYING": "rekeying"
     },
     "OPERATION-FAILED": "Operation failed. Please refresh the page and try again.",
     "CLEAR-ALL-FILTERS": "Clear all Filters",
@@ -237,6 +238,10 @@
     "TIME-DEVIATION": "Time deviation",
     "STATES": "States",
     "GRATER-THAN": "Greater than",
+    "INITIAL-SECURITY": "Initial set of security keys",
+    "INITIAL-REKEY": "Reset initial re-key",
+    "RE-KEYED": "Reset initial re-key succeeded",
+    "RE-KEY-FAILED": "Reset initial re-key failed",
     "ARE-YOU-SURE": "Are you sure?",
     "UPLOAD": "Upload"
   },
@@ -503,6 +508,7 @@
     "LASTCOMMUNICATION": "Last communication",
     "OLDER-THAN": "Older than",
     "NEWER-THAN": "Newer than",
+    "NO-OF-DAYS": "Number of days after the installation when meter security material must be re-keyed",
     "INPUT-TYPE": "Input type"
   },
   "GRID": {
@@ -625,7 +631,9 @@
     "FIRMWARE-BASE": "Firmware (base)",
     "EVENT": "Event",
     "USER": "User",
-    "DEVICE-ID": "Device ID"
+    "DEVICE-ID": "Device ID",
+    "RE-KEY-METER": "Meter is still using initial set of security material! Please re-key the meter as soon as possible!",
+    "RE-KEY-METER-FAILED": "Re-keying failed"
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -708,7 +716,12 @@
       "CONDITIONAL-SYNC-ALERT": "Clock will be synchronized unconditionally every time job will be executed!"
     },
     "JOBS-OVERVIEW": "Jobs overview",
-    "SCHEDULER-JOB-REMOVED": "Scheduler job removed!"
+    "SCHEDULER-JOB-REMOVED": "Scheduler job removed!",
+    "INITIAL-RE-KEYING": {
+      "TITLE": "Initial re-keying",
+      "ALERT-TEXT": "Please note, that all meter keys as defined in the meter configuration will be re-keyed! \nThis action may result in meter becoming permanently inoperable!",
+      "TEXT": "If none of the filters below is set, all newly added meters in the last {{param}} days, still having the initial set of keys will be re-keyed."
+    }
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",
@@ -887,12 +900,13 @@
       "PW-M2": "PW_M2 (Operator)",
       "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
       "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
-      "REKEY": "Rekey",
+      "REKEY": "Re-key",
       "SECURITY": "Security",
       "SELECT-KEY-TYPE": "Please select from the list below a key type you would like to re-key.",
       "SELECT-PASSWORD-TYPE": "Please select from the list below a password type that you would like to change.",
       "UEK-DATA-COLLECTOR": "UEK_DATA_COLLECTOR (Reader)",
-      "UEK-INSTALLER": "UEK_INSTALLER (Installer)"
+      "UEK-INSTALLER": "UEK_INSTALLER (Installer)",
+      "INITIAL-REKEY": "Reset Initial re-key"
     },
     "SELECT-TEMPLATE": "Please select meter configuration first",
     "SELECTED-REGISTERS": "Selected registers *",
@@ -1415,7 +1429,8 @@
       "DELETE_USER_ROLE": "Delete user role",
       "USER_ROLE_REMOVED": "Update user role (removed)",
       "USER_ROLE_ADDED": "Update user role (added)",
-      "DELETE_METER_DATA": "Delete meter data"
+      "DELETE_METER_DATA": "Delete meter data",
+      "CLEAR_REKEYING_FAILED": "Clear re-keying failed"
     },
     "CREATE_JOB": "New job {{ description }} of type {{ type }} was created",
     "UPDATE_JOB": "Job {{ description }} was updated",
@@ -1468,7 +1483,8 @@
     "TRIGGER_FIRMWARE_UPGRADE_CONCENTRATOR": "Firmware upgrade was triggered for {{ vendorType }} concentrator with serial number {{ concentratorPushId }}",
     "IMPORT_KEYS": "Security material was imported from {{ fileName }}, filetype is {{ fileType }}",
     "TRIGGER_FIRMWARE_UPGRADE_METER": "{{ imageName }} was uploaded for meter {{ vendorType }} meter with serial number {{ serialNumber }}",
-    "DELETE_METER_DATA": "Data for {{ vendor }} meter with serial number {{ serialNumber }} was deleted {{ description }}"
+    "DELETE_METER_DATA": "Data for {{ vendor }} meter with serial number {{ serialNumber }} was deleted {{ description }}",
+    "CLEAR_REKEYING_FAILED": "Re-keying failed status was cleared for {{ manufacturer }} meter {{ serialNumber }}."
   },
   "LICENCE": {
     "TYPE": "Licence type",

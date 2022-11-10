@@ -10,3 +10,4 @@ export const schedulerActiveJobs = `${basePath}/active-jobs`;
 export const removeDeviceFromScheduler = `${basePath}/job-device`;
 
 export const notificationJobs = `${basePath}/notifications/jobs`;
+export const reKeyScheduleJobs = `${basePath}/rekey/jobs`;

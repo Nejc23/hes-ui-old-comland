@@ -110,6 +110,15 @@
         </app-meter-time-sync>
       </div>
 
+      <div id="step2" *ngIf="step === 2 && initialReKeying">
+        <app-initial-re-keying-component [form]="formReKey"
+                                         [selectedManufacturersValues]="manufacturersValues"
+                                         [selectedProtocolsValues]="protocolsValues"
+                                         [protocols]="protocols"
+                                         [manufacturers]="manufacturers">
+        </app-initial-re-keying-component>
+      </div>
+
     </ng-container>
   </div>
   <div modal-footer>
