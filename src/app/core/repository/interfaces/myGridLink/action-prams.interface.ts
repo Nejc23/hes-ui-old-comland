@@ -1,11 +1,11 @@
 import { NotificationFilter } from '../jobs/scheduler-job.interface';
 
 export interface IActionRequestParams {
-  pageSize: number;
-  pageNumber: number;
+  pageSize?: number;
+  pageNumber?: number;
   includedIds?: string[];
-  sort: IActionSortParams[];
-  textSearch: IActionSearchParam;
+  sort?: IActionSortParams[];
+  textSearch?: IActionSearchParam;
   filter?: IActionFilterParams[];
   deviceIds?: string[];
   excludeIds?: string[];
@@ -198,4 +198,26 @@ export enum IRegisterTypesEnum {
   monitorPhase1 = 'MonitorPhase1',
   monitorPhase2 = 'MonitorPhase2',
   monitorPhase3 = 'MonitorPhase3'
+}
+
+export interface IActionRequestSecurityRekey extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  keyType?: string;
+  keyTypes?: string[];
+}
+
+export interface MeterParametrizationRequest extends IActionRequestParams {
+  fileContent: string; // base64
+  fileName: string;
+  inputType: string; // enum ->  XmlBlueLink = 0
+  isExecution?: boolean;
+  requestId?: string;
+}
+
+export interface MeterParametrizationResponse {
+  fileName: string;
+  numberOfCommands: number;
+  isValid: boolean;
+  requestId: string;
 }

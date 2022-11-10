@@ -109,7 +109,17 @@
 
         <div
           [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
-          [permissionsBelow]="[permissionFwUpgrade]"
+          [permissionsBelow]="[    permissionDisconnectorConnect,
+            permissionDisconnectorDisconnect,
+            permissionDisconnectorGetState,
+            permissionDisconnectorSetMode,
+            permissionCiiActivate,
+            permissionCiiDeactivate,
+            permissionCiiState,
+            permissionRelaysConnect,
+            permissionRelaysDisconnect,
+            permissionRelaysState,
+            permissionRelaysSetMode]"
           appHideDividerIfPermissionsUnauthorized
           class="dropdown-divider"
         ></div>
@@ -135,21 +145,27 @@
             </div>
           </div>
         </div>
+
+        <div [permission]="permissionMeterParametrization" appHideIfPermissionUnauthorized>
+          <a (click)="onMeterParametrization()" class="dropdown-item custom-hover-display"
+             href="javascript:void(0)"><span>{{ 'PLC-METER.METER-PARAMETRIZATION' | translate }}</span></a>
+        </div>
+
         <div
           [permissionsAbove]="[permissionFwUpgrade]"
           [permissionsBelow]="[
-            permissionDisconnectorConnect,
-            permissionDisconnectorDisconnect,
-            permissionDisconnectorGetState,
-            permissionDisconnectorSetMode,
-            permissionCiiActivate,
-            permissionCiiDeactivate,
-            permissionCiiState,
-            permissionRelaysConnect,
-            permissionRelaysDisconnect,
-            permissionRelaysState,
-            permissionRelaysSetMode
-          ]"
+                    permissionDisconnectorConnect,
+                    permissionDisconnectorDisconnect,
+                    permissionDisconnectorGetState,
+                    permissionDisconnectorSetMode,
+                    permissionCiiActivate,
+                    permissionCiiDeactivate,
+                    permissionCiiState,
+                    permissionRelaysConnect,
+                    permissionRelaysDisconnect,
+                    permissionRelaysState,
+                    permissionRelaysSetMode
+                  ]"
           appHideDividerIfPermissionsUnauthorized
           class="dropdown-divider"
         ></div>

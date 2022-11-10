@@ -46,5 +46,6 @@ export enum PermissionEnumerator {
   Data_Export = 'Data_Export',
   Update_Short_Names = 'Meter_Study',
   View_Audit_Logs = 'View_Audit_Logs',
-  View_License = 'View_License'
+  View_License = 'View_License',
+  Meter_Parametrization = 'Meter_Parametrization'
 }

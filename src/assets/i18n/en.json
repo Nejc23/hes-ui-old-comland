@@ -236,7 +236,9 @@
     "NO-NORMALIZED-DATA": "Normalized data not found",
     "TIME-DEVIATION": "Time deviation",
     "STATES": "States",
-    "GRATER-THAN": "Greater than"
+    "GRATER-THAN": "Greater than",
+    "ARE-YOU-SURE": "Are you sure?",
+    "UPLOAD": "Upload"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -500,7 +502,8 @@
     "USER": "User",
     "LASTCOMMUNICATION": "Last communication",
     "OLDER-THAN": "Older than",
-    "NEWER-THAN": "Newer than"
+    "NEWER-THAN": "Newer than",
+    "INPUT-TYPE": "Input type"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -948,7 +951,8 @@
     "STATE-CHANGED-TOOLTIP": "Changed on {{ changedOn }} at {{ changedAt }} by {{ changedBy }}",
     "UPDATE-SHORT-NAMES": "Update short names",
     "ASSIGN-CONFIGURATION": " Assign existing configuration",
-    "NO-RAW-DATA-FOUND": "Raw data not found"
+    "NO-RAW-DATA-FOUND": "Raw data not found",
+    "METER-PARAMETRIZATION": "Meter parametrization"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {
@@ -1500,6 +1504,19 @@
     "LAST-30-DAYS": "Last 30 days",
     "NEXT-READ": "Next read",
     "LAST-COMM": "Last comm.",
-    "NO-DATA": "This device SLA values have not yet been calculated."
+    "NO-DATA": "This device SLA values have not yet been calculated.",
+    "NOT-VALID": "File is no valid"
+  },
+  "METER-PARAMETRIZATION": {
+    "XML-CONFIG": "Xml configuration file",
+    "FILE-NAME": "File name",
+    "COMMANDS-COUNT": "Commands count",
+    "SELECTED-METERS": "Selected meters",
+    "CAUTION-TEXT": "Caution: This action may result in damages, making the meter inoperable! There is no undo. Proceed?",
+    "TYPE-TEXT": "Type",
+    "CONFIRM-TEXT": "to confirm",
+    "EXECUTE-METER": "Are you sure you would like to execute meter parametrization on {{ selectedRowsCount }} selected meters?",
+    "NO-OF-COMMANDS-TEXT": " {{ numberOfCommands }} parametrization commands will be send to the meters!",
+    "FILE-NOT-VALID": "File not valid. Please upload valid file!"
   }
 }
