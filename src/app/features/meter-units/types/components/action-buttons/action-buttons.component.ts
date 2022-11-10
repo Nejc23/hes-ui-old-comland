@@ -25,6 +25,9 @@ import { MeterUnitsTypeGridService } from '../../services/meter-units-type-grid.
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 import { ExportDataComponent } from '../../../common/components/export-data/export-data.component';
 import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { MeterParametrizationComponent } from '../../../../../shared/meter-parametrization/meter-parametrization.component';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 
 @Component({
   selector: 'app-action-buttons',
@@ -179,6 +182,10 @@ export class ActionButtonsComponent {
 
   get permissionUpdateShortNames() {
     return PermissionEnumerator.Update_Short_Names;
+  }
+
+  get permissionMeterParametrization() {
+    return PermissionEnumerator.Meter_Parametrization;
   }
 
   // --> Operations action click (bulk or selected row)
@@ -389,6 +396,37 @@ export class ActionButtonsComponent {
       this.searchColumnNames
     );
     this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.selectedCount, actionName);
+  }
+
+  onMeterParametrization(selectedGuid?: string, actionName?: string) {
+    const params: IActionRequestParams = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+    const modalRef = this.modalService.open(MeterParametrizationComponent, { size: 'lg' });
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = this.selectedCount;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (cancel or requestId as parameter)
+        if (data !== 'cancel') {
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
+          const options: NgbModalOptions = {
+            size: 'lg'
+          };
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.METER-PARAMETRIZATION');
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   // popup

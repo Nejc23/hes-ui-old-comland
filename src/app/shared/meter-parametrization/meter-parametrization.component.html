@@ -1,0 +1,104 @@
+<div class="tw-p-8">
+  <div class="form-row mb-2">
+    <div class="tw-inline-flex tw-justify-between tw-w-full">
+
+      <div class="tw-inline-flex" *ngIf="showSecondConfirm || execute">
+        <div
+          class="modal-warning">
+          <img [src]="'assets/images/icons/warning-icon.svg'" class="me-3" />
+        </div>
+        <h3 class="modal-title">{{ 'COMMON.ARE-YOU-SURE' | translate }}</h3>
+      </div>
+
+      <h3 class="modal-title"
+          *ngIf="!(showSecondConfirm || execute)">{{ 'PLC-METER.METER-PARAMETRIZATION' | translate }}</h3>
+
+      <img (click)="cancel()" class="p-2 tw-cursor-pointer" src="assets/images/icons/close-icon.svg" />
+    </div>
+
+  </div>
+
+  <div class="form-row" *ngIf="!uploaded">
+    <div class="col-12">
+      <app-select-input label="input-type" [form]="form" [property]="fileTypeProperty"
+                        [selectOptions]="fileTypes"
+                        [disabled]="false">
+      </app-select-input>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 expand-dropzone">
+
+
+      <app-file-select *ngIf="!uploaded"
+                       [form]="form"
+                       [property]="gulfProperty"
+                       [multiple]="false"
+                       [allowedExtensions]="allowedExt"
+                       [acceptExtensions]="acceptExtensions"
+                       (selectEvent)="selected($event)"
+                       (removeEvent)="removed($event)"
+                       (fileValid)="isFileValid($event)"
+                       [dropFileSelectSubtitle]="'PLC-METER.METER-PARAMETRIZATION'">
+      </app-file-select>
+
+      <div *ngIf="uploaded && !execute && fileValid">
+        <div class="content-container">
+          <div>
+            {{ 'METER-PARAMETRIZATION.EXECUTE-METER' | translate: { selectedRowsCount: selectedRowsCount }  }}
+          </div>
+          <div class="tw-mt-5">
+            {{ 'METER-PARAMETRIZATION.NO-OF-COMMANDS-TEXT' | translate: { numberOfCommands: numberOfCommands }  }}
+          </div>
+          <div class="alert alert-danger tw-mt-6"
+               role="alert">{{'PLC-METER.SECURITY.METER-INOPERABLE-WARNING' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="uploaded && fileBase64 && !fileValid" class="alert alert-danger tw-my-6 tw-text-sm" role="alert">
+        <span class="text-danger">{{  'METER-PARAMETRIZATION.FILE-NOT-VALID' | translate }}</span>
+      </div>
+
+      <div class="form-row pt-2" *ngIf="showSecondConfirm">
+        <div class="col-12">
+          <div>
+            <div class="small-title tw-my-6">
+              <div class="alert alert-danger">
+                {{ 'METER-PARAMETRIZATION.CAUTION-TEXT' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="tw-mb-8">
+            <div class="tw-mb-2 tw-inline-flex">
+              {{ 'METER-PARAMETRIZATION.TYPE-TEXT' | translate }}
+              <div (copy)="copyText($event)"
+                   class="tw-font-bold tw-mx-1 tw-cursor-not-allowed tw-select-none">{{keyword}}</div>
+              {{ 'METER-PARAMETRIZATION.CONFIRM-TEXT' | translate }}
+            </div>
+            <app-input-text [form]="form" [property]="keywordProperty">
+            </app-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <ng-container>
+        <button (click)="cancel()" class="btn text-secondary" type="button">
+          <span>{{'BUTTON.CANCEL' | translate }}</span>
+        </button>
+        <div class="btn-group dropdown">
+          <button (click)="confirm()" [disabled]="disableButton()" class="btn btn-primary" type="submit">
+            <span>{{ !uploaded ? ('COMMON.UPLOAD' | translate) : ('BUTTON.CONFIRM' | translate) }}</span></button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

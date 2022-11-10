@@ -41,6 +41,7 @@ import { SecurityChangePasswordComponent } from '../../common/components/securit
 import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
+import { MeterParametrizationComponent } from '../../../../shared/meter-parametrization/meter-parametrization.component';
 
 @Injectable({
   providedIn: 'root'
@@ -840,6 +841,35 @@ export class MeterUnitsPlcActionsService {
         if (data === 'save') {
           // TODO open date time picker modal
           this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onMeterParametrization(params: IActionRequestParams, selectedRowsCount: number) {
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(MeterParametrizationComponent, options);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.selectedDeviceIds = params.deviceIds;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (cancel or requestId as parameter)
+        if (data !== 'cancel') {
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
+          const options: NgbModalOptions = {
+            size: 'lg'
+          };
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.METER-PARAMETRIZATION');
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {

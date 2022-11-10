@@ -227,6 +227,10 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     return PermissionEnumerator.Update_Short_Names;
   }
 
+  get permissionMeterParametrization() {
+    return PermissionEnumerator.Meter_Parametrization;
+  }
+
   ngOnInit() {
     this.subscriptions.push(
       this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
@@ -538,5 +542,10 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  onMeterParametrization() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.onMeterParametrization(params, 1);
   }
 }

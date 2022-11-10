@@ -13,6 +13,8 @@ import {
   importDevices,
   importTemplates,
   lastStatus,
+  meterParamExecute,
+  meterParamParse,
   onDemandClearFF,
   onDemandConnect,
   onDemandData,
@@ -37,7 +39,9 @@ import {
   IActionResponseFwUpgradeData,
   IActionResponseParams,
   IActionResponseSetDisconnectorMode,
-  IActionResponseTOUData
+  IActionResponseTOUData,
+  MeterParametrizationRequest,
+  MeterParametrizationResponse
 } from '../../interfaces/myGridLink/action-prams.interface';
 import {
   IdentityToken,
@@ -469,5 +473,21 @@ export class MyGridLinkService {
 
   updateShortNamesRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${readShortNames}`, param);
+  }
+
+  postMeterParametrizationParse(body: MeterParametrizationRequest): Observable<MeterParametrizationResponse> {
+    return this.repository.makeRequest(this.postMeterParametrizationParseRequest(body));
+  }
+
+  postMeterParametrizationParseRequest(param: any): HttpRequest<any> {
+    return new HttpRequest('POST', `${meterParamParse}`, param);
+  }
+
+  postMeterParametrizationExecute(body: MeterParametrizationRequest): Observable<MeterParametrizationResponse> {
+    return this.repository.makeRequest(this.postMeterParametrizationParseExecute(body));
+  }
+
+  postMeterParametrizationParseExecute(param: any): HttpRequest<any> {
+    return new HttpRequest('POST', `${meterParamExecute}`, param);
   }
 }

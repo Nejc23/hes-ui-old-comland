@@ -59,3 +59,6 @@ export const activeImports = '/tasks/device-import';
 export const updateMeterState = '/update-meters-state';
 
 export const readShortNames = '/on-demand/trigger-read-short-names';
+
+export const meterParamParse = `${enumMyGridLink.managment}/meter-parametrization/parse`;
+export const meterParamExecute = `${enumMyGridLink.managment}/meter-parametrization/execute`;

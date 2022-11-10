@@ -125,6 +125,7 @@ import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { PopoverComponent } from './popover/popover.component';
 import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widget.component';
+import { MeterParametrizationComponent } from './meter-parametrization/meter-parametrization.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -372,7 +373,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobCardItemComponent,
     JsonViewerComponent,
     PopoverComponent,
-    SlaQualityWidgetComponent
+    SlaQualityWidgetComponent,
+    MeterParametrizationComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
