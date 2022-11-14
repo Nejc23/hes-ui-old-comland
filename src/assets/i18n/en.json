@@ -243,7 +243,8 @@
     "RE-KEYED": "Reset initial re-key succeeded",
     "RE-KEY-FAILED": "Reset initial re-key failed",
     "ARE-YOU-SURE": "Are you sure?",
-    "UPLOAD": "Upload"
+    "UPLOAD": "Upload",
+    "TOO-MANY-RECORDS-SEARCH": "There are too many results for this search. Please narrow the search criteria and try again."
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

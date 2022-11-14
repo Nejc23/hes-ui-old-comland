@@ -127,6 +127,7 @@ import { PopoverComponent } from './popover/popover.component';
 import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widget.component';
 import { InitialReKeyingComponent } from '../features/jobs/components/scheduler-job/initial-re-keying.component';
 import { MeterParametrizationComponent } from './meter-parametrization/meter-parametrization.component';
+import { HasPermissionDirective } from './directives/permissions/has-permission.directive';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -228,7 +229,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     JsonViewerComponent,
     PopoverComponent,
     SlaQualityWidgetComponent,
-    InitialReKeyingComponent
+    InitialReKeyingComponent,
+    HasPermissionDirective
   ],
   imports: [
     CommonModule,
@@ -377,7 +379,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PopoverComponent,
     SlaQualityWidgetComponent,
     InitialReKeyingComponent,
-    MeterParametrizationComponent
+    MeterParametrizationComponent,
+    HasPermissionDirective
   ],
   entryComponents: [
     ModalConfirmComponent,

@@ -27,7 +27,7 @@ export class DataTableToolbarComponent {
 
   @Output() clearSearchClickedEvent = new EventEmitter<any>();
   @Output() reloadGridDataEvent = new EventEmitter<any>();
-  @Output() exportDataClickekdEvent = new EventEmitter<any>();
+  @Output() exportDataClickedEvent = new EventEmitter<any>();
   @Output() wildCardsEnabledEvent = new EventEmitter<boolean>();
 
   @ViewChild('dateRangePicker')
@@ -56,7 +56,7 @@ export class DataTableToolbarComponent {
   }
 
   exportData(event: any) {
-    this.exportDataClickekdEvent.emit(event);
+    this.exportDataClickedEvent.emit(event);
   }
 
   searchIconClicked() {

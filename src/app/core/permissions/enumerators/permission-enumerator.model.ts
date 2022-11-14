@@ -48,5 +48,6 @@ export enum PermissionEnumerator {
   View_Audit_Logs = 'View_Audit_Logs',
   View_License = 'View_License',
   Initial_Re_Keying = 'Initial_Rekeying',
-  Meter_Parametrization = 'Meter_Parametrization'
+  Meter_Parametrization = 'Meter_Parametrization',
+  Export_Events = 'Export_Events'
 }
