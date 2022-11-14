@@ -16,6 +16,8 @@ import { GetDataV2Service } from 'src/app/api/data-processing/services';
 import { EventDataRequest, ExportEventDataRequest } from 'src/app/api/data-processing/models';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -182,12 +184,11 @@ export class AlarmsEventsComponent implements OnInit {
     private elRef: ElementRef,
     private dataV2Service: GetDataV2Service,
     private toast: ToastNotificationService,
-    private templatingService: TemplatingService
+    private templatingService: TemplatingService,
+    private translate: TranslateService
   ) {
     this.alarmsForm = this.createAlarmsForm();
     this.eventsForm = this.createEventsForm();
-
-    this.getEventsDataList();
   }
 
   get startTimeAlarmsProperty(): string {
@@ -328,45 +329,55 @@ export class AlarmsEventsComponent implements OnInit {
       rawEventIds: this.getDropdownSelectedValue('rawEventIds')?.map((x) => x.value)
     };
 
-    this.dataV2Service.v2GetEventsDataPost({ body: request }).subscribe((data) => {
-      this.eventsLoading = false;
-      this.eventsDataList = data;
-      if (data) {
-        this.eventsDataListCount = data.totalRowCount;
-        if (this.eventsDataListCount === 0) {
-          this.eventsPageNumber = 0;
+    this.dataV2Service.v2GetEventsDataPost({ body: request }).subscribe(
+      (data) => {
+        this.eventsLoading = false;
+        this.eventsDataList = data;
+        if (data) {
+          this.eventsDataListCount = data.totalRowCount;
+          if (this.eventsDataListCount === 0) {
+            this.eventsPageNumber = 0;
+          }
+        } else {
+          this.eventsDataListCount = 0;
         }
-      } else {
-        this.eventsDataListCount = 0;
-      }
-      this.manufacturers = [...new Set(this.eventsDataList.events.map((event) => event.manufacturer.toString().toUpperCase()).sort())];
-      this.protocols = [...new Set(this.eventsDataList.events.map((event) => event.protocol.toString().toUpperCase()).sort())];
+        this.manufacturers = [...new Set(this.eventsDataList.events.map((event) => event.manufacturer.toString().toUpperCase()).sort())];
+        this.protocols = [...new Set(this.eventsDataList.events.map((event) => event.protocol.toString().toUpperCase()).sort())];
 
-      this.filters = [
-        {
-          field: 'rawEventIds',
-          values: this.rawEventIds,
-          label: 'GRID.EVENT-ID-RAW',
-          isMultiselect: true
-        },
-        {
-          field: 'eventIds',
-          values: this.eventIds,
-          label: 'GRID.EVENT-ID',
-          isMultiselect: true
-        },
-        {
-          field: 'manufacturer',
-          values: this.manufacturers,
-          label: 'GRID.VENDOR'
-        },
-        {
-          field: 'protocol',
-          values: this.protocols,
-          label: 'GRID.PROTOCOL'
-        }
-      ];
-    });
+        this.filters = [
+          {
+            field: 'rawEventIds',
+            values: this.rawEventIds,
+            label: 'GRID.EVENT-ID-RAW',
+            isMultiselect: true
+          },
+          {
+            field: 'eventIds',
+            values: this.eventIds,
+            label: 'GRID.EVENT-ID',
+            isMultiselect: true
+          },
+          {
+            field: 'manufacturer',
+            values: this.manufacturers,
+            label: 'GRID.VENDOR'
+          },
+          {
+            field: 'protocol',
+            values: this.protocols,
+            label: 'GRID.PROTOCOL'
+          }
+        ];
+      },
+      () => {
+        this.toast.errorToast(this.translate.instant('COMMON.TOO-MANY-RECORDS-SEARCH'));
+        this.eventsLoading = false;
+      }
+    );
+  }
+
+  get permissionExportEvents() {
+    return PermissionEnumerator.Export_Events;
   }
 
   getDropdownSelectedValue(fieldName: string) {

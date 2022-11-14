@@ -47,11 +47,10 @@
         </app-data-table>
       </ng-template>
     </kendo-tabstrip-tab>
-
-    <kendo-tabstrip-tab title="{{ 'ALARM.EVENTS' | translate }}">
+    <kendo-tabstrip-tab title="{{ 'ALARM.EVENTS' | translate }}" *appHasPermission="permissionExportEvents">
       <ng-template kendoTabContent>
         <app-data-table-toolbar
-          (exportDataClickekdEvent)="exportData($event)"
+          (exportDataClickedEvent)="exportData($event)"
           (reloadGridDataEvent)="getEventsDataList()"
           (wildCardsEnabledEvent)="toggleWildcards($event)"
           [exportOptions]="exportOptions"
