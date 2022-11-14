@@ -151,7 +151,7 @@ export class MeterUnitsService {
       templateId: payload.template?.id,
       interfaceType: payload.communicationType,
       driver: 2, // DLMS
-      medium: 1, // ELECTRICITY
+      medium: payload.medium,
       jobIds: payload.jobIds,
       hostname: payload.hostname,
       port: payload.port,
@@ -208,7 +208,8 @@ export class MeterUnitsService {
       interfaceType: payload.communicationType,
       driver: payload.driver,
       referencingType: payload.referencingType,
-      externalId: payload.externalId
+      externalId: payload.externalId,
+      medium: payload.medium
     };
 
     if (payload.advancedInformation) {
@@ -249,7 +250,8 @@ export class MeterUnitsService {
       name: payload.name,
       serialNumber: payload.serialNumber,
       externalId: payload.externalId,
-      templateId: payload.templateId
+      templateId: payload.templateId,
+      medium: payload.medium
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }

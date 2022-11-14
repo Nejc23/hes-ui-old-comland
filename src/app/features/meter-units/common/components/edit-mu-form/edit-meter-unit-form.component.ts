@@ -26,7 +26,7 @@ import { ToastNotificationService } from '../../../../../core/toast-notification
 import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
 import { MuForm } from '../../../types/interfaces/mu-form.interface';
 import { EventManagerService } from '../../../../../core/services/event-manager.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-meter-unit-form',
@@ -54,6 +54,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
   defaultCommunicationType = this.communicationTypes[0];
 
   communicationTypeSelected: RadioOption = null;
+  mediums: Codelist<number>[] = [];
 
   authenticationTypes: Codelist<string>[] = [
     { id: AuthenticationTypeEnum.NONE, value: this.translate.instant('FORM.NONE') },
@@ -74,6 +75,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
   loading = false;
 
   subscriptions: Array<Subscription> = [];
+  deviceMediums$: Observable<Codelist<number>[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,6 +102,12 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
         this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
         const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
         this.form.get(this.manufacturerProperty).setValue(manufacturer);
+
+        this.deviceMediums$.subscribe((res) => {
+          this.mediums = res;
+          const medium = this.mediums.find((t) => this.data.medium.toLowerCase() === t.value.toLowerCase());
+          this.form.get(this.mediumProperty).setValue(medium);
+        });
       })
     );
   }
@@ -224,6 +232,10 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
     return this.data?.driver?.toLowerCase() === 'dlms';
   }
 
+  get mediumProperty() {
+    return nameOf<MuForm>((o) => o.medium);
+  }
+
   ngOnInit() {
     this.form = this.setFormEdit();
     console.log(this.form);
@@ -231,6 +243,14 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       this.manufacturers = this.isDlms ? manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : manufacturers;
       const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
       this.form.get(this.manufacturerProperty).setValue(manufacturer);
+    });
+    this.deviceMediums$ = this.codelistServiceMu.meterUnitDeviceMediumCodelist();
+    this.deviceMediums$.subscribe((res) => {
+      this.mediums = res;
+      const medium = this.mediums.find((t) => this.data?.medium?.toLowerCase() === t.value.toLowerCase());
+      if (medium) {
+        this.form.get(this.mediumProperty).setValue(medium);
+      }
     });
 
     this.checkTemplate();
@@ -246,6 +266,10 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       this.manufacturers = this.isDlms ? this.manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : this.manufacturers;
       const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
       this.form.get(this.manufacturerProperty).setValue(manufacturer);
+      const medium = this.mediums.find((t) => this.data?.medium?.toLowerCase() === t.value.toLowerCase());
+      if (medium) {
+        this.form.get(this.mediumProperty).setValue(medium);
+      }
     }
   }
 
@@ -262,6 +286,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       [this.nameProperty]: [this.data?.name],
       [this.serialNumberProperty]: [{ value: this.data?.serialNumber, disabled: true }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
+      [this.mediumProperty]: [{ value: null, disabled: false }, Validators.required],
       [this.templateProperty]: [{ value: null, disabled: !!this.data.templateName }],
       [this.templateStringProperty]: [{ value: this.data?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
@@ -645,7 +670,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       connectionType: this.form.get(this.connectionTypeProperty).value,
       driver: this.isDlms ? 2 : 0,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
-      externalId: this.form.get(this.externalIdProperty).value
+      externalId: this.form.get(this.externalIdProperty).value,
+      medium: this.form.get(this.mediumProperty)?.value?.id ?? ''
     };
   }
 
@@ -655,7 +681,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
       name: this.form.get(this.nameProperty).value,
       externalId: this.form.get(this.externalIdProperty).value,
       serialNumber: this.data.serialNumber,
-      templateId: this.form.get(this.templateProperty).value?.id ? this.form.get(this.templateProperty).value.id : ''
+      templateId: this.form.get(this.templateProperty).value?.id ? this.form.get(this.templateProperty).value.id : '',
+      medium: this.form.get(this.mediumProperty)?.value?.id ?? ''
     };
   }
 

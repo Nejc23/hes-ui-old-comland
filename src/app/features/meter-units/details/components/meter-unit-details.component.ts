@@ -19,9 +19,10 @@ import * as moment from 'moment';
 import { MeterPropertyService } from '../../../../api/concentrator-inventory/services';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { process } from '@progress/kendo-data-query';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { TemplateDto } from 'src/app/api/templating/template-dto';
+import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -50,6 +51,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   loading = false;
 
   private requestModel;
+  deviceMediums$: Observable<Codelist<number>[]>;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -309,6 +311,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
           ' ' +
           moment(this.data.lastCommunication).format(environment.timeFormat)
         : null,
+      medium: this.data.medium,
       externalId: this.data.externalId,
       deviceId: this.data.deviceId
     });

@@ -18,6 +18,7 @@ export interface MuUpdateRequest {
   driver: number;
   referencingType: ReferenceType;
   externalId?: string;
+  medium?: number;
 }
 
 export interface MuUpdatePlcRequest {
@@ -26,4 +27,5 @@ export interface MuUpdatePlcRequest {
   serialNumber: string;
   externalId?: string;
   templateId?: number;
+  medium?: number;
 }
