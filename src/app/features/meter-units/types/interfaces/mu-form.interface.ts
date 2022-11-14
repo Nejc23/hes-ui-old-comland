@@ -25,4 +25,5 @@ export interface MuForm {
   hdlcInformation?: MuHdlcInformation;
   referencingType: ReferenceType;
   externalId?: string;
+  medium?: number;
 }

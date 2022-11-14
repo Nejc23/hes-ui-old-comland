@@ -57,6 +57,16 @@
                   </div>
                 </div>
 
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input [selectOptions]="deviceMediums$ | async"
+                                      [form]="form"
+                                      [property]="mediumProperty"
+                                      label="Medium">
+                    </app-select-input>
+                  </div>
+                </div>
+
                 <div *ngIf="isConnectionTypeIp" class="form-row">
                   <div class="col-6">
                     <app-input-text

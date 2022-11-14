@@ -23,6 +23,7 @@ export interface MuUpdateForm extends MuUpdatePlcForm {
   hdlcInformation?: MuHdlcInformation;
   driver: number;
   referencingType: ReferenceType;
+  medium?: number;
 }
 
 export interface MuUpdatePlcForm {
@@ -31,4 +32,5 @@ export interface MuUpdatePlcForm {
   serialNumber: string;
   externalId?: string;
   templateId?: string;
+  medium?: number;
 }

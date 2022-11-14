@@ -28,6 +28,7 @@ import { ReferenceType } from '../../../../../core/repository/interfaces/meter-u
 import { TranslateService } from '@ngx-translate/core';
 import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
 import { ValidateHostnameStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './add-meter-unit-form.component.html'
@@ -73,6 +74,7 @@ export class AddMeterUnitFormComponent implements OnInit {
   templateDefaultValues: GetDefaultInformationResponse;
   opened = false;
   loading = false;
+  deviceMediums$: Observable<Codelist<number>[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -88,6 +90,7 @@ export class AddMeterUnitFormComponent implements OnInit {
   ) {
     this.form = this.createForm();
     this.communicationTypeChanged(this.defaultCommunicationType);
+    this.deviceMediums$ = this.codelistServiceMu.meterUnitDeviceMediumCodelist();
   }
 
   get nameProperty() {
@@ -206,6 +209,10 @@ export class AddMeterUnitFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.externalId);
   }
 
+  get mediumProperty() {
+    return nameOf<MuForm>((o) => o.medium);
+  }
+
   ngOnInit() {
     this.codelistServiceMu
       .meterUnitVendorCodelist(null)
@@ -245,6 +252,7 @@ export class AddMeterUnitFormComponent implements OnInit {
       [this.hostnameProperty]: [{ value: editMu?.hostname, disabled: this.plcDevice }, this.plcDevice ? null : [Validators.required]],
       [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }, Validators.required],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
+      [this.mediumProperty]: [{ id: 1, value: 'ELECTRICITY' }, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.driver, disabled: true }],
 
@@ -592,7 +600,8 @@ export class AddMeterUnitFormComponent implements OnInit {
       wrapperInformation,
       hdlcInformation,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
-      externalId: this.form.get(this.externalIdProperty).value
+      externalId: this.form.get(this.externalIdProperty).value,
+      medium: this.form.get(this.mediumProperty)?.value?.id ?? 1
     };
   }
 
