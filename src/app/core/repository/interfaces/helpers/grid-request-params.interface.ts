@@ -39,7 +39,7 @@ export interface GridFilterParams {
 
 export interface GridSortParams {
   colId: string;
-  sort: string;
+  sort: 'asc' | 'desc';
 }
 
 export interface GridSearchParams {

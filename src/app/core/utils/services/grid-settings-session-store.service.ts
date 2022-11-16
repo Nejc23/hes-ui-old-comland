@@ -9,6 +9,7 @@ export class GridSettingsSessionStoreService {
   cryptoImportIds = 'cryptoImportIds';
 
   constructor() {}
+
   // searchText
   // pageIndex
   /* setGridSearchText(gridId: string, searchText: string) {
@@ -220,6 +221,7 @@ export class GridSettingsSessionStoreService {
       }
     }
     return {
+      sortModel: [],
       searchText: '',
       pageIndex: 0,
       selectedRows: [],
