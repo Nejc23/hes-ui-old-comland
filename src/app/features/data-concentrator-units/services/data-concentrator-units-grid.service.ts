@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
-import { GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridFilterParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -583,6 +583,16 @@ export class DataConcentratorUnitsGridService {
     // send to subscribers the visibility of columns
     this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
+
+  public setSessionSettingsGridSort(sorting: GridSortParams) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.sortModel = [sorting];
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
 }
 
 // extra functions for grid

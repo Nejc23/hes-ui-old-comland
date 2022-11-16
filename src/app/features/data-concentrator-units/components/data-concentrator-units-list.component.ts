@@ -43,6 +43,7 @@ import {
 import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-response.interface';
 import { Router } from '@angular/router';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -54,7 +55,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   dcuUnitsGridLayoutStoreKey = 'dcu-units-grid-layout';
   dcuUnitsGridLayoutStore: DcuUnitsGridLayoutStore;
-
+  defaultSort: GridSortParams = { colId: 'slaSuccessPercentage', sort: 'asc' };
   // grid variables
   filtersInfo: FiltersInfo;
   requestModel: GridRequestParams = {
@@ -63,12 +64,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     requestId: null,
     startRow: 0,
     endRow: 0,
-    sortModel: [
-      {
-        colId: 'name',
-        sort: 'asc'
-      }
-    ],
+    sortModel: [this.defaultSort],
     searchModel: [],
     filterModel: {}
   };
@@ -385,6 +381,11 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
           this.addSettingsToSession(settings);
           this.searchText = settings.searchText;
           this.setFilter(false);
+
+          if (settings.sortModel?.length > 0) {
+            this.defaultSort = settings.sortModel[0];
+            this.requestModel.sortModel[0] = this.defaultSort;
+          }
         }
         this.areSettingsLoaded = true;
         this.getData();
@@ -409,6 +410,10 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
       if (settings.searchText) {
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(settings.searchText);
+      }
+
+      if (settings.sortModel) {
+        this.dataConcentratorUnitsGridService.setSessionSettingsGridSort(settings.sortModel[0]);
       }
 
       if (settings.visibleColumns) {
@@ -442,20 +447,14 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   }
 
   saveSettingsStore(sortModel?: GridSortParams[], saveData = true) {
+    debugger;
     const store: DcuUnitsGridLayoutStore = {
       currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex() ?? 0,
       dcuLayout: (this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout) ?? null,
-      sortModel: sortModel
-        ? sortModel
-        : this.dcuUnitsGridLayoutStore?.sortModel ?? [
-            {
-              colId: 'name',
-              sort: 'asc'
-            }
-          ],
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText() ?? '',
       searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards() ?? false,
       visibleColumns: this.getAllDisplayedColumnsNames(),
+      sortModel: [sortModel[0]],
       pageSize: this.pageSizes.find((pageSize) => pageSize.id === this.pageSize),
       hideFilter: true
     };
@@ -475,6 +474,11 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
         this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
       }
       this.dcuUnitsGridLayoutStore = store;
+    }
+
+    if (sortModel) {
+      store.sortModel[0] = sortModel[0];
+      this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
     }
   }
 
@@ -624,5 +628,17 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     // clear and apply filters
     this.gridFilterSessionStoreService.clearGridLayout();
     this.eventsService.emitCustom('ClearDcFilter', true);
+  }
+
+  sortingChanged(event: SortDescriptor[]) {
+    this.loading = true;
+    this.requestModel.sortModel = [];
+    this.defaultSort = {
+      colId: event[0].field,
+      sort: event[0].dir
+    };
+    this.requestModel.sortModel.push(this.defaultSort);
+    this.getData();
+    this.saveSettingsStore(this.requestModel.sortModel);
   }
 }

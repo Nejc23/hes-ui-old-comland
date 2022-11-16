@@ -102,6 +102,7 @@
           [showClearFiltersButton]="true"
           [showColumnChooser]="true"
           [sortable]="true"
+          [sort]="[{ field: defaultSort.colId, dir: defaultSort.sort}]"
           [tableHeight]="calculateHeight()"
           [totalCount]="totalCount"
           [wildCardsEnabled]="wildCardsSearch"
@@ -110,6 +111,7 @@
           [withFiltersIcon]="true"
           [withRefreshButton]="true"
           [withRowSelection]="true"
+          (sortChangeEvent)="sortingChanged($event)"
           [withSearch]="true">
         </app-data-table>
 

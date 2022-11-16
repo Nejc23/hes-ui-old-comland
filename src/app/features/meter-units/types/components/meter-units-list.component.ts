@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -15,7 +15,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import { enumSearchFilterOperators } from 'src/environments/config';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
 import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
@@ -40,6 +40,7 @@ import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selecti
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { Subscription } from 'rxjs';
 import { GetDataV2Service } from '../../../../api/data-processing/services/get-data-v-2.service';
+import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-meter-units',
@@ -69,14 +70,14 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   meterIdsFilterApplied = false;
   //
   wildCardsSearch = false;
-  refreshInterval = gridRefreshInterval;
+  defaultSort: GridSortParams = { colId: 'slaSuccessPercentage', sort: 'asc' };
   requestModel: GridRequestParams = {
     deviceIds: [],
     excludeIds: [],
     requestId: null,
     startRow: 0,
     endRow: 0,
-    sortModel: [],
+    sortModel: [this.defaultSort],
     searchModel: [{ colId: 'all', type: enumSearchFilterOperators.like, value: '', useWildcards: false }],
     filterModel: {
       states: [],
@@ -324,6 +325,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.meterUnitsTypeGridLayoutStore.pageSize = { id: this.pageSize, value: this.pageSize.toString() };
     this.meterUnitsTypeGridLayoutStore.searchWildcards = this.wildCardsSearch;
     this.meterUnitsTypeGridLayoutStore.searchText = this.searchText;
+    this.meterUnitsTypeGridLayoutStore.sortModel[0] = this.defaultSort;
     this.meterUnitsTypeGridLayoutStore.meterUnitsLayout = this.gridFilterSessionStoreService.getGridLayout(
       this.sessionNameForGridFilter
     ) as MeterUnitsLayout; //
@@ -335,7 +337,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       .filter((column) => column.field !== 'rowActions')
       .map((item) => item.field);
 
-    console.log(this.meterUnitsTypeGridLayoutStore);
     this.settingsStoreService.saveCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey, this.meterUnitsTypeGridLayoutStore);
     sessionStorage.setItem('metersGridLayout', JSON.stringify(this.meterUnitsTypeGridLayoutStore));
   }
@@ -489,6 +490,10 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.wildCardsSearch = settings.searchWildcards ?? false; // todo check
     this.selectedRowsIds = JSON.parse(sessionStorage.getItem('selectedRowsIds')) ?? [];
 
+    if (settings.sortModel.length > 0) {
+      this.defaultSort = settings.sortModel[0];
+      this.requestModel.sortModel = [this.defaultSort];
+    }
     if (this.searchText) {
       this.requestModel.searchModel = [
         {
@@ -667,6 +672,18 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
     sessionStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
+  }
+
+  sortingChanged(event: SortDescriptor[]) {
+    this.loading = true;
+    this.requestModel.sortModel = [];
+    this.defaultSort = {
+      colId: event[0].field,
+      sort: event[0].dir
+    };
+    this.requestModel.sortModel.push(this.defaultSort);
+    this.getMetersListData(true);
+    this.saveUserSettings();
   }
 
   ngOnDestroy() {
