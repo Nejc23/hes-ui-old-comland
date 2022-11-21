@@ -105,6 +105,7 @@ export class ImportDeviceKeysComponent implements OnInit {
     if (this.importResult.errorCode === 0) {
       this.meterUnitsTypeGridService.saveCryptoimportId(this.importResult.uuid);
       this.toast.successToast(this.staticextService.uploadSuccessful);
+      this.checkImportResults();
     }
   }
 

@@ -13,7 +13,7 @@ export enum TypeCode {
 export class ToastNotificationService {
   toasts: any[] = [];
   private defaultTitle = '';
-  private defaultTimeout = 6000;
+  private defaultTimeout = 5000;
 
   constructor() {}
 

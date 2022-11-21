@@ -533,3 +533,11 @@ ngb-tooltip-window.row-actions-tooltip {
     @apply tw-fill-yellow;
   }
 }
+
+.alert {
+  justify-content: space-between;
+}
+
+.alert-dismissible {
+  padding-right: 1.25rem;
+}
