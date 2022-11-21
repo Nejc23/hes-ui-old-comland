@@ -304,6 +304,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         <!-- multiple icons on grid with popover -->
         <ng-container *ngIf="column.type === columnType.ICONS">
           <div class="tw-inline-flex tw-justify-center tw-items-center">
+
             <ng-container *ngFor="let iconData of column.iconsData">
               <ng-container *ngIf="dataItem[iconData.field] === true || dataItem[iconData.field] === undefined">
                 <!-- true or data/templateId -->
@@ -312,6 +313,13 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   [src]="'assets/images/icons/' + iconData.iconName + '.svg'"
                   [title]="iconData.popoverText | translate" class="tw-mr-2 tw-w-4 tw-h-4" data-placement="top"
                   data-toggle="tooltip" />
+
+                <img
+                  *ngIf="iconData.field === 'hasConfigurationErrors'"
+                  [src]="'assets/images/icons/' + iconData.iconName + '.svg'"
+                  [title]="dataItem[iconData.popoverTextErrorField]" class="tw-mr-2 tw-w-4 tw-h-4"
+                  data-placement="top" data-toggle="tooltip"
+                />
 
                 <!-- re key -->
                 <div [permissions]="[permissionSecurityReKey]" appHideIfAllPermissionsUnauthorized
