@@ -408,7 +408,7 @@ export class SchedulerJobComponent {
     this.form.get(this.registersProperty).clearValidators();
 
     this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
-    if (job && (this.jobType === JobTypeEnumeration.alarmNotification || JobTypeEnumeration.initialReKeying)) {
+    if (job && (this.jobType === JobTypeEnumeration.alarmNotification || this.jobType == JobTypeEnumeration.initialReKeying)) {
       this.cronExpression = job.cronExpression;
     }
 
