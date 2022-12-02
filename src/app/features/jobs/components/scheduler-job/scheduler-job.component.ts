@@ -101,7 +101,7 @@ export class SchedulerJobComponent {
       jobName: this.translate.instant('JOB.INITIAL-RE-KEYING.TITLE'),
       deviceType: this.translate.instant('JOB.METER').toUpperCase(),
       icon: 'lock',
-      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Jobs)
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Initial_Re_Keying)
     },
     {
       jobType: JobTypeEnumeration.meterTimeSync,
