@@ -1,6 +1,6 @@
 {
   "name": "myGrid",
-  "version": "5.1.1",
+  "version": "5.4.0",
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8192 --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --ssl --ssl-key ./resources/ssl/localhost/localhost.key --ssl-cert ./resources/ssl/localhost/localhost.pem ",
