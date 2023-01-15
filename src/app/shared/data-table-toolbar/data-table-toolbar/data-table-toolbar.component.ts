@@ -24,6 +24,7 @@ export class DataTableToolbarComponent {
   @Input() withSearch = true;
   @Input() clearFilterClass = '';
   @Input() refreshButtonClass = '';
+  @Input() setDateRangePickerDefaultDate = false;
 
   @Output() clearSearchClickedEvent = new EventEmitter<any>();
   @Output() reloadGridDataEvent = new EventEmitter<any>();
