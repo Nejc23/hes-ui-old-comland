@@ -66,7 +66,7 @@
       <div *ngIf="!finished">
         {{ 'JOB.STATUS-JOB.RUNNING-TIME' | translate }}
       </div>
-      <cd-timer #basicTimer class="tw-pl-3"></cd-timer>
+      <div class="tw-ml-1"> {{ getTimeTiff() }} </div>
     </div>
   </div>
 

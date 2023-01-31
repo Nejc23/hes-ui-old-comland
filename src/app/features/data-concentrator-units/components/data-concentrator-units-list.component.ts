@@ -447,14 +447,13 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   }
 
   saveSettingsStore(sortModel?: GridSortParams[], saveData = true) {
-    debugger;
     const store: DcuUnitsGridLayoutStore = {
-      currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex() ?? 0,
+      currentPageIndex: this.dataConcentratorUnitsGridService?.getSessionSettingsPageIndex() ?? 0,
       dcuLayout: (this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout) ?? null,
-      searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText() ?? '',
-      searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards() ?? false,
+      searchText: this.dataConcentratorUnitsGridService?.getSessionSettingsSearchedText() ?? '',
+      searchWildcards: this.dataConcentratorUnitsGridService?.getSessionSettingsSearchedWildcards() ?? false,
       visibleColumns: this.getAllDisplayedColumnsNames(),
-      sortModel: [sortModel[0]],
+      sortModel: sortModel ? sortModel : [{ colId: 'slaSuccessPercentage', sort: 'asc' }],
       pageSize: this.pageSizes.find((pageSize) => pageSize.id === this.pageSize),
       hideFilter: true
     };
