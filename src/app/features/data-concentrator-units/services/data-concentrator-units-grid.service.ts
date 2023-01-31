@@ -515,7 +515,7 @@ export class DataConcentratorUnitsGridService {
   // searched wildcard
   public getSessionSettingsSearchedWildcards() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    return settings.searchWildcards;
+    return settings.searchWildcards ? settings.searchWildcards : false;
   }
 
   // set searched text
