@@ -1,18 +1,16 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { CdTimerComponent } from 'angular-cd-timer';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
 import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-status-job',
   templateUrl: './status-job.component.html'
 })
 export class StatusJobComponent implements OnInit, OnDestroy {
-  @ViewChild('basicTimer', { static: false }) cdTimer: CdTimerComponent;
-
   @Input() requestId: string = '';
   @Input() jobName: string = '';
   @Input() deviceCount = 0;
@@ -28,6 +26,9 @@ export class StatusJobComponent implements OnInit, OnDestroy {
     failCount: 0,
     progress: 10
   };
+
+  startDate: Date = new Date();
+  currentDate: Date = new Date();
 
   constructor(
     private modal: NgbActiveModal,
@@ -52,7 +53,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.statusJobProgress = res;
         if (this.statusJobProgress.progress == 0) {
-          this.statusJobProgress.progress += 10;
+          this.statusJobProgress.progress += 1;
         }
 
         this.interval = setTimeout(() => {
@@ -90,8 +91,18 @@ export class StatusJobComponent implements OnInit, OnDestroy {
 
   clearInt() {
     this.finished = true;
-    this.cdTimer.stop();
     clearTimeout(this.interval);
+    this.getTimeTiff(true);
     this.interval = null;
+  }
+
+  getTimeTiff(finished = false) {
+    if (!this.finished) {
+      this.currentDate = new Date();
+    }
+    const diffTime = moment(this.currentDate).diff(this.startDate);
+    const duration = moment.duration(diffTime);
+
+    return duration.days() + 'd' + ' ' + duration.hours() + 'h' + ' ' + duration.minutes() + 'm' + ' ' + duration.seconds() + 's';
   }
 }
