@@ -193,7 +193,8 @@ export class AuditLogsComponent implements OnInit {
   translateItems() {
     this.auditLogData.data.forEach((item) => {
       item.properties.auditExternalId = item.externalId;
-      if (item.properties) {
+      delete item.properties['auditExternalId'];
+      if (Object.keys(item.properties).length !== 0) {
         item['description'] = this.translate.instant('AUDIT-LOG.' + item.event?.toUpperCase(), item.properties);
       }
       item.event = this.translate.instant('AUDIT-LOG.TITLE.' + item.event?.toUpperCase());
