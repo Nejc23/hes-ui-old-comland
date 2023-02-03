@@ -1485,7 +1485,19 @@
     "IMPORT_KEYS": "Security material was imported from {{ fileName }}, filetype is {{ fileType }}",
     "TRIGGER_FIRMWARE_UPGRADE_METER": "{{ imageName }} was uploaded for meter {{ vendorType }} meter with serial number {{ serialNumber }}",
     "DELETE_METER_DATA": "Data for {{ vendor }} meter with serial number {{ serialNumber }} was deleted {{ description }}",
-    "CLEAR_REKEYING_FAILED": "Re-keying failed status was cleared for {{ manufacturer }} meter {{ serialNumber }}."
+    "CLEAR_REKEYING_FAILED": "Re-keying failed status was cleared for {{ manufacturer }} meter {{ serialNumber }}.",
+    "USER_LOGGED_IN": "User {{ username }} has logged in",
+    "USER_LOGGED_OUT": "User {{ username }} has logged out",
+    "CREATE_USER": "User with username {{ username }} was created",
+    "UPDATE_USER": "Field {{ fielD_NAME }} was changed for {{ username }} from {{ olD_FIELD_VALUE }} to {{ neW_FIELD_VALUE }}",
+    "USER_GROUP_ASSIGNED": "User {{ username }} was assigned to user groups: {{ lisT_OF_USER_GROUPS }}",
+    "USER_GROUP_REMOVED": "User {{ username }} was removed from user groups: {{ lisT_OF_USER_GROUPS }}",
+    "USER_ORGANIZATION_ASSIGNED": "User {{ username }} was assigned to organization: {{ organizatioN_NAME }}",
+    "USER_ORGANIZATION_REMOVED": "User {{ username }} was removed from organization: {{ organizatioN_NAME }}",
+    "CREATE_USER_ROLE": "User role {{ username }} was created",
+    "DELETE_USER_ROLE": "User role {{ username }} was deleted",
+    "USER_ROLE_ADDED": "User role added to {{ username }}",
+    "USER_ROLE_REMOVED": "User role removed from {{ username }}"
   },
   "LICENCE": {
     "TYPE": "Licence type",
