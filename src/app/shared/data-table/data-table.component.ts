@@ -766,6 +766,10 @@ export class DataTableComponent implements OnInit, OnChanges {
       .filter((data) => data.interpretedValue?.toLowerCase() === type.toLowerCase());
   }
 
+  getRelayStateCount(data: any) {
+    return data.filter((value) => value.registerType === 'RELAY_CONTROL_STATE').length;
+  }
+
   getClass(type: DisconnectorStateEnum) {
     switch (type) {
       case DisconnectorStateEnum.CONNECTED:

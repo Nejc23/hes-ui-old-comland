@@ -403,7 +403,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
             </ng-template>
           </ng-container>
 
-          <span *ngIf="dataItem[column.field].length === 0" class="text-muted">N/A</span>
+          <span *ngIf="getRelayStateCount(dataItem[column.field]) === 0" class="text-muted">N/A</span>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SLA">
