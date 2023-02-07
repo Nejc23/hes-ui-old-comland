@@ -36,7 +36,8 @@ export class ImportDeviceKeysComponent implements OnInit {
     { id: '3' as string, value: `GULF_V2_0` },
     { id: '4' as string, value: `GULF_V2_3` },
     { id: '5' as string, value: `GULF_V2_4` },
-    { id: '6' as string, value: `SMX_V1_6` }
+    { id: '6' as string, value: `SMX_V1_6` },
+    { id: '7' as string, value: `SMX_V2_0` }
   ];
 
   defaultFileType = this.fileTypes[4];
