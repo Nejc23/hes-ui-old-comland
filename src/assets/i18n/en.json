@@ -988,7 +988,7 @@
       "SHOW-HIDE": "Show/hide templates"
     },
     "IMPORT-DEVICE-KEYS": {
-      "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }",
+      "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }}",
       "IMPORT-SUCCESSFUL": "File {{ value1 }}  imported successfully, number of imported meters {{ value2 }}, number of imported keys {{ value3 }}.",
       "PARTIAL-IMPORT-SUCCESSFUL": "The import file contains certain keys that are not supported by our system. File {{ value1 }} imported partially successfully, number of imported meters {{ value2 }}, number of imported keys {{ value3 }}.",
       "SUBTITLE": "To import key material to Vault, first select the security material file type, then select the file to be imported.",
