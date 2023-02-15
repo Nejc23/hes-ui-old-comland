@@ -11,7 +11,7 @@ export const environment = {
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
   dateTimeFileFormat: 'DD-MM-yyyy_HH-mm',
   dateDisplayFormat: 'DD. MM. YYYY',
-  dateOnlyFormat: 'DD. MM',
+  dateOnlyFormat: 'DD. MM.',
   dateFormat: 'dd.MM.yyyy',
   fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',
@@ -21,7 +21,7 @@ export const environment = {
   kendoChartCategoryDateFormats: {
     minutes: 't',
     hours: 't', // h:mm tt for en-US; HH:mm - for 24h format
-    days: 'dd.MM',
+    days: 'dd.MM.',
     years: 'yyyy'
   },
   kendoChartCulture: 'de-DE',
