@@ -34,12 +34,10 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { MeterUnitsLayout } from '../../../../core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { FiltersInfo } from '../../../../shared/forms/interfaces/filters-info.interface';
 import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { Subscription } from 'rxjs';
-import { GetDataV2Service } from '../../../../api/data-processing/services/get-data-v-2.service';
 import { SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
@@ -108,7 +106,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     searchWildcards: this.wildCardsSearch
   };
 
-  filtersInfo: FiltersInfo;
   subscriptions: Array<Subscription> = [];
 
   constructor(
@@ -134,8 +131,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private codelistService: CodelistMeterUnitsRepositoryService,
-    private eventManager: EventManagerService,
-    private getDataV2Service: GetDataV2Service
+    private eventManager: EventManagerService
   ) {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
@@ -659,6 +655,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     if (this.meterIdsFilterApplied) {
       this.clearMeterIdsFilter();
     }
+    this.searchText = '';
+    this.clearSessionStorage();
     // clear and apply filters
     this.gridFilterSessionStoreService.clearGridLayout();
     this.eventManager.emitCustom('ClearFilter', true);
