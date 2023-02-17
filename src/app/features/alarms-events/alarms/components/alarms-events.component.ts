@@ -7,7 +7,7 @@ import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operat
 import * as moment from 'moment';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { EventData } from 'src/app/api/alarms-events/event-data-dto';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { GridColumn, GridColumnType, GridFilter, PageChangedEvent } from 'src/app/shared/data-table/data-table.component';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { SortDescriptor } from '@progress/kendo-data-query';
@@ -18,6 +18,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { TranslateService } from '@ngx-translate/core';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -88,8 +89,7 @@ export class AlarmsEventsComponent implements OnInit {
     {
       field: 'manufacturer',
       translationKey: 'GRID.VENDOR',
-      width: 100,
-      class: 'text-uppercase'
+      width: 100
     },
     {
       field: 'sourceType',
@@ -142,8 +142,7 @@ export class AlarmsEventsComponent implements OnInit {
     {
       field: 'manufacturer',
       translationKey: 'GRID.VENDOR',
-      width: 100,
-      class: 'text-uppercase'
+      width: 100
     },
     {
       field: 'protocol',
@@ -156,8 +155,8 @@ export class AlarmsEventsComponent implements OnInit {
   // Events search & filter
   wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
   filters: Array<GridFilter> = [];
-  protocols = [];
-  manufacturers = [];
+  protocols: string[];
+  manufacturers: string[];
   eventIds: Array<any>;
   rawEventIds: Array<any>;
 
@@ -185,7 +184,8 @@ export class AlarmsEventsComponent implements OnInit {
     private dataV2Service: GetDataV2Service,
     private toast: ToastNotificationService,
     private templatingService: TemplatingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
   ) {
     this.alarmsForm = this.createAlarmsForm();
     this.eventsForm = this.createEventsForm();
@@ -226,7 +226,7 @@ export class AlarmsEventsComponent implements OnInit {
   }
 
   createEventsForm(): FormGroup {
-    this.getGetEventMappingGroupCodeLists();
+    this.getGetCodeLists();
 
     return this.formBuilder.group({
       eventsSearchValue: null,
@@ -241,16 +241,23 @@ export class AlarmsEventsComponent implements OnInit {
     });
   }
 
-  getGetEventMappingGroupCodeLists() {
-    this.templatingService.getGetEventMappingGroupCodeTables().subscribe((values) => {
+  getGetCodeLists() {
+    forkJoin({
+      eventMappings: this.templatingService.getGetEventMappingGroupCodeTables(),
+      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0)
+    }).subscribe(({ eventMappings: eventCodeTable, protocols, manufacturers }) => {
       const epointEventListItems: Array<{ value: number; text: string }> = [];
       const rawEventListItems = [...epointEventListItems];
 
-      values.epointEventCodeTable.map((x) => epointEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
+      eventCodeTable.epointEventCodeTable.map((x) => epointEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
       this.eventIds = epointEventListItems;
 
-      values.rawEventCodeTable.map((x) => rawEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
+      eventCodeTable.rawEventCodeTable.map((x) => rawEventListItems.push({ value: x.id, text: x.id + ': ' + x.description }));
       this.rawEventIds = rawEventListItems;
+
+      this.protocols = protocols.map((protocol) => protocol.value);
+      this.manufacturers = manufacturers.map((manufacturer) => manufacturer.value);
     });
   }
 
@@ -341,9 +348,6 @@ export class AlarmsEventsComponent implements OnInit {
         } else {
           this.eventsDataListCount = 0;
         }
-        this.manufacturers = [...new Set(this.eventsDataList.events.map((event) => event.manufacturer.toString().toUpperCase()).sort())];
-        this.protocols = [...new Set(this.eventsDataList.events.map((event) => event.protocol.toString().toUpperCase()).sort())];
-
         this.filters = [
           {
             field: 'rawEventIds',
