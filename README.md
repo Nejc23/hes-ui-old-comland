@@ -125,4 +125,3 @@ Then download swagger documentation (json file) and start command to generate ap
 For each service put api into `<your-service-name>` subfolder.
 Do not overwrite BaseService class because of special condition and logic for getter of root url.
 
-
