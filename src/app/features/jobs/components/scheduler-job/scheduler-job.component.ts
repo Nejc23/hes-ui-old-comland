@@ -151,7 +151,7 @@ export class SchedulerJobComponent {
   ];
 
   addJobsForUser: AddJobParams[];
-
+  selectedConcentratorsIds = [];
   constructor(
     private meterService: PlcMeterReadScheduleService,
     private codelistService: CodelistRepositoryService,
@@ -234,6 +234,7 @@ export class SchedulerJobComponent {
   }
 
   createForm(formData: SchedulerJob): FormGroup {
+    this.selectedConcentratorsIds = formData?.scheduleDevices ?? [];
     let startAt =
       formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
         ? moment(formData.schedules[0].startAt).toDate()
