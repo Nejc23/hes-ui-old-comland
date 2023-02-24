@@ -21,6 +21,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   @Input() type = 'meter';
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
+  @Input() scheduleDevices = [];
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
 
@@ -115,7 +116,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   // select rows on load grid from session
   selectRows(api: any) {
-    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    const selectedRows =
+      this.scheduleDevices.length > 0 ? this.scheduleDevices : this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
     api.forEachNode((node) => {
       if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
