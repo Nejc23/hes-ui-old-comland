@@ -1,4 +1,4 @@
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -44,7 +44,7 @@ export class AddDcuFormComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private jobsService: JobsService,
+    private jobsService: SchedulerJobsService,
     private toast: ToastNotificationService,
     private jobsSelectGridService: JobsSelectGridService,
     private translate: TranslateService

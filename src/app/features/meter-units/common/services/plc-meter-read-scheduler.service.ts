@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlcMeterReadScheduleService {
-  constructor(private jobsService: JobsService) {}
+  constructor(private jobsService: SchedulerJobsService) {}
 
   transformData(values: SchedulerJobForm): SchedulerJob {
     const serviceData: SchedulerJob = {

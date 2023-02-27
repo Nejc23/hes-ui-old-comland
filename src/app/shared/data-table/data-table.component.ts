@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
@@ -25,7 +24,6 @@ import { DisconnectorStateEnum, jobStatus } from 'src/app/features/meter-units/t
 import { brand } from '../../../environments/brand/default/brand';
 import { environment } from '../../../environments/environment';
 import { ModalService } from '../../core/modals/services/modal.service';
-import { ActiveJobsListComponent } from '../../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { FormData } from '../card-item/card-item.component';
 import { dateServerFormat } from '../forms/consts/date-format';
 import { Codelist } from '../repository/interfaces/codelists/codelist.interface';
@@ -745,15 +743,6 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.searchInput.nativeElement.value = '';
     this.clearFilerTextClickEvent.emit(true);
     this.searchInputChangedEvent.emit('');
-  }
-
-  // meter units grid specific columns from old grid
-  openJobStatusModal(deviceId: string) {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-    const modalRef = this.modalService.open(ActiveJobsListComponent, options);
-    modalRef.componentInstance.deviceId = deviceId;
   }
 
   checkThresholdDate(date: string) {

@@ -13,7 +13,6 @@ import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
 import {
   deviceJobs,
-  enableJob,
   executeJob,
   notificationJobs,
   reKeyScheduleJobs,
@@ -30,7 +29,7 @@ import { DeviceJobs } from '../../interfaces/jobs/device-jobs.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class JobsService {
+export class SchedulerJobsService {
   constructor(private repository: RepositoryService) {}
 
   getSchedulerJobsListForm(param: GridRequestParams, pageIndex: number, pageSize?): Observable<GridResponse<SchedulerJobsList>> {
@@ -111,36 +110,12 @@ export class JobsService {
     return new HttpRequest('PUT', `${schedulerJobs}/${id}`, param);
   }
 
-  deleteSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.deleteSchedulerJobRequest(id));
-  }
-
-  deleteSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('DELETE', `${schedulerJobs}/${id}`);
-  }
-
   executeSchedulerJob(id: string): Observable<any> {
     return this.repository.makeRequest(this.executeSchedulerJobRequest(id));
   }
 
   executeSchedulerJobRequest(id: string): HttpRequest<any> {
     return new HttpRequest('PUT', `${executeJob}/${id}`, null);
-  }
-
-  enableSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.enableSchedulerJobRequest(id));
-  }
-
-  enableSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('PUT', `${enableJob}/${id}/1`, null);
-  }
-
-  disableSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.disableSchedulerJobRequest(id));
-  }
-
-  disableSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('PUT', `${enableJob}/${id}/0`, null);
   }
 
   createDeviceJobs(deviceId: string, scheduleJobIds: string[]) {

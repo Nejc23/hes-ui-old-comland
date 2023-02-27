@@ -83,7 +83,6 @@ export class PlcMeterJobsAssignExistingComponent {
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.loading = false;
-        console.log(result);
         this.modal.close();
       },
       (err) => {

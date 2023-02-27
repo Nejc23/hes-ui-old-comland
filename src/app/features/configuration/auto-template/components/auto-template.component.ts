@@ -13,7 +13,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
@@ -73,7 +73,7 @@ export class AutoTemplateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private serviceRepository: AutoTemplatesService,
-    private serviceJob: JobsService,
+    private serviceJob: SchedulerJobsService,
     private codelistService: CodelistRepositoryService,
     private toast: ToastNotificationService,
     private modalService: ModalService,

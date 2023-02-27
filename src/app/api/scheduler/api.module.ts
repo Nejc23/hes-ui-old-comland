@@ -8,6 +8,7 @@ import { JobCodesService } from './services/job-codes.service';
 import { JobsService } from './services/jobs.service';
 import { JobDevicesService } from './services/job-devices.service';
 import { ScheduledNotificationsService } from './services/scheduled-notifications.service';
+import { ScheduledRekeyService } from './services/scheduled-rekey.service';
 
 /**
  * Module that provides all services and configuration.
@@ -16,7 +17,7 @@ import { ScheduledNotificationsService } from './services/scheduled-notification
   imports: [],
   exports: [],
   declarations: [],
-  providers: [JobCodesService, JobsService, JobDevicesService, ScheduledNotificationsService, ApiConfiguration]
+  providers: [JobCodesService, JobsService, JobDevicesService, ScheduledNotificationsService, ScheduledRekeyService, ApiConfiguration]
 })
 export class ApiModule {
   static forRoot(params: ApiConfigurationParams): ModuleWithProviders<ApiModule> {
