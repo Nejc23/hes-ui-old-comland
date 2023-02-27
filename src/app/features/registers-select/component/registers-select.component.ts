@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulableRegistersType } from '../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 import { RegistersSelectRequest } from '../../../core/repository/interfaces/registers-select/registers-select-request.interface';
 
@@ -38,7 +38,7 @@ export class RegistersSelectComponent implements OnInit {
     private registersSelectGridService: RegistersSelectGridService,
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private jobsService: JobsService
+    private jobsService: SchedulerJobsService
   ) {}
 
   get selectedAtLeastOneRowOnGrid() {

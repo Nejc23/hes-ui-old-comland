@@ -1,6 +1,6 @@
 import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
 import { DataConcentratorUnitsService } from '../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
@@ -102,7 +102,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
-    private jobsService: JobsService,
+    private jobsService: SchedulerJobsService,
     private breadcrumbService: BreadcrumbService,
     private sidebarToggleService: SidebarToggleService,
     private translate: TranslateService

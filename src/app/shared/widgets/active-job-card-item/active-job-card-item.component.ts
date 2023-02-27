@@ -7,7 +7,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
@@ -61,7 +61,7 @@ export class ActiveJobCardItemComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private activeJobsService: JobsService,
+    private activeJobsService: SchedulerJobsService,
     private modalService: ModalService,
     private translate: TranslateService,
     private toast: ToastNotificationService,

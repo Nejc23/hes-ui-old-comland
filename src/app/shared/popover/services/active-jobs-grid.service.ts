@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { GridCellActiveJobStatusComponent } from '../components/grid-custom-components/grid-cell-active-job-status.component';
-import { GridCellLinkComponent } from '../components/grid-custom-components/grid-cell-link.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +33,5 @@ export class ActiveJobsGridService {
         cellRenderer: 'gridCellLinkComponent'
       }
     ];
-  }
-
-  public setFrameworkComponents() {
-    return {
-      gridCellActiveJobStatusComponent: GridCellActiveJobStatusComponent,
-      gridCellLinkComponent: GridCellLinkComponent
-    };
   }
 }

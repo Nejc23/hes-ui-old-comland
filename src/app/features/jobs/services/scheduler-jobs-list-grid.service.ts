@@ -1,13 +1,9 @@
-import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { Injectable } from '@angular/core';
-import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
-import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridPagination } from '../../meter-units/types/interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
-import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GridColumn, GridColumnType, GridRowAction } from '../../../shared/data-table/data-table.component';
 import { SortDescriptor } from '@progress/kendo-data-query';
@@ -79,18 +75,6 @@ export class SchedulerJobsListGridService {
   ];
 
   constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService, private translate: TranslateService) {}
-
-  /**
-   *  Set templates for grid
-   */
-  public setFrameworkComponents() {
-    return {
-      gridCellActiveComponent: GridCellActiveComponent,
-      gridCellNextRunComponent: GridCellNextRunComponent,
-      gridCellEditActionsComponent: GridCellEditActionsComponent,
-      gridCellDeviceCountComponent: GridCellDeviceCountComponent
-    };
-  }
 
   /**
    * Get grid pagination for current row

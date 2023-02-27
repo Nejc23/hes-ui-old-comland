@@ -9,7 +9,6 @@ import { GridCellIdNumberComponent } from 'src/app/shared/ag-grid/components/gri
 import { GridCellIpComponent } from 'src/app/shared/ag-grid/components/grid-cell-ip.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridSelectionHeaderScrollableComponent } from 'src/app/shared/ag-grid/components/grid-selection-header-scrollable.component';
-import { GridCellActiveReadOnlyComponent } from '../components/grid-custom-components/grid-cell-active-read-only.component';
 import { GridCellNextRunNoEventComponent } from 'src/app/features/configuration/auto-template/components/grid-custom-components/grid-cell-next-run-no-event.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -99,7 +98,6 @@ export class JobsSelectGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellIpComponent: GridCellIpComponent,
       gridCellIdNumberComponent: GridCellIdNumberComponent,
-      gridCellActiveReadOnlyComponent: GridCellActiveReadOnlyComponent,
       gridCellNextRunComponent: GridCellNextRunNoEventComponent
     };
   }
