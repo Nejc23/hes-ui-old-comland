@@ -5,6 +5,8 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import { forkJoin, Observable, Subscription } from 'rxjs';
+import { ActivateOrDeactivateJobsRequest, DeleteJobsRequest } from 'src/app/api/scheduler/models';
+import { JobsService } from 'src/app/api/scheduler/services';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { userSettingNotificationJobDefaultAddress } from 'src/app/core/repository/consts/settings-store.const';
@@ -12,7 +14,7 @@ import { GridRequestParams, GridSortParams } from 'src/app/core/repository/inter
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsService } from 'src/app/core/repository/services/settings/settings.service';
@@ -103,7 +105,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
   private refreshSubscription: Subscription;
 
   constructor(
-    private schedulerJobsService: JobsService,
+    private schedulerJobsService: SchedulerJobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
     public fb: FormBuilder,
     public staticTextService: JobsStaticTextService,
@@ -121,7 +123,8 @@ export class JobsListComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     private toast: ToastNotificationService,
     private settingsService: SettingsService,
-    private router: Router
+    private router: Router,
+    private jobService: JobsService
   ) {
     this.refreshSubscription = this.eventService.eventEmitterRefresh.subscribe({
       next: (event: boolean) => {
@@ -317,12 +320,14 @@ export class JobsListComponent implements OnInit, OnDestroy {
   openJobStatusModal(id: any, event: boolean) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    let response: Observable<any> = new Observable();
-    const operation = event ? this.translate.instant('COMMON.ENABLE') : this.translate.instant('COMMON.DISABLE');
-    response = event ? this.schedulerJobsService.enableSchedulerJob(id) : this.schedulerJobsService.disableSchedulerJob(id);
-    component.btnConfirmText = operation;
     component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
     component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB-CHANGE-STATUS');
+    const operation = event ? this.translate.instant('COMMON.ENABLE') : this.translate.instant('COMMON.DISABLE');
+    component.btnConfirmText = operation;
+
+    let response: Observable<any> = new Observable();
+    const activateOrDeactivateJobsRequest: ActivateOrDeactivateJobsRequest = { jobIds: [id], activate: event };
+    response = this.jobService.jobsEnablePut({ body: activateOrDeactivateJobsRequest });
 
     modalRef.result.then(
       (data) => {
@@ -450,12 +455,14 @@ export class JobsListComponent implements OnInit, OnDestroy {
   deleteJob(params: any) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    let response: Observable<any> = new Observable();
-    const operation = this.translate.instant('COMMON.DELETE');
-    response = this.schedulerJobsService.deleteSchedulerJob(params.id);
-    component.btnConfirmText = operation;
+    component.btnConfirmText = this.translate.instant('COMMON.DELETE');
     component.modalTitle = this.translate.instant('COMMON.CONFIRM-DELETE');
     component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.DELETE');
+
+    let response: Observable<any> = new Observable();
+    const deleteJobsRequest: DeleteJobsRequest = { jobIds: [params.id] };
+    response = this.jobService.jobsDelete({ body: deleteJobsRequest });
+
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)

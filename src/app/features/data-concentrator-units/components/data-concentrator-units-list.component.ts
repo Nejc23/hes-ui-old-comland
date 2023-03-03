@@ -134,7 +134,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
         if (event !== null) {
-          this.requestModel.filterModel.states = event.statesFilter;
+          this.requestModel.filterModel.states = event.statesFilter ?? [];
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
@@ -198,6 +198,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
         (data) => {
           this.loading = false;
           this.gridData = data;
+          this.gridData.data = [...data.data];
           this.totalCount = this.gridData.totalCount;
           if (this.totalCount === 0) {
             this.pageNumber = 0;
@@ -265,29 +266,21 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   // set filter in request model
   setFilter(saveUserDataToApi = true) {
     this.pageNumber = 1;
-    if (
-      !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
-        this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
-        this.requestModel.filterModel
-      )
-    ) {
-      this.setFilterInfo();
-      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-      this.requestModel.filterModel.states = filterDCU.statesFilter;
-      this.requestModel.filterModel.readStatus = {
-        operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
-        value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
-        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
-      };
+    this.setFilterInfo();
+    const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+    this.requestModel.filterModel.states = filterDCU?.statesFilter ?? [];
+    this.requestModel.filterModel.readStatus = {
+      operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
+      value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
+      value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
+    };
 
-      this.requestModel.filterModel.types = filterDCU.typesFilter?.map((t) => t.id);
-      this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-      this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
-      this.requestModel.filterModel.sla = filterDCU.slaFilter;
-      this.requestModel.filterModel.lastCommunicationFilter = filterDCU.lastCommunicationFilter;
-    } else {
-      this.setFilterInfo();
-    }
+    this.requestModel.filterModel.types = filterDCU.typesFilter?.map((t) => t.id);
+    this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+    this.requestModel.searchModel = this.setSearch();
+    this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
+    this.requestModel.filterModel.sla = filterDCU.slaFilter;
+    this.requestModel.filterModel.lastCommunicationFilter = filterDCU.lastCommunicationFilter;
     if (saveUserDataToApi) {
       this.saveSettingsStore();
     }
@@ -625,6 +618,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   clearFilters(event: boolean) {
     // clear and apply filters
+    this.searchText = '';
+    this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(this.searchText);
     this.gridFilterSessionStoreService.clearGridLayout();
     this.eventsService.emitCustom('ClearDcFilter', true);
   }

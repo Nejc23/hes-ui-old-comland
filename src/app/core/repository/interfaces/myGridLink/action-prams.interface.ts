@@ -221,3 +221,13 @@ export interface MeterParametrizationResponse {
   isValid: boolean;
   requestId: string;
 }
+
+export interface ModuleConfigurationCommon {
+  changePrimaryAddressOnUninstall: boolean;
+  autoInstallOnReboot: boolean;
+  deleteLPOnInstallation: boolean;
+  installationPeriodChannel1: number;
+  installationPeriodChannel2: number;
+  installationPeriodChannel3: number;
+  installationPeriodChannel4: number;
+}

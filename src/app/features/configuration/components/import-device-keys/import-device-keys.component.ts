@@ -36,7 +36,8 @@ export class ImportDeviceKeysComponent implements OnInit {
     { id: '3' as string, value: `GULF_V2_0` },
     { id: '4' as string, value: `GULF_V2_3` },
     { id: '5' as string, value: `GULF_V2_4` },
-    { id: '6' as string, value: `SMX_V1_6` }
+    { id: '6' as string, value: `SMX_V1_6` },
+    { id: '7' as string, value: `SMX_V2_0` }
   ];
 
   defaultFileType = this.fileTypes[4];
@@ -144,8 +145,8 @@ export class ImportDeviceKeysComponent implements OnInit {
             this.allResultTexts.push(
               this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-SUCCESSFUL', {
                 value1: o.fileName,
-                value2: o.meterCount,
-                value3: o.keyCount
+                value2: o.meterCount ?? 0,
+                value3: o.keyCount ?? 0
               })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
@@ -153,20 +154,18 @@ export class ImportDeviceKeysComponent implements OnInit {
             this.allWarningText.push(
               this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.PARTIAL-IMPORT-SUCCESSFUL', {
                 value1: o.fileName,
-                value2: o.meterCount,
-                value3: o.keyCount
+                value2: o.meterCount ?? 0,
+                value3: o.keyCount ?? 0
               })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
             this.allErrorTexts.push(
-              this.allErrorTexts.push(
-                this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-FAILED', {
-                  value1: o.fileName,
-                  value2: o.errorMsg
-                })
-              )
+              this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-FAILED', {
+                value1: o.fileName,
+                value2: o.errorMsg
+              })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }

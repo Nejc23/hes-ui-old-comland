@@ -5,7 +5,7 @@ import { RegistersSelectList } from 'src/app/core/repository/interfaces/register
 import * as _ from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
 import { JobsSelectGridService } from '../services/jobs-select-grid.service';
@@ -49,7 +49,7 @@ export class JobsSelectComponent implements OnInit {
     private jobsSelectGridService: JobsSelectGridService,
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private jobsService: JobsService
+    private jobsService: SchedulerJobsService
   ) {
     this.gridOptions = this.jobsSelectGridService.setGridOptions();
     this.frameworkComponents = jobsSelectGridService.setFrameworkComponents();

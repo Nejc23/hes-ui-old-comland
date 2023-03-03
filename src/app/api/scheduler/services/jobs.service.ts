@@ -9,8 +9,10 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { ActivateOrDeactivateJobsRequest } from '../models/activate-or-deactivate-jobs-request';
 import { AddNewJobRequest } from '../models/add-new-job-request';
 import { AddNewScheduleDeviceRequest } from '../models/add-new-schedule-device-request';
+import { DeleteJobsRequest } from '../models/delete-jobs-request';
 import { GetJobListSearchRequest } from '../models/get-job-list-search-request';
 import { IJobCommand } from '../models/i-job-command';
 import { IJobCommandResponseGridModel } from '../models/i-job-command-response-grid-model';
@@ -127,6 +129,66 @@ export class JobsService extends BaseService {
   }
 
   /**
+   * Path part for operation jobsDelete
+   */
+  static readonly JobsDeletePath = '/jobs';
+
+  /**
+   * Deletes all the scheduled jobs that are provided in the request object and removes their corresponding schedules.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `jobsDelete()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  jobsDelete$Response(params?: {
+    /**
+     * Delete request object containing the list ob job ids.
+     */
+    body?: DeleteJobsRequest;
+  }): Observable<StrictHttpResponse<void>> {
+    const rb = new RequestBuilder(this.rootUrl, JobsService.JobsDeletePath, 'delete');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'text',
+          accept: '*/*'
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        })
+      );
+  }
+
+  /**
+   * Deletes all the scheduled jobs that are provided in the request object and removes their corresponding schedules.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `jobsDelete$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  jobsDelete(params?: {
+    /**
+     * Delete request object containing the list ob job ids.
+     */
+    body?: DeleteJobsRequest;
+  }): Observable<void> {
+    return this.jobsDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
+  }
+
+  /**
    * Path part for operation jobsJobIdGet
    */
   static readonly JobsJobIdGetPath = '/jobs/{jobId}';
@@ -227,56 +289,6 @@ export class JobsService extends BaseService {
    */
   jobsJobIdPut(params: { jobId: string; body?: UpdateJobRequest }): Observable<void> {
     return this.jobsJobIdPut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
-  }
-
-  /**
-   * Path part for operation jobsJobIdDelete
-   */
-  static readonly JobsJobIdDeletePath = '/jobs/{jobId}';
-
-  /**
-   * Delete job.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `jobsJobIdDelete()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  jobsJobIdDelete$Response(params: { jobId: string }): Observable<StrictHttpResponse<void>> {
-    const rb = new RequestBuilder(this.rootUrl, JobsService.JobsJobIdDeletePath, 'delete');
-    if (params) {
-      rb.path('jobId', params.jobId, {});
-    }
-
-    return this.http
-      .request(
-        rb.build({
-          responseType: 'text',
-          accept: '*/*'
-        })
-      )
-      .pipe(
-        filter((r: any) => r instanceof HttpResponse),
-        map((r: HttpResponse<any>) => {
-          return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-        })
-      );
-  }
-
-  /**
-   * Delete job.
-   *
-   *
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `jobsJobIdDelete$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  jobsJobIdDelete(params: { jobId: string }): Observable<void> {
-    return this.jobsJobIdDelete$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
 
   /**
@@ -486,25 +498,29 @@ export class JobsService extends BaseService {
   }
 
   /**
-   * Path part for operation jobsEnableJobIdEnablePut
+   * Path part for operation jobsEnablePut
    */
-  static readonly JobsEnableJobIdEnablePutPath = '/jobs-enable/{jobId}/{enable}';
+  static readonly JobsEnablePutPath = '/jobs-enable';
 
   /**
-   * Enable/disable job: 1- enable; 0 - disable.
+   * Activates or deactivates jobs that are provided in the request object.
    *
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `jobsEnableJobIdEnablePut()` instead.
+   * To access only the response body, use `jobsEnablePut()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  jobsEnableJobIdEnablePut$Response(params: { jobId: string; enable: number }): Observable<StrictHttpResponse<void>> {
-    const rb = new RequestBuilder(this.rootUrl, JobsService.JobsEnableJobIdEnablePutPath, 'put');
+  jobsEnablePut$Response(params?: {
+    /**
+     * Delete request object containing the list ob job ids and activation/deactivation flag.
+     */
+    body?: ActivateOrDeactivateJobsRequest;
+  }): Observable<StrictHttpResponse<void>> {
+    const rb = new RequestBuilder(this.rootUrl, JobsService.JobsEnablePutPath, 'put');
     if (params) {
-      rb.path('jobId', params.jobId, {});
-      rb.path('enable', params.enable, {});
+      rb.body(params.body, 'application/*+json');
     }
 
     return this.http
@@ -523,17 +539,22 @@ export class JobsService extends BaseService {
   }
 
   /**
-   * Enable/disable job: 1- enable; 0 - disable.
+   * Activates or deactivates jobs that are provided in the request object.
    *
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `jobsEnableJobIdEnablePut$Response()` instead.
+   * To access the full response (for headers, for example), `jobsEnablePut$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  jobsEnableJobIdEnablePut(params: { jobId: string; enable: number }): Observable<void> {
-    return this.jobsEnableJobIdEnablePut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
+  jobsEnablePut(params?: {
+    /**
+     * Delete request object containing the list ob job ids and activation/deactivation flag.
+     */
+    body?: ActivateOrDeactivateJobsRequest;
+  }): Observable<void> {
+    return this.jobsEnablePut$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
   }
 
   /**

@@ -164,6 +164,9 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           </div>
         </div>
       </div>
+
+      <ng-content></ng-content>
+
     </div>
   </ng-template>
 
@@ -291,16 +294,6 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           </div>
         </ng-container>
 
-        <!-- copied from old grid - Job status with active jobs modal window -->
-        <ng-container *ngIf="column.type === columnType.JOB_STATUS">
-          <div [title]="dataItem[column.field]" data-placement="top" data-toggle="tooltip">
-            <div (click)="openJobStatusModal(dataItem.deviceId)" *ngIf="dataItem[column.field]" class="tw-pt-3"
-                 role="button">
-              <img src="assets/images/icons/{{ dataItem[column.field].toLowerCase() }}-icon.svg" />
-            </div>
-          </div>
-        </ng-container>
-
         <!-- multiple icons on grid with popover -->
         <ng-container *ngIf="column.type === columnType.ICONS">
           <div class="tw-inline-flex tw-justify-center tw-items-center">
@@ -403,7 +396,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
             </ng-template>
           </ng-container>
 
-          <span *ngIf="dataItem[column.field].length === 0" class="text-muted">N/A</span>
+          <span *ngIf="getRelayStateCount(dataItem[column.field]) === 0" class="text-muted">N/A</span>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SLA">

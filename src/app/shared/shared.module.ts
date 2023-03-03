@@ -20,11 +20,9 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
 import { DeleteDcuFormComponent } from '../features/data-concentrator-units/components/delete-dcu-form/delete-dcu-form.component';
 import { EditDataConcentratorFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
-import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
 import { StatusJobComponent } from '../features/jobs/components/status-job/status-job.component';
-import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/components/grid-custom-components/grid-cell-active-read-only.component';
 import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { PlcMeterLimiterComponent } from '../features/meter-units/common/components/plc-meter-limiter/plc-meter-limiter.component';
@@ -32,7 +30,6 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
 import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
-import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { TouConfigurationComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
@@ -84,8 +81,6 @@ import { ModalTemplateComponent } from './modals/components/modal-template.compo
 import { WidgetSettingsFormDirective } from './modals/directives/widget-settings-form.directive';
 import { PipesModule } from './pipes/pipes.module';
 import { ActiveJobComponent } from './popover/components/active-job/active-job.component';
-import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
-import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
 import { ToastComponent } from './toast-notification/components/toast.component';
 import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
@@ -128,6 +123,8 @@ import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widg
 import { InitialReKeyingComponent } from '../features/jobs/components/scheduler-job/initial-re-keying.component';
 import { MeterParametrizationComponent } from './meter-parametrization/meter-parametrization.component';
 import { HasPermissionDirective } from './directives/permissions/has-permission.directive';
+import { ImportMbusConfigurationComponent } from '../features/meter-units/common/components/import-mbus-configuration/import-mbus-configuration.component';
+import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -177,7 +174,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,
@@ -202,7 +199,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     PlcDeleteMeterDataComponent,
     StatusJobComponent,
-    ActiveJobsListComponent,
     PageTitleComponent,
     CardItemComponent,
     MiniCardItemComponent,
@@ -230,7 +226,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PopoverComponent,
     SlaQualityWidgetComponent,
     InitialReKeyingComponent,
-    HasPermissionDirective
+    HasPermissionDirective,
+    PlcMeterTemplatesImportComponent
   ],
   imports: [
     CommonModule,
@@ -245,14 +242,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     BreadcrumbsModule,
     PipesModule,
     AgGridModule.withComponents([
-      GridCellActiveJobStatusComponent,
-      GridCellLinkComponent,
       GridSelectionHeaderComponent,
       GridSelectionHeaderScrollableComponent,
       GridCellNameComponent,
       GridCellIdNumberComponent,
-      GridCellIpComponent,
-      GridCellActiveReadOnlyComponent
+      GridCellIpComponent
     ]),
     CdTimerModule,
     MatDatepickerModule,
@@ -312,12 +306,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     Page404Component,
     AutoRefreshComponent,
     IdentityErrorComponent,
-    GridCellActiveJobStatusComponent,
-    GridCellLinkComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     GridSelectionHeaderComponent,
     GridSelectionHeaderScrollableComponent,
     GridCellNameComponent,
@@ -332,7 +324,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
     JobsSelectComponent,
-    GridCellActiveReadOnlyComponent,
     CronScheduleComponent,
     SecurityActivateHlsComponent,
     SecurityRekeyComponent,
@@ -349,7 +340,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     PlcDeleteMeterDataComponent,
     StatusJobComponent,
-    ActiveJobsListComponent,
     AddJobComponent,
     CardItemComponent,
     PageTitleComponent,
@@ -380,7 +370,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SlaQualityWidgetComponent,
     InitialReKeyingComponent,
     MeterParametrizationComponent,
-    HasPermissionDirective
+    HasPermissionDirective,
+    PlcMeterTemplatesImportComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -397,7 +388,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,

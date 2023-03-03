@@ -1,5 +1,0 @@
-<div class="d-flex flex-row-reverse" container="body" [openDelay]="1000" triggers="hover" placement="bottom"
-  [ngbTooltip]="setToolTip(params.data.running)">
-  <a href="javascript:void(0);" (click)="cancelJob(params.value)" *ngIf="!params.data.running">{{ 'COMMON.CANCEL' | translate }}</a>
-  <a href="javascript:void(0);" (click)="stopJob(params.value)" *ngIf="params.data.running">{{ 'COMMON.STOP' | translate }}</a>
-</div>

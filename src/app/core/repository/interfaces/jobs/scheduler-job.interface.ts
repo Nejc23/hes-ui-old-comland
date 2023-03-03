@@ -12,6 +12,8 @@ export interface SchedulerJob extends IActionRequestParams {
   active: boolean;
 
   devices?: GridBulkActionRequestParams;
+
+  scheduleDevices?: [];
   registers?: RegistersSelectRequest[];
   readingProperties?: ReadingProperties;
   schedules?: Schedule[];

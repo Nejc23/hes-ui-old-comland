@@ -6,11 +6,15 @@ import { deleteMeters, deleteMetersData, onDemandClearAlarms, triggerSetDisplayS
 import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
   activeImports,
+  deleteModuleConfigurationChannelSpecific,
   enumMyGridLink,
   getCommonRegisterGroups,
   getDataExportJobs,
+  getModuleConfigurationChannelSpecific,
+  getModuleConfigurationCommon,
   identityToken,
   importDevices,
+  importModuleConfigurationSpecific,
   importTemplates,
   lastStatus,
   meterParamExecute,
@@ -29,7 +33,8 @@ import {
   triggerDataExport,
   triggerDeviceUpgrade,
   triggerSetTimeOfUse,
-  updateMeterState
+  updateMeterState,
+  updateModuleConfigurationCommon
 } from '../../consts/my-grid-link.const';
 import {
   IActionRequestFwUpgradeData,
@@ -41,7 +46,8 @@ import {
   IActionResponseSetDisconnectorMode,
   IActionResponseTOUData,
   MeterParametrizationRequest,
-  MeterParametrizationResponse
+  MeterParametrizationResponse,
+  ModuleConfigurationCommon
 } from '../../interfaces/myGridLink/action-prams.interface';
 import {
   IdentityToken,
@@ -497,5 +503,54 @@ export class MyGridLinkService {
 
   postMeterParametrizationParseExecute(param: any): HttpRequest<any> {
     return new HttpRequest('POST', `${meterParamExecute}`, param);
+  }
+
+  // import-module-configuration-channel-specific
+  postImportModuleConfigurationChannelSpecific(params: any): Observable<any> {
+    return this.repository.makeRequest(this.postImportModuleConfigurationChannelSpecificRequest(params));
+  }
+
+  postImportModuleConfigurationChannelSpecificRequest(params: any): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${importModuleConfigurationSpecific}`, params);
+  }
+
+  // /get-module-configuration-common
+  getModuleConfigurationCommon(): Observable<ModuleConfigurationCommon> {
+    return this.repository.makeRequest(this.getModuleConfigurationCommonRequest());
+  }
+
+  getModuleConfigurationCommonRequest(): HttpRequest<ModuleConfigurationCommon> {
+    return new HttpRequest('GET', `${enumMyGridLink.templating}${getModuleConfigurationCommon}`);
+  }
+
+  updateModuleConfigurationCommon(params: ModuleConfigurationCommon): Observable<any> {
+    return this.repository.makeRequest(this.updateModuleConfigurationCommonRequest(params));
+  }
+
+  updateModuleConfigurationCommonRequest(params: ModuleConfigurationCommon): HttpRequest<any> {
+    return new HttpRequest('PUT', `${enumMyGridLink.templating}${updateModuleConfigurationCommon}`, params);
+  }
+  getModuleConfigurationChannelSpecific(): Observable<Array<ModuleConfigurationCommon>> {
+    return this.repository.makeRequest(this.getModuleConfigurationChannelSpecificRequest());
+  }
+
+  getModuleConfigurationChannelSpecificRequest(): HttpRequest<Array<ModuleConfigurationCommon>> {
+    return new HttpRequest('GET', `${enumMyGridLink.templating}${getModuleConfigurationChannelSpecific}`);
+  }
+
+  getModuleConfigurationChannelSpecificById(id: string): Observable<Array<ModuleConfigurationCommon>> {
+    return this.repository.makeRequest(this.getModuleConfigurationChannelSpecificByIdRequest(id));
+  }
+
+  getModuleConfigurationChannelSpecificByIdRequest(id: string): HttpRequest<Array<ModuleConfigurationCommon>> {
+    return new HttpRequest('GET', `${enumMyGridLink.templating}${getModuleConfigurationChannelSpecific}/` + id);
+  }
+
+  deleteModuleConfigurationChannelSpecific(body: any): Observable<any> {
+    return this.repository.makeRequest(this.deleteModuleConfigurationChannelSpecificRequest(body));
+  }
+
+  deleteModuleConfigurationChannelSpecificRequest(body: any): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${deleteModuleConfigurationChannelSpecific}`, body);
   }
 }

@@ -89,6 +89,7 @@
       <div id="step2" *ngIf="step === 2 && showConcentrators">
         <app-data-concentrator-units-select (onSelectionChanged)="dcuSelectionChanged($event)"
                                             [selectedJobId]="selectedJobId"
+                                            [scheduleDevices]="selectedConcentratorsIds"
                                             [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
       </div>
 

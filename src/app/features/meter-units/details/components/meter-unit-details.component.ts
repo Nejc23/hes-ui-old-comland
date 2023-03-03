@@ -36,7 +36,15 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   communicationForm: FormGroup;
   subscriptions: Array<Subscription> = [];
 
-  plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
+  plcAndMbusProtocols = [
+    'DC450G3',
+    'AC750',
+    'AmeraDC',
+    'multiUtilityParent',
+    'Unknown',
+    'WiredMultiUtilityParent',
+    'WirelessMultiUtilityParent'
+  ];
   isPlcDevice = false;
   openEdit = false;
   basicDetails = false;

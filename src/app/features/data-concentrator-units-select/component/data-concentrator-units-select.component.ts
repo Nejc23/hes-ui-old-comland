@@ -8,7 +8,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { DataConcentratorUnitsSelectGridService } from '../services/data-concentrator-units-select-grid.service';
@@ -21,6 +21,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   @Input() type = 'meter';
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
+  @Input() scheduleDevices = [];
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
 
@@ -72,7 +73,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private formUtils: FormsUtilsService,
-    private jobsService: JobsService
+    private jobsService: SchedulerJobsService
   ) {
     this.gridOptions = this.dataConcentratorUnitsSelectGridService.setGridOptions();
     this.frameworkComponents = dataConcentratorUnitsSelectGridService.setFrameworkComponents();
@@ -115,7 +116,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   // select rows on load grid from session
   selectRows(api: any) {
-    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    const selectedRows =
+      this.scheduleDevices.length > 0 ? this.scheduleDevices : this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
     api.forEachNode((node) => {
       if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
