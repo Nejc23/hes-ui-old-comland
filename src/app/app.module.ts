@@ -36,6 +36,7 @@ import { environment } from 'src/environments/environment';
 import { AuditLogsComponent } from './features/administration/audit-logs/audit-logs.component';
 import { LicenceComponent } from './features/administration/licence/licence.component';
 import { ArcGaugeModule } from '@progress/kendo-angular-gauges';
+import { ImportMbusConfigurationModalComponent } from './features/meter-units/common/components/import-mbus-configuration/import-mbus-configuration-modal/import-mbus-configuration-modal.component';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -61,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AuditLogsComponent, LicenceComponent],
+  declarations: [AppComponent, AuditLogsComponent, LicenceComponent, ImportMbusConfigurationModalComponent],
   providers: [
     AppConfigService,
     {

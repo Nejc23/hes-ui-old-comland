@@ -1,0 +1,183 @@
+<div [style.width.px]="addWidth()" class="sticky-header bottom-line">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title [title]="'MENU.IMPORT-MBUS-CONFIGURATION'" class="tw-h-36 tw-mt-10 tw--m-5"></app-page-title>
+  </div>
+</div>
+
+<div class="tw-pt-10 tw-pb-6">
+  <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+    <kendo-tabstrip-tab [selected]="true" title="{{ 'MENU.CONFIGURATIONS' | translate }}">
+      <ng-template kendoTabContent>
+
+        <app-data-table
+          [clientSideSearchAndFilters]="true"
+          [rowActions]="configurationRowActionConfiguration"
+          [fetchData]="false"
+          (selectedRowDataEvent)="selectionChanged($event)"
+          (rowActionClickedEvent)="rowActionsClicked($event)"
+          [gridColumns]="configurationsColumnsConfiguration"
+          [gridData]="configurationsData"
+          [loading]="configurationsLoading"
+          [kendoGridSelectByColumn]="'id'"
+          [noDataText]="'COMMON.NO-DATA-FOUND'"
+          [pageNumber]="1"
+          [withSearch]="true"
+          [withRowSelection]="true"
+          [pageable]="true"
+          [selectedKeys]="selectedIds"
+          [rowHeight]="44"
+          [scrollable]="'virtual'"
+          [showGridBulkActions]="true"
+          [sortable]="true"
+          [sort]="[
+            {
+              field: 'modified',
+              dir: 'desc'
+            }
+          ]"
+          [tableHeight]="calculateHeight()"
+          [totalCount]="configurationsData.length"
+          [withRefreshButton]="false"
+        >
+
+          <!--      [permission]="permissionAdd"
+      appHideIfPermissionUnauthorized-->
+
+          <div class="tw-inline-flex tw-gap-2">
+            <button *ngIf="selectedIds.length > 0"
+                    [permission]="permissionManageConfiguration"
+                    appHideIfPermissionUnauthorized
+                         (click)="openDeleteConfigurationsModal()"
+                         class="btn text-secondary btn-outline tw-inline-flex tw-items-center tw-w-28 tw-mt-5">
+              <i class="far fa-trash-alt tw-pr-2"></i>{{ 'BUTTON.DELETE' | translate }}
+            </button>
+
+            <button
+              [permission]="permissionManageConfiguration"
+              appHideIfPermissionUnauthorized
+              (click)="openImportConfigurationModal()"
+              class="btn btn-primary tw-mt-5"
+              href="javascript:void(0)"
+            >
+              {{ 'BUTTON.IMPORT' | translate }}
+            </button>
+          </div>
+
+
+        </app-data-table>
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab title="{{ 'MENU.COMMON' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div class="tw-w-full tw-mt-2">
+
+          <div class="tw-font-bold tw-text-xl tw-text-black tw-mb-4">
+            {{ 'FORM.COMMON-SETTINGS' | translate}}
+          </div>
+
+          <div class="tw-border-solid tw-border tw-border-lightGray tw-rounded-xl tw-px-2 tw-py-3 tw-mb-3">
+            <app-input-switch cssClass="tw-justify-between tw-flex-row-reverse" [labelCss]="'tw-text-black tw-font-medium tw-text-sm'" [form]="commonForm" [property]="'changePrimaryAddressOnUninstall'" label="CHANGE-PRIMARY-ADDRESS" subTitle="CHANGE-PRIMARY-ADDRESS-TEXT">
+            </app-input-switch>
+          </div>
+
+          <div class="tw-border-solid tw-border tw-border-lightGray tw-rounded-xl tw-px-2 tw-py-3 tw-mb-3">
+            <app-input-switch cssClass="tw-justify-between tw-flex-row-reverse" [labelCss]="'tw-text-black tw-font-medium tw-text-sm'" [form]="commonForm" [property]="'autoInstallOnReboot'" label="AUTO-INSTALL" subTitle="AUTO-INSTALL-TEXT">
+            </app-input-switch>
+          </div>
+
+          <div class="tw-border-solid tw-border tw-border-lightGray tw-rounded-xl tw-px-2 tw-py-3 tw-mb-3">
+            <app-input-switch cssClass="tw-justify-between tw-flex-row-reverse" [labelCss]="'tw-text-black tw-font-medium tw-text-sm'" [form]="commonForm" [property]="'deleteLPOnInstallation'" label="DELETE-LOAD-PROFILE" subTitle="DELETE-LOAD-PROFILE-TEXT">
+            </app-input-switch>
+          </div>
+
+          <div class="tw-border-solid tw-border tw-border-lightGray tw-rounded-xl tw-px-4 tw-py-3 tw-mb-4">
+
+            <div class="tw-text-black tw-font-medium tw-text-sm">
+              {{ 'FORM.M-BUS-PERIODS' | translate }}
+            </div>
+
+            <div class="tw-text-mediumGray tw-text-xs tw-font-medium tw-mt-1">
+              {{ 'FORM.M-BUS-PERIODS-TEXT' | translate }}
+            </div>
+
+            <div class="tw-inline-flex tw-gap-6 tw-w-full tw-mt-6">
+
+              <div>
+                <div class="tw-text-black tw-font-medium tw-mb-2">
+                  {{ 'FORM.CHANNEL' | translate }} 1
+                </div>
+                <app-input-numeric
+                  [label]="'period'"
+                  [min]="0"
+                  [max]="null"
+                  [form]="commonForm"
+                  [property]="'installationPeriodChannel1'"
+                ></app-input-numeric>
+              </div>
+
+              <div>
+                <div class="tw-text-black tw-font-medium tw-mb-2">
+                  {{ 'FORM.CHANNEL' | translate }} 2
+                </div>
+                <app-input-numeric
+                  [label]="'period'"
+                  [min]="0"
+                  [max]="null"
+                  [form]="commonForm"
+                  [property]="'installationPeriodChannel2'"
+                ></app-input-numeric>
+              </div>
+
+              <div>
+                <div class="tw-text-black tw-font-medium tw-mb-2">
+                  {{ 'FORM.CHANNEL' | translate }} 3
+                </div>
+                <app-input-numeric
+                  [label]="'period'"
+                  [min]="0"
+                  [max]="null"
+                  [form]="commonForm"
+                  [property]="'installationPeriodChannel3'"
+                ></app-input-numeric>
+              </div>
+
+              <div>
+                <div class="tw-text-black tw-font-medium tw-mb-2">
+                  {{ 'FORM.CHANNEL' | translate }} 4
+                </div>
+                <app-input-numeric
+                  [label]="'period'"
+                  [min]="0"
+                  [max]="null"
+                  [form]="commonForm"
+                  [property]="'installationPeriodChannel4'"
+                ></app-input-numeric>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tw-w-full tw-flex tw-justify-end tw-mt-6" *appHasPermission="permissionManageConfiguration">
+            <button type="button" class="btn btn-primary m-0" (click)="updateCommonFields()" [disabled]="checkFields()">{{ 'BUTTON.SAVE' | translate }}</button>
+          </div>
+
+        </div>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+</div>
+
+<app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()"
+                         (confirmButtonClickedEvent)="closeSlideOut()"
+                         *ngIf="detailsData?.json"
+                         [hideCloseButton]="true"
+                         [primaryButtonText]="'BUTTON.CLOSE'"
+                         [title]="detailsData.configurationId"
+                         [visible]="slideOutOpened">
+  <div class="tw-px-8 tw-pt-6">
+    <app-json-viewer [cssClass]="'tw-w-full'" [objectToRender]="jsonData" [depth]="3" [expanded]="true"></app-json-viewer>
+  </div>
+
+</app-slide-out-component>

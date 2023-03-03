@@ -1,3 +1,3 @@
-<div *ngIf="objectToRender" class="json-view-wrapper">
+<div *ngIf="objectToRender" [ngClass]="cssClass ? cssClass : 'json-view-wrapper'">
   <ngx-json-viewer [json]="objectToRender" [expanded]="expanded" [depth]="depth"></ngx-json-viewer>
 </div>

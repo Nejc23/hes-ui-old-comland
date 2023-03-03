@@ -1,3 +1,28 @@
+<div *ngIf="multiple && isFileSelectOk">
+
+  <div *ngIf="fileNames.length > 0" class="tw-my-4">
+
+    <div *ngFor="let fileName of fileNames; let i = index;" class="tw-h-16 tw-w-full gray-line">
+
+      <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+
+        <div class="tw-inline-flex tw-ml-6">
+          <img [src]="'assets/images/icons/file-icon.svg'" />
+          <div class="tw-ml-6">
+            <div class="tw-text-sm tw-text-black tw-font-medium">
+              {{ fileName }}
+            </div>
+          </div>
+        </div>
+
+        <img [src]="'assets/images/icons/close-icon.svg'" class="tw-cursor-pointer tw-mx-6" (click)="removeFile(i)" />
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <div [formGroup]="form" class="mb-3">
   <label *ngIf="label" [attr.for]="property">
     {{ 'FORM.' + label.toUpperCase() | translate }}
@@ -16,7 +41,7 @@
     class="dropzone-custom"
   >
     <div class="text-center" style="width: 100%">
-      <div *ngIf="!isFileSelectOk && !isFileSelectFailed">
+      <div *ngIf="!isFileSelectOk && !isFileSelectFailed || multiple ">
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
@@ -35,12 +60,13 @@
         <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width:50%;" [value]="uploadProgressValue"></kendo-progressbar>
       </div> -->
 
-      <div *ngIf="isFileSelectOk">
+      <div *ngIf="isFileSelectOk && !multiple">
         <div class="pb-1">
           <i class="fas fa-file"></i>
         </div>
         <div class="title">
-          <span>{{ 'FORM.SELECTED-FILE' | translate }}:</span><span> {{ fileName }}</span>
+          <span>{{ 'FORM.SELECTED-FILE' | translate }}:</span>
+          <div *ngFor="let fileName of fileNames"> {{ fileName }}</div>
         </div>
         <div class="subtitle pt-2">
           <span>{{ 'FORM.DRAG-UPLOAD' | translate }} </span
@@ -56,7 +82,8 @@
           </span>
         </div>
         <div class="title">
-          <span>{{ 'FORM.FILE-NOT-SUPPORTED' | translate }}:</span><span> {{ fileName }}</span>
+          <span>{{ 'FORM.FILE-NOT-SUPPORTED' | translate }}:</span>
+          <div *ngFor="let fileName of fileNames"> {{ fileName }}</div>
         </div>
         <div class="subtitle pt-2">
           <a (click)="onFileSelectClick()" href="javascript:void(0)">{{ 'FORM.SELECT-HERE' | translate }}</a

@@ -1,6 +1,19 @@
 <div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+
     <app-page-title [title]="'CONFIGURATIONS.OVERVIEW'" class="tw-h-28 tw-mt-10 tw--m-5"></app-page-title>
+
+    <div class="tw-inline-flex tw-justify-end tw-mt-10 tw-pt-10 tw-pr-5">
+
+      <button
+        (click)="openImportTemplateConfigurationsModal()"
+        class="btn btn-primary"
+        href="javascript:void(0)"
+      >
+        {{ 'BUTTON.IMPORT' | translate }}
+      </button>
+    </div>
+
   </div>
 </div>
 

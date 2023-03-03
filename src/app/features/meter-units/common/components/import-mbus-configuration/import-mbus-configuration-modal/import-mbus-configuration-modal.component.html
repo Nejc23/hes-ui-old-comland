@@ -1,14 +1,17 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header> {{ 'COMMON.IMPORT-CONFIGURATION' | translate }} </div>
+  <div modal-header> {{ 'MENU.IMPORT-MBUS-DEVICE-CONFIGURATION' | translate }}</div>
 
   <div modal-body>
     <div class="form-row">
       <div class="col-12 expand-dropzone">
-        <app-file-select [form]="form" [property]="fileProperty"
-                         [multiple]="false"
+        <app-file-select [form]="form"
+                         [property]="fileProperty"
+                         [multiple]="true"
                          [allowedExtensions]="allowedExt"
+                         [clearData]="clearData"
                          [acceptExtensions]="acceptExtensions"
+                         (itemsChangedEvent)="itemsChangedNames($event)"
                          (selectEvent)="selected($event)"
                          (removeEvent)="removed($event)"
                          (fileValid)="isFileValid($event)"
@@ -24,8 +27,8 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!jsonString || !fileValid || loading">
-        <span>{{ 'BUTTON.IMPORT' | translate }}</span></button>
+        <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="uploadedFiles.length === 0">
+          <span>{{ 'BUTTON.IMPORT' | translate }}</span></button>
       </div>
     </div>
   </div>

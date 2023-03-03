@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 import { TouConfigurationComponent } from '../../meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
-import { PlcMeterTemplatesImportComponent } from '../../meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { ImportDevicesComponent } from '../../meter-units/common/components/import-devices/import-devices.component';
 import { TouConfigBasicComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-basic/tou-config-basic.component';
 import { TouConfigDayComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-day/tou-config-day.component';
@@ -16,6 +15,7 @@ import { TouConfigListComponent } from '../../meter-units/common/components/plc-
 import { CanDeactivateGuard } from '../../../shared/guards/can-deactivate.guard';
 import { ConfigurationsDetailComponent } from '../configurations-detail/configurations-detail.component';
 import { ConfigurationsListComponent } from '../configurations-list/configurations-list.component';
+import { ImportMbusConfigurationComponent } from '../../meter-units/common/components/import-mbus-configuration/import-mbus-configuration.component';
 
 const routes: Routes = [
   {
@@ -25,12 +25,12 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'importTemplates',
+        path: 'importMbusConfiguration',
         data: {
           breadcrumb: '',
-          permission: PermissionEnumerator.Import_Templates
+          permission: PermissionEnumerator.View_MBus_Configuration
         },
-        component: PlcMeterTemplatesImportComponent
+        component: ImportMbusConfigurationComponent
       },
       {
         path: 'importDevices',

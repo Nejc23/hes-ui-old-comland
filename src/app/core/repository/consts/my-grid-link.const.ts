@@ -62,3 +62,9 @@ export const readShortNames = '/on-demand/trigger-read-short-names';
 
 export const meterParamParse = `${enumMyGridLink.managment}/meter-parametrization/parse`;
 export const meterParamExecute = `${enumMyGridLink.managment}/meter-parametrization/execute`;
+
+export const importModuleConfigurationSpecific = '/import-module-configuration-channel-specific';
+export const getModuleConfigurationCommon = '/get-module-configuration-common';
+export const updateModuleConfigurationCommon = '/update-module-configuration-common';
+export const getModuleConfigurationChannelSpecific = '/get-module-configuration-channel-specific';
+export const deleteModuleConfigurationChannelSpecific = '/delete-module-configuration-channel-specific';

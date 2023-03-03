@@ -49,5 +49,7 @@ export enum PermissionEnumerator {
   View_License = 'View_License',
   Initial_Re_Keying = 'Initial_Rekeying',
   Meter_Parametrization = 'Meter_Parametrization',
-  Export_Events = 'Export_Events'
+  Export_Events = 'Export_Events',
+  View_MBus_Configuration = 'View_MBusModuleConfiguration',
+  Manage_MBus_Configuration = 'Manage_MBusModuleConfiguration'
 }

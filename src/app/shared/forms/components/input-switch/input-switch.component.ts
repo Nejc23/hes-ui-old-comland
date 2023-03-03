@@ -14,9 +14,15 @@ export class InputSwitchComponent implements OnInit {
 
   // optional
   @Input() label: string;
+
+  @Input() subTitle = '';
+
+  @Input() labelCss = '';
   @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
 
   controlId: string;
+
+  @Input() cssClass = '';
 
   constructor(private formUtils: FormsUtilsService) {}
 

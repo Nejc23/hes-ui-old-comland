@@ -9,5 +9,6 @@ export class JsonViewerComponent {
   @Input() objectToRender: any;
   @Input() expanded = true;
   @Input() depth = 0;
+  @Input() cssClass = '';
   constructor() {}
 }
