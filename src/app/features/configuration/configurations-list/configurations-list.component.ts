@@ -8,6 +8,8 @@ import { TemplatingService } from 'src/app/core/repository/services/templating/t
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { GridColumn, GridColumnType, GridRowAction, PageChangedEvent } from 'src/app/shared/data-table/data-table.component';
 import { enumSearchFilterOperators } from 'src/environments/config';
+import { PlcMeterTemplatesImportComponent } from '../../meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { ModalService } from '../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-configurations',
@@ -85,7 +87,8 @@ export class ConfigurationsListComponent implements OnInit {
     private elRef: ElementRef,
     private router: Router,
     private templatingService: TemplatingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -165,5 +168,19 @@ export class ConfigurationsListComponent implements OnInit {
 
   openDetailsPage(event: any) {
     this.router.navigate([`/configuration/details/${event.rowData?.templateId}`]);
+  }
+
+  openImportTemplateConfigurationsModal() {
+    const modalRef = this.modalService.open(PlcMeterTemplatesImportComponent);
+
+    modalRef.result.then(
+      (data) => {
+        modalRef.close();
+        this.getData();
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 }

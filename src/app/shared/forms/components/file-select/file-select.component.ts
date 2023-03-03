@@ -24,6 +24,9 @@ export class FileSelectComponent implements OnInit, OnChanges {
   @Output() selectEvent = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
   @Output() fileValid = new EventEmitter<boolean>();
+
+  // items deleted
+  @Output() itemsChangedEvent = new EventEmitter<any>();
   @Input() clearData = false;
 
   @ViewChild('uploadSample') upload: any;
@@ -39,7 +42,7 @@ export class FileSelectComponent implements OnInit, OnChanges {
 
   isDropZoneHover = false;
 
-  fileName = '';
+  fileNames = [];
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -101,7 +104,7 @@ export class FileSelectComponent implements OnInit, OnChanges {
     this.isFileSelectOk = false;
     this.isFileSelectFailed = false;
     this.uploadProgressValue = 0;
-    this.fileName = null;
+    this.fileNames = [];
   }
 
   onFileSelectClick() {
@@ -139,7 +142,7 @@ export class FileSelectComponent implements OnInit, OnChanges {
       isAcceptedImageFormat = $.inArray(files[0].extension, this.acceptExtensions) !== -1;
     }
 
-    this.fileName = files[0].name;
+    this.fileNames = files.map((item) => item.name);
 
     if (!isAcceptedImageFormat) {
       e.preventDefault();
@@ -150,5 +153,10 @@ export class FileSelectComponent implements OnInit, OnChanges {
       this.isFileSelectOk = true;
       this.fileValid.emit(true);
     }
+  }
+
+  removeFile(index: number) {
+    this.fileNames = this.fileNames.filter((item, i) => i != index);
+    this.itemsChangedEvent.emit(this.fileNames);
   }
 }

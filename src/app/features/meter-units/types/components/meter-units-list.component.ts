@@ -390,7 +390,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   openDetailsPage(event: LinkClickedEvent) {
-    const protocols = ['multiUtilityParent'];
+    const protocols = ['WiredMultiUtilityParent', 'WirelessMultiUtilityParent'];
 
     if (event.field === 'name') {
       this.router.navigate(['/meterUnits/details', event.id]);

@@ -364,7 +364,7 @@ body {
   // sticky transparent issue fix
 }
 
-// kendo TABS 
+// kendo TABS
 .edit-meter {
   .k-tabstrip-items {
     #k-tabstrip-tab-0 {
@@ -540,4 +540,8 @@ ngb-tooltip-window.row-actions-tooltip {
 
 .alert-dismissible {
   padding-right: 1.25rem;
+}
+
+kendo-switch.k-state-disabled {
+  background-color: transparent !important;
 }

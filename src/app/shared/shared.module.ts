@@ -30,7 +30,6 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
 import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
-import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { TouConfigurationComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
@@ -124,6 +123,8 @@ import { SlaQualityWidgetComponent } from './sla-quality-widget/sla-quality-widg
 import { InitialReKeyingComponent } from '../features/jobs/components/scheduler-job/initial-re-keying.component';
 import { MeterParametrizationComponent } from './meter-parametrization/meter-parametrization.component';
 import { HasPermissionDirective } from './directives/permissions/has-permission.directive';
+import { ImportMbusConfigurationComponent } from '../features/meter-units/common/components/import-mbus-configuration/import-mbus-configuration.component';
+import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -173,7 +174,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,
@@ -225,7 +226,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PopoverComponent,
     SlaQualityWidgetComponent,
     InitialReKeyingComponent,
-    HasPermissionDirective
+    HasPermissionDirective,
+    PlcMeterTemplatesImportComponent
   ],
   imports: [
     CommonModule,
@@ -307,7 +309,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     GridSelectionHeaderComponent,
     GridSelectionHeaderScrollableComponent,
     GridCellNameComponent,
@@ -368,7 +370,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SlaQualityWidgetComponent,
     InitialReKeyingComponent,
     MeterParametrizationComponent,
-    HasPermissionDirective
+    HasPermissionDirective,
+    PlcMeterTemplatesImportComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -385,7 +388,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     TouConfigurationComponent,
-    PlcMeterTemplatesImportComponent,
+    ImportMbusConfigurationComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,

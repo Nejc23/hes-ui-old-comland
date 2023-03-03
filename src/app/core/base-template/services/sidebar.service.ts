@@ -62,11 +62,11 @@ export class SidebarService {
             children: []
           },
           {
-            title: this.translate.instant('MENU.IMPORT-TEMPLATES'),
-            routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
+            title: this.translate.instant('MENU.IMPORT-MBUS-CONFIGURATION'),
+            routeLink: `/${ConfigurationRoute.configuration}/importMbusConfiguration`,
             hasChildren: false,
             children: [],
-            permission: PermissionEnumerator.Import_Templates
+            permission: PermissionEnumerator.View_MBus_Configuration
           },
           {
             title: this.translate.instant('MENU.TOU-CONFIGURATION'),
