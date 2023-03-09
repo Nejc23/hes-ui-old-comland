@@ -216,7 +216,8 @@
       "DISABLED": "disabled",
       "DRAFT": "draft",
       "EDIT": "edit",
-      "REKEYING": "rekeying"
+      "REKEYING": "rekeying",
+      "DEINSTALLED": "deinstalled"
     },
     "OPERATION-FAILED": "Operation failed. Please refresh the page and try again.",
     "CLEAR-ALL-FILTERS": "Clear all Filters",
