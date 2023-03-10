@@ -118,7 +118,7 @@ export class ImportMbusConfigurationComponent implements OnInit {
       commonSetting: [{ value: false, disabled: this.disableForm }, Validators.required],
       changePrimaryAddressOnUninstall: [{ value: false, disabled: this.disableForm }, Validators.required],
       autoInstallOnReboot: [{ value: false, disabled: this.disableForm }, Validators.required],
-      deleteLPOnInstallation: [{ value: false, disabled: this.disableForm }, Validators.required],
+      deleteLPOnInstallation: [{ value: true, disabled: this.disableForm }, Validators.required],
       installationPeriodChannel1: [{ value: 12600, disabled: this.disableForm }, Validators.required],
       installationPeriodChannel2: [{ value: 12600, disabled: this.disableForm }, Validators.required],
       installationPeriodChannel3: [{ value: 0, disabled: this.disableForm }, Validators.required],
