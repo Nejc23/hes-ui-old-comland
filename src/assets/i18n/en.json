@@ -521,13 +521,15 @@
     "DELETE-LOAD-PROFILE": "Delete load profile on installation",
     "CHANNEL-ID": "Channel Id",
     "MODIFIED": "Date modified",
-    "CHANGE-PRIMARY-ADDRESS-TEXT": "Recommended setting is disabled.",
-    "AUTO-INSTALL-TEXT": "Enable auto installation of M-BUS meters when electricity meter reboots. Recommended setting is disabled.",
-    "DELETE-LOAD-PROFILE-TEXT": "Delete load profile when new device is installed. Recommended setting is disabled.",
+    "CHANGE-PRIMARY-ADDRESS-TEXT": "Recommended setting is",
+    "AUTO-INSTALL-TEXT": "Enable auto installation of M-BUS meters when electricity meter reboots. Recommended setting is",
+    "DELETE-LOAD-PROFILE-TEXT": "Delete load profile when new device is installed. Recommended setting is",
     "M-BUS-PERIODS": "M-BUS installation periods",
     "M-BUS-PERIODS-TEXT": "Time in seconds for the M-Bus installation period of the slaves. Default value 0 (disabled), minimum value: 300 seconds,  preferred value: 3699 seconds",
     "CHANNEL": "Channel",
-    "PERIOD": "Period"
+    "PERIOD": "Period",
+    "ENABLED": "enabled",
+    "DISABLED": "disabled"
   },
   "GRID": {
     "ACTIVE": "Active",
