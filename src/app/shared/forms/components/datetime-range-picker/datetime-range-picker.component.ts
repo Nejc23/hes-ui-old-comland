@@ -39,12 +39,27 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   };
 
   defaultRanges: any = {
-    [this.translate.instant('DAY.TODAY')]: [moment(), moment()],
-    [this.translate.instant('DAY.YESTERDAY')]: [moment().subtract(1, 'days'), moment()],
-    [this.translate.instant('DAY.LAST-7-DAYS')]: [moment().subtract(6, 'days'), moment()],
-    [this.translate.instant('DAY.LAST-30-DAYS')]: [moment().subtract(29, 'days'), moment()],
-    [this.translate.instant('DAY.CURRENT-MONTH')]: [moment().startOf('month'), moment()],
-    [this.translate.instant('DAY.LAST-MONTH')]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+    [this.translate.instant('DAY.TODAY')]: [moment().set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0), moment()],
+    [this.translate.instant('DAY.YESTERDAY')]: [
+      moment().subtract(1, 'days').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0),
+      moment()
+    ],
+    [this.translate.instant('DAY.LAST-7-DAYS')]: [
+      moment().subtract(6, 'days').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0),
+      moment()
+    ],
+    [this.translate.instant('DAY.LAST-30-DAYS')]: [
+      moment().subtract(29, 'days').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0),
+      moment()
+    ],
+    [this.translate.instant('DAY.CURRENT-MONTH')]: [
+      moment().startOf('month').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0),
+      moment()
+    ],
+    [this.translate.instant('DAY.LAST-MONTH')]: [
+      moment().subtract(1, 'month').startOf('month'),
+      moment().startOf('month').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0)
+    ]
   };
 
   constructor(private translate: TranslateService) {
