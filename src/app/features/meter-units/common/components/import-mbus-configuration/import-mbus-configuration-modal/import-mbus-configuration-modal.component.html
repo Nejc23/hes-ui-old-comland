@@ -17,6 +17,16 @@
                          (fileValid)="isFileValid($event)"
                          [dropFileSelectSubtitle]="uploadDropSubtitle">
         </app-file-select>
+        <div class="alert alert-warning" role="alert" *ngIf="uploadedFiles.length > 0 &&  errors.length > 0">
+          <div *ngFor="let error of errors" class="tw-w-full tw-inline-flex gap-2">
+            <div>
+              <i class="fas fa-exclamation-triangle me-2"></i>
+            </div>
+            <div>
+              <span>{{ error }}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

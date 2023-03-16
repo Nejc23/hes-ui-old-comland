@@ -248,7 +248,7 @@
     "TOO-MANY-RECORDS-SEARCH": "There are too many results for this search. Please narrow the search criteria and try again.",
     "IMPORT-CONFIGURATION": "Import configuration",
     "DELETE-CONFIGURATION": "Delete configuration(s)",
-    "CHECK-CONFIGURATION": "Please, check your configuration."
+    "CHECK-CONFIGURATION": "Please, check your configuration file(s)."
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
