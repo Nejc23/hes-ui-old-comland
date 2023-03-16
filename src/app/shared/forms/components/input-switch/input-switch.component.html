@@ -10,6 +10,9 @@
       </div>
       <div *ngIf="subTitle" class="tw-text-mediumGray tw-text-xs ps-2 pt-1">
         {{ 'FORM.' + subTitle.toUpperCase() | translate }}
+        <div *ngIf="boldedLastValue" class="tw-inline-flex tw-text-black tw-font-bold tw-text-xs">
+          {{ 'FORM.' + boldedLastValue.toUpperCase() | translate }}.
+        </div>
       </div>
     </div>
   </div>

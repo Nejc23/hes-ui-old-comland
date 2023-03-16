@@ -17,6 +17,8 @@ export class InputSwitchComponent implements OnInit {
 
   @Input() subTitle = '';
 
+  @Input() boldedLastValue = '';
+
   @Input() labelCss = '';
   @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
 

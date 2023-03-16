@@ -99,38 +99,38 @@ export class DateRangePickerComponent implements OnInit {
     switch (selectedRangeId) {
       case 1: {
         // today
-        this.startTime = moment().set('minute', 0).set('hour', 0).toDate();
-        this.endTime = moment().add(1, 'hour').set('minute', 0).toDate();
+        this.startTime = moment().set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().add(1, 'hour').set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
       case 2: {
         // yesterday
-        this.startTime = moment().subtract(1, 'days').set('minute', 0).set('hour', 0).toDate();
-        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        this.startTime = moment().subtract(1, 'days').set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
       case 3: {
         // Last 7 days
-        this.startTime = moment().subtract(6, 'days').set('minute', 0).set('hour', 0).toDate();
-        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        this.startTime = moment().subtract(6, 'days').set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
       case 4: {
         // Last 30 days
-        this.startTime = moment().subtract(29, 'days').set('minute', 0).set('hour', 0).toDate();
-        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        this.startTime = moment().subtract(29, 'days').set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
       case 5: {
         // Current month
-        this.startTime = moment().startOf('month').set('minute', 0).set('hour', 0).toDate();
-        this.endTime = moment().add(1, 'hour').set('minute', 0).toDate();
+        this.startTime = moment().startOf('month').set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().add(1, 'hour').set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
       case 6: {
         // Last month
-        this.startTime = moment().subtract(1, 'month').startOf('month').toDate();
-        this.endTime = moment().startOf('month').set('minute', 0).set('hour', 0).toDate();
+        this.startTime = moment().subtract(1, 'month').startOf('month').set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
+        this.endTime = moment().startOf('month').set('hour', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0).toDate();
         break;
       }
     }
