@@ -24,6 +24,8 @@ export class ImportMbusConfigurationModalComponent {
   messageServerError = this.translate.instant('COMMON.CHECK-CONFIGURATION');
   successMessage = this.translate.instant('COMMON.IMPORT-SUCCESSFUL');
   uploadDropSubtitle = this.translate.instant('COMMON.IMPORT-SUBTITLE');
+
+  errors = [];
   clearData = false;
   deviceIdsParam = [];
   public files: Array<any>;
@@ -60,7 +62,7 @@ export class ImportMbusConfigurationModalComponent {
     const that = this;
     console.log(e.files);
     this.uploadedFiles = [];
-
+    this.errors = [];
     e.files.forEach((file, index) => {
       if (!file.validationErrors) {
         const reader = new FileReader();
@@ -80,11 +82,13 @@ export class ImportMbusConfigurationModalComponent {
   }
 
   public removed(e: RemoveEvent): void {
+    this.errors = [];
     this.uploadedFiles = [];
   }
 
   clear() {
     this.uploadedFiles = [];
+    this.errors = [];
     this.clearData = true;
     this.resetForm();
   }
@@ -105,7 +109,10 @@ export class ImportMbusConfigurationModalComponent {
       },
       (e) => {
         this.loading = false;
-        this.toast.errorToast(this.messageServerError);
+        if (e.status === 400 && e.error) {
+          this.toast.infoToast(this.messageServerError);
+          this.errors = e.error;
+        }
       }
     );
   }
