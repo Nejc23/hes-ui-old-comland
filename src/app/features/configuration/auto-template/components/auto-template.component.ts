@@ -46,7 +46,6 @@ export class AutoTemplateComponent implements OnInit {
   public getRowHeight;
   public headerTitle = this.translate.instant('MENU.AUTO-TEMPLATES');
   public form: FormGroup;
-  // jobList$: Observable<CodelistExt<string>[]>;
   allJobList: CodelistExt<string>[];
   jobList: CodelistExt<string>[];
   hide = false;
@@ -88,6 +87,7 @@ export class AutoTemplateComponent implements OnInit {
     this.frameworkComponents = this.service.setFrameworkComponents();
     this.frameworkComponentsJobs = this.service.setFrameworkComponentsJobs();
     this.context = { forma: this.form, componentParent: this };
+
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = (params) => {
       return 38;
@@ -152,8 +152,8 @@ export class AutoTemplateComponent implements OnInit {
     this.hide = !this.hide;
 
     setTimeout(() => {
-      this.gridApiJobs.sizeColumnsToFit();
       this.gridApi.sizeColumnsToFit();
+      this.gridApiJobs.sizeColumnsToFit();
     }, 50);
 
     window.onresize = () => {
@@ -164,7 +164,6 @@ export class AutoTemplateComponent implements OnInit {
 
   rowEditingStopped($event) {
     this.gridApi.resetRowHeights();
-    // this.event.edit(1);
     if ($event && $event.data && $event.data.autoTemplateRuleId === 'new') {
       const index = this.rowData.map((x) => x.autoTemplateRuleId).indexOf('new');
       if (index > -1) {
@@ -187,10 +186,6 @@ export class AutoTemplateComponent implements OnInit {
     });
   }
 
-  onFirstDataRendered(params) {}
-
-  onFirstDataRenderedJobs(params) {}
-
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -200,6 +195,11 @@ export class AutoTemplateComponent implements OnInit {
       this.gridApiJobs.sizeColumnsToFit();
       this.gridApi.sizeColumnsToFit();
     };
+  }
+
+  getData() {
+    this.getRulesData();
+    this.getJobsDada();
   }
 
   onGridReadyJobs(params) {
@@ -239,12 +239,11 @@ export class AutoTemplateComponent implements OnInit {
       }
     });
 
+    this.breadcrumbService.setPageName(this.headerTitle);
+
     this.codelistService.jobsReadingJobsCodelistCodes().subscribe((result) => {
       this.allJobList = result;
-      this.setJobListWithoutAssignedJobs();
     });
-
-    this.breadcrumbService.setPageName(this.headerTitle);
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
       setTimeout(() => {
@@ -256,7 +255,7 @@ export class AutoTemplateComponent implements OnInit {
 
   setJobListWithoutAssignedJobs() {
     if (this.allJobList) {
-      const jobIds = this.getJobIds();
+      const jobIds = this.rowDataJobs.map((item) => item.jobId);
       this.jobList = this.allJobList
         .filter((j) => {
           return jobIds.indexOf(j.id) < 0;
@@ -267,80 +266,62 @@ export class AutoTemplateComponent implements OnInit {
     }
   }
 
-  getData() {
-    try {
-      if (this.activeElement?.templateId.length > 0) {
-        this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
-          (template) => {
-            this.rowData = template.autoTemplateRules;
-            this.gridApi.setRowData(this.rowData);
-            this.setJobListWithoutAssignedJobs();
-            this.getDataJobs();
-          },
-          (error) => {
-            console.log(error);
-            this.rowData = [];
-            this.setJobListWithoutAssignedJobs();
-          }
-        );
-      } else {
-        this.rowData = [];
-        this.setJobListWithoutAssignedJobs();
-      }
-    } catch (err) {
+  getRulesData() {
+    if (this.activeElement?.templateId?.length > 0) {
+      this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
+        (template) => {
+          this.rowData = template.autoTemplateRules;
+          this.gridApi.setRowData(this.rowData);
+          this.setJobListWithoutAssignedJobs();
+        },
+        (error) => {
+          this.rowData = [];
+          this.setJobListWithoutAssignedJobs();
+        }
+      );
+    } else {
       this.rowData = [];
       this.setJobListWithoutAssignedJobs();
     }
   }
 
   // get list of jobs by selected template
-  getDataJobs() {
-    try {
-      const jobIds = this.getJobIds();
-      if (this.activeElement.templateId && jobIds.length > 0) {
-        // get list of ids from service
-        this.serviceJob.getSchedulerJobsListByJobId(jobIds).subscribe(
-          (jobs) => {
-            this.rowDataJobs = jobs;
-            this.gridApiJobs.setRowData(this.rowDataJobs);
-          },
-          (error) => {
-            console.log(error);
-            this.rowDataJobs = [];
-            this.gridApiJobs.setRowData(this.rowDataJobs);
-          }
-        );
-      } else {
-        this.rowDataJobs = [];
-        this.gridApiJobs.setRowData(this.rowDataJobs);
-      }
-    } catch (err) {
+  getJobsDada() {
+    if (this.activeElement.templateId) {
+      // get list of ids from service
+      this.serviceJob.getSchedulerJobsListByTemplateId(this.activeElement.templateId).subscribe(
+        (jobs) => {
+          this.rowDataJobs = jobs;
+          this.gridApiJobs?.setRowData(this.rowDataJobs);
+
+          const jobIds = jobs.map((job) => this.serviceJob.getJobListByJobId(job.jobId));
+          forkJoin(jobIds).subscribe((res: any) => {
+            this.rowDataJobs.forEach((job) => {
+              const existingJob = res.flat().find((item) => item.id === job.jobId);
+              if (job.jobId === existingJob.id) {
+                job.type = existingJob.type;
+                job.description = existingJob.description;
+                job.nextRun = existingJob.nextRun;
+                job.owner = existingJob.owner;
+              }
+              this.gridApiJobs?.setRowData(this.rowDataJobs);
+              this.setJobListWithoutAssignedJobs();
+            });
+          });
+        },
+        (error) => {
+          console.log(error);
+          this.rowDataJobs = [];
+          this.gridApiJobs.setRowData(this.rowDataJobs);
+          this.setJobListWithoutAssignedJobs();
+        }
+      );
+    } else {
       this.rowDataJobs = [];
       this.gridApiJobs.setRowData(this.rowDataJobs);
+      this.setJobListWithoutAssignedJobs();
     }
   }
-
-  // private prepareData(template: template, rules: AutoTemplateRuleList[]) {
-  //   const rows: AutoTemplateList[] = [];
-  //   templates.forEach(template => {
-  //     let rulesNew: AutoTemplateRule[] = [];
-  //     rules.forEach(r => {
-  //       if (r.templateId === template.templateId) {
-  //         rulesNew = r.autoTemplateRules;
-  //       }
-  //     });
-
-  //     const templateNew: AutoTemplateList = {
-  //       templateId: template.templateId,
-  //       name: template.name,
-  //       rules: rulesNew
-  //     };
-
-  //     rows.push(templateNew);
-  //     this.expandTemplateRows();
-  //   });
-  //   return rows;
-  // }
 
   addNewRuleItem() {
     // if not new row is added jet add new else return
@@ -390,7 +371,7 @@ export class AutoTemplateComponent implements OnInit {
       successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-ADDED');
     } else {
       const values = this.fillDataEditRule();
-      request = this.serviceRepository.updateAutoTemplateRule(values);
+      request = this.serviceRepository.updateAutoTemplateRule(values.autoTemplateRuleId, values.propertyName, values.propertyValue);
       successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-UPDATED');
     }
 
@@ -418,6 +399,7 @@ export class AutoTemplateComponent implements OnInit {
   }
 
   fillDataEditRule(): AutoTemplateRule {
+    // cleanup
     const formData: AutoTemplateRule = {
       propertyName: this.form.get('propertyName').value,
       propertyValue: this.form.get('propertyValue').value,
@@ -429,11 +411,7 @@ export class AutoTemplateComponent implements OnInit {
   }
 
   getJobIds(): string[] {
-    if (!this.rowData || this.rowData.length === 0) {
-      return [];
-    }
-
-    return this.rowData.map((item) => item.jobIds).flat();
+    return this.jobList?.map((item) => item.id) ?? [];
   }
 
   editForm(id: string, rowIndex: number) {
@@ -473,21 +451,21 @@ export class AutoTemplateComponent implements OnInit {
       // on close (CONFIRM)
       response.subscribe(
         (value) => {
-          this.getData();
-
           // refresh grid
           this.gridApiJobs.setRowData(this.rowDataJobs);
+          this.getData();
 
           this.toast.successToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-DELETED'));
         },
         (e) => {
+          this.getData();
           this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
         }
       );
     });
   }
 
-  removeForm(jobId: string) {
+  removeForm(jobLinkId: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     const operation = this.translate.instant('COMMON.REMOVE');
@@ -498,7 +476,7 @@ export class AutoTemplateComponent implements OnInit {
 
     modalRef.result.then(
       (data) => {
-        this.removeJobIdFromAllRules(jobId);
+        this.removeJobIdFromAllRules(jobLinkId);
       },
       () => {
         // on dismiss (CLOSE)
@@ -507,22 +485,13 @@ export class AutoTemplateComponent implements OnInit {
   }
 
   removeJobIdFromAllRules(jobId: string) {
-    const batch: Observable<any>[] = [];
-
-    for (const rule of this.rowData) {
-      const jobIdLowerCase = jobId.toLowerCase();
-      rule.jobIds = rule.jobIds.filter((j) => j.toLowerCase() !== jobIdLowerCase);
-
-      batch.push(this.serviceRepository.updateAutoTemplateRule(rule));
-    }
-
-    const joinedObservables = forkJoin(batch);
-    joinedObservables.subscribe(
+    this.serviceRepository.deleteJobFromTemplateRule(jobId).subscribe(
       () => {
         this.getData();
         this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-REMOVED'));
       },
       (err) => {
+        this.getData();
         this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED'));
       }
     );
@@ -540,40 +509,28 @@ export class AutoTemplateComponent implements OnInit {
       this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.SELECT-JOB'));
     }
 
-    this.addJobIdToAllRules(selectedJob.id);
+    this.addJobIdToAllRules(selectedJob.id, this.activeElement?.templateId);
   }
 
-  addJobIdToAllRules(jobId: string) {
-    const batch: Observable<any>[] = [];
-
-    for (const rule of this.rowData) {
-      if (!rule.jobIds) {
-        rule.jobIds = [];
-      }
-      rule.jobIds.push(jobId);
-
-      batch.push(this.serviceRepository.updateAutoTemplateRule(rule));
-    }
-
-    const joinedObservables = forkJoin(batch);
-    joinedObservables.subscribe(
+  addJobIdToAllRules(jobId: string, templateId: string) {
+    this.serviceRepository.assignNewJobToTemplateRule(jobId, templateId).subscribe(
       () => {
         this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-ADDED-TO-ALL'));
 
         this.getData();
       },
       (err) => {
-        this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED-TO-ALL'));
+        if (err.status === 409) {
+          this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-ALREADY-EXIST'));
+        } else {
+          this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED-TO-ALL'));
+        }
       }
     );
   }
 
   setTemplateListActivityClass(template: TemplatesList) {
     return typeof this.activeElement !== 'undefined' && template.templateId === this.activeElement.templateId ? 'active' : 'none';
-  }
-
-  showJobSection(): boolean {
-    return this.rowData && this.rowData.filter((d) => d.autoTemplateRuleId !== 'new').length > 0;
   }
 
   private prepareData(templates: TemplatesList[], rules: AutoTemplateRuleList[]) {

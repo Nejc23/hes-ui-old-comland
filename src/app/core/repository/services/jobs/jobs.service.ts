@@ -12,6 +12,7 @@ import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
 import {
+  autoJobLinks,
   deviceJobs,
   executeJob,
   notificationJobs,
@@ -20,11 +21,12 @@ import {
   schedulerActiveJobs,
   schedulerJobs,
   schedulerJobsList,
-  schedulerJobsListByJobId
+  schedulerJobsListByTemplateId
 } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
 import { DeviceJobs } from '../../interfaces/jobs/device-jobs.interface';
+import { basePath, templates } from '../../consts/auto-templates.const';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +48,12 @@ export class SchedulerJobsService {
     return new HttpRequest('POST', schedulerJobsList, param);
   }
 
-  getSchedulerJobsListByJobId(param: string[]): Observable<SchedulerJobsList[]> {
-    return this.repository.makeRequest(this.getSchedulerJobsListByJobIdRequest(param));
+  getSchedulerJobsListByTemplateId(templateId: string): Observable<SchedulerJobsList[]> {
+    return this.repository.makeRequest(this.getSchedulerJobsListByTemplateIdRequest(templateId));
   }
 
-  getSchedulerJobsListByJobIdRequest(param: string[]): HttpRequest<any> {
-    return new HttpRequest('POST', schedulerJobsListByJobId, param);
+  getSchedulerJobsListByTemplateIdRequest(templateId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${basePath}/${templates}/${templateId}/${autoJobLinks}`);
   }
 
   getSchedulerActiveJobsList(deviceId: string): Observable<SchedulerJobsList[]> {
@@ -72,6 +74,14 @@ export class SchedulerJobsService {
 
   getJob(jobId: string): Observable<SchedulerJob> {
     return this.repository.makeRequest(this.getJobRequest(jobId));
+  }
+
+  getJobListByJobId(jobId: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.getJobListByJobIdRequest(jobId));
+  }
+
+  getJobListByJobIdRequest(jobId: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${schedulerJobsListByTemplateId}`, [jobId]);
   }
 
   getJobRequest(jobId: string): HttpRequest<any> {

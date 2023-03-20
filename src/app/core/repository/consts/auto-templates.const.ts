@@ -1,9 +1,9 @@
 export const basePath = '/api/templating';
-export const templates = `${basePath}/get-templates`;
-export const autoTemplateRules = `${basePath}/get-auto-template-rule`;
-export const autoTemplateRulesAdd = `${basePath}/add-auto-template-rule`;
-export const autoTemplateRulesUpdate = `${basePath}/update-auto-template-rule`;
-export const autoTemplateRulesDelete = `${basePath}/delete-auto-template-rule`;
+export const templates = `templates`;
+export const getTemplates = `${basePath}/get-templates`;
+export const autoTemplateRules = `auto-template-rules`;
+export const autoTemplateRulesAdd = `${basePath}/auto-template-rules`;
+export const autoTemplateRulesUpdate = `${basePath}/auto-template-rules`;
+export const autoTemplateRulesDelete = `${basePath}/auto-template-rules`;
 export const autoTemplateDevice = `${basePath}/device`;
-
-// export const registers = `${basePath}/registers`;
+export const autoJobRule = `${basePath}/auto-job-links`;

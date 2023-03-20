@@ -996,19 +996,20 @@
     "AUTO-TEMPLATE": {
       "ALREADY-ADDED": "New row was already added!",
       "DCU-FOR-JOB": "Selected concentrators were removed successfully.",
-      "DELETE-RULE": "Do you want to delete the rule",
+      "DELETE-RULE": "Do you want to delete the rule?",
       "ERROR": "There are no meter configurations added to the system yet.",
-      "JOB-ADDED-TO-ALL": "Successfully assigned job to the rules!",
+      "JOB-ADDED-TO-ALL": "Successfully assigned job to the template!",
       "JOB-FAILED": "Failed to remove job from all rules.",
-      "JOB-FAILED-TO-ALL": "Failed to assign the job to the rules!",
-      "JOB-REMOVED": "Job was successfully de-assigned from the rules.",
-      "REMOVE-FROM_RULES": "Do you want to remove job from all rules?",
+      "JOB-FAILED-TO-ALL": "Failed to assign the job to the template!",
+      "JOB-REMOVED": "Job was successfully de-assigned from the template.",
+      "REMOVE-FROM_RULES": "Do you want to remove job from template?",
       "RULE-ADDED": "Rule was added successfully",
       "RULE-DELETED": "Rule deleted!",
       "RULE-UPDATED": "Rule was updated successfully",
       "RULES": "Rules",
       "SELECT-JOB": "Select a job to add.",
-      "SHOW-HIDE": "Show/hide templates"
+      "SHOW-HIDE": "Show/hide templates",
+      "JOB-ALREADY-EXIST": "Assigned job already exist"
     },
     "IMPORT-DEVICE-KEYS": {
       "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }}",

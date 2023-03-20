@@ -40,7 +40,6 @@
         <div>
           <ag-grid-angular
             #agGrid
-            (firstDataRendered)="onFirstDataRendered($event)"
             (gridReady)="onGridReady($event)"
             (rowEditingStopped)="rowEditingStopped($event)"
             [columnDefs]="columnDefs"
@@ -58,7 +57,7 @@
           ></ag-grid-angular>
         </div>
 
-        <div *ngIf="showJobSection()">
+        <div>
           <div class="d-flex align-items-center mb-3 mt-5">
             <div class="mb-3 me-3">
               <h4 class="mb-0">{{ 'FORM.JOBS' | translate }}</h4>
@@ -76,7 +75,6 @@
           <div>
             <ag-grid-angular
               #agGrid
-              (firstDataRendered)="onFirstDataRenderedJobs($event)"
               (gridReady)="onGridReadyJobs($event)"
               [columnDefs]="columnDefsJobs"
               [context]="context"

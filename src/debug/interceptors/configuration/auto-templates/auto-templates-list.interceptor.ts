@@ -1,7 +1,7 @@
 import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { templates } from 'src/app/core/repository/consts/auto-templates.const';
+import { getTemplates } from 'src/app/core/repository/consts/auto-templates.const';
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
 
 @Injectable()
@@ -93,6 +93,6 @@ export class AutoTemplatesListInterceptor {
   }
 
   static canInterceptAutoTemplatesList(request: HttpRequest<any>): boolean {
-    return new RegExp(templates).test(request.url) && request.method.endsWith('GET');
+    return new RegExp(getTemplates).test(request.url) && request.method.endsWith('GET');
   }
 }
