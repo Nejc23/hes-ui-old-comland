@@ -1,7 +1,7 @@
 import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { schedulerJobsListByJobId } from 'src/app/core/repository/consts/jobs.const';
+import { schedulerJobsListByTemplateId } from 'src/app/core/repository/consts/jobs.const';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 
 @Injectable()
@@ -61,6 +61,6 @@ export class AutoTemplatesReadingJobsListInterceptor {
   }
 
   static canInterceptAutoTemplatesReadingJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`${schedulerJobsListByJobId}$`).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(`${schedulerJobsListByTemplateId}$`).test(request.url) && request.method.endsWith('POST');
   }
 }

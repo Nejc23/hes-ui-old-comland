@@ -5,15 +5,19 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { TemplatesList } from '../../interfaces/auto-templates/templates-list.interface';
 import {
-  templates,
+  getTemplates,
   autoTemplateRules,
   autoTemplateRulesAdd,
   autoTemplateRulesUpdate,
   autoTemplateRulesDelete,
-  autoTemplateDevice
+  autoTemplateDevice,
+  basePath,
+  templates,
+  autoJobRule
 } from '../../consts/auto-templates.const';
-import { AutoTemplateRuleList, AutoTemplateRule } from '../../interfaces/auto-templates/auto-template-rule.interface';
+import { AutoTemplateRuleList } from '../../interfaces/auto-templates/auto-template-rule.interface';
 import { Rule } from '../../interfaces/auto-templates/rule.interface';
+import { autoJobLinks } from '../../consts/jobs.const';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +30,7 @@ export class AutoTemplatesService {
   }
 
   getTemplatesRequest(): HttpRequest<any> {
-    return new HttpRequest('GET', templates);
-  }
-
-  getAutoTemplateRules(): Observable<AutoTemplateRuleList[]> {
-    return this.repository.makeRequest(this.getAutoTemplateRulesRequest());
-  }
-
-  getAutoTemplateRulesRequest(): HttpRequest<any> {
-    return new HttpRequest('GET', autoTemplateRules);
+    return new HttpRequest('GET', getTemplates);
   }
 
   getAutoTemplateRulesForTemplateId(templateId: string): Observable<AutoTemplateRuleList> {
@@ -42,7 +38,7 @@ export class AutoTemplatesService {
   }
 
   getAutoTemplateRulesForTemplateIdRequest(templateId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${autoTemplateRules}/${templateId}`);
+    return new HttpRequest('GET', `${basePath}/${templates}/${templateId}/${autoTemplateRules}`);
   }
 
   createAutoTemplateRule(rule: Rule): Observable<any> {
@@ -53,12 +49,16 @@ export class AutoTemplatesService {
     return new HttpRequest('POST', autoTemplateRulesAdd, param);
   }
 
-  updateAutoTemplateRule(rule: AutoTemplateRule): Observable<any> {
-    return this.repository.makeRequest(this.updateAutoTemplateRuleRequest(rule));
+  updateAutoTemplateRule(autoTemplateRuleId: string, propertyName: string, regex: string): Observable<any> {
+    return this.repository.makeRequest(this.updateAutoTemplateRuleRequest(autoTemplateRuleId, propertyName, regex));
   }
 
-  updateAutoTemplateRuleRequest(param: AutoTemplateRule): HttpRequest<any> {
-    return new HttpRequest('PUT', autoTemplateRulesUpdate, param);
+  updateAutoTemplateRuleRequest(autoTemplateRuleId: string, propertyName: string, regex: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${autoTemplateRulesUpdate}/${autoTemplateRuleId}`, {
+      autoTemplateRuleId: autoTemplateRuleId,
+      propertyName: propertyName,
+      propertyValue: regex
+    });
   }
 
   deleteAutoTemplateRule(id: string): Observable<any> {
@@ -75,5 +75,21 @@ export class AutoTemplatesService {
 
   getRegistersRequest(deviceId: string): HttpRequest<any> {
     return new HttpRequest('GET', `${autoTemplateDevice}/${deviceId}/registers?type=data`);
+  }
+
+  assignNewJobToTemplateRule(jobId: string, templateId: string) {
+    return this.repository.makeRequest(this.postAssignNewJobToTemplateRequest(jobId, templateId));
+  }
+
+  postAssignNewJobToTemplateRequest(jobId: string, templateId: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${basePath}/${autoJobLinks}`, { templateId: templateId, jobId: jobId });
+  }
+
+  deleteJobFromTemplateRule(id: string): Observable<any> {
+    return this.repository.makeRequest(this.deleteJobFromTemplateRuleRequest(id));
+  }
+
+  deleteJobFromTemplateRuleRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('DELETE', `${autoJobRule}/${id}`);
   }
 }

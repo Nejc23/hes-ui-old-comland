@@ -17,7 +17,7 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
   // called on init
   agInit(params: any): void {
     this.params = params;
-    this.jobId = params.data.id;
+    this.jobId = params.data.autoJobLinkId;
   }
 
   // called when the cell is refreshed
