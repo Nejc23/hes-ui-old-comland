@@ -82,7 +82,6 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
       (value) => {
         this.loading = false;
         this.toast.successToast(this.successMessage);
-        this.modal.close();
         this.resetForm();
       },
       (e) => {
