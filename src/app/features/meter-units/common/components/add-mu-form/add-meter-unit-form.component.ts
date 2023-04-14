@@ -29,6 +29,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
 import { ValidateHostnameStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
 import { Observable } from 'rxjs';
+import { groupBy, orderBy } from '@progress/kendo-data-query';
 
 @Component({
   templateUrl: './add-meter-unit-form.component.html'
@@ -74,7 +75,7 @@ export class AddMeterUnitFormComponent implements OnInit {
   templateDefaultValues: GetDefaultInformationResponse;
   opened = false;
   loading = false;
-  deviceMediums$: Observable<Codelist<number>[]>;
+  deviceMediums$: Observable<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -90,7 +91,28 @@ export class AddMeterUnitFormComponent implements OnInit {
   ) {
     this.form = this.createForm();
     this.communicationTypeChanged(this.defaultCommunicationType);
-    this.deviceMediums$ = this.codelistServiceMu.meterUnitDeviceMediumCodelist();
+
+    this.deviceMediums$ = this.codelistServiceMu.meterUnitDeviceMediumCodelist().pipe(
+      map((items) => {
+        items.map((item) => (item.value = this.translate.instant('M-BUS-TYPE.' + item.id.toString(16).toUpperCase())));
+        const mainIds = [0, 2, 3, 4, 7]; // other, electricity, gas, heat, water
+        const allCategoryItems = items.filter((item) => !mainIds.includes(item.id));
+        if (allCategoryItems) {
+          allCategoryItems.forEach((item) => {
+            return (item['category'] = this.translate.instant('COMMON.ALL-MEDIUM-TYPES'));
+          });
+        }
+        const mainCategoryItems = items.filter((item) => mainIds.includes(item.id));
+        if (mainCategoryItems) {
+          mainCategoryItems.forEach((item) => {
+            return (item['category'] = this.translate.instant('COMMON.MEDIUM-TYPES'));
+          });
+        }
+        return groupBy(orderBy(items, [{ field: 'category', dir: 'desc' }]), [
+          { field: 'category', dir: 'desc' } // main / other
+        ]);
+      })
+    );
   }
 
   get nameProperty() {
@@ -252,7 +274,7 @@ export class AddMeterUnitFormComponent implements OnInit {
       [this.hostnameProperty]: [{ value: editMu?.hostname, disabled: this.plcDevice }, this.plcDevice ? null : [Validators.required]],
       [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }, Validators.required],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
-      [this.mediumProperty]: [{ id: 1, value: 'ELECTRICITY' }, Validators.required],
+      [this.mediumProperty]: [{ id: 2, value: 'ELECTRICITY' }, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.driver, disabled: true }],
 

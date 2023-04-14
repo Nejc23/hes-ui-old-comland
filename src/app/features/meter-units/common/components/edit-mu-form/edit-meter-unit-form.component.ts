@@ -107,6 +107,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
           this.mediums = res;
           const medium = this.mediums.find((t) => this.data.medium.toLowerCase() === t.value.toLowerCase());
           this.form.get(this.mediumProperty).setValue(medium);
+          res.map((item) => (item.value = this.translate.instant('M-BUS-TYPE.' + item.value.toUpperCase())));
         });
       })
     );
@@ -246,6 +247,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges, OnDestroy 
     });
     this.deviceMediums$ = this.codelistServiceMu.meterUnitDeviceMediumCodelist();
     this.deviceMediums$.subscribe((res) => {
+      res.map((item) => (item.value = this.translate.instant('M-BUS-TYPE.' + item.value.toUpperCase())));
+      //res.this.translate.instant('M-BUS-TYPE.' + this.data.medium.toUpperCase());
       this.mediums = res;
       const medium = this.mediums.find((t) => this.data?.medium?.toLowerCase() === t.value.toLowerCase());
       if (medium) {

@@ -262,6 +262,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.meterUnitsService.getMeterUnitFromConcentrator(deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
+      this.data.medium = this.data.medium ? this.translate.instant('M-BUS-TYPE.' + this.data.medium.toUpperCase()) : '';
       this.loading = false;
       this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
       if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
