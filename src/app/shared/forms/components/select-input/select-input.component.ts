@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { UnitCodeListItemClient } from 'src/app/models/tou-configuration/UnitCodeListItemClient';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { GroupResult } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-select-input',
@@ -17,7 +18,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @Input() property: string;
   @Input() label;
-  @Input() selectOptions: Codelist<number | string>[] | UnitCodeListItemClient<number | string> = [];
+  @Input() selectOptions: Codelist<number | string>[] | UnitCodeListItemClient<number | string | GroupResult[]> = [];
   @Input() disabled = false;
   @Input() clearButton = true;
   @Input() itemDisabled;

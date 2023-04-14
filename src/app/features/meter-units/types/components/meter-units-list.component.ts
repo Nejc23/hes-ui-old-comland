@@ -232,9 +232,10 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.loading = false;
         this.gridData = data;
-        this.gridData.data.map(
-          (meterUnit) => (meterUnit.protocolType = this.translate.instant('PROTOCOL.' + meterUnit.protocolType?.toUpperCase()))
-        );
+        this.gridData.data.map((meterUnit) => {
+          meterUnit.protocolType = this.translate.instant('PROTOCOL.' + meterUnit.protocolType?.toUpperCase());
+          meterUnit.medium = meterUnit.medium ? this.translate.instant('M-BUS-TYPE.' + meterUnit.medium?.toUpperCase()) : '';
+        });
         this.gridData.data.map((meterUnit) => {
           const errorList = [];
           let lifecycleError = [];
