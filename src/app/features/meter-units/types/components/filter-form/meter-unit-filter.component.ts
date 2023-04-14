@@ -19,6 +19,7 @@ import readXlsxFile from 'read-excel-file';
 import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
 import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
+import { map } from 'rxjs/operators';
 
 interface MetersIdsFilterData {
   ids: number[];
@@ -60,7 +61,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   ];
   lastCommunicationFormattedDateValue = '';
 
-  deviceMediums$: Observable<Codelist<number>[]>;
+  deviceMediums$: Observable<any>;
   protocolTypes: Codelist<number>[];
 
   currentStatuses: Codelist<number>[];
@@ -220,7 +221,13 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
     this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
 
-    this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist();
+    this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist().pipe(
+      map((items) => {
+        items.map((item) => (item.value = this.translate.instant('M-BUS-TYPE.' + item.id.toString(16).toUpperCase())));
+        return items;
+      })
+    );
+
     this.codelistService.meterUnitProtocolTypeCodelist().subscribe((res) => {
       this.protocolTypes = res;
       this.protocolTypes.map((protocol) => (protocol.value = this.translate.instant('PROTOCOL.' + protocol.value)));
