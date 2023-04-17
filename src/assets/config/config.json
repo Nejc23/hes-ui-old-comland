@@ -1,6 +1,6 @@
 {
   "apiServer": {
-    "url": "https://192.168.2.183",
+    "url": "https://localhost",
     "fileStorageUrl": "https://192.168.2.181:8083",
     "translationsDebug": false
   },
@@ -12,4 +12,5 @@
     "clientScope": "openid profile roles company segment mygridWebApi",
     "clientAutoSilentRenew": true
   }
+
 }
