@@ -326,11 +326,7 @@ export class ImportMbusConfigurationComponent implements OnInit {
   }
 
   translateManufacturer(manufacturer: number) {
-    let translation = this.translate.instant('M-BUS-MANUFACTURER.UNKNOWN');
-    if (this.hasTranslation('M-BUS-MANUFACTURER.' + manufacturer.toString(16).toUpperCase())) {
-      translation = this.translate.instant('M-BUS-MANUFACTURER.' + manufacturer.toString(16).toUpperCase());
-    }
-    return translation;
+    return this.getManufacturers(manufacturer.toString(16).toUpperCase());
   }
 
   translateType(type: number) {
@@ -361,5 +357,122 @@ export class ImportMbusConfigurationComponent implements OnInit {
 
   checkValues(number: number): boolean {
     return number === 0 || number >= 300;
+  }
+
+  getManufacturers(id: string) {
+    const jsonData = {
+      '442': 'ABB AB                                                               ',
+      '465': 'Actaris                                                              ',
+      '467': 'Actaris                                                              ',
+      '477': 'Actaris                                                              ',
+      '4A7': 'AEG                                                                  ',
+      '4AC': 'Kohler                                                               ',
+      '4AD': 'S.C. AEM S.A.                                                        ',
+      '5B0': 'Ampy Automation Digilog Ltd                                          ',
+      '5B4': 'Aquametro                                                            ',
+      '613': 'Apsis Kontrol Sistemleri                                             ',
+      '8A3': 'Berg Energiekontrollsysteme GmbH                                     ',
+      '8B2': 'Bernina Electronic AG                                                ',
+      A65: 'Basari Elektronik A.S.                                               ',
+      A74: 'BESTAS Elektronik Optik                                              ',
+      C49: 'Circuit Breaker Industries                                           ',
+      D8F: 'Clorius Raab Karcher Energie Service A/S                             ',
+      DEE: 'Conlog                                                               ',
+      '0F4D': 'Cazzaniga S.p.A.                                                     ',
+      '102E': 'Danubia                                                              ',
+      '10D3': 'Danfoss A/S                                                          ',
+      '11A5': 'DIEHL Metering                                                       ',
+      '1347': 'Deutsche Zählergesellschaft                                          ',
+      '148D': 'EDMI Pty.Ltd.                                                        ',
+      '14C5': 'Engelmann Sensor GmbH                                                ',
+      '1574': 'PA KVANT J.S.                                                        ',
+      '158D': 'Elektromed Elektronik Ltd                                            ',
+      '1593': 'ELSTER Produktion GmbH                                               ',
+      '15A8': 'EMH Elektrizitätszähler GmbH & CO KG                                 ',
+      '15B5': 'EMU Elektronik AG                                                    ',
+      '15AF': 'Enermet                                                              ',
+      '15C4': 'ENDYS GmbH                                                           ',
+      '15D0': 'Kiev Polytechnical Scientific Research                               ',
+      '15D4': 'ENTES Elektronik                                                     ',
+      '164C': 'Erelsan Elektrik ve Elektronik                                       ',
+      '166D': 'Starion Elektrik ve Elektronik                                       ',
+      '16B2': 'Eurometers Ltd                                                       ',
+      '16F4': 'Elin Wasserwerkstechnik                                              ',
+      '18A4': 'Federal Elektrik                                                     ',
+      '19AC': 'Siemens Measurements Ltd.                                            ',
+      '1C4A': 'Grundfoss A/S                                                        ',
+      '1CA3': 'GEC Meters Ltd.                                                      ',
+      '1E70': 'Ingenieurbuero Gasperowicz                                           ',
+      '1EE6': 'Gas- u. Wassermessfabrik                                             ',
+      '20A7': 'Hamburger Elektronik Gesellschaft                                    ',
+      '20AC': 'Heliowatt                                                            ',
+      '2283': 'Horstmann Timers and Controls Ltd.                                   ',
+      '2324': 'Hydrometer GmbH                                                      ',
+      '246D': 'Intracom                                                             ',
+      '2485': 'IMIT S.p.A.                                                          ',
+      '25D6': 'Invensys Metering Systems AG                                         ',
+      '266B': 'Iskraemeco                                                           ',
+      '2674': 'Ista                                                                 ',
+      '2692': 'Itron                                                                ',
+      '26EB': 'IWK Regler und Kompensatoren GmbH                                    ',
+      '2C2D': 'Kamstrup Energie A/S                                                 ',
+      '2D0C': 'Kohler                                                               ',
+      '2D65': 'KK-Electronic A/S                                                    ',
+      '2DD8': 'KONNEX-based users                                                   ',
+      '2E4F': 'Kromschröder                                                         ',
+      '2E74': 'Kundo SystemTechnik GmbH                                             ',
+      '30AD': 'LEM HEME Ltd.                                                        ',
+      '3000': 'Landis & Gyr Ltd.                                                    ',
+      '30E4': 'Landis+Gyr GmbH                                                      ',
+      '30FA': 'Landis & Gyr AG                                                      ',
+      '3101': 'Atlantic Meters                                                      ',
+      '31AC': 'LUMEL                                                                ',
+      '3265': 'Landis & Staefa electronic                                           ',
+      '3270': 'Landis & Staefa production                                           ',
+      '32A7': 'Landis & Staefa                                                      ',
+      '327A': 'Siemens Building Technologies                                        ',
+      '3424': 'Maddalena S.r.I.                                                     ',
+      '34A9': 'Sensus Metering Systems                                              ',
+      '3573': 'MAK-SAY Elektrik Elektronik                                          ',
+      '35D3': 'MANAS Elektronik                                                     ',
+      '3613': 'Multiprocessor Systems Ltd                                           ',
+      '3683': 'Metering Technology Corporation                                      ',
+      '3933': 'Nisko Industries                                                     ',
+      '39B3': 'Nisko Advanced Metering Solutions                                    ',
+      '3A4D': 'Norm Elektronik                                                      ',
+      '3DD2': 'ONUR Elektroteknik                                                   ',
+      '4024': 'PadMess GmbH                                                         ',
+      '41A7': 'Sensus Metering Systems                                              ',
+      '4249': 'Polymeters Response International Ltd.                               ',
+      '4833': 'Hydrometer GmbH                                                      ',
+      '48AC': 'Relay GmbH                                                           ',
+      '4965': 'Viterra Energy Services                                              ',
+      '4C30': 'Sappel                                                               ',
+      '4C68': 'Schnitzel GmbH                                                       ',
+      '4CAE': 'Sensus GmbH                                                          ',
+      '4DA3': 'Sierra Monitor Corporation                                           ',
+      '4DA5': 'Siame                                                                ',
+      '4DAC': 'Siemens Measurements Ltd.                                            ',
+      '4D25': 'Siemens AG                                                           ',
+      '4D82': 'Schlumberger Industries Ltd.                                         ',
+      '4DEE': 'Sontex SA                                                            ',
+      '4DE6': 'softflow.de GmbH                                                     ',
+      '4E0C': 'Sappel                                                               ',
+      '4E18': 'Sensus Metering Systems                                              ',
+      '4ECD': 'AB Svensk Värmemätning SVM                                           ',
+      '5068': 'Techem Service AG                                                    ',
+      '5130': 'TIP Thüringer Industrie Produkte GmbH                                ',
+      '5427': 'Uher                                                                 ',
+      '54E9': 'United Gas Industries                                                ',
+      '58B3': 'Viterra Energy Services                                              ',
+      '5A09': 'Van Putten Instruments B.V.                                          ',
+      '5DAF': 'Westermo Teleindustri AB                                             ',
+      '6685': 'Yuksek Teknoloji                                                     ',
+      '6827': 'Zellwerg Uster AG                                                    ',
+      '6830': 'Zaptronix                                                            ',
+      '6936': 'ZIV Aplicaciones y Tecnologia, S.A.                                  '
+    };
+    const manufacturers = JSON.stringify(jsonData);
+    return JSON.parse(manufacturers)[id] ?? this.translate.instant('M-BUS-TYPE.UNKNOWN');
   }
 }
