@@ -1234,7 +1234,8 @@
     "MBUS": "M-BUS",
     "WMBUS": "wM-BUS",
     "mBus": "M-BUS",
-    "vmBus": "wM-BUS"
+    "vmBus": "wM-BUS",
+    "PLANPLC": "PLAN-PLC"
   },
   "TOU-CONFIG": {
     "TOU-ID-ERROR-PATTERN": "TOU ID must include only alphanumeric characters and must be between 1 and 8 in length.",
