@@ -35,6 +35,7 @@ import { OperationType } from '../../components/operations/dc-operations.compone
 import { DeviceState } from '../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
+import { AppConfigService } from '../../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -149,6 +150,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
   eventsFiltersConfiguration: Array<GridFilter> = [];
 
+  lastCommunicationDisabled = false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -164,7 +166,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private meterUnitsTypeService: MeterUnitsService,
     private router: Router,
     private dataProcessingService: DataProcessingService,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private appConfigService: AppConfigService
   ) {
     this.subscriptions.push(
       this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
@@ -284,6 +287,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     // get DCU
     this.getData();
+
+    this.lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing') ?? false;
   }
 
   ngOnDestroy(): void {
@@ -313,6 +318,11 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
             moment(this.data.lastCommunication).format(environment.timeFormatLong);
         }
         this.form = this.createForm();
+
+        if (this.lastCommunicationDisabled) {
+          this.form.removeControl('lastCommunication');
+        }
+
         this.editForm = this.createEditForm();
         this.eventsForm = this.createEventsForm();
 

@@ -44,6 +44,7 @@ import { GridResponse } from '../../../core/repository/interfaces/helpers/grid-r
 import { Router } from '@angular/router';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 import { SortDescriptor } from '@progress/kendo-data-query';
+import { AppConfigService } from '../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -121,11 +122,16 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private eventsService: EventManagerService,
     private elRef: ElementRef,
-    private router: Router
+    private router: Router,
+    private appConfigService: AppConfigService
   ) {
     // grid columns and row actions configuration
     this.concentratorsColumns = this.dataConcentratorUnitsGridService.concentratorsColumns;
     this.concentratorsRowActionConfiguration = this.dataConcentratorUnitsGridService.concentratorsRowActionConfiguration;
+    const lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing') ?? false;
+    if (lastCommunicationDisabled) {
+      this.concentratorsColumns = this.concentratorsColumns.filter((column) => column.field !== 'lastCommunication');
+    }
 
     this.listSubscription = this.eventsService.getCustom('RefreshConcentratorEvent').subscribe(() => {
       this.getData();

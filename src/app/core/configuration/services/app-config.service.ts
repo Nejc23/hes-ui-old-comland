@@ -21,4 +21,13 @@ export class AppConfigService {
         this.appConfigStoreService.setConfig(data as IAppConfig);
       });
   }
+
+  isFeatureEnabled(key: string) {
+    return (
+      (AppConfigService.settings &&
+        AppConfigService.settings?.features !== undefined &&
+        AppConfigService.settings?.features[key] === true) ??
+      false
+    );
+  }
 }

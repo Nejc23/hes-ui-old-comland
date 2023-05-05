@@ -125,6 +125,7 @@ import { MeterParametrizationComponent } from './meter-parametrization/meter-par
 import { HasPermissionDirective } from './directives/permissions/has-permission.directive';
 import { ImportMbusConfigurationComponent } from '../features/meter-units/common/components/import-mbus-configuration/import-mbus-configuration.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { FeatureFlagDirective } from './directives/feature-flag/feature-flag.directive';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -371,7 +372,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     InitialReKeyingComponent,
     MeterParametrizationComponent,
     HasPermissionDirective,
-    PlcMeterTemplatesImportComponent
+    PlcMeterTemplatesImportComponent,
+    FeatureFlagDirective
   ],
   entryComponents: [
     ModalConfirmComponent,
