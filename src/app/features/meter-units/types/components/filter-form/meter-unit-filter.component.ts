@@ -20,6 +20,7 @@ import { environment } from '../../../../../../environments/environment';
 import * as moment from 'moment';
 import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 import { map } from 'rxjs/operators';
+import { AppConfigService } from '../../../../../core/configuration/services/app-config.service';
 
 interface MetersIdsFilterData {
   ids: number[];
@@ -49,6 +50,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   firmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
+  lastCommunicationDisabled = false;
 
   slaOperations: Codelist<number>[] = [
     { id: 3, value: this.translate.instant('COMMON.GRATER-THAN') },
@@ -111,7 +113,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private translate: TranslateService,
     private ngxCsvParser: NgxCsvParser,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private appConfigService: AppConfigService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
@@ -236,6 +239,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       this.doFillData();
     });
+
+    this.lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing') ?? false;
   }
 
   /*

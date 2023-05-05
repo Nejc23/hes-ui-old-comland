@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
+import { AppConfigService } from '../../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-dc-filter',
@@ -47,7 +48,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     { id: 3, value: this.translate.instant('FORM.NEWER-THAN') } // grater than x days
   ];
   lastCommunicationFormattedDateValue = '';
-
+  lastCommunicationDisabled = false;
   sessionFilter: DcuLayout;
 
   @Output() toggleFilter = new EventEmitter();
@@ -64,7 +65,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     private codelistHelperService: CodelistHelperService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private translate: TranslateService,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private appConfigService: AppConfigService
   ) {
     this.form = this.createForm(null, null);
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -143,6 +145,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.clearFilterSubscription = this.eventsService.getCustom('ClearDcFilter').subscribe((res) => {
       this.clearButtonClicked();
     });
+
+    this.lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing') ?? false;
   }
 
   doFillData() {

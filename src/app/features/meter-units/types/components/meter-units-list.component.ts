@@ -39,6 +39,7 @@ import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selecti
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { Subscription } from 'rxjs';
 import { SortDescriptor } from '@progress/kendo-data-query';
+import { AppConfigService } from '../../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-meter-units',
@@ -131,7 +132,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private codelistService: CodelistMeterUnitsRepositoryService,
-    private eventManager: EventManagerService
+    private eventManager: EventManagerService,
+    private appConfigService: AppConfigService
   ) {
     route.queryParams.subscribe((params) => {
       if (params['search']) {
@@ -187,6 +189,12 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.metersColumns = this.meterUnitsTypeGridService.metersColumns;
+    // last communication feature flag -> default is enabled
+    const lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing');
+    if (lastCommunicationDisabled) {
+      this.metersColumns = this.metersColumns.filter((column) => column.field !== 'lastCommunication');
+    }
+
     this.metersRowActionConfiguration = this.meterUnitsTypeGridService.metersRowActionConfiguration;
     this.meterUnitsTypeGridLayoutStore.visibleColumns = this.metersColumns.map((column) => column.field);
     // all visible by default

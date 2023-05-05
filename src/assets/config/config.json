@@ -11,5 +11,8 @@
     "clientRoot": "https://localhost:4200/",
     "clientScope": "openid profile roles company segment mygridWebApi",
     "clientAutoSilentRenew": true
+  },
+  "features": {
+    "SkipLastCommunicationPublishing": true
   }
 }

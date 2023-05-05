@@ -12,4 +12,7 @@ export interface IAppConfig {
     clientScope: string;
     clientAutoSilentRenew: boolean;
   };
+  features: {
+    [key: string]: boolean;
+  };
 }

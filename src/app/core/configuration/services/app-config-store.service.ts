@@ -18,7 +18,8 @@ export class AppConfigStoreService extends Store<IAppConfig> {
         clientRoot: null,
         clientScope: null,
         clientAutoSilentRenew: false
-      }
+      },
+      features: null
     });
   }
 

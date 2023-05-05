@@ -23,6 +23,7 @@ import { Observable, Subscription } from 'rxjs';
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { TemplateDto } from 'src/app/api/templating/template-dto';
 import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
+import { AppConfigService } from '../../../../core/configuration/services/app-config.service';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -61,6 +62,7 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   private requestModel;
   deviceMediums$: Observable<Codelist<number>[]>;
 
+  lastCommunicationDisabled = false;
   constructor(
     private breadcrumbService: BreadcrumbService,
     private meterUnitsService: MeterUnitsService,
@@ -72,7 +74,8 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     private permissionService: PermissionService,
     private meterPropertyService: MeterPropertyService,
     private eventsService: EventManagerService,
-    private templatingService: TemplatingService
+    private templatingService: TemplatingService,
+    private appConfigService: AppConfigService
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.deviceId = params.deviceId;
@@ -256,6 +259,8 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
     );
     // get MeterUnit
     this.getData(this.deviceId);
+
+    this.lastCommunicationDisabled = this.appConfigService.isFeatureEnabled('SkipLastCommunicationPublishing') ?? false;
   }
 
   getData(deviceId: string) {
@@ -337,6 +342,9 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
         referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),
         communicationType: this.data.hdlcInformation ? 'HDLC' : 'WRAPPER'
       });
+    }
+    if (this.lastCommunicationDisabled) {
+      this.detailsForm.removeControl('lastCommunication');
     }
   }
 
