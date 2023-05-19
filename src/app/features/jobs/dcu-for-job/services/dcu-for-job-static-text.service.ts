@@ -33,7 +33,9 @@ export class DcuForJobStaticTextService {
     vendor: boolean,
     tag: boolean,
     readStatuses: boolean,
-    firmware: boolean,
+    appFirmware: boolean,
+    metrologyFirmware: boolean,
+    moduleFirmware: boolean,
     breakerState: boolean,
     showChildMBus: boolean,
     showWithoutTemplate: boolean,
@@ -43,9 +45,31 @@ export class DcuForJobStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ' · ' : '';
+        status ||
+        vendor ||
+        tag ||
+        readStatuses ||
+        appFirmware ||
+        metrologyFirmware ||
+        moduleFirmware ||
+        breakerState ||
+        showChildMBus ||
+        showWithoutTemplate
+          ? ' · '
+          : '';
       result = filterName + additionalString;
-    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate) {
+    } else if (
+      status ||
+      vendor ||
+      tag ||
+      readStatuses ||
+      appFirmware ||
+      metrologyFirmware ||
+      moduleFirmware ||
+      breakerState ||
+      showChildMBus ||
+      showWithoutTemplate
+    ) {
       result = '';
     }
 
@@ -55,7 +79,9 @@ export class DcuForJobStaticTextService {
       vendor ||
       tag ||
       readStatuses ||
-      firmware ||
+      appFirmware ||
+      metrologyFirmware ||
+      moduleFirmware ||
       breakerState ||
       showChildMBus ||
       showWithoutTemplate
@@ -64,26 +90,37 @@ export class DcuForJobStaticTextService {
     }
 
     if (status) {
-      additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString =
+        vendor ||
+        tag ||
+        readStatuses ||
+        appFirmware ||
+        metrologyFirmware ||
+        moduleFirmware ||
+        breakerState ||
+        showChildMBus ||
+        showWithoutTemplate
+          ? ', '
+          : '';
       result = result + this.translate.instant('GRID.STATUS') + additionalString;
     }
 
     if (vendor) {
-      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = tag || readStatuses || appFirmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + this.translate.instant('GRID.VENDOR') + additionalString;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = readStatuses || appFirmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + this.translate.instant('GRID.TAG') + additionalString;
     }
 
     if (readStatuses) {
-      additionalString = firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = appFirmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + this.translate.instant('GRID.READ-STATUS') + additionalString;
     }
 
-    if (firmware) {
+    if (appFirmware) {
       additionalString = breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + this.translate.instant('GRID.FIRMWARE').toLowerCase() + additionalString;
     }

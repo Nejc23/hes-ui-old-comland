@@ -10,6 +10,7 @@ import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-u
 import { v4 as uuidv4 } from 'uuid';
 import {
   device,
+  getDeviceBasicData,
   meterUnits,
   meterUnitsBreakerState,
   meterUnitsForJob,
@@ -71,6 +72,14 @@ export class MeterUnitsService {
 
   getMeterUnitFromConcentrator(id: string): Observable<MeterUnitDetails> {
     return this.repository.makeRequest(this.getMeterUnitFromConcentratorRequest(id));
+  }
+
+  getDeviceBasicDetails(id: string): Observable<MeterUnitDetails> {
+    return this.repository.makeRequest(this.getDeviceBasicDetailsRequest(id));
+  }
+
+  getDeviceBasicDetailsRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${getDeviceBasicData}/${id}`);
   }
 
   getMeterUnitFromConcentratorRequest(id: string): HttpRequest<any> {
@@ -329,10 +338,28 @@ export class MeterUnitsService {
           })
         );
       }
-      if (param.filterModel.firmware && param.filterModel.firmware.length > 0) {
-        param.filterModel.firmware.map((row) =>
+      if (param.filterModel.applicationFirmware && param.filterModel.applicationFirmware.length > 0) {
+        param.filterModel.applicationFirmware.map((row) =>
           requestParam.filter.push({
-            propName: capitalize(gridSysNameColumnsEnum.firmware),
+            propName: capitalize(gridSysNameColumnsEnum.applicationFirmwareVersion),
+            propValue: row.value,
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+      if (param.filterModel.metrologyFirmware && param.filterModel.metrologyFirmware.length > 0) {
+        param.filterModel.metrologyFirmware.map((row) =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.metrologyFirmwareVersion),
+            propValue: row.value,
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+      if (param.filterModel.moduleFirmware && param.filterModel.moduleFirmware.length > 0) {
+        param.filterModel.moduleFirmware.map((row) =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.moduleFirmwareVersion),
             propValue: row.value,
             filterOperation: filterOperationEnum.contains
           })

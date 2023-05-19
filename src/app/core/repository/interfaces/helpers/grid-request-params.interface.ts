@@ -24,7 +24,9 @@ export interface GridFilterParams {
   tags?: Codelist<number>[];
   vendors?: Codelist<number>[];
   readStatus?: ReadStatus;
-  firmware?: Codelist<number>[];
+  applicationFirmware?: Codelist<number>[];
+  moduleFirmware?: Codelist<number>[];
+  metrologyFirmware?: Codelist<number>[];
   disconnectorState?: Codelist<number>[];
   ciiState?: Codelist<number>[];
   showChildInfoMBus?: boolean;

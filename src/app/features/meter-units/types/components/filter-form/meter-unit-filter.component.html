@@ -27,12 +27,25 @@
             </app-input-tag>
 
             <app-input-tag (valueChanged)="applyFilter()" [allowCustomValues]="true"
-                           [autocompleteItemsAsObjects]="firmware$ | async"
+                           [autocompleteItemsAsObjects]="appFirmware$ | async"
                            [form]="form"
-                           [property]="firmwareProperty"
-                           label="Firmware">
+                           [property]="appFirmwareProperty"
+                           label="Application-Firmware">
             </app-input-tag>
 
+            <app-input-tag (valueChanged)="applyFilter()" [allowCustomValues]="true"
+                           [autocompleteItemsAsObjects]="metrologyFirmware$ | async"
+                           [form]="form"
+                           [property]="metrologyFirmwareProperty"
+                           label="metrology-Firmware">
+            </app-input-tag>
+
+            <app-input-tag (valueChanged)="applyFilter()" [allowCustomValues]="true"
+                           [autocompleteItemsAsObjects]="moduleFirmware$ | async"
+                           [form]="form"
+                           [property]="moduleFirmwareProperty"
+                           label="module-Firmware">
+            </app-input-tag>
 
             <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="showOptionFilter$"
                            [form]="form"

@@ -27,6 +27,9 @@ export interface MeterUnitDetails {
   stateChangedBy?: string;
   lastCommunication?: string;
   medium: string;
+  applicationFirmwareVersion?: string;
+  metrologyFirmwareVersion?: string;
+  moduleFirmwareVersion?: string;
 }
 
 export enum DeviceState {

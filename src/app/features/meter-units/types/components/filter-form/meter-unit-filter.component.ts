@@ -47,7 +47,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   meterUnitTags$: Observable<Codelist<number>[]>;
   disconnectorState$: Observable<Codelist<number>[]>;
   ciiState$: Observable<Codelist<number>[]>;
-  firmware$: Observable<Codelist<number>[]>;
+  appFirmware$: Observable<Codelist<number>[]>;
+  metrologyFirmware$: Observable<Codelist<number>[]>;
+  moduleFirmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
   lastCommunicationDisabled = false;
@@ -162,9 +164,25 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'value2';
   }
 
-  get firmwareProperty() {
+  get appFirmwareProperty() {
+    return 'appFirmware';
+  }
+
+  get moduleFirmwareProperty() {
+    return 'moduleFirmware';
+  }
+
+  get metrologyFirmwareProperty() {
+    return 'metrologyFirmware';
+  }
+
+  /*  get firmwareProperty() {
     return 'firmware';
   }
+
+  get firmwareProperty() {
+    return 'firmware';
+  }*/
 
   get breakerStateProperty() {
     return 'breakerState';
@@ -222,7 +240,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
     this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
     this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
-    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
+
+    this.appFirmware$ = this.codelistService.meterUnitFirmwareCodelist(0);
+    this.metrologyFirmware$ = this.codelistService.meterUnitFirmwareCodelist(1);
+    this.moduleFirmware$ = this.codelistService.meterUnitFirmwareCodelist(2);
 
     this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist().pipe(
       map((items) => {
@@ -289,7 +310,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           readStatusFilter: this.sessionFilter.readStatusFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
           vendorsFilter: this.sessionFilter.vendorsFilter,
-          firmwareFilter: this.sessionFilter.firmwareFilter,
+          appFirmwareFilter: this.sessionFilter.appFirmwareFilter,
+          metrologyFirmwareFilter: this.sessionFilter.metrologyFirmwareFilter,
+          moduleFirmwareFilter: this.sessionFilter.moduleFirmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           ciiStateFilter: this.sessionFilter.ciiStateFilter,
           showOptionFilter: this.sessionFilter.showOptionFilter,
@@ -317,7 +340,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['tags']: [filters && selected ? selected.tagsFilter : []],
         ['filters']: [filters ? filters : []],
         ['vendors']: [filters && selected ? selected.vendorsFilter : null],
-        ['firmware']: [filters && selected ? selected.firmwareFilter : []],
+        ['appFirmware']: [filters && selected ? selected.appFirmwareFilter : []],
+        ['moduleFirmware']: [filters && selected ? selected.moduleFirmwareFilter : []],
+        ['metrologyFirmware']: [filters && selected ? selected.metrologyFirmwareFilter : []],
         ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
         ['ciiState']: [filters && selected ? selected.ciiStateFilter : []],
         ['operation']: [
@@ -402,7 +427,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
               value1: 0,
               value2: 0
             },*/
-      firmwareFilter: this.form.get(this.firmwareProperty).value,
+      appFirmwareFilter: this.form.get(this.appFirmwareProperty).value,
+      moduleFirmwareFilter: this.form.get(this.moduleFirmwareProperty).value,
+      metrologyFirmwareFilter: this.form.get(this.metrologyFirmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
       ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,

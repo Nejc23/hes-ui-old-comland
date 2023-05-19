@@ -138,8 +138,18 @@ export class MeterUnitsTypeGridService {
       width: 120
     },
     {
-      field: gridSysNameColumnsEnum.firmware,
-      translationKey: 'GRID.FIRMWARE',
+      field: gridSysNameColumnsEnum.applicationFirmwareVersion,
+      translationKey: 'GRID.APPLICATION-FIRMWARE',
+      width: 140
+    },
+    {
+      field: gridSysNameColumnsEnum.metrologyFirmwareVersion,
+      translationKey: 'GRID.METROLOGY-FIRMWARE',
+      width: 140
+    },
+    {
+      field: gridSysNameColumnsEnum.moduleFirmwareVersion,
+      translationKey: 'GRID.MODULE-FIRMWARE',
       width: 140
     },
     {
