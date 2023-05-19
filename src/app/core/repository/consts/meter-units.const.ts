@@ -47,6 +47,8 @@ export const muCreate = `${basePathMuConcentratorInventory}/meter`;
 export const muUpdate = `${basePathMuConcentratorInventory}/meter`;
 export const getDevice = `${basePathMuConcentratorInventory}/meter`;
 
+export const getDeviceBasicData = `${basePath}/device`;
+
 // registers
 export const deviceRegisters = `${basePath}/registers/schedulable`;
 export const getPropertyData = `${basePath}/get-property-data`;

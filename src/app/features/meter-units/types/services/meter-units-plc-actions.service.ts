@@ -716,10 +716,28 @@ export class MeterUnitsPlcActionsService {
               })
             );
           }
-          if (requestModel.filterModel.firmware && requestModel.filterModel.firmware?.length > 0) {
-            requestModel.filterModel.firmware.map((row) =>
+          if (requestModel.filterModel.applicationFirmware && requestModel.filterModel.applicationFirmware?.length > 0) {
+            requestModel.filterModel.applicationFirmware.map((row) =>
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.firmware),
+                propName: capitalize(gridSysNameColumnsEnum.applicationFirmwareVersion),
+                propValue: row.value,
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+          if (requestModel.filterModel.applicationFirmware && requestModel.filterModel.applicationFirmware?.length > 0) {
+            requestModel.filterModel.applicationFirmware.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.metrologyFirmwareVersion),
+                propValue: row.value,
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+          if (requestModel.filterModel.applicationFirmware && requestModel.filterModel.applicationFirmware?.length > 0) {
+            requestModel.filterModel.applicationFirmware.map((row) =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.moduleFirmwareVersion),
                 propValue: row.value,
                 filterOperation: filterOperationEnum.contains
               })

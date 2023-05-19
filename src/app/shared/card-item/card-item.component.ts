@@ -183,7 +183,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   }
 
   addColoredTagBackground(formField: string) {
-    if (formField && formField === 'communicationType') {
+    if ((formField && formField === 'communicationType') || (formField && formField === 'medium')) {
       return 'primary-transparent-bg colored-tag';
     }
   }

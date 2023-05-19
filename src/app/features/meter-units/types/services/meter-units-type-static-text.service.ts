@@ -42,7 +42,9 @@ export class MeterUnitsTypeStaticTextService {
     vendor: boolean,
     tag: boolean,
     readStatuses: boolean,
-    firmware: boolean,
+    appFirmware: boolean,
+    moduleFirmware: boolean,
+    metrologyFirmware: boolean,
     disconnectorState: boolean,
     ciiState: boolean,
     showOptionFilter: boolean,
@@ -63,7 +65,7 @@ export class MeterUnitsTypeStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter || protocol || medium
+        status || vendor || tag || readStatuses || appFirmware || disconnectorState || ciiState || showOptionFilter || protocol || medium
           ? ' · '
           : '';
       result.text = filterName + additionalString;
@@ -72,7 +74,9 @@ export class MeterUnitsTypeStaticTextService {
       vendor ||
       tag ||
       readStatuses ||
-      firmware ||
+      appFirmware ||
+      moduleFirmware ||
+      metrologyFirmware ||
       disconnectorState ||
       ciiState ||
       showOptionFilter ||
@@ -88,7 +92,9 @@ export class MeterUnitsTypeStaticTextService {
       vendor ||
       tag ||
       readStatuses ||
-      firmware ||
+      appFirmware ||
+      moduleFirmware ||
+      metrologyFirmware ||
       disconnectorState ||
       ciiState ||
       showOptionFilter ||
@@ -128,8 +134,18 @@ export class MeterUnitsTypeStaticTextService {
       result.count++;
     }
 
-    if (firmware) {
-      result.text += this.translate.instant('FORM.FIRMWARE').toLowerCase() + separator;
+    if (appFirmware) {
+      result.text += this.translate.instant('FORM.APP-FIRMWARE').toLowerCase() + separator;
+      result.count++;
+    }
+
+    if (metrologyFirmware) {
+      result.text += this.translate.instant('FORM.METROLOGY-FIRMWARE').toLowerCase() + separator;
+      result.count++;
+    }
+
+    if (moduleFirmware) {
+      result.text += this.translate.instant('FORM.MODULE-FIRMWARE').toLowerCase() + separator;
       result.count++;
     }
 

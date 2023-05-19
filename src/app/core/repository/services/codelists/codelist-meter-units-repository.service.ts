@@ -48,7 +48,7 @@ export class CodelistMeterUnitsRepositoryService {
   }
 
   meterUnitFirmwareCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitFirmwares}/${this.id}`);
+    return new HttpRequest('GET', `${meterUnitFirmwares}/${id}`);
   }
 
   meterUnitDisconnectorStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {

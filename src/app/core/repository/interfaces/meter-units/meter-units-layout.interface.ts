@@ -9,7 +9,9 @@ export interface MeterUnitsLayout {
   statesFilter: Codelist<number>[];
   readStatusFilter: ReadStatus;
   tagsFilter: Codelist<number>[];
-  firmwareFilter: Codelist<number>[];
+  appFirmwareFilter: Codelist<number>[];
+  moduleFirmwareFilter: Codelist<number>[];
+  metrologyFirmwareFilter: Codelist<number>[];
   breakerStateFilter: Codelist<number>[];
   ciiStateFilter: Codelist<number>[];
   showOptionFilter: Codelist<number>[];

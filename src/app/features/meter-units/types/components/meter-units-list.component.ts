@@ -82,7 +82,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       states: [],
       tags: [],
       vendors: [],
-      firmware: [],
+      applicationFirmware: [],
+      moduleFirmware: [],
+      metrologyFirmware: [],
       disconnectorState: [],
       ciiState: [],
       showChildInfoMBus: false,
@@ -550,7 +552,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       value1: filter.readStatusFilter ? filter.readStatusFilter.value1 : 0,
       value2: filter.readStatusFilter ? filter.readStatusFilter.value2 : 0
     };
-    this.requestModel.filterModel.firmware = filter.firmwareFilter ?? [];
+    this.requestModel.filterModel.applicationFirmware = filter.appFirmwareFilter ?? [];
+    this.requestModel.filterModel.metrologyFirmware = filter.metrologyFirmwareFilter ?? [];
+    this.requestModel.filterModel.moduleFirmware = filter.moduleFirmwareFilter ?? [];
     this.requestModel.filterModel.disconnectorState = filter.breakerStateFilter ?? [];
     this.requestModel.filterModel.ciiState = filter.ciiStateFilter ?? [];
     this.requestModel.filterModel.showOptionFilter = filter.showOptionFilter ?? [];
@@ -590,7 +594,9 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0,
-      filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
+      filterInfo.appFirmwareFilter && filterInfo.appFirmwareFilter.length > 0,
+      filterInfo.moduleFirmwareFilter && filterInfo.moduleFirmwareFilter.length > 0,
+      filterInfo.metrologyFirmwareFilter && filterInfo.metrologyFirmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
       filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0,

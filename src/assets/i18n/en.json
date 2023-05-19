@@ -384,6 +384,10 @@
     "FILES": "Files",
     "FILL-LAST-BLOCK": "Override fill last block",
     "FIRMWARE": "Firmware",
+    "APPLICATION-FIRMWARE": "Application firmware",
+    "METROLOGY-FIRMWARE": "Metrology firmware",
+    "MODULE-FIRMWARE": "Communication firmware",
+    "APPFIRMWARE": "Application firmware",
     "FOR-LAST": "For last",
     "GATEWAY": "Gateway",
     "GULF": "GULF",
@@ -531,7 +535,8 @@
     "CHANNEL": "Channel",
     "PERIOD": "Period",
     "ENABLED": "enabled",
-    "DISABLED": "disabled"
+    "DISABLED": "disabled",
+    "METROLOGYFIRMWARE": "Metrology firmware"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -655,7 +660,10 @@
     "USER": "User",
     "DEVICE-ID": "Device ID",
     "RE-KEY-METER": "Meter is still using initial set of security material! Please re-key the meter as soon as possible!",
-    "RE-KEY-METER-FAILED": "Re-keying failed"
+    "RE-KEY-METER-FAILED": "Re-keying failed",
+    "APPLICATION-FIRMWARE": "Application firmware",
+    "METROLOGY-FIRMWARE": "Metrology firmware",
+    "MODULE-FIRMWARE": "Comm. firmware"
   },
   "JOB": {
     "ACTIVE-JOB": {

@@ -66,7 +66,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     filterModel: {
       states: null,
       tags: null,
-      firmware: null,
+      applicationFirmware: null,
+      moduleFirmware: null,
+      metrologyFirmware: null,
       // vendors: null,
       readStatus: null,
       disconnectorState: null,
@@ -212,7 +214,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         filterInfo.vendorsFilter[0].value !== undefined &&
         filterInfo.vendorsFilter[0].value !== '') ||
       (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
-      (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
+      (filterInfo.appFirmwareFilter && filterInfo.appFirmwareFilter.length > 0) ||
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
       filterInfo.showMeterUnitsWithoutTemplateFilter ||
@@ -359,7 +361,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
             value2: 0
           };
         }
-        this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+        this.requestModel.filterModel.applicationFirmware = filterDCU.appFirmwareFilter;
         this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -432,7 +434,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
-      this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+      this.requestModel.filterModel.applicationFirmware = filterDCU.appFirmwareFilter;
       this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -454,7 +456,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
         ? true
         : false,
-      filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
+      filterInfo.appFirmwareFilter && filterInfo.appFirmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
       filterInfo.showMeterUnitsWithoutTemplateFilter,
@@ -673,9 +675,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.vendors.length === 0 ||
           this.requestModel.filterModel.vendors[0].id === 0) &&
         (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
-        (!this.requestModel.filterModel.firmware ||
-          this.requestModel.filterModel.firmware.length === 0 ||
-          this.requestModel.filterModel.firmware[0].id === 0) &&
+        (!this.requestModel.filterModel.applicationFirmware ||
+          this.requestModel.filterModel.applicationFirmware.length === 0 ||
+          this.requestModel.filterModel.applicationFirmware[0].id === 0) &&
         (!this.requestModel.filterModel.disconnectorState ||
           this.requestModel.filterModel.disconnectorState.length === 0 ||
           this.requestModel.filterModel.disconnectorState[0].id === 0) &&

@@ -55,7 +55,7 @@ export class MeterUnitsSchedulerInterceptor {
             value1: 0,
             value2: null
           },
-          firmware: [
+          applicationFirmware: [
             {
               id: 0,
               value: ''

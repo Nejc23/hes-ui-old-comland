@@ -28,7 +28,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           { id: 2, value: 'tag 2' },
           { id: 1, value: 'tag 1' }
         ],
-        firmwareFilter: [{ id: 1, value: 'frmware 1' }],
+        appFirmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
         ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
         showOptionFilter: [{ id: 1, value: `With template` }],
@@ -63,7 +63,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           { id: 3, value: 'tag 3' },
           { id: 1, value: 'tag 1' }
         ],
-        firmwareFilter: [{ id: 1, value: 'frmware 1' }],
+        appFirmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
         ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
         showOptionFilter: [{ id: 1, value: `With template` }],
@@ -92,7 +92,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value2: null
         },
         tagsFilter: [],
-        firmwareFilter: [{ id: 1, value: 'frmware 1' }],
+        appFirmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
         ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
         showOptionFilter: [{ id: 1, value: `With template` }],
@@ -121,7 +121,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value2: null
         },
         tagsFilter: [],
-        firmwareFilter: [{ id: 1, value: 'frmware 1' }],
+        appFirmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
         ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
         showOptionFilter: [{ id: 2, value: `Without template` }],
@@ -172,7 +172,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         { id: 3, value: 'tag 3' },
         { id: 1, value: 'tag 1' }
       ],
-      firmwareFilter: [{ id: 1, value: 'frmware 1' }],
+      appFirmwareFilter: [{ id: 1, value: 'frmware 1' }],
       breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
       ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
       showOptionFilter: [{ id: 2, value: `Without template` }],

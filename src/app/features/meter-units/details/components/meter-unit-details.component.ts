@@ -19,11 +19,12 @@ import * as moment from 'moment';
 import { MeterPropertyService } from '../../../../api/concentrator-inventory/services';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { process } from '@progress/kendo-data-query';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { TemplateDto } from 'src/app/api/templating/template-dto';
 import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { AppConfigService } from '../../../../core/configuration/services/app-config.service';
+import { repeat } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -265,30 +266,42 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
 
   getData(deviceId: string) {
     this.loading = true;
-    this.meterUnitsService.getMeterUnitFromConcentrator(deviceId).subscribe((response: MeterUnitDetails) => {
-      this.data = response;
-      this.data.medium = this.data.medium ? this.translate.instant('M-BUS-TYPE.' + this.data.medium.toUpperCase()) : '';
-      this.loading = false;
-      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
-      if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
-        this.isPlcDevice = true;
-      }
-      this.createForm();
-      this.getMetadata();
-      this.closeSlideOut();
-      if (response.stateChanged && response.stateChangedBy) {
-        this.stateToolTipMessage = this.translate.instant('PLC-METER.STATE-CHANGED-TOOLTIP', {
-          changedOn: moment(response.stateChanged).format(environment.dateDisplayFormat),
-          changedAt: moment(response.stateChanged).format(environment.timeFormat),
-          changedBy: response.stateChangedBy
-        });
-      }
-      if (this.data.templateId) {
-        this.templatingService.getTemplateDetail(this.data.templateId).subscribe((templateDto) => {
-          this.templateDto = templateDto;
-        });
-      }
-    });
+    const basicDetails$ = this.meterUnitsService.getDeviceBasicDetails(deviceId);
+    const meterData$ = this.meterUnitsService.getMeterUnitFromConcentrator(deviceId);
+
+    this.subscriptions.push(
+      combineLatest([basicDetails$, meterData$])
+        .pipe(repeat(1))
+        .subscribe((response) => {
+          this.data = response[1];
+
+          this.data.applicationFirmwareVersion = response[0].applicationFirmwareVersion ?? '';
+          this.data.moduleFirmwareVersion = response[0].moduleFirmwareVersion ?? '';
+          this.data.metrologyFirmwareVersion = response[0].metrologyFirmwareVersion ?? '';
+
+          this.data.medium = this.data.medium ? this.translate.instant('M-BUS-TYPE.' + this.data.medium.toUpperCase()) : '';
+          this.loading = false;
+          this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
+          if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
+            this.isPlcDevice = true;
+          }
+          this.createForm();
+          this.getMetadata();
+          this.closeSlideOut();
+          if (response[1].stateChanged && response[1].stateChangedBy) {
+            this.stateToolTipMessage = this.translate.instant('PLC-METER.STATE-CHANGED-TOOLTIP', {
+              changedOn: moment(response[1].stateChanged).format(environment.dateDisplayFormat),
+              changedAt: moment(response[1].stateChanged).format(environment.timeFormat),
+              changedBy: response[1].stateChangedBy
+            });
+          }
+          if (this.data.templateId) {
+            this.templatingService.getTemplateDetail(this.data.templateId).subscribe((templateDto) => {
+              this.templateDto = templateDto;
+            });
+          }
+        })
+    );
   }
 
   getMetadata() {
@@ -306,11 +319,19 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
   createForm() {
     this.detailsForm = this.formBuilder.group({
       name: this.data.name,
+      serialNumber: this.data.serialNumber,
+      externalId: this.data.externalId,
       firstInstalledDate:
         moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
         ' ' +
         moment(this.data.firstInstallDate).format(environment.timeFormat),
-      serialNumber: this.data.serialNumber,
+      lastCommunication: this.data.lastCommunication
+        ? moment(this.data.lastCommunication).format(environment.dateDisplayFormat) +
+          ' ' +
+          moment(this.data.lastCommunication).format(environment.timeFormat)
+        : null,
+      manufacturer: this.data.manufacturer,
+      medium: this.data?.medium.toUpperCase(),
       template: [
         [
           this.data.templateName,
@@ -319,24 +340,19 @@ export class MeterUnitDetailsComponent implements OnInit, OnDestroy {
             moment(this.data.templateActiveFrom).format(environment.timeFormat)
         ]
       ],
-      manufacturer: this.data.manufacturer,
-      lastCommunication: this.data.lastCommunication
-        ? moment(this.data.lastCommunication).format(environment.dateDisplayFormat) +
-          ' ' +
-          moment(this.data.lastCommunication).format(environment.timeFormat)
-        : null,
-      medium: this.data.medium,
-      externalId: this.data.externalId,
-      deviceId: this.data.deviceId
+      appFirmware: this.data.applicationFirmwareVersion,
+      metrologyFirmware: this.data.metrologyFirmwareVersion
     });
 
     if (this.isPlcDevice) {
       this.communicationForm = this.formBuilder.group({
-        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase())
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase()),
+        firmware: this.data.moduleFirmwareVersion
       });
     } else {
       this.communicationForm = this.formBuilder.group({
         protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase()),
+        firmware: this.data.moduleFirmwareVersion,
         hostname: this.data.hostname,
         port: this.data.port,
         referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),
