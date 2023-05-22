@@ -83,7 +83,7 @@ export class MeterUnitsTypeGridService {
     {
       field: gridSysNameColumnsEnum.protocolType,
       translationKey: 'GRID.PROTOCOL',
-      width: 80
+      width: 100
     },
     {
       field: gridSysNameColumnsEnum.name,
