@@ -19,6 +19,7 @@ import { TemplatingService } from 'src/app/core/repository/services/templating/t
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -167,14 +168,7 @@ export class AlarmsEventsComponent implements OnInit {
     }
   ];
 
-  exportOptions: Array<any> = [
-    {
-      text: 'Excel'
-    },
-    {
-      text: 'CSV'
-    }
-  ];
+  exportOptions: Array<any> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -185,7 +179,8 @@ export class AlarmsEventsComponent implements OnInit {
     private toast: ToastNotificationService,
     private templatingService: TemplatingService,
     private translate: TranslateService,
-    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private permissionService: PermissionService
   ) {
     this.alarmsForm = this.createAlarmsForm();
     this.eventsForm = this.createEventsForm();
@@ -214,6 +209,17 @@ export class AlarmsEventsComponent implements OnInit {
       this.eventsPageNumber = 0;
       this.getEventsDataList();
     });
+
+    if (this.permissionService.hasAccess(this.permissionExportEvents)) {
+      this.exportOptions = [
+        {
+          text: 'Excel'
+        },
+        {
+          text: 'CSV'
+        }
+      ];
+    }
   }
 
   createAlarmsForm(): FormGroup {
@@ -378,6 +384,10 @@ export class AlarmsEventsComponent implements OnInit {
         this.eventsLoading = false;
       }
     );
+  }
+
+  get permissionViewEvents() {
+    return PermissionEnumerator.View_Events;
   }
 
   get permissionExportEvents() {
