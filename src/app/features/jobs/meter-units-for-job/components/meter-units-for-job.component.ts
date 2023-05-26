@@ -316,6 +316,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           if (response && response.grid && response.grid.totalCount > 0) {
             that.totalCount = response.grid.totalCount;
             that.gridApi.paginationGoToPage(that.meterUnitsForJobGridService.getSessionSettingsPageIndex());
+            response.grid.data.forEach((x) => {
+              x.protocol = that.translate.instant('PROTOCOL.' + x.protocol.toUpperCase());
+            });
             paramsRow.successCallback(response.grid.data, response.grid.totalCount);
             that.selectRows(that.gridApi);
             that.eventService.setIsSelectedAll(that.meterUnitsForJobGridService.getSessionSettingsSelectedAll());

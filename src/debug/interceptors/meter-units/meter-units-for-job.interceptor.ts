@@ -21,64 +21,74 @@ export class MeterUnitsForJobInterceptor {
         groupCount: 0,
         data: [
           {
-            id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
+            deviceId: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
             name: 'PLC dat 221',
             vendor: 'Iskra',
-            id5: '626516631021'
+            serialNumber: '626516631021',
+            protocol: 'g3plc'
           },
           {
-            id: 'e4694732-a282-477c-9c47-79ca08f64911',
+            deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
             name: 'PLC dat 915',
             vendor: 'Iskra',
-            id5: '977862534617'
+            serialNumber: '977862534617',
+            protocol: 'g3plc'
           },
           {
-            id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
+            deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
             name: 'PLC dat 387',
             vendor: 'Landis+Gy',
-            id5: '991196390689'
+            serialNumber: '991196390689',
+            protocol: 'g3plc'
           },
           {
-            id: '7f7e9055-ad99-479f-956f-903022e1cccd',
+            deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
             name: 'PLC dat 626',
             vendor: 'Landis+Gy',
-            id5: '645461952652'
+            serialNumber: '645461952652',
+            protocol: 'g3plc'
           },
           {
-            id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
+            deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
             name: 'PLC dat 623',
             vendor: 'Iskra',
-            id5: '372969078122'
+            serialNumber: '372969078122',
+            protocol: 'g3plc'
           },
           {
-            id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
+            deviceId: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
             name: 'PLC dat 345',
             vendor: 'Iskra',
-            id5: '878565520965'
+            serialNumber: '878565520965',
+            protocol: 'g3plc'
           },
           {
-            id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
+            deviceId: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
             name: 'PLC dat 954',
             vendor: 'Iskra',
-            id5: '297789917782'
+            serialNumber: '297789917782',
+            protocol: 'g3plc'
           },
           {
-            id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
+            deviceId: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
             name: 'PLC dat 233',
             vendor: 'Landis+Gy',
-            id5: '833452712479'
+            serialNumber: '833452712479',
+            protocol: 'g3plc'
           },
           {
-            id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
+            deviceId: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
             name: 'PLC dat 659',
             vendor: 'Iskra',
-            id5: '770053695430'
+            serialNumber: '770053695430',
+            protocol: 'g3plc'
           },
           {
-            id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
+            deviceId: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
             name: 'PLC dat 519',
             vendor: 'Landis+Gy',
-            id5: '591174417896'
+            serialNumber: '591174417896',
+            protocol: 'g3plc'
           }
         ]
       }
