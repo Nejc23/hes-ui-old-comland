@@ -11,8 +11,9 @@ export interface ResponseMeterUnitsForJob {
 }
 
 export interface MeterUnitForJob {
-  id: string;
+  deviceId: string;
   name: string;
   vendor: string;
-  id5: string;
+  serialNumber: string;
+  protocol: string;
 }
